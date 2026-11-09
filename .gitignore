@@ -1,0 +1,10 @@
+target/
+node_modules/
+.next/
+dist/
+*.wasm
+.env
+.env.*
+!.env.example
+.vercel/
+*.log
