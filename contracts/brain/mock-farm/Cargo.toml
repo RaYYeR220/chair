@@ -1,0 +1,15 @@
+[package]
+name = "chair-mock-farm"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Testnet stand-in for stake.dao's farm methods, for exercising the CHAIR brain"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+near-sdk = "=5.30.1"
+
+[dev-dependencies]
+near-sdk = { version = "=5.30.1", features = ["unit-testing"] }
