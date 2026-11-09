@@ -1,0 +1,22 @@
+{
+ "request_sha256": "140e910da6d4e9483c5a2a6a1e338e771a9f4b420b09d696d9ba9f5c7349c882",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:23:07.164Z",
+ "latency_ms": 12117,
+ "usage": {
+  "prompt_tokens": 812,
+  "completion_tokens": 529,
+  "total_tokens": 1341,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 328,
+   "audio_tokens": 0,
+   "reasoning_tokens": 260,
+   "rejected_prediction_tokens": 275
+  }
+ },
+ "content": "{\"tax_bps\": 200, \"endowment_share\": 35, \"locker_share\": 30, \"buyback_burn\": 1, \"minutes\": \"Volume steady (~95 NEAR/24h) with mild sell tilt; price and floor intact, endowment healthy at 21.9 NEAR. Petition 1 is right in principle: the buyback fund is nearly empty (0.49 NEAR), so the floor-compounding lever is idle. I shift 10% of tax from lockers to buyback (locker 40→30, buyback share 25→35), keeping endowment at 35 to protect wakefulness. Tax stays 200 — no need to disturb flow. Burn set to 1 bps (~28k CHAIR, ~0.16 NEAR), affordable today and compounding daily as the fund refills. Gradual, sustainable floor growth over one-off spikes.\", \"answers\": [\"Granted in substance. A small daily buyback is exactly the mandate's floor-building tool, but the fund was too thin to matter. I've redirected 10% of tax from lockers to buyback and set a 1 bps daily burn the fund can sustain. The floor will now compound every meeting.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-555d1058bcfe47fdb6a7d9253c99c5f7\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 200, \\\"endowment_share\\\": 35, \\\"locker_share\\\": 30, \\\"buyback_burn\\\": 1, \\\"minutes\\\": \\\"Volume steady (~95 NEAR/24h) with mild sell tilt; price and floor intact, endowment healthy at 21.9 NEAR. Petition 1 is right in principle: the buyback fund is nearly empty (0.49 NEAR), so the floor-compounding lever is idle. I shift 10% of tax from lockers to buyback (locker 40→30, buyback share 25→35), keeping endowment at 35 to protect wakefulness. Tax stays 200 — no need to disturb flow. Burn set to 1 bps (~28k CHAIR, ~0.16 NEAR), affordable today and compounding daily as the fund refills. Gradual, sustainable floor growth over one-off spikes.\\\", \\\"answers\\\": [\\\"Granted in substance. A small daily buyback is exactly the mandate's floor-building tool, but the fund was too thin to matter. I've redirected 10% of tax from lockers to buyback and set a 1 bps daily burn the fund can sustain. The floor will now compound every meeting.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: supply 280M, s slightly above supply (burned tokens). Price 0.00000576. Volume modest, sells exceed buys slightly. Endowment 21.94 NEAR — fine, awake. Buyback fund only 0.49 NEAR — tiny. Locker pool 0.76.\\n\\nCurrent: tax 200, endowment 35, locker 40, buyback 25.\\n\\nPetition: small daily buyback to compound floor. Buyback fund is only 0.49 NEAR; buyback_burn limited by fund. To build buyback fund, need to shift shares from locker to buyback. Locker share 40% is high; reduce to 30, keep endowment 35, buyback gets 35%. Tax: sells slightly exceed buys; keep tax at 200 or trim to 175 to encourage volume? Keep 200 stable.\\n\\nBuyback burn: fund 0.49 NEAR at price ~0.00000576 → ~85k tokens ≈ 0.03% of supply. Set buyback_burn small, e.g., 1 bps of supply = 28k tokens ≈ 0.16 NEAR — affordable. Set 1.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266575,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":812,\"completion_tokens\":529,\"total_tokens\":1341,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":328,\"audio_tokens\":0,\"reasoning_tokens\":260,\"rejected_prediction_tokens\":275}},\"cost\":{\"usd\":0.0003863,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

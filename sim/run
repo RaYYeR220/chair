@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Reproduce the CHAIR 60-day simulation.
+#   sim/run                 baselines (20 seeds) + LLM chair replayed from sim/cache/llm (no network)
+#   sim/run --live          also call Venice for any cache miss (reads VENICE_API_KEY from the environment or sim/.env)
+#   sim/run --no-llm        baselines only
+#   sim/run test            unit tests of the token model
+set -euo pipefail
+cd "$(dirname "$0")"
+TSX="npx --yes tsx@4.23.15"
+if [ "${1:-}" = "test" ]; then shift; exec $TSX --test test/*.test.ts "$@"; fi
+exec $TSX src/main.ts "$@"

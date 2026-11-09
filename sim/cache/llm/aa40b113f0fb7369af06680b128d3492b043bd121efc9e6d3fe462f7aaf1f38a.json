@@ -1,0 +1,23 @@
+{
+ "request_sha256": "aa40b113f0fb7369af06680b128d3492b043bd121efc9e6d3fe462f7aaf1f38a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:27:42.784Z",
+ "latency_ms": 4094,
+ "usage": {
+  "prompt_tokens": 866,
+  "completion_tokens": 590,
+  "total_tokens": 1456,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 390,
+   "audio_tokens": 0,
+   "reasoning_tokens": 303,
+   "rejected_prediction_tokens": 210
+  }
+ },
+ "content": "{\"tax_bps\": 220, \"endowment_share\": 40, \"locker_share\": 45, \"buyback_burn\": 10, \"minutes\": \"Sell pressure dominates (1352 vs 93 NEAR), but the floor holds at ~0.00000469 and the curve is intact. Endowment at 47.55 NEAR keeps me awake comfortably. The top holder asks for steadiness; petitions 2 and 3 ask for a small daily buyback. The buyback fund (4.77 NEAR) supports roughly 10 bps of supply at the current price, so I grant a modest 10 bps burn to compound the floor without straining the fund. All other levers unchanged: tax 220, endowment 40, locker 45. Stability over tinkering while outflows run hot.\", \"answers\": [\"Granted. All levers hold steady this meeting; only a small 10 bps burn was added, which is consistent with your request for calm.\", \"Granted in part. The buyback fund supports ~10 bps of supply today, so I burn 10 bps. As the fund refills, the burn can scale toward the 50 bps cap.\", \"Granted in part. Same ruling as your co-petitioner: 10 bps burned this meeting, limited by fund size, not by will.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6b89ada03f9b4f84ae1d37319aaf76c7\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 220, \\\"endowment_share\\\": 40, \\\"locker_share\\\": 45, \\\"buyback_burn\\\": 10, \\\"minutes\\\": \\\"Sell pressure dominates (1352 vs 93 NEAR), but the floor holds at ~0.00000469 and the curve is intact. Endowment at 47.55 NEAR keeps me awake comfortably. The top holder asks for steadiness; petitions 2 and 3 ask for a small daily buyback. The buyback fund (4.77 NEAR) supports roughly 10 bps of supply at the current price, so I grant a modest 10 bps burn to compound the floor without straining the fund. All other levers unchanged: tax 220, endowment 40, locker 45. Stability over tinkering while outflows run hot.\\\", \\\"answers\\\": [\\\"Granted. All levers hold steady this meeting; only a small 10 bps burn was added, which is consistent with your request for calm.\\\", \\\"Granted in part. The buyback fund supports ~10 bps of supply today, so I burn 10 bps. As the fund refills, the burn can scale toward the 50 bps cap.\\\", \\\"Granted in part. Same ruling as your co-petitioner: 10 bps burned this meeting, limited by fund size, not by will.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: heavy selling (1352 NEAR sell vs 93 buy). Reserve 2116, supply 451M, floor per token ~0.00000469 vs curve price 0.0000092. Buyback fund only 4.77 NEAR — small. Endowment 47.55 NEAR, fine.\\n\\nSelling pressure high. Tax 220, endowment 40, locker 45, buyback 15. Locker pool 14.3. Petitions: keep steady, small buybacks.\\n\\nBuyback burn: fund 4.77 NEAR buys ~4.77/0.0000092 ≈ 518M tokens — wait, that's more than supply? 4.77/0.0000092 = 518,478 tokens... actually 4.77 / 0.0000092 ≈ 518,478. Supply 451M, so 0.115% ≈ 11 bps. Cap 50 bps = 2.26M tokens ≈ 20.7 NEAR needed. Fund only supports ~11 bps. Set buyback_burn to 10 bps (safe).\\n\\nKeep tax steady at 220. Maybe shift slightly toward buyback given sell pressure? Petition 1 says no changes. Keep endowment 40, locker 45, buyback 15. That's fine.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266858,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":866,\"completion_tokens\":590,\"total_tokens\":1456,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":390,\"audio_tokens\":0,\"reasoning_tokens\":303,\"rejected_prediction_tokens\":210}},\"cost\":{\"usd\":0.00036346,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

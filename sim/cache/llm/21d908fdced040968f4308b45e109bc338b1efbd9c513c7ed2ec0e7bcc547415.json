@@ -1,0 +1,21 @@
+{
+ "request_sha256": "21d908fdced040968f4308b45e109bc338b1efbd9c513c7ed2ec0e7bcc547415",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:02.263Z",
+ "latency_ms": 4336,
+ "usage": {
+  "prompt_tokens": 779,
+  "completion_tokens": 489,
+  "total_tokens": 1268,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 295,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\": 260, \"endowment_share\": 60, \"locker_share\": 0, \"buyback_burn\": 50, \"minutes\": \"Meeting 6. Steady state: 53 NEAR of buys, zero sells in 24h — holders are patient and the floor is intact. Endowment at 7.69 NEAR keeps me comfortably awake; no need to shift shares. Locker pool sits at 1.28 NEAR with no locked-petition pressure, so locker_share stays 0 and the buyback fund keeps compounding. I spend the maximum permitted burn (50 bps ≈ 10.9k CHAIR, ~0.05 NEAR of the 0.95 fund) to keep ratcheting the reserve-per-token floor. Policy unchanged: stability over stimulus while the curve only rises.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-e3020ac5\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 260, \\\"endowment_share\\\": 60, \\\"locker_share\\\": 0, \\\"buyback_burn\\\": 50, \\\"minutes\\\": \\\"Meeting 6. Steady state: 53 NEAR of buys, zero sells in 24h — holders are patient and the floor is intact. Endowment at 7.69 NEAR keeps me comfortably awake; no need to shift shares. Locker pool sits at 1.28 NEAR with no locked-petition pressure, so locker_share stays 0 and the buyback fund keeps compounding. I spend the maximum permitted burn (50 bps ≈ 10.9k CHAIR, ~0.05 NEAR of the 0.95 fund) to keep ratcheting the reserve-per-token floor. Policy unchanged: stability over stimulus while the curve only rises.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Supply 217M, s=218M, reserve 497 NEAR, price 0.00000446. Volume 24h: 53 NEAR buys, no sells. Endowment 7.69 NEAR — awake. Buyback fund 0.947 NEAR. Locker pool 1.28 NEAR, locker weight 387.6M token-days.\\n\\nCurrent: tax 260, endowment 60, locker 0, buyback 40.\\n\\nEndowment 7.69 NEAR is decent. Volume healthy, no sells. Keep stability. Maybe reduce tax slightly to encourage volume? Tax 260 is high-ish. Keep steady: tax 260, endowment 60, locker 0, buyback 40. Buyback burn: fund 0.947 NEAR; 50 bps of supply = ~10,863 tokens; cost at price ~0.00000446 ≈ 0.0485 NEAR. So affordable. Burn some to raise floor: use ~0.9 NEAR? buyback_burn in bps of supply. 50 bps = 0.0485 NEAR cost. Could do 50 bps max. That spends ~0.05 NEAR, fine. Maybe do 50 to lift floor.\\n\\nMinutes ≤600 chars. No petitions: answer \\\"no petition\\\" x3.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794266338,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":779,\"completion_tokens\":489,\"total_tokens\":1268,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":295,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00036135,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

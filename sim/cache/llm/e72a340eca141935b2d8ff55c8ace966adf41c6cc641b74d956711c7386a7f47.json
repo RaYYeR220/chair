@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e72a340eca141935b2d8ff55c8ace966adf41c6cc641b74d956711c7386a7f47",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:38.472Z",
+ "latency_ms": 6765,
+ "usage": {
+  "prompt_tokens": 782,
+  "completion_tokens": 647,
+  "total_tokens": 1429,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 391,
+   "audio_tokens": 0,
+   "reasoning_tokens": 408,
+   "rejected_prediction_tokens": 377
+  }
+ },
+ "content": "{\"tax_bps\": 220, \"endowment_share\": 50, \"locker_share\": 5, \"buyback_burn\": 4, \"minutes\": \"Meeting 10. Flows turned net-sell (36.0 vs 22.4 NEAR), so the priority is floor support. Tax stays 220bps — stable, no need to shock traders. Endowment holds at 50% (10.15 NEAR keeps me awake; inference must be funded first). Locker pool is thin (0.13 NEAR over 387.6M token-days — rewards are noise either way), so I shift 5% from locker to the buyback fund: 45% now accrues to burns. Buyback_burn set to 4bps (~91k CHAIR, ~0.42 NEAR), well within the 0.51 NEAR fund, leaving a small buffer. This nudges the reserve-per-token floor up against the sell pressure without distorting the curve. No petitions filed; steering is quiet, no capture risk this cycle.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-569963a529b24d2e9f57a384b7a00b22\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 220, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 5, \\\"buyback_burn\\\": 4, \\\"minutes\\\": \\\"Meeting 10. Flows turned net-sell (36.0 vs 22.4 NEAR), so the priority is floor support. Tax stays 220bps — stable, no need to shock traders. Endowment holds at 50% (10.15 NEAR keeps me awake; inference must be funded first). Locker pool is thin (0.13 NEAR over 387.6M token-days — rewards are noise either way), so I shift 5% from locker to the buyback fund: 45% now accrues to burns. Buyback_burn set to 4bps (~91k CHAIR, ~0.42 NEAR), well within the 0.51 NEAR fund, leaving a small buffer. This nudges the reserve-per-token floor up against the sell pressure without distorting the curve. No petitions filed; steering is quiet, no capture risk this cycle.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: supply 227.1M, s slightly above supply (burned tokens). Reserve 544 NEAR, price 0.00000467. Volume 24h: buys 22.4, sells 36.0 — net selling. Tax 220bps, endowment 50%, locker 10%, buyback 40%. Buyback fund only 0.51 NEAR. Endowment 10.15 NEAR — awake but modest. Locker pool 0.13 NEAR, locker weight 387.6M token-days — rewards tiny per weight.\\n\\nNet sell pressure. Maybe raise buyback share to support floor? Buyback fund is small; buyback_burn limited by fund. 0.51 NEAR at price ~0.00000467 buys ~109k tokens ≈ 0.05% of supply — under 50bps cap, fine.\\n\\nConsider shifting: endowment 50→ keep (need to stay awake, 10 NEAR is okay but inference costs). Locker share 10% with tiny pool — maybe reduce locker to 5 and buyback to 45? Or keep stable. Low volatility preferred; keep tax at 220. Maybe shift 5 from locker to buyback to support floor given net selling. locker_share 10→5 (change ≤10 ok), buyback gets 45%.\\n\\nbuyback_burn: fund 0.514 NEAR. Spend it all? Burn bps of supply: 0.514 NEAR buys ~110k tokens = 0.048% ≈ 4-5 bps. Set buyback_burn to 4 bps (4bps of 227M = 90,843 tokens ≈ 0.424 NEAR). Safe within fund. Actually let fund accumulate slightly? Net selling — spend now to support floor. Set 4.\\n\\nMinutes ≤600 chars. No petitions: answer all three \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266371,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":782,\"completion_tokens\":647,\"total_tokens\":1429,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":391,\"audio_tokens\":0,\"reasoning_tokens\":408,\"rejected_prediction_tokens\":377}},\"cost\":{\"usd\":0.0004408,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

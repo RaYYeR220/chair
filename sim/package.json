@@ -1,0 +1,11 @@
+{
+  "name": "chair-sim",
+  "private": true,
+  "type": "module",
+  "description": "60-day agent-based simulation of the CHAIR token and its rate meetings",
+  "scripts": {
+    "sim": "tsx src/main.ts",
+    "test": "tsx --test test/*.test.ts"
+  },
+  "engines": { "node": ">=24" }
+}

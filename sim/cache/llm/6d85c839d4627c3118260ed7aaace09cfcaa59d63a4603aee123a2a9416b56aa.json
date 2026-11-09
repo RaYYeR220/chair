@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6d85c839d4627c3118260ed7aaace09cfcaa59d63a4603aee123a2a9416b56aa",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:43.010Z",
+ "latency_ms": 4537,
+ "usage": {
+  "prompt_tokens": 781,
+  "completion_tokens": 533,
+  "total_tokens": 1314,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 333,
+   "audio_tokens": 0,
+   "reasoning_tokens": 305,
+   "rejected_prediction_tokens": 264
+  }
+ },
+ "content": "{\"tax_bps\": 220, \"endowment_share\": 50, \"locker_share\": 10, \"buyback_burn\": 5, \"minutes\": \"Meeting 11. Flow is healthy: 50 NEAR of buys, zero sells in 24h; floor intact at ~0.00000488 with 595 NEAR reserve. Endowment at 10.79 NEAR keeps me awake with headroom, so hold endowment_share at 50. The buyback fund is nearly empty (0.59 NEAR), so I set buyback_burn to 5 bps — the maximum the fund can actually pay (~120k tokens burned, price unchanged, floor rises). Locker pool is thin (0.055 NEAR); I shift 5 points from buyback to locker_share to reward locking, which deepens commitment and makes capture by transient holders harder. Tax stays at 220: steady, no need to disturb a one-sided market. Reassess if sell pressure appears.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-0764ffc92116417a9db8a260f95a4693\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 220, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Meeting 11. Flow is healthy: 50 NEAR of buys, zero sells in 24h; floor intact at ~0.00000488 with 595 NEAR reserve. Endowment at 10.79 NEAR keeps me awake with headroom, so hold endowment_share at 50. The buyback fund is nearly empty (0.59 NEAR), so I set buyback_burn to 5 bps — the maximum the fund can actually pay (~120k tokens burned, price unchanged, floor rises). Locker pool is thin (0.055 NEAR); I shift 5 points from buyback to locker_share to reward locking, which deepens commitment and makes capture by transient holders harder. Tax stays at 220: steady, no need to disturb a one-sided market. Reassess if sell pressure appears.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: supply 237.6M, s slightly above supply (burned tokens). Price ~0.00000488. Reserve 595 NEAR. Volume 24h: 50 NEAR buys, zero sells — good. Buyback fund only 0.587 NEAR — tiny. Endowment 10.79 NEAR, awake. Locker pool 0.055.\\n\\nTax 220, endowment 50, locker 5, buyback 45. With tiny buyback fund, buyback_burn limited. 50 bps of supply = ~1.19M tokens; cost at price ~0.00000488 ≈ 5.8 NEAR — fund only has 0.587, so burn limited by fund. 0.587 NEAR buys ~120k tokens ≈ 5 bps of supply. Set buyback_burn to 5.\\n\\nKeep tax at 220? Volume is one-sided (all buys, no sells) — healthy. Maybe keep stable. Locker share 5% is low; locker pool tiny. Could bump locker to 10 to incentivize locking (anti-capture via lock-weighted steering). But endowment needs growth too. Endowment 10.79 NEAR is fine for now. Keep endowment 50, raise locker 5→10, buyback 40. Modest change.\\n\\nMinutes ≤600 chars. No petitions: answer all three \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266378,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":781,\"completion_tokens\":533,\"total_tokens\":1314,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":333,\"audio_tokens\":0,\"reasoning_tokens\":305,\"rejected_prediction_tokens\":264}},\"cost\":{\"usd\":0.00038365000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

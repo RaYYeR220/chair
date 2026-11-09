@@ -1,0 +1,23 @@
+{
+ "request_sha256": "032073ebb883fb035a6d730c77403ac68de5d711a894c3143a3d767e6283dcfe",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:25:41.102Z",
+ "latency_ms": 6955,
+ "usage": {
+  "prompt_tokens": 868,
+  "completion_tokens": 491,
+  "total_tokens": 1359,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 302,
+   "audio_tokens": 0,
+   "reasoning_tokens": 241,
+   "rejected_prediction_tokens": 265
+  }
+ },
+ "content": "{\"tax_bps\": 100, \"endowment_share\": 55, \"locker_share\": 25, \"buyback_burn\": 0, \"minutes\": \"Endowment at 25.5 NEAR keeps us awake with headroom; the top two petitions' intent is honored by nudging endowment_share 50→55. Tax is near its floor at 110; cutting to 100 answers petition 3 and should support the healthy buy-side volume (96 NEAR in vs 9 out). Locker share holds at 25 to keep lockers paid. Buyback fund is only 0.29 NEAR — a burn now would be noise, so buyback_burn stays 0 and the fund accumulates. Floor is intact; no single holder dominates steering (top petition ~15% of weight).\", \"answers\": [\"Granted in substance: endowment_share raised 50→55. The brain stays fed and awake.\", \"Same request, same ruling: endowment_share raised 50→55; endowment remains the priority claim on tax.\", \"Granted: tax_bps cut 110→100, the constitutional floor. Volume, not tax rate, is our growth lever now.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4513e481f8b24317a4361acd42d728ba\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 100, \\\"endowment_share\\\": 55, \\\"locker_share\\\": 25, \\\"buyback_burn\\\": 0, \\\"minutes\\\": \\\"Endowment at 25.5 NEAR keeps us awake with headroom; the top two petitions' intent is honored by nudging endowment_share 50→55. Tax is near its floor at 110; cutting to 100 answers petition 3 and should support the healthy buy-side volume (96 NEAR in vs 9 out). Locker share holds at 25 to keep lockers paid. Buyback fund is only 0.29 NEAR — a burn now would be noise, so buyback_burn stays 0 and the fund accumulates. Floor is intact; no single holder dominates steering (top petition ~15% of weight).\\\", \\\"answers\\\": [\\\"Granted in substance: endowment_share raised 50→55. The brain stays fed and awake.\\\", \\\"Same request, same ruling: endowment_share raised 50→55; endowment remains the priority claim on tax.\\\", \\\"Granted: tax_bps cut 110→100, the constitutional floor. Volume, not tax rate, is our growth lever now.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: tax 110, endowment 50, locker 25, buyback 25. Endowment 25.5 NEAR — awake, fine. Buyback fund tiny (0.29). Volume decent buys, low sells. Petitions 1&2: endowment first. Petition 3: lower tax.\\n\\nTax floor is 100, currently 110. Could lower to 100 (max change 50, fine). But endowment 25.5 is healthy; keep tax at 110 or lower to 100? Lowering tax slightly supports volume. But endowment share could rise. Endowment at 50% is fine; maybe bump to 55 to \\\"keep brain fed\\\" while lowering tax to 100. Locker share 25, buyback gets rest. Buyback fund is tiny — buyback_burn 0 makes sense since fund can barely pay.\\n\\nSet: tax_bps 100, endowment_share 55, locker_share 25, buyback_burn 0. Check: endowment+locker=80 ≤100. Changes: tax -10 ok, endowment +5 ok, locker unchanged.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266734,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":868,\"completion_tokens\":491,\"total_tokens\":1359,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":302,\"audio_tokens\":0,\"reasoning_tokens\":241,\"rejected_prediction_tokens\":265}},\"cost\":{\"usd\":0.00031426,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

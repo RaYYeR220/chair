@@ -1,0 +1,23 @@
+{
+ "request_sha256": "66b357a7a75c78ff5af6e10ea44bff4c33d2e562e0bd57b412384b0d226beed9",
+ "venice_model": "deepseek-v4-1-flash-1017",
+ "at": "2026-11-09T23:34:15.381Z",
+ "latency_ms": 4815,
+ "usage": {
+  "prompt_tokens": 809,
+  "completion_tokens": 630,
+  "total_tokens": 1439,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 385,
+   "audio_tokens": 0,
+   "reasoning_tokens": 491,
+   "rejected_prediction_tokens": 350
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":30,\"locker_share\":40,\"buyback_burn\":0,\"minutes\":\"No petitions and no 24h volume. Buyback and locker pools are empty, so no burn is possible or prudent. Endowment is 54 NEAR, comfortably awake. Hold tax at 175 bps and shares at 30/40/30 to avoid unnecessary churn while volume is absent; the existing split still funds the endowment, rewards lockers, and routes 30% to buybacks when trading returns. No constitutional changes needed this meeting.\",\"answers\":[\"no petition\",\"no petition\",\"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-549984326f634f809a956ae5b17311fb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":30,\\\"locker_share\\\":40,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"No petitions and no 24h volume. Buyback and locker pools are empty, so no burn is possible or prudent. Endowment is 54 NEAR, comfortably awake. Hold tax at 175 bps and shares at 30/40/30 to avoid unnecessary churn while volume is absent; the existing split still funds the endowment, rewards lockers, and routes 30% to buybacks when trading returns. No constitutional changes needed this meeting.\\\",\\\"answers\\\":[\\\"no petition\\\",\\\"no petition\\\",\\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"We need answer JSON only. Need decide levers. No petitions. State: supply 331M, s 335.9M (s > supply? because burns leave s unchanged, supply less than s due burns). reserve 1161.95 NEAR. curve price 6.818e-6. volume 24h zero. funds buyback 0, locker pool 0. endowment 54 NEAR (awake). tax 175, endowment 30, locker 40, buyback 30. Need keep alive/trusted, rising floor, low drawdowns/vol, steady volume, endowment enough. No volume, no funds. We can adjust. Need consider buyback_burn 0 because fund zero. Tax maybe keep or lower to encourage volume? Current tax 175 bps (1.75%) moderate. Endowment 54 NEAR, inference cost? Below 1 asleep. 54 enough. Could increase endowment share to strengthen model? But no volume, tax revenue zero. Locker share 40 high, buyback 30. No locker pool. Petitions none. Need maybe set tax 175 unchanged, endowment_share 30 unchanged, locker_share 40 unchanged, buyback_burn 0. But mandate prefer rising floor. Could increase buyback share by reducing locker share? But no fund. No volume. Maybe lower tax to 150 to stimulate volume? Change at most 50. Lower tax may encourage trading, but reduces per-trade revenue. With zero volume, tax rate irrelevant. Need not overreact. Endowment 54 NEAR, maybe enough. Could raise endowment_share to 40 to grow endowment, but reduces buyback/locker. Since no volume, no effect. But if volume returns, more endowment. However locker rewards attract locking/petitions. Current locker 40. Buyback 30. Maybe keep.\\n\\nNeed answer missing petitions \\\"no petition\\\" x3. Minutes <=600 chars. Need mention no petitions, no volume, fund empty, hold levers, burn 0. Ensure JSON valid. Could set buyback_burn 0. tax_bps int 175. endowment_share 30. locker_share 40. buyback_burn 0.\\n\\nNeed maybe consider buyback_burn max 50 bps supply but fund 0 so 0. Good.\\n\\nNeed final only JSON.\"},\"finish_reason\":\"stop\"}],\"created\":1794267250,\"model\":\"deepseek-v4-1-flash-1017\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":809,\"completion_tokens\":630,\"total_tokens\":1439,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":385,\"audio_tokens\":0,\"reasoning_tokens\":491,\"rejected_prediction_tokens\":350}},\"cost\":{\"usd\":0.0008489400000000001,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

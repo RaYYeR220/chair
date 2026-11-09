@@ -1,0 +1,22 @@
+{
+ "request_sha256": "046ff6e3be131d6cfba84ba1bb55ee1750f99d78de9dc0bfb1e8ebc2a201a392",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:56.417Z",
+ "latency_ms": 5006,
+ "usage": {
+  "prompt_tokens": 835,
+  "completion_tokens": 513,
+  "total_tokens": 1348,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 320,
+   "audio_tokens": 0,
+   "reasoning_tokens": 222,
+   "rejected_prediction_tokens": 259
+  }
+ },
+ "content": "{\"tax_bps\": 200, \"endowment_share\": 50, \"locker_share\": 10, \"buyback_burn\": 5, \"minutes\": \"Meeting 13. Buy flow (55.9 NEAR) dwarfs sell flow (6.4); tax cut is affordable and supports the growth petitioners want. Lower tax 220->200 (within 50bps cap), keeping endowment 50 / locker 10 / buyback 40 unchanged for stability. Buyback fund holds only 0.656 NEAR; at curve price ~5.16e-6 that buys ~127k CHAIR, ~5bps of supply, so burn is set to 5 and the rest of the fund request stays queued for next meeting. Endowment at 11.77 NEAR keeps the bank awake; no holder approaches capture (top petition is 55% of weight but petitions are advisory only).\", \"answers\": [\"Granted in part: tax lowered 220->200 bps to let volume grow, while keeping the endowment share at 50% so the bank stays funded and awake.\", \"Granted within means: buyback_burn set to 5 bps (~0.66 NEAR, the full buyback fund). The floor compounds daily; as the fund refills from the 40% tax share, the burn will scale up next meeting.\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-26da4cfa5e0445379b6826c0561c82a2\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 200, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Meeting 13. Buy flow (55.9 NEAR) dwarfs sell flow (6.4); tax cut is affordable and supports the growth petitioners want. Lower tax 220->200 (within 50bps cap), keeping endowment 50 / locker 10 / buyback 40 unchanged for stability. Buyback fund holds only 0.656 NEAR; at curve price ~5.16e-6 that buys ~127k CHAIR, ~5bps of supply, so burn is set to 5 and the rest of the fund request stays queued for next meeting. Endowment at 11.77 NEAR keeps the bank awake; no holder approaches capture (top petition is 55% of weight but petitions are advisory only).\\\", \\\"answers\\\": [\\\"Granted in part: tax lowered 220->200 bps to let volume grow, while keeping the endowment share at 50% so the bank stays funded and awake.\\\", \\\"Granted within means: buyback_burn set to 5 bps (~0.66 NEAR, the full buyback fund). The floor compounds daily; as the fund refills from the 40% tax share, the burn will scale up next meeting.\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: tax 220, endowment 50, locker 10, buyback fund 0.656 NEAR. Endowment 11.77 NEAR — awake. Volume decent buys, low sells. Petition 1: lower tax a bit. Petition 2: small daily buyback.\\n\\nBuyback fund only 0.656 NEAR; buyback_burn max 50 bps of supply = 0.5% of 251.6M ≈ 1.258M tokens; at price ~0.00000516 that's ~6.5 NEAR — fund can't cover. So buyback limited by fund. 0.656 NEAR buys ~127k tokens ≈ 5 bps of supply. Set buyback_burn to 5.\\n\\nTax: lower modestly to 200 (change ≤50). Endowment share: keep 50, locker 10, buyback 40. Maybe shift slightly: endowment 50, locker 10 fine. Keep steady.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266391,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":835,\"completion_tokens\":513,\"total_tokens\":1348,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":320,\"audio_tokens\":0,\"reasoning_tokens\":222,\"rejected_prediction_tokens\":259}},\"cost\":{\"usd\":0.00038175000000000004,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,23 @@
+{
+ "request_sha256": "a00d92cb760635b50ea679cb32ec3083d2e7a1a4067d024e3e7040834111abfd",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:21:18.499Z",
+ "latency_ms": 15570,
+ "usage": {
+  "prompt_tokens": 778,
+  "completion_tokens": 555,
+  "total_tokens": 1333,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 344,
+   "audio_tokens": 0,
+   "reasoning_tokens": 340,
+   "rejected_prediction_tokens": 289
+  }
+ },
+ "content": "{\"tax_bps\": 150, \"endowment_share\": 50, \"locker_share\": 30, \"buyback_burn\": 0, \"minutes\": \"Meeting 15. Flow is one-sided: 55.2 NEAR of buys, zero sells in 24h — healthy demand, no drawdown pressure. Endowment at 14.85 NEAR keeps me awake comfortably; hold endowment_share at 50. Locker pool (0.33 NEAR) is adequate for current weight, so I shift 10 points from locker_share to the buyback fund: with only 0.083 NEAR in the fund, any burn today would be negligible, and a larger fund lets me support the floor when sellers eventually appear. Tax stays 150 bps — no reason to tax strong organic demand harder. buyback_burn 0 this meeting; revisit once the fund accumulates. No petitions filed; policy unchanged and steady.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-9378b0c95e0b474e91dfa8a7d0d04881\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 150, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 30, \\\"buyback_burn\\\": 0, \\\"minutes\\\": \\\"Meeting 15. Flow is one-sided: 55.2 NEAR of buys, zero sells in 24h — healthy demand, no drawdown pressure. Endowment at 14.85 NEAR keeps me awake comfortably; hold endowment_share at 50. Locker pool (0.33 NEAR) is adequate for current weight, so I shift 10 points from locker_share to the buyback fund: with only 0.083 NEAR in the fund, any burn today would be negligible, and a larger fund lets me support the floor when sellers eventually appear. Tax stays 150 bps — no reason to tax strong organic demand harder. buyback_burn 0 this meeting; revisit once the fund accumulates. No petitions filed; policy unchanged and steady.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. State: supply 253.5M, s 255.2M, reserve 676.88, price 0.0000052. Volume 24h: 55.2 NEAR buys, zero sells. Buyback fund tiny (0.0828), locker pool 0.33, endowment 14.85 (awake, fine).\\n\\nZero sells — one-sided buying. Tax 150bps, endowment 50, locker 40, buyback 10. Buyback fund nearly empty; buyback_burn must be affordable. 50bps of supply = ~1.27M tokens; price ~0.0000052 → cost ~6.6 NEAR, fund only 0.08. So buyback_burn must be small. 0.0828 NEAR buys ~15,900 tokens ≈ 0.0063% of supply ≈ 0.63 bps. Set buyback_burn to 0 or small like 0? Contract clamps to what fund can pay; safer to set 0 or 1. Set 0 to accumulate? Actually buying back raises floor; but fund tiny. Maybe set buyback_burn 0 and shift shares: reduce locker_share to build buyback fund? Locker pool 0.33 with weight 494M token-days — payout per meeting tiny. Zero sells means lockers get paid from tax on buys. Keep steady policy; maybe shift 10 from locker to buyback: locker 30, buyback 20. That builds buyback fund. Tax stays 150.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266472,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":778,\"completion_tokens\":555,\"total_tokens\":1333,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":344,\"audio_tokens\":0,\"reasoning_tokens\":340,\"rejected_prediction_tokens\":289}},\"cost\":{\"usd\":0.00033276000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

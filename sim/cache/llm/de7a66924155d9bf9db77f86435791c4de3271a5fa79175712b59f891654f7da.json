@@ -1,0 +1,21 @@
+{
+ "request_sha256": "de7a66924155d9bf9db77f86435791c4de3271a5fa79175712b59f891654f7da",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:20:33.939Z",
+ "latency_ms": 4660,
+ "usage": {
+  "prompt_tokens": 810,
+  "completion_tokens": 576,
+  "total_tokens": 1386,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 334,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\": 175, \"endowment_share\": 50, \"locker_share\": 20, \"buyback_burn\": 5, \"minutes\": \"Steady state: net buying (63.6 vs 31.7 NEAR), endowment 12.9 NEAR keeps me awake, floor intact. Buyback fund is only 0.576 NEAR, so a large burn is impossible anyway; 5 bps (~115k CHAIR) is roughly what the fund covers and matches the ~0.5 NEAR/day the 30% buyback share refills. Daily compounding of the floor is sustainable at this pace. Keep tax 175 and shares 50/20 unchanged to avoid churn; reward lockers modestly.\", \"answers\": [\"Granted in part: the buyback fund can only fund ~5 bps today, so I set buyback_burn to 5 bps. The 30% buyback share refills the fund daily, so this compounds the floor every meeting without draining reserves. A larger burn now would be an empty promise the contract would clamp.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-7ee616ff\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 175, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 20, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Steady state: net buying (63.6 vs 31.7 NEAR), endowment 12.9 NEAR keeps me awake, floor intact. Buyback fund is only 0.576 NEAR, so a large burn is impossible anyway; 5 bps (~115k CHAIR) is roughly what the fund covers and matches the ~0.5 NEAR/day the 30% buyback share refills. Daily compounding of the floor is sustainable at this pace. Keep tax 175 and shares 50/20 unchanged to avoid churn; reward lockers modestly.\\\", \\\"answers\\\": [\\\"Granted in part: the buyback fund can only fund ~5 bps today, so I set buyback_burn to 5 bps. The 30% buyback share refills the fund daily, so this compounds the floor every meeting without draining reserves. A larger burn now would be an empty promise the contract would clamp.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"One petition. State: supply 240M, s 241.5M, reserve 607 NEAR, price ~0.00000493. Volume 24h: 63.6 buy, 31.7 sell — net positive. Buyback fund only 0.576 NEAR. Buyback burn max 50 bps of supply = 0.5% of 240M = 1.2M tokens. Cost at curve price ~0.00000493 → ~5.9 NEAR needed. Fund only has 0.576 NEAR, so burn limited by fund. 0.576 NEAR buys ~0.576/avg price... buying on curve raises price; roughly 0.576/0.00000493 ≈ 116k tokens ≈ 4.8 bps of supply. So set buyback_burn to something the fund can pay — maybe 4 bps? Actually contract clamps to what fund can pay. Set 5 bps.\\n\\nEndowment 12.9 NEAR — awake, fine. Keep endowment_share 50, locker_share 20, tax 175. Maybe trim tax slightly to encourage volume? Volume is okay. Keep steady. Buyback share 30% of tax: tax revenue per day ≈ 95 NEAR volume × 1.75% ≈ 1.66 NEAR; 30% ≈ 0.5 NEAR/day to buyback fund — matches fund level. Small daily buyback is sustainable; grant petition.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794266429,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":810,\"completion_tokens\":576,\"total_tokens\":1386,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":334,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00040950000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

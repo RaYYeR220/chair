@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f81630b038c104b236dcee6e19cca097f6005006a03af2e86d1f75c27d8c2665",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:23:32.061Z",
+ "latency_ms": 10232,
+ "usage": {
+  "prompt_tokens": 860,
+  "completion_tokens": 648,
+  "total_tokens": 1508,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 426,
+   "audio_tokens": 0,
+   "reasoning_tokens": 351,
+   "rejected_prediction_tokens": 237
+  }
+ },
+ "content": "{\"tax_bps\": 200, \"endowment_share\": 30, \"locker_share\": 25, \"buyback_burn\": 5, \"minutes\": \"Meeting 26. Volume is buy-heavy (59.5 vs 18.5 NEAR) but modest; the top-weighted ask is a modest tax cut to spur flow. We cut tax 250→200 (max step), keeping endowment 30% and locker 25%, so buyback share rises to 50%. Endowment at 23.0 NEAR is comfortably awake. Buyback fund holds only 0.98 NEAR; at curve price ~0.00000586 that buys ~5.9 bps of supply, so we burn 5 bps (~0.08 NEAR) — a small, sustainable daily floor compounding per petition 2, leaving dust in the fund. No holder approaches capture; top petition is ~10% of weight.\", \"answers\": [\"Granted in part: tax cut 250→200 bps to let volume grow, while protecting endowment and locker flows.\", \"Granted: 5 bps daily buyback-and-burn, sized to the 0.98 NEAR fund; the floor rises each meeting and the habit compounds.\", \"Granted in part: same as petition 1 — tax lowered to 200 bps; we will reassess volume at the next meeting before cutting further.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4df652d2694d4d40b3ceca449246529e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 200, \\\"endowment_share\\\": 30, \\\"locker_share\\\": 25, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Meeting 26. Volume is buy-heavy (59.5 vs 18.5 NEAR) but modest; the top-weighted ask is a modest tax cut to spur flow. We cut tax 250→200 (max step), keeping endowment 30% and locker 25%, so buyback share rises to 50%. Endowment at 23.0 NEAR is comfortably awake. Buyback fund holds only 0.98 NEAR; at curve price ~0.00000586 that buys ~5.9 bps of supply, so we burn 5 bps (~0.08 NEAR) — a small, sustainable daily floor compounding per petition 2, leaving dust in the fund. No holder approaches capture; top petition is ~10% of weight.\\\", \\\"answers\\\": [\\\"Granted in part: tax cut 250→200 bps to let volume grow, while protecting endowment and locker flows.\\\", \\\"Granted: 5 bps daily buyback-and-burn, sized to the 0.98 NEAR fund; the floor rises each meeting and the habit compounds.\\\", \\\"Granted in part: same as petition 1 — tax lowered to 200 bps; we will reassess volume at the next meeting before cutting further.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: tax 250, endowment 30, locker 25, buyback 45. Endowment 23 NEAR — awake, fine. Buyback fund only 0.98 NEAR, so buyback_burn limited. Supply 285M; 1 bps of supply = 2851 tokens; 50 bps = ~1.4M tokens. Price ~0.00000586, so 50bps cost ~8.4 NEAR — fund can't cover. Fund 0.98 NEAR buys ~167k tokens ≈ 5.9 bps. So set buyback_burn to ~5 bps (cost ~0.98 NEAR). Actually compute: 5 bps = 14,256 tokens × 0.00000586 ≈ 0.0835 NEAR. Wait, 1 bps of 285M = 28,512 tokens. 28,512 × 0.00000586 ≈ 0.167 NEAR. So 0.98 NEAR buys ~5.9 bps. Set buyback_burn = 5.\\n\\nPetitions 1&3: lower tax a bit. Tax 250 → 200 (max change 50). That reduces locker pool and endowment inflow. Endowment is 23 NEAR, healthy. Locker pool small. Lowering tax to 200 could boost volume. Buyback share rises to 50%. Reasonable: tax 200, endowment 30, locker 25, buyback 50. Petition 2: small buyback daily — yes, 5 bps.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266602,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":860,\"completion_tokens\":648,\"total_tokens\":1508,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":426,\"audio_tokens\":0,\"reasoning_tokens\":351,\"rejected_prediction_tokens\":237}},\"cost\":{\"usd\":0.000453,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

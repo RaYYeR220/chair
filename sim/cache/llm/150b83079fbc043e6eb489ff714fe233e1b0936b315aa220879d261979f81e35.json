@@ -1,0 +1,21 @@
+{
+ "request_sha256": "150b83079fbc043e6eb489ff714fe233e1b0936b315aa220879d261979f81e35",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:20:34.923Z",
+ "latency_ms": 4356,
+ "usage": {
+  "prompt_tokens": 780,
+  "completion_tokens": 545,
+  "total_tokens": 1325,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 354,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\": 160, \"endowment_share\": 50, \"locker_share\": 15, \"buyback_burn\": 2, \"minutes\": \"Steady state: buy-only volume (11.9 NEAR), zero sell pressure, floor intact at ~0.00000547. Endowment at 13.19 NEAR keeps me awake with headroom, so I trim endowment_share 55→50 and tax 170→160 to keep buy-side friction low and redirect flow to the starved buyback fund (0.08 NEAR). Locker pool is thin but locker weight is healthy; hold locker_share at 15. Buyback_burn set at 2 bps; the contract will cap at what the fund pays, and each burn lifts the floor. No holder concentration risk visible this meeting.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-bf825d3a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 160, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 15, \\\"buyback_burn\\\": 2, \\\"minutes\\\": \\\"Steady state: buy-only volume (11.9 NEAR), zero sell pressure, floor intact at ~0.00000547. Endowment at 13.19 NEAR keeps me awake with headroom, so I trim endowment_share 55→50 and tax 170→160 to keep buy-side friction low and redirect flow to the starved buyback fund (0.08 NEAR). Locker pool is thin but locker weight is healthy; hold locker_share at 15. Buyback_burn set at 2 bps; the contract will cap at what the fund pays, and each burn lifts the floor. No holder concentration risk visible this meeting.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 16. Supply 266.9M, s=268.7M, reserve 748.87 NEAR, price 0.000005474. Volume: buys 11.9 NEAR, no sells. Buyback fund only 0.08 NEAR — tiny. Endowment 13.19 NEAR, awake. Locker pool 0.03.\\n\\nBuyback fund is nearly empty; buyback_burn limited by fund. 50 bps of supply = 1.33M tokens; at price ~0.00000547 that's ~7.3 NEAR needed. Fund only has 0.08 NEAR, so burn will be tiny anyway. Set buyback_burn to something the fund can pay: 0.08 NEAR buys ~14,600 tokens ≈ 0.0055% of supply ≈ 0.55 bps. Set buyback_burn to 1 bps? Contract clamps to fund anyway. Set 2 bps, contract will cap.\\n\\nTax: currently 170. Volume is buy-only, low sells. Keep tax moderate to not deter buying. Maybe lower slightly to 150 to encourage volume? Buyback share is 30% currently (endowment 55 + locker 15 = 70, buyback 30). Buyback fund is starved. Maybe shift: endowment 50, locker 15, buyback 35. Endowment is 13.19, fine. Keep endowment_share 50 (down 5, within 10 limit), locker 15, tax 160 (down 10). Buyback gets 35%.\\n\\nMinutes ≤600 chars. No petitions.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794266430,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":780,\"completion_tokens\":545,\"total_tokens\":1325,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":354,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003895,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

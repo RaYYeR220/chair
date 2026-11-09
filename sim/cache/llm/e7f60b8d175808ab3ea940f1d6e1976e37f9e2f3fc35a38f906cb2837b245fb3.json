@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e7f60b8d175808ab3ea940f1d6e1976e37f9e2f3fc35a38f906cb2837b245fb3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:21.798Z",
+ "latency_ms": 18185,
+ "usage": {
+  "prompt_tokens": 812,
+  "completion_tokens": 599,
+  "total_tokens": 1411,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 379,
+   "audio_tokens": 0,
+   "reasoning_tokens": 351,
+   "rejected_prediction_tokens": 281
+  }
+ },
+ "content": "{\"tax_bps\": 240, \"endowment_share\": 65, \"locker_share\": 10, \"buyback_burn\": 20, \"minutes\": \"Meeting 6. Volume is healthy and buy-dominated (28.3 vs 6.3 NEAR), price steady at 4.52e-6. Endowment at 9.74 NEAR keeps me awake but is thin; the top petition asks to feed the brain, and I agree — the model is the product. I shift 5 points from buyback to endowment (65/10/25), keeping tax at 240 for stability. Buyback fund of 3.21 NEAR supports a 20 bps burn (~441k tokens, ~2.0 NEAR), lifting the floor while leaving reserve powder. Locker pool is small; hold locker_share at 10 and revisit if locks grow.\", \"answers\": [\"Granted in part: endowment_share raised 60→65. The brain stays fed, but 25% of tax still flows to buybacks to keep the floor rising. A larger endowment also buys a stronger model, so this compounds.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-10f9417b034743c6b59746a2d8330422\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 240, \\\"endowment_share\\\": 65, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 20, \\\"minutes\\\": \\\"Meeting 6. Volume is healthy and buy-dominated (28.3 vs 6.3 NEAR), price steady at 4.52e-6. Endowment at 9.74 NEAR keeps me awake but is thin; the top petition asks to feed the brain, and I agree — the model is the product. I shift 5 points from buyback to endowment (65/10/25), keeping tax at 240 for stability. Buyback fund of 3.21 NEAR supports a 20 bps burn (~441k tokens, ~2.0 NEAR), lifting the floor while leaving reserve powder. Locker pool is small; hold locker_share at 10 and revisit if locks grow.\\\", \\\"answers\\\": [\\\"Granted in part: endowment_share raised 60→65. The brain stays fed, but 25% of tax still flows to buybacks to keep the floor rising. A larger endowment also buys a stronger model, so this compounds.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Supply ~220.6M, s slightly above supply (burned tokens). Reserve 510 NEAR, price 0.00000452. Volume: buys 28.26 NEAR, sells 6.28 — healthy buy pressure. Endowment 9.74 NEAR — above 1, awake, but modest. Buyback fund 3.21 NEAR. Locker pool tiny 0.083.\\n\\nCurrent: tax 240, endowment 60, locker 10, buyback 30.\\n\\nPetition: keep endowment fed. Reasonable — endowment 9.74 is okay but growth is good. Maybe raise endowment_share to 65? But buyback fund supports floor. Volume is decent; buyback fund 3.2 NEAR is small relative to reserve. Keep tax at 240 (steady). Shift +5 to endowment: endowment 65, locker 10, buyback 25. Buyback burn: with fund 3.21 NEAR, price 0.00000452 → ~710k tokens max. 50 bps of supply = 1.1M tokens ≈ 4.98 NEAR — too much. 25 bps = 551k tokens ≈ 2.49 NEAR — affordable. But maybe keep burn modest to preserve fund. Buy 2.5 NEAR worth raises floor slightly. Let's do buyback_burn 20 bps = 441k tokens ≈ 2.0 NEAR, leaving fund ~1.2.\\n\\nMinutes ≤600 chars. Answers: petition 1 answered; 2 and 3 \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266343,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":812,\"completion_tokens\":599,\"total_tokens\":1411,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":379,\"audio_tokens\":0,\"reasoning_tokens\":351,\"rejected_prediction_tokens\":281}},\"cost\":{\"usd\":0.0004213,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

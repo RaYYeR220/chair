@@ -1,0 +1,22 @@
+{
+ "request_sha256": "bd8fc559b6bcf77fb5bbe8b1478147329a4cd2e6d725ded335c347e7233bb51f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:18:57.925Z",
+ "latency_ms": 20391,
+ "usage": {
+  "prompt_tokens": 776,
+  "completion_tokens": 460,
+  "total_tokens": 1236,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 269,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "content": "{\"tax_bps\": 260, \"endowment_share\": 60, \"locker_share\": 0, \"buyback_burn\": 40, \"minutes\": \"Meeting 5. Buy pressure dominates (126 vs 18 NEAR); tax 260 is holding without choking flow, keep it. Endowment 5.43 NEAR keeps me awake; hold 60%. Locker weight is zero, so the 10% locker share accrues to a pool nobody can claim — redirect it to buyback (locker_share 0, buyback gets 40%). Buyback fund 3.84 NEAR buys ~820k tokens at curve price 4.2e-6; burn 40 bps (~820k of 205M supply) to lift the reserve floor per token without moving curve price. No petitions to answer.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-400e427d552540f3adb90cd3e0305219\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 260, \\\"endowment_share\\\": 60, \\\"locker_share\\\": 0, \\\"buyback_burn\\\": 40, \\\"minutes\\\": \\\"Meeting 5. Buy pressure dominates (126 vs 18 NEAR); tax 260 is holding without choking flow, keep it. Endowment 5.43 NEAR keeps me awake; hold 60%. Locker weight is zero, so the 10% locker share accrues to a pool nobody can claim — redirect it to buyback (locker_share 0, buyback gets 40%). Buyback fund 3.84 NEAR buys ~820k tokens at curve price 4.2e-6; burn 40 bps (~820k of 205M supply) to lift the reserve floor per token without moving curve price. No petitions to answer.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: supply ~205M, reserve 440.7 NEAR, price 4.2e-6. Volume healthy buys 126 vs sells 18. Endowment 5.43 NEAR — awake, fine. Locker weight 0, so locker_share 10% is wasted; shift to buyback. Tax 260 is high-ish; maybe reduce to 250 to encourage volume? Change max 50. Keep tax 260 or trim to 240. Buy pressure strong; keep tax steady to accumulate buyback fund. Locker pool has 1.28 NEAR but no lockers — rewards paid pro rata to weight; with zero weight, funds sit. Reduce locker_share to 0, boost buyback_share to 40. Endowment 60 stays.\\n\\nBuyback burn: fund 3.84 NEAR, price 4.2e-6 → ~915k tokens max. 50 bps of supply = ~1.02M tokens, cost ~1.02M*4.2e-6 ≈ 4.3 NEAR — slightly more than fund. Use 40 bps ≈ 820k tokens ≈ 3.44 NEAR. Set buyback_burn 40.\\n\\nMinutes ≤600 chars. Petitions: none.\"},\"finish_reason\":\"stop\"}],\"created\":1794266317,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":776,\"completion_tokens\":460,\"total_tokens\":1236,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":269,\"rejected_prediction_tokens\":0}},\"cost\":{\"usd\":0.0003464,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

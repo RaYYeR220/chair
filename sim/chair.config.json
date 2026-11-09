@@ -1,0 +1,56 @@
+{
+  "_about": "Curve, constitution and ladder parameters for the CHAIR simulation. Every key under `new_args` is meant to be passed 1:1 to the token contract's `new` so the sim and the chain run the same numbers. Big integers are decimal strings (yoctoNEAR = 1e-24 NEAR; token base units = 1e-18 CHAIR).",
+  "new_args": {
+    "token_decimals": 18,
+    "curve": {
+      "p0_yocto_per_token": "100000000000000000",
+      "k_yocto_per_token_per_token": "20000000000"
+    },
+    "launch_levers": {
+      "tax_bps": 300,
+      "endowment_share_pct": 60,
+      "locker_share_pct": 10
+    },
+    "constitution": {
+      "tax_bps": { "min": 100, "max": 300, "max_step": 50 },
+      "endowment_share_pct": { "min": 30, "max": 100, "max_step": 10 },
+      "locker_share_pct": { "min": 0, "max": 50, "max_step": 10 },
+      "buyback_burn_max_bps_of_supply": 50,
+      "fallback": { "tax_target_bps": 200, "tax_step_bps": 10 }
+    },
+    "lock_days": [1, 7, 30],
+    "petition": { "fee_tokens": "10000", "max_chars": 280, "top_n": 3 },
+    "meeting_interval_hours": 23,
+    "iq_ladder": [
+      { "min_endowment_near": "1", "model": "z-ai/glm-5.3-flash" },
+      { "min_endowment_near": "50", "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017" },
+      { "min_endowment_near": "500", "model": "moonshotai/kimi-k3" }
+    ]
+  },
+  "assumptions_not_in_spec": {
+    "buyback_is_tax_exempt": "The meeting's buyback buys on the curve without paying tau.",
+    "burns_leave_s_unchanged": "Both buyback burns and petition-fee burns reduce supply, never s.",
+    "tax_rounding": "tax = ceil(curve_amount * tax_bps / 10000); endowment = floor(tax * endowment_share / 100); locker = floor(tax * locker_share / 100); buyback fund gets the remainder.",
+    "share_sum_clamp": "If endowment_share + locker_share > 100 after the per-lever clamp, locker_share is cut to 100 - endowment_share.",
+    "fallback_buyback": "The fallback rule performs no buyback (buyback_burn = 0).",
+    "locker_payout": "The whole locker pool is paid out at each meeting, pro rata to weight of locks active at the meeting; integer dust stays in the pool.",
+    "floor_definition": "floor = reserve / total supply (locked tokens count; burned tokens do not).",
+    "endowment_reporting": "The brief and the IQ ladder use the endowment the brain reported at the previous meeting (one-meeting lag).",
+    "ruling_units": "tax_bps in bps; endowment_share and locker_share in integer percent of tax; buyback_burn in bps of current supply.",
+    "ruling_parse": "Content is trimmed; one surrounding ```json fence is stripped; it must be a JSON object whose four numeric fields are integers (any sign; bounds are enforced by the clamp), minutes a string, answers an array of 3 strings."
+  },
+  "venice": {
+    "base_url": "https://api.venice.ai/api/v1",
+    "model_map": {
+      "z-ai/glm-5.3-flash": "z-ai-glm-5-3-flash",
+      "deepseek-ai/DeepSeek-V4.1-Flash-1017": "deepseek-v4-1-flash-1017",
+      "moonshotai/kimi-k3": "kimi-k3"
+    },
+    "usd_per_mtok": {
+      "z-ai-glm-5-3-flash": { "input": 0.15, "output": 0.5 },
+      "deepseek-v4-1-flash-1017": { "input": 0.3, "output": 1.2 },
+      "kimi-k3": { "input": 3.75, "output": 18.75 }
+    },
+    "max_calls_per_run": 300
+  }
+}

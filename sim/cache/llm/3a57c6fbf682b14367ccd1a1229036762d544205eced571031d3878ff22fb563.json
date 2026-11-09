@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3a57c6fbf682b14367ccd1a1229036762d544205eced571031d3878ff22fb563",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:26.918Z",
+ "latency_ms": 5194,
+ "usage": {
+  "prompt_tokens": 784,
+  "completion_tokens": 489,
+  "total_tokens": 1273,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 304,
+   "audio_tokens": 0,
+   "reasoning_tokens": 250,
+   "rejected_prediction_tokens": 248
+  }
+ },
+ "content": "{\"tax_bps\": 260, \"endowment_share\": 70, \"locker_share\": 5, \"buyback_burn\": 30, \"minutes\": \"Meeting 5. Supply 247.9M, reserve 645.8 NEAR, floor ~0.00000508. Buy/sell volume nearly balanced (130.7 vs 120.2 NEAR) — healthy two-way flow, no dump pressure. Endowment at 13.15 NEAR keeps me awake with headroom; hold endowment_share at 70. Locker pool thin (0.35 NEAR) but locker weight is modest; keep locker_share at 5 to prioritize floor-building. Buyback fund only 1.84 NEAR, so I burn 30 bps of supply (~74k tokens, well within fund capacity) to keep ratcheting the floor per token. Trim tax 280→260 (within 50 bps limit) to marginally lower trading friction and support volume while keeping the take meaningful. No holder concentration concerns raised this session.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-2e46b5c288604dbd8a954d78b9382dec\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 260, \\\"endowment_share\\\": 70, \\\"locker_share\\\": 5, \\\"buyback_burn\\\": 30, \\\"minutes\\\": \\\"Meeting 5. Supply 247.9M, reserve 645.8 NEAR, floor ~0.00000508. Buy/sell volume nearly balanced (130.7 vs 120.2 NEAR) — healthy two-way flow, no dump pressure. Endowment at 13.15 NEAR keeps me awake with headroom; hold endowment_share at 70. Locker pool thin (0.35 NEAR) but locker weight is modest; keep locker_share at 5 to prioritize floor-building. Buyback fund only 1.84 NEAR, so I burn 30 bps of supply (~74k tokens, well within fund capacity) to keep ratcheting the floor per token. Trim tax 280→260 (within 50 bps limit) to marginally lower trading friction and support volume while keeping the take meaningful. No holder concentration concerns raised this session.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. State: tax 280, endowment 70, locker 5, buyback 25. Endowment 13.15 NEAR — awake. Buyback fund tiny (1.84 NEAR). Volume balanced. Maybe reduce tax slightly to encourage volume? Tax 280 is high; change max 50. Consider lowering tax to 250 to boost volume, keep endowment 70, locker 5, buyback 25. Buyback fund low — buyback_burn limited by fund. 50 bps of supply = ~124k tokens; price ~0.00000508 → ~0.63 NEAR. Fund 1.84 NEAR can cover that. But maybe modest burn ~30 bps. Actually burn raises floor; fund 1.84 NEAR buys ~362k tokens at avg price... burn of 50bps = 123,942 tokens, cost roughly price*amount ≈ 0.63 NEAR plus curve slope. Fine.\\n\\nKeep steady: tax 280→260 to nudge volume? Modest. I'll set tax 260, endowment 70, locker 5, buyback 25, burn 30 bps.\"},\"finish_reason\":\"stop\"}],\"created\":1794266361,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":784,\"completion_tokens\":489,\"total_tokens\":1273,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":304,\"audio_tokens\":0,\"reasoning_tokens\":250,\"rejected_prediction_tokens\":248}},\"cost\":{\"usd\":0.00036209999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

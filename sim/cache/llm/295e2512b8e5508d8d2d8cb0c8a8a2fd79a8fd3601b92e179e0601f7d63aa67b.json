@@ -1,0 +1,22 @@
+{
+ "request_sha256": "295e2512b8e5508d8d2d8cb0c8a8a2fd79a8fd3601b92e179e0601f7d63aa67b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:31.706Z",
+ "latency_ms": 3913,
+ "usage": {
+  "prompt_tokens": 783,
+  "completion_tokens": 478,
+  "total_tokens": 1261,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 312,
+   "audio_tokens": 0,
+   "reasoning_tokens": 281,
+   "rejected_prediction_tokens": 186
+  }
+ },
+ "content": "{\"tax_bps\": 220, \"endowment_share\": 50, \"locker_share\": 10, \"buyback_burn\": 25, \"minutes\": \"Meeting 9. Net flow positive (18.6 NEAR bought vs 12.6 sold); price holding at 0.00000472. Endowment at 9.74 NEAR is comfortably above the wake threshold, so I shift 10 points from endowment to the buyback fund, which is starved at 0.28 NEAR and limits floor-building. Locker pool stays at 10% to keep lock incentives alive. Tax unchanged at 220 bps for stability. Burn set to 25 bps of supply, within what the fund can pay (~26 bps), to lift the reserve floor per token. No petitions this session; no holder-capture risk detected.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-0db3523dd57f47b49b9033697fc1923b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 220, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 25, \\\"minutes\\\": \\\"Meeting 9. Net flow positive (18.6 NEAR bought vs 12.6 sold); price holding at 0.00000472. Endowment at 9.74 NEAR is comfortably above the wake threshold, so I shift 10 points from endowment to the buyback fund, which is starved at 0.28 NEAR and limits floor-building. Locker pool stays at 10% to keep lock incentives alive. Tax unchanged at 220 bps for stability. Burn set to 25 bps of supply, within what the fund can pay (~26 bps), to lift the reserve floor per token. No petitions this session; no holder-capture risk detected.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 9. No petitions. State: tax 220, endowment 60, locker 10, buyback 30. Buyback fund only 0.284 NEAR — very low. Endowment 9.74 NEAR, fine. Volume modest, buys > sells (good). Locker pool tiny 0.0686.\\n\\nBuyback burn limited by fund: 0.284 NEAR buys ~0.284/0.0000047 ≈ 60k tokens, which is ~0.26% of supply ≈ 26 bps. So buyback_burn max ~26 bps. Set buyback_burn to 25? Actually burn bps of supply: 0.284 NEAR / (price * supply) = 0.284 / (0.000004724*230008692) = 0.284/1086.4 ≈ 26 bps. Set 25.\\n\\nMaybe shift tax split: buyback fund is starved. Raise buyback share by lowering endowment? Endowment at 9.7 is healthy; could lower endowment_share to 50, keep locker 10, buyback 40. That gives more buyback funding. Tax stays 220.\\n\\nMinutes ≤600 chars. Answers: \\\"no petition\\\" x3.\"},\"finish_reason\":\"stop\"}],\"created\":1794266367,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":783,\"completion_tokens\":478,\"total_tokens\":1261,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":312,\"audio_tokens\":0,\"reasoning_tokens\":281,\"rejected_prediction_tokens\":186}},\"cost\":{\"usd\":0.00035645,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

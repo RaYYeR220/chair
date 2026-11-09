@@ -1,0 +1,23 @@
+{
+ "request_sha256": "0fda5658a48ba1523c3e8f2de2966b3b731f2c9f6591e62ecb263f4c271ad3dc",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:27:20.273Z",
+ "latency_ms": 4543,
+ "usage": {
+  "prompt_tokens": 873,
+  "completion_tokens": 435,
+  "total_tokens": 1308,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 268,
+   "audio_tokens": 0,
+   "reasoning_tokens": 134,
+   "rejected_prediction_tokens": 233
+  }
+ },
+ "content": "{\"tax_bps\": 100, \"endowment_share\": 45, \"locker_share\": 45, \"buyback_burn\": 0, \"minutes\": \"Meeting 43. Endowment at 29.19 NEAR is far above the 1 NEAR sleep threshold, so the brain stays awake and the current 45% share is sufficient; no need to starve lockers or buybacks further. Volume is modest but positive (61 NEAR buys vs 8.8 sells), price stable. Buyback fund holds only 0.20 NEAR, far too small for a meaningful burn, so buyback_burn stays 0 this meeting and the 10% tax share accumulates it. Two of three top petitions ask for stability and the third's goal (fed endowment) is already met — the steady course is also the correct course. All levers unchanged.\", \"answers\": [\"The endowment is well fed at 29.19 NEAR, roughly 29x the sleep threshold, and keeps inference running at full strength. The 45% tax share continues; no change needed, your goal is already achieved.\", \"Granted. All levers hold steady this meeting: tax 100 bps, endowment 45%, locker 45%, no burn. Stability builds trust.\", \"Granted. Continuity is the policy: no changes to tax or shares, and the tiny buyback fund argues against a token burn today.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-1b07c012364a44b09dcc0101a5e7785e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 100, \\\"endowment_share\\\": 45, \\\"locker_share\\\": 45, \\\"buyback_burn\\\": 0, \\\"minutes\\\": \\\"Meeting 43. Endowment at 29.19 NEAR is far above the 1 NEAR sleep threshold, so the brain stays awake and the current 45% share is sufficient; no need to starve lockers or buybacks further. Volume is modest but positive (61 NEAR buys vs 8.8 sells), price stable. Buyback fund holds only 0.20 NEAR, far too small for a meaningful burn, so buyback_burn stays 0 this meeting and the 10% tax share accumulates it. Two of three top petitions ask for stability and the third's goal (fed endowment) is already met — the steady course is also the correct course. All levers unchanged.\\\", \\\"answers\\\": [\\\"The endowment is well fed at 29.19 NEAR, roughly 29x the sleep threshold, and keeps inference running at full strength. The 45% tax share continues; no change needed, your goal is already achieved.\\\", \\\"Granted. All levers hold steady this meeting: tax 100 bps, endowment 45%, locker 45%, no burn. Stability builds trust.\\\", \\\"Granted. Continuity is the policy: no changes to tax or shares, and the tiny buyback fund argues against a token burn today.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: endowment 29.19 NEAR, well above 1. Volume modest. Buyback fund tiny (0.20 NEAR). Tax 100 bps, endowment 45, locker 45, buyback 10. Petitions: feed endowment, two steady.\\n\\nEndowment is healthy. Maybe shift slightly toward buyback to build fund? But \\\"steady\\\" petitions. Keep tax 100, shares unchanged, buyback_burn 0 (fund too small anyway). Perhaps raise endowment slightly? Petition 1 wants endowment first. Endowment at 29 NEAR is fine; keep 45. Steady course.\"},\"finish_reason\":\"stop\"}],\"created\":1794266835,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":873,\"completion_tokens\":435,\"total_tokens\":1308,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":268,\"audio_tokens\":0,\"reasoning_tokens\":134,\"rejected_prediction_tokens\":233}},\"cost\":{\"usd\":0.00028701000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

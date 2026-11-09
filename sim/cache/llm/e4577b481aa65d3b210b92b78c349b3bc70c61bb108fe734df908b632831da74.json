@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e4577b481aa65d3b210b92b78c349b3bc70c61bb108fe734df908b632831da74",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:22:38.327Z",
+ "latency_ms": 49610,
+ "usage": {
+  "prompt_tokens": 779,
+  "completion_tokens": 509,
+  "total_tokens": 1288,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 323,
+   "audio_tokens": 0,
+   "reasoning_tokens": 290,
+   "rejected_prediction_tokens": 232
+  }
+ },
+ "content": "{\"tax_bps\": 140, \"endowment_share\": 55, \"locker_share\": 30, \"buyback_burn\": 0, \"minutes\": \"Meeting 21. Net flow positive: 25.25 NEAR bought vs 4.78 sold; price holding at 0.0000058 with reserve at 841.9. Endowment at 14.67 NEAR is comfortably above the wake threshold, so I trim endowment_share 60→55 and route the freed 5% to the buyback fund, which sits at a dangerously low 0.042 NEAR. Locker share stays 30 to keep lockers paid and petitions flowing. Tax unchanged at 140 bps — volume is healthy and I see no need to discourage trading. Buyback burn is 0: the fund cannot buy a meaningful amount of supply at current price, so I let it accumulate this cycle and will burn once it can actually lift the floor.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-01d9981e1f6647d3b7362783a1737c01\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 140, \\\"endowment_share\\\": 55, \\\"locker_share\\\": 30, \\\"buyback_burn\\\": 0, \\\"minutes\\\": \\\"Meeting 21. Net flow positive: 25.25 NEAR bought vs 4.78 sold; price holding at 0.0000058 with reserve at 841.9. Endowment at 14.67 NEAR is comfortably above the wake threshold, so I trim endowment_share 60→55 and route the freed 5% to the buyback fund, which sits at a dangerously low 0.042 NEAR. Locker share stays 30 to keep lockers paid and petitions flowing. Tax unchanged at 140 bps — volume is healthy and I see no need to discourage trading. Buyback burn is 0: the fund cannot buy a meaningful amount of supply at current price, so I let it accumulate this cycle and will burn once it can actually lift the floor.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. State: supply 283M, s 285M, price 0.0000058, reserve 841.9. Volume buys 25.25 NEAR, sells 4.78 — net inflow positive. Endowment 14.66 NEAR, healthy. Buyback fund tiny (0.042) because buyback_share is only 10%. Locker pool 0.126.\\n\\nConsider: buyback fund is nearly empty; raising buyback_share would build it. But endowment_share 60, locker 30, buyback 10. Could shift: endowment 55, locker 30, buyback 15? Endowment is fine at 14.66 (well above 1). Maybe raise buyback share to 20 to build fund for floor support. Change max 10 per meeting. Set endowment 55, buyback 15.\\n\\nTax 140 fine; volume decent. Buyback burn: fund only 0.042 NEAR, price 0.0000058 → ~7240 tokens, tiny vs supply 283M. bps of supply: 0.042/0.0000058 ≈ 7240 tokens = 0.0000256% of supply ≈ 0.000256 bps. So burn 0. Keep 0.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794266508,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":779,\"completion_tokens\":509,\"total_tokens\":1288,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":323,\"audio_tokens\":0,\"reasoning_tokens\":290,\"rejected_prediction_tokens\":232}},\"cost\":{\"usd\":0.00037135,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

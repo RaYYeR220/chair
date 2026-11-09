@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6b030d837aeaf5e2889bac28851e6fa8992c98b113f5bbd51b2b61346f24d583",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:06.337Z",
+ "latency_ms": 5560,
+ "usage": {
+  "prompt_tokens": 840,
+  "completion_tokens": 542,
+  "total_tokens": 1382,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 340,
+   "audio_tokens": 0,
+   "reasoning_tokens": 260,
+   "rejected_prediction_tokens": 266
+  }
+ },
+ "content": "{\"tax_bps\": 240, \"endowment_share\": 60, \"locker_share\": 10, \"buyback_burn\": 5, \"minutes\": \"Meeting 3. Buy pressure is strong (474 NEAR in vs 25 out) and the floor holds at ~0.00000547 with 748 NEAR reserved. Endowment at 5.26 NEAR keeps us awake; no change to the 60/10/30 split — steady policy builds trust. Buyback fund at 3.6 NEAR supports a modest permanent burn: 5 bps of supply (~13.4k tokens, ~0.73 NEAR) lifts the reserve-per-token floor while leaving ample fund buffer for future meetings. Tax stays 240 bps; heavy one-sided buying doesn't yet justify tightening. Revisit if sell pressure rises.\", \"answers\": [\"Granted in moderation: we burn 5 bps of supply this meeting (~0.73 NEAR from the buyback fund). Small, steady burns compound the floor without draining the fund. We will keep a baseline burn each meeting while the fund allows.\", \"Respected. Tax and revenue splits are unchanged this meeting; the only action is the modest 5 bps buyback burn, which is itself a standing policy rather than a departure. Stability preserved.\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-3126f3b076744c3180a6109dd800e96e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 240, \\\"endowment_share\\\": 60, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Meeting 3. Buy pressure is strong (474 NEAR in vs 25 out) and the floor holds at ~0.00000547 with 748 NEAR reserved. Endowment at 5.26 NEAR keeps us awake; no change to the 60/10/30 split — steady policy builds trust. Buyback fund at 3.6 NEAR supports a modest permanent burn: 5 bps of supply (~13.4k tokens, ~0.73 NEAR) lifts the reserve-per-token floor while leaving ample fund buffer for future meetings. Tax stays 240 bps; heavy one-sided buying doesn't yet justify tightening. Revisit if sell pressure rises.\\\", \\\"answers\\\": [\\\"Granted in moderation: we burn 5 bps of supply this meeting (~0.73 NEAR from the buyback fund). Small, steady burns compound the floor without draining the fund. We will keep a baseline burn each meeting while the fund allows.\\\", \\\"Respected. Tax and revenue splits are unchanged this meeting; the only action is the modest 5 bps buyback burn, which is itself a standing policy rather than a departure. Stability preserved.\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 3. Supply ~267.8M, s=268.6M, reserve 748 NEAR, price 0.00000547. Volume: buys 474 NEAR, sells 24.8 NEAR — heavy buy pressure. Tax 240bps, endowment 60%, locker 10%, buyback 30%.\\n\\nEndowment 5.26 NEAR — awake, fine. Buyback fund 3.59 NEAR. Petition 1: small buyback daily. Petition 2: no changes.\\n\\nBuyback burn: 0-50 bps of supply. Supply 267.8M; 1 bps = 26,780 tokens. Cost per token ~0.00000547 → 1 bps ≈ 0.1465 NEAR. Fund 3.59 NEAR could cover ~24 bps. But keep small: maybe 5 bps (~0.73 NEAR), leaving fund buffer. Buy pressure strong; buyback adds demand. Keep tax at 240, shares unchanged (steady). Maybe nudge buyback burn to 5 bps.\\n\\nMinutes ≤600 chars. Answers to petitions 1 and 2, third \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266340,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":840,\"completion_tokens\":542,\"total_tokens\":1382,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":340,\"audio_tokens\":0,\"reasoning_tokens\":260,\"rejected_prediction_tokens\":266}},\"cost\":{\"usd\":0.000397,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

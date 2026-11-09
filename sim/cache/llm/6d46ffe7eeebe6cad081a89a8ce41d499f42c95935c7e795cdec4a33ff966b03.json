@@ -1,0 +1,23 @@
+{
+ "request_sha256": "6d46ffe7eeebe6cad081a89a8ce41d499f42c95935c7e795cdec4a33ff966b03",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:21:25.137Z",
+ "latency_ms": 6637,
+ "usage": {
+  "prompt_tokens": 785,
+  "completion_tokens": 635,
+  "total_tokens": 1420,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 398,
+   "audio_tokens": 0,
+   "reasoning_tokens": 411,
+   "rejected_prediction_tokens": 313
+  }
+ },
+ "content": "{\"tax_bps\": 175, \"endowment_share\": 45, \"locker_share\": 25, \"buyback_burn\": 3, \"minutes\": \"Meeting 16. Healthy state: buys outweigh sells 4.5:1, price stable, endowment at 15.3 NEAR keeps me awake with headroom. Problem: the buyback fund is nearly empty (0.54 NEAR), so the floor has no support mechanism. I raise tax 150->175 (within the 50bps step cap) while buying volume is strong, and shift the split toward buybacks: endowment 50->45, locker 30->25, leaving 30% for the buyback fund. Locker pool is modest but lockers also gain via petitions; no need to overpay. Burn set to 3bps, the most the fund can actually pay (~0.5 NEAR at current price); it will rise as the fund refills. No petitions to answer this session.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-fd0115c1051041018cb8828dc82bd796\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 175, \\\"endowment_share\\\": 45, \\\"locker_share\\\": 25, \\\"buyback_burn\\\": 3, \\\"minutes\\\": \\\"Meeting 16. Healthy state: buys outweigh sells 4.5:1, price stable, endowment at 15.3 NEAR keeps me awake with headroom. Problem: the buyback fund is nearly empty (0.54 NEAR), so the floor has no support mechanism. I raise tax 150->175 (within the 50bps step cap) while buying volume is strong, and shift the split toward buybacks: endowment 50->45, locker 30->25, leaving 30% for the buyback fund. Locker pool is modest but lockers also gain via petitions; no need to overpay. Burn set to 3bps, the most the fund can actually pay (~0.5 NEAR at current price); it will rise as the fund refills. No petitions to answer this session.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. State: supply 271.5M, s slightly above supply (burned tokens). Reserve 774 NEAR, price 0.00000557. Volume decent buys 125, sells 27. Endowment 15.26 NEAR — above 1, awake. Buyback fund tiny (0.54), locker pool 0.686.\\n\\nBuyback fund is nearly empty; buyback_burn limited by fund. 0.54 NEAR buys ~97k tokens at price ~0.00000557 → ~0.036% of supply. 50 bps = 0.5% of supply would cost ~7.5 NEAR. So burn limited: spend 0.54 NEAR → burn ~97,000 tokens ≈ 3.6 bps. Set buyback_burn to something like 3 bps (or just set 3). Actually burn bps of supply: 0.54/0.00000557 ≈ 96,948 tokens / 271,552,819 ≈ 3.57 bps. Set 3.\\n\\nTax: buys dominate, keep tax moderate. Maybe raise slightly to build buyback fund? Keep 150 or bump to 175? Volume healthy; modest increase to 175 builds funds without choking. Endowment 15 NEAR is fine; keep endowment_share 50, locker_share 30. Maybe shift a bit toward buyback since fund is empty: endowment 45, locker 25, buyback gets 30? Change ≤10 each. Endowment 50→45, locker 30→25, buyback share 30%. That builds buyback fund. Endowment still gets tax*0.45; 24h buy volume 125 NEAR * 1.5% tax = ~1.87 NEAR tax/day, endowment gets ~0.84/day — fine.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266478,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":785,\"completion_tokens\":635,\"total_tokens\":1420,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":398,\"audio_tokens\":0,\"reasoning_tokens\":411,\"rejected_prediction_tokens\":313}},\"cost\":{\"usd\":0.00037381000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

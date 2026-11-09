@@ -1,0 +1,22 @@
+{
+ "request_sha256": "00b768a45803f652952c862eac3a7380fef69badb4e950d0403a2483b1f74da6",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:20:00.350Z",
+ "latency_ms": 6824,
+ "usage": {
+  "prompt_tokens": 840,
+  "completion_tokens": 557,
+  "total_tokens": 1397,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 344,
+   "audio_tokens": 0,
+   "reasoning_tokens": 273,
+   "rejected_prediction_tokens": 295
+  }
+ },
+ "content": "{\"tax_bps\": 200, \"endowment_share\": 70, \"locker_share\": 10, \"buyback_burn\": 15, \"minutes\": \"Volume is strongly buy-skewed (327 vs 43 NEAR), so the 250bps tax is not choking demand, but two heavy holders flag fee friction. I cut tax 50bps to 200 — the maximum allowed — to keep new buyers coming while preserving revenue. Shares unchanged: 70% endowment (28 NEAR, comfortably awake), 10% locker pool, 20% buyback. Buyback fund is 3.67 NEAR; at ~0.207 NEAR per bps of supply I burn 15bps (~3.1 NEAR), spending most of the fund to lift the floor per token while leaving a buffer. No single holder dominates steering (top petition ~1.5% of weight).\", \"answers\": [\"Granted in part: tax cut from 250 to 200 bps, the maximum step permitted. Volume is already healthy, so this is a measured concession to growth, not a collapse in funding.\", \"Granted: same 50bps cut to 200. Note buys still dominate 327:43, so the fee is not the main barrier; watch whether 24h buy volume rises before asking for deeper cuts.\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-bdf2b701a668496c8734f410dad35b5b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 200, \\\"endowment_share\\\": 70, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 15, \\\"minutes\\\": \\\"Volume is strongly buy-skewed (327 vs 43 NEAR), so the 250bps tax is not choking demand, but two heavy holders flag fee friction. I cut tax 50bps to 200 — the maximum allowed — to keep new buyers coming while preserving revenue. Shares unchanged: 70% endowment (28 NEAR, comfortably awake), 10% locker pool, 20% buyback. Buyback fund is 3.67 NEAR; at ~0.207 NEAR per bps of supply I burn 15bps (~3.1 NEAR), spending most of the fund to lift the floor per token while leaving a buffer. No single holder dominates steering (top petition ~1.5% of weight).\\\", \\\"answers\\\": [\\\"Granted in part: tax cut from 250 to 200 bps, the maximum step permitted. Volume is already healthy, so this is a measured concession to growth, not a collapse in funding.\\\", \\\"Granted: same 50bps cut to 200. Note buys still dominate 327:43, so the fee is not the main barrier; watch whether 24h buy volume rises before asking for deeper cuts.\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 8. Supply 318M, s=320M, price 0.0000065. Volume: buys 327 NEAR, sells 43 NEAR — healthy buy pressure. Tax 250bps, endowment 70%, locker 10%, buyback 20%. Endowment 28 NEAR — awake (above 1). Buyback fund 3.67 NEAR.\\n\\nPetitions: lower tax. Tax 250 is high-ish; volume is strong though. Cutting tax to 200 (-50 max) could boost volume while still funding endowment. Endowment share 70% is fine; maybe keep 70/10/20. With lower tax, endowment still grows. I'll cut tax to 200, keep shares. Buyback burn: fund 3.67 NEAR, price ~0.0000065, supply 318M. 1 bps of supply = 31,808 tokens ≈ 0.207 NEAR. 50 bps = ~10.3 NEAR > fund. Fund can afford ~17 bps. Buy pressure strong; modest burn to lift floor: use ~15 bps (~3.1 NEAR). Let's do 15.\\n\\nMinutes ≤600 chars. Answers to two petitions, third \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266393,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":840,\"completion_tokens\":557,\"total_tokens\":1397,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":344,\"audio_tokens\":0,\"reasoning_tokens\":273,\"rejected_prediction_tokens\":295}},\"cost\":{\"usd\":0.0004045,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "01c66c6410f190fc31b1b355e855ec28a9c8a94f2edea4aad398af7aabd97bfb",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:21:39.142Z",
+ "latency_ms": 6186,
+ "usage": {
+  "prompt_tokens": 784,
+  "completion_tokens": 522,
+  "total_tokens": 1306,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 320,
+   "audio_tokens": 0,
+   "reasoning_tokens": 309,
+   "rejected_prediction_tokens": 286
+  }
+ },
+ "content": "{\"tax_bps\": 150, \"endowment_share\": 40, \"locker_share\": 25, \"buyback_burn\": 5, \"minutes\": \"Meeting 18. Flow is healthy: 208 NEAR bought vs 73 sold over 24h, price holding at 6.23e-6 with reserve at 969 NEAR. Endowment at 16.98 NEAR is comfortably awake, so I shift 5 points from endowment to the buyback fund to keep pressing the floor up while demand is strong. Tax stays at 150 bps — no need to disturb a steady regime. Buyback fund holds only 1.41 NEAR, enough for roughly 5 bps of supply at current curve prices; I authorize 5 bps and let the unspent remainder roll over. Locker pool unchanged; rewards continue pro rata. No petitions this session; no holder concentration concerns visible in the brief.\", \"answers\": [\"no petition\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-d55b6b16f31a4f59aa7805a837f9face\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 150, \\\"endowment_share\\\": 40, \\\"locker_share\\\": 25, \\\"buyback_burn\\\": 5, \\\"minutes\\\": \\\"Meeting 18. Flow is healthy: 208 NEAR bought vs 73 sold over 24h, price holding at 6.23e-6 with reserve at 969 NEAR. Endowment at 16.98 NEAR is comfortably awake, so I shift 5 points from endowment to the buyback fund to keep pressing the floor up while demand is strong. Tax stays at 150 bps — no need to disturb a steady regime. Buyback fund holds only 1.41 NEAR, enough for roughly 5 bps of supply at current curve prices; I authorize 5 bps and let the unspent remainder roll over. Locker pool unchanged; rewards continue pro rata. No petitions this session; no holder concentration concerns visible in the brief.\\\", \\\"answers\\\": [\\\"no petition\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. State: supply 304M, s slightly above supply (burned tokens). Price 0.00000623. Volume decent, buys 208 vs sells 73 — bullish. Endowment 16.98 NEAR, healthy. Buyback fund small (1.41). Locker pool 1.06.\\n\\nCurrent: tax 150, endowment 45, locker 25, buyback 30%.\\n\\nBuy pressure strong; keep stability. Maybe nudge buyback burn to support floor. Buyback fund 1.41 NEAR; 50 bps of supply = 1.52M tokens; cost at curve... buying 1.52M tokens on curve raises s; price ~0.0000062, cost roughly 1.52M * ~0.0000063 ≈ 9.6 NEAR — too much. Fund only 1.41 NEAR buys ~224k tokens ≈ 7 bps of supply. So set buyback_burn to ~7 or lower. Contract clamps to what fund can pay, but better set modest: 5 bps.\\n\\nKeep tax 150, shares same. Maybe shift slightly toward buyback given rising floor mandate: endowment 45→40, buyback gets more. Endowment 16.98 is fine (well above 1). Reduce endowment_share by 5 to 40, keep locker 25, buyback 35. Modest.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266493,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":784,\"completion_tokens\":522,\"total_tokens\":1306,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":320,\"audio_tokens\":0,\"reasoning_tokens\":309,\"rejected_prediction_tokens\":286}},\"cost\":{\"usd\":0.0003786,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

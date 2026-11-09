@@ -1,0 +1,22 @@
+{
+ "request_sha256": "54601b883228535dde9c55389a160ec5da167d41e334fbf3f5c439d64de6894b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:24:56.321Z",
+ "latency_ms": 7027,
+ "usage": {
+  "prompt_tokens": 811,
+  "completion_tokens": 315,
+  "total_tokens": 1126,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 187,
+   "audio_tokens": 0,
+   "reasoning_tokens": 130,
+   "rejected_prediction_tokens": 197
+  }
+ },
+ "content": "{\"tax_bps\": 140, \"endowment_share\": 50, \"locker_share\": 40, \"buyback_burn\": 0, \"minutes\": \"Meeting 31. State is healthy: endowment at 21.77 NEAR keeps me awake with headroom, buys outweigh sells (59.7 vs 18.7 NEAR), floor intact at ~0.00000596. Buyback fund is thin (0.218 NEAR), so no burn this meeting; the 10% buyback share will slowly rebuild it. Top holder (12% of weight) petitions for no changes — the mandate favors stability, and nothing in the brief argues for deviation. Steady as she goes.\", \"answers\": [\"Granted. All levers unchanged: tax 140 bps, endowment 50%, locker 40%, no burn. Stability is policy.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-ab31871ce05d456f87e56ac113121f0c\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 140, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 40, \\\"buyback_burn\\\": 0, \\\"minutes\\\": \\\"Meeting 31. State is healthy: endowment at 21.77 NEAR keeps me awake with headroom, buys outweigh sells (59.7 vs 18.7 NEAR), floor intact at ~0.00000596. Buyback fund is thin (0.218 NEAR), so no burn this meeting; the 10% buyback share will slowly rebuild it. Top holder (12% of weight) petitions for no changes — the mandate favors stability, and nothing in the brief argues for deviation. Steady as she goes.\\\", \\\"answers\\\": [\\\"Granted. All levers unchanged: tax 140 bps, endowment 50%, locker 40%, no burn. Stability is policy.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: tax 140, endowment 50, locker 40, buyback 10. Endowment 21.77 NEAR — healthy. Buyback fund tiny (0.218). Volume modest, buys > sells. Petition: keep steady.\\n\\nMaybe slight tweak: buyback fund is tiny; buyback_share is only 10%. Could shift a bit toward buyback to build fund, but petition says steady. Keep steady, honor petition. Maybe raise buyback burn slightly? Fund only 0.218 NEAR, burn limited. Keep 0 burn or small. Keep everything same.\\n\\nAnswers: petition 1 granted.\"},\"finish_reason\":\"stop\"}],\"created\":1794266689,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":811,\"completion_tokens\":315,\"total_tokens\":1126,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":187,\"audio_tokens\":0,\"reasoning_tokens\":130,\"rejected_prediction_tokens\":197}},\"cost\":{\"usd\":0.00027915000000000004,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

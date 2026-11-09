@@ -1,0 +1,21 @@
+{
+ "request_sha256": "3ca9d185f70d70650abac8f57807893117b4359b7335ae44f2909897bd61bd48",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:20:29.278Z",
+ "latency_ms": 4324,
+ "usage": {
+  "prompt_tokens": 810,
+  "completion_tokens": 531,
+  "total_tokens": 1341,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 299,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\": 175, \"endowment_share\": 50, \"locker_share\": 20, \"buyback_burn\": 1, \"minutes\": \"Sells (15.98 NEAR) outpace buys (4.41); volume is thin. I cut tax 25bps to 175 to lower friction and invite flow, keeping endowment at 50% (12.73 NEAR, well awake) and locker at 20% to reward the 699M token-days locked. Buyback keeps 30%; fund is only 0.188 NEAR, so I burn 1bp of supply (~23k CHAIR, ~0.11 NEAR) to nudge the floor up without draining the fund. Revisit a deeper cut if volume responds.\", \"answers\": [\"Granted in part: tax cut from 200 to 175 bps. A full 50bp cut would starve the buyback fund (0.188 NEAR) while sells already dominate. If volume grows next meeting, I'll cut further toward 150.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-f92bbf68\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 175, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 20, \\\"buyback_burn\\\": 1, \\\"minutes\\\": \\\"Sells (15.98 NEAR) outpace buys (4.41); volume is thin. I cut tax 25bps to 175 to lower friction and invite flow, keeping endowment at 50% (12.73 NEAR, well awake) and locker at 20% to reward the 699M token-days locked. Buyback keeps 30%; fund is only 0.188 NEAR, so I burn 1bp of supply (~23k CHAIR, ~0.11 NEAR) to nudge the floor up without draining the fund. Revisit a deeper cut if volume responds.\\\", \\\"answers\\\": [\\\"Granted in part: tax cut from 200 to 175 bps. A full 50bp cut would starve the buyback fund (0.188 NEAR) while sells already dominate. If volume grows next meeting, I'll cut further toward 150.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"State: tax 200, endowment 50, locker 20, buyback 30. Volume low, sells exceed buys. Endowment 12.73 NEAR, fine. Buyback fund tiny (0.188). Petition: lower tax a bit to grow volume. Tax can drop by max 50 → 150. But lower tax reduces buyback fund which is already tiny. Sells exceed buys; rising floor matters. Maybe lower tax modestly to 175? Max change 50, so 150 allowed. But buyback fund needs replenishment; keep buyback_share at 30. Actually endowment+locker = 70, buyback gets 30. Could shift: endowment 50, locker 15, buyback 35? Locker pool tiny too. Keep it simple: tax 175, endowment 50, locker 20, buyback 30. Buyback burn: fund 0.188 NEAR at price ~0.0000048 → ~39k tokens, supply 233M → 0.017% ≈ 1.7 bps. Set buyback_burn 1 or 2. 2 bps of supply = 46,692 tokens ≈ 0.224 NEAR > fund. So 1 bps = 23,346 tokens ≈ 0.112 NEAR, affordable. Set 1.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794266425,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":810,\"completion_tokens\":531,\"total_tokens\":1341,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":299,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.000387,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

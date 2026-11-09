@@ -1,0 +1,23 @@
+{
+ "request_sha256": "97924c325c33a4b5c66883bbd8e5df5b038ab4c6844caadfcb0a3204607e7733",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:21:02.928Z",
+ "latency_ms": 11098,
+ "usage": {
+  "prompt_tokens": 813,
+  "completion_tokens": 642,
+  "total_tokens": 1455,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 394,
+   "audio_tokens": 0,
+   "reasoning_tokens": 405,
+   "rejected_prediction_tokens": 350
+  }
+ },
+ "content": "{\"tax_bps\": 150, \"endowment_share\": 50, \"locker_share\": 40, \"buyback_burn\": 8, \"minutes\": \"24h: 13 NEAR bought, zero sold — lockers are doing their job. Granting their petition: locker_share 30→40, taken from buyback share (20→10), endowment unchanged at 50 to protect wakefulness. Tax stays 150; no need to touch pricing with one-sided flow. Buyback fund is nearly empty (0.10 NEAR), so burn only what it can pay: ~8 bps of supply (~0.10 NEAR), which still nudges the floor up. Watch that locker rewards don't crowd out buybacks if sells return.\", \"answers\": [\"Granted. locker_share raised 30→40. Lockers earned it this period — zero sell volume while buys continued. We funded it from the buyback share, not the endowment, so the floor engine keeps a (smaller) drip. Re-petition if sell pressure returns and we'll rebalance.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c9a88e77736343728a2f35b87dae47a9\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 150, \\\"endowment_share\\\": 50, \\\"locker_share\\\": 40, \\\"buyback_burn\\\": 8, \\\"minutes\\\": \\\"24h: 13 NEAR bought, zero sold — lockers are doing their job. Granting their petition: locker_share 30→40, taken from buyback share (20→10), endowment unchanged at 50 to protect wakefulness. Tax stays 150; no need to touch pricing with one-sided flow. Buyback fund is nearly empty (0.10 NEAR), so burn only what it can pay: ~8 bps of supply (~0.10 NEAR), which still nudges the floor up. Watch that locker rewards don't crowd out buybacks if sells return.\\\", \\\"answers\\\": [\\\"Granted. locker_share raised 30→40. Lockers earned it this period — zero sell volume while buys continued. We funded it from the buyback share, not the endowment, so the floor engine keeps a (smaller) drip. Re-petition if sell pressure returns and we'll rebalance.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Only one petition. State: supply 242.6M, s slightly above supply (burned tokens). Price ~0.00000499. Reserve 621 NEAR. Volume 24h: buys 13 NEAR, zero sells — good. Buyback fund tiny (0.10 NEAR), so buyback_burn must be small or zero. Endowment 14.75 NEAR — awake, fine.\\n\\nCurrent: tax 150, endowment 50, locker 30, buyback 20.\\n\\nPetition: raise locker_share. Lockers do provide stability (zero sells). But buyback fund is nearly empty — floor support matters. Maybe raise locker_share by 10 to 40, taking from buyback share (20→10)? Or keep buyback. Zero sells suggests lockers are holding; rewarding them encourages locking. But buyback fund at 0.10 NEAR is nearly depleted; buyback_burn should be 0 this meeting anyway. Raising locker_share to 40 leaves buyback 10%. Hmm, mandate prefers rising floor. With zero sell pressure, floor support less urgent. I'll raise locker_share to 40, keep endowment 50, buyback 10. Tax stays 150. Buyback_burn: fund 0.10 NEAR; 50 bps of supply = ~121k tokens * price ~0.000005 = ~0.6 NEAR — can't afford. Burn affordable: 0.10/0.000005 ≈ 20k tokens ≈ 8 bps of supply. Small burn still signals floor support. Set buyback_burn to 8? Cost ~0.10 NEAR. Actually 8 bps of 242.6M = 19,410 tokens * 0.000004987 ≈ 0.0968 NEAR. OK, set 8.\\n\\nMinutes ≤600 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794266455,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":813,\"completion_tokens\":642,\"total_tokens\":1455,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":394,\"audio_tokens\":0,\"reasoning_tokens\":405,\"rejected_prediction_tokens\":350}},\"cost\":{\"usd\":0.00038151,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

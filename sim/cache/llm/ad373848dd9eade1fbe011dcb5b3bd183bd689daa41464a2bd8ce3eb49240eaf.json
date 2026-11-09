@@ -1,0 +1,22 @@
+{
+ "request_sha256": "ad373848dd9eade1fbe011dcb5b3bd183bd689daa41464a2bd8ce3eb49240eaf",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-09T23:19:00.775Z",
+ "latency_ms": 23307,
+ "usage": {
+  "prompt_tokens": 814,
+  "completion_tokens": 567,
+  "total_tokens": 1381,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 349,
+   "audio_tokens": 0,
+   "reasoning_tokens": 298,
+   "rejected_prediction_tokens": 305
+  }
+ },
+ "content": "{\"tax_bps\": 240, \"endowment_share\": 60, \"locker_share\": 10, \"buyback_burn\": 50, \"minutes\": \"Meeting 2. Flows are one-sided: 97.4 NEAR bought, zero sold — demand is real but the 290 bps toll is the likeliest brake on new entrants. Cutting tax by the maximum 50 to 240 bps, per petition 1. Endowment at 3.57 NEAR keeps me awake but is thin; holding endowment_share at 60 to keep compounding inference budget. Locker share stays 10 — pool is small and lockers are few. Buyback gets the remaining 30; fund at 2.63 NEAR comfortably covers a maximum 50 bps burn (~8.4k tokens, ~0.03 NEAR), which lifts the floor per token and signals commitment. Watch next meeting for whether sell pressure appears at the lower tax.\", \"answers\": [\"Granted in part: tax cut 290→240 bps, the maximum allowed per meeting. Zero sell volume suggests buyers aren't fleeing yet, but a lower toll should widen the funnel. If volume doesn't rise, we can step down again next meeting.\", \"no petition\", \"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-88a688b7ddf04005948e56d7af522832\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\": 240, \\\"endowment_share\\\": 60, \\\"locker_share\\\": 10, \\\"buyback_burn\\\": 50, \\\"minutes\\\": \\\"Meeting 2. Flows are one-sided: 97.4 NEAR bought, zero sold — demand is real but the 290 bps toll is the likeliest brake on new entrants. Cutting tax by the maximum 50 to 240 bps, per petition 1. Endowment at 3.57 NEAR keeps me awake but is thin; holding endowment_share at 60 to keep compounding inference budget. Locker share stays 10 — pool is small and lockers are few. Buyback gets the remaining 30; fund at 2.63 NEAR comfortably covers a maximum 50 bps burn (~8.4k tokens, ~0.03 NEAR), which lifts the floor per token and signals commitment. Watch next meeting for whether sell pressure appears at the lower tax.\\\", \\\"answers\\\": [\\\"Granted in part: tax cut 290→240 bps, the maximum allowed per meeting. Zero sell volume suggests buyers aren't fleeing yet, but a lower toll should widen the funnel. If volume doesn't rise, we can step down again next meeting.\\\", \\\"no petition\\\", \\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 2. Supply ~1.67M, reserve 295.69 NEAR, price 0.00000344. Volume 24h: 97.4 NEAR buys, zero sells — good. Tax 290 bps is high; petition asks cut. Constitution: tax change max 50 per meeting. Cut to 240. Endowment 3.57 NEAR — awake but modest; keep endowment_share 60. Locker share 10, buyback 30. Buyback fund 2.63 NEAR. Buyback burn: maybe small, 5 bps? Supply 1.67M, 5 bps = 835 tokens, cost ~835*0.00000344 ≈ 0.0029 NEAR — trivially affordable. Could do more; fund 2.63 NEAR could buy ~764k tokens at avg price... but cap is 50 bps = 8351 tokens ≈ 0.03 NEAR. So burn 50 bps max? Rising floor is mandate. Use 50 bps, costs ~0.03 NEAR, well within fund. Actually buying on curve pushes price up slightly; fine.\\n\\nKeep endowment 60, locker 10, buyback 30. Tax 290→240.\\n\\nMinutes ≤600 chars. Answers: petition 1 answered; petitions 2,3 missing → \\\"no petition\\\".\"},\"finish_reason\":\"stop\"}],\"created\":1794266317,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":814,\"completion_tokens\":567,\"total_tokens\":1381,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":349,\"audio_tokens\":0,\"reasoning_tokens\":298,\"rejected_prediction_tokens\":305}},\"cost\":{\"usd\":0.0004056,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

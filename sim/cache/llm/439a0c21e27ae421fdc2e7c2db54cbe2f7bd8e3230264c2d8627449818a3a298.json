@@ -1,0 +1,23 @@
+{
+ "request_sha256": "439a0c21e27ae421fdc2e7c2db54cbe2f7bd8e3230264c2d8627449818a3a298",
+ "venice_model": "deepseek-v4-1-flash-1017",
+ "at": "2026-11-09T23:34:10.564Z",
+ "latency_ms": 5208,
+ "usage": {
+  "prompt_tokens": 809,
+  "completion_tokens": 642,
+  "total_tokens": 1451,
+  "prompt_tokens_details": {
+   "cached_tokens": 512
+  },
+  "cache_read_input_tokens": 512,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 382,
+   "audio_tokens": 0,
+   "reasoning_tokens": 508,
+   "rejected_prediction_tokens": 398
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":30,\"locker_share\":40,\"buyback_burn\":0,\"minutes\":\"No petitions and no 24h volume. Buyback fund is empty, so any burn above 0 is impossible; set burn to 0. Endowment at 54 NEAR is comfortably awake, and current tax/split already balances inference funding, locker incentives, and future buybacks. With zero flow, changing parameters would signal instability without affecting reserves. Hold levers steady to preserve trust and let volume return before reallocating.\",\"answers\":[\"no petition\",\"no petition\",\"no petition\"]}",
+ "response_text": "{\"id\":\"chatcmpl-8677a9bcabd54354a6dc36eaec4783af\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":30,\\\"locker_share\\\":40,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"No petitions and no 24h volume. Buyback fund is empty, so any burn above 0 is impossible; set burn to 0. Endowment at 54 NEAR is comfortably awake, and current tax/split already balances inference funding, locker incentives, and future buybacks. With zero flow, changing parameters would signal instability without affecting reserves. Hold levers steady to preserve trust and let volume return before reallocating.\\\",\\\"answers\\\":[\\\"no petition\\\",\\\"no petition\\\",\\\"no petition\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"We need answer JSON only. Need decide levers. State: supply 331,317,109; s 335,911,058 (s > supply? because burns leave s unchanged, supply less than s due burns). reserve 1161.95 NEAR. curve price 0.000006818. volume 24h zero. tax 175, endowment 30, locker 40, buyback 30. funds zero. endowment 54 NEAR awake. locker weight 218M token-days. No petitions.\\n\\nNeed rule. Mandate keep alive/trusted, rising floor, low drawdowns/vol, steady volume, endowment enough. No volume. Buyback fund zero, so buyback_burn cannot spend >0? \\\"never more than buyback fund can pay.\\\" fund 0, so burn 0. Could adjust tax/endowment/locker. Current tax 175 within. Endowment 54 >1. Need maybe increase endowment share to build inference endowment? But locker share 40 high, buyback 30. No volume means no tax. Changing shares no immediate effect. Need avoid capture? no petitions. Could keep steady. Maybe increase endowment_share to 40? But locker_share 40, sum 80, buyback 20. Endowment stronger. But locker rewards important for locking/petitions. No volume. Buyback fund zero. Since no volume, no tax. We can set buyback_burn 0. Tax maybe keep 175 to not discourage volume. Endowment share maybe 40 to grow brain, locker 40, buyback 20. But change at most 10. Is that wise? Endowment 54 already enough. Stronger model maybe >? \\\"below 1 asleep; larger endowment buys stronger model.\\\" 54 likely strong. Increasing endowment share reduces buyback. But buyback fund zero anyway. Locker share 40 high. Maybe keep all same. Need answer no petitions. Minutes <=600 chars. JSON.\\n\\nNeed consider buyback_burn: 0 to 50 bps current supply per meeting, never more than fund can pay. Fund 0 => 0. Good.\\n\\nCould set tax_bps 175, endowment_share 30, locker_share 40, buyback_burn 0. Minutes mention no volume, no fund, hold steady, preserve incentives, endowment adequate. Answers [\\\"no petition\\\",\\\"no petition\\\",\\\"no petition\\\"].\\n\\nNeed ensure valid JSON.\"},\"finish_reason\":\"stop\"}],\"created\":1794267245,\"model\":\"deepseek-v4-1-flash-1017\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":809,\"completion_tokens\":642,\"total_tokens\":1451,\"prompt_tokens_details\":{\"cached_tokens\":512},\"cache_read_input_tokens\":512,\"completion_tokens_details\":{\"accepted_prediction_tokens\":382,\"audio_tokens\":0,\"reasoning_tokens\":508,\"rejected_prediction_tokens\":398}},\"cost\":{\"usd\":0.00086334,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}
