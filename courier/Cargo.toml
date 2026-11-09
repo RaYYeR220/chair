@@ -1,0 +1,37 @@
+[package]
+name = "chair-courier"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "CHAIR courier: the OutLayer module that carries the meeting request to NEAR AI Cloud and brings back the response with its TEE signature"
+build = "build.rs"
+
+# Own workspace: nothing else in the repo is a Cargo workspace member.
+[workspace]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "chair-courier"
+path = "src/main.rs"
+
+[features]
+default = []
+# Testnet-only check build: no `callers` gate, so the owner can run the module
+# directly. Never publish it to the real project.
+scratch = []
+
+[dependencies]
+serde_json = "1"
+sha2 = "0.10"
+
+[target.'cfg(target_os = "wasi")'.dependencies]
+wasi = "0.13"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+debug = false
+codegen-units = 1
