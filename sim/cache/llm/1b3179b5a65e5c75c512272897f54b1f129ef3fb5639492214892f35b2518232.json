@@ -1,0 +1,22 @@
+{
+ "request_sha256": "1b3179b5a65e5c75c512272897f54b1f129ef3fb5639492214892f35b2518232",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:16:08.464Z",
+ "latency_ms": 22329,
+ "usage": {
+  "prompt_tokens": 696,
+  "completion_tokens": 401,
+  "total_tokens": 1097,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 247,
+   "audio_tokens": 0,
+   "reasoning_tokens": 102,
+   "rejected_prediction_tokens": 215
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 59. Zero volume in 24h; tax already at the 100 bps floor, so no room to cut further. Locker_share is at its 25% constitutional cap — cannot raise. Buyback fund holds ~0.000000000000000000000012 NEAR, far below the cost of any burnable amount, so buyback_burn is 0 this meeting; the daily-buyback petition is sound in principle but unfundable today. Endowment at 30% keeps the brain funded while leaving 45% of any future tax flow to buybacks. Hold all levers steady and wait for volume to return.\",\"answers\":[\"holder-166.near: Agreed in spirit — tax is already at the 100 bps constitutional floor. Nothing lower is permitted. Volume must come from the market, not the lever.\",\"holder-169.near: The compounding floor is the right instinct, but the buyback fund is effectively empty (~1.2e-23 NEAR). No burn is payable today. The 45% tax share will refill it the moment trading resumes.\",\"holder-150.near: Lockers are appreciated, but locker_share sits at the 25% constitutional maximum. It cannot go higher. Your 266M weight-days already earn the full allowed share.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-3aa679d5907d41d5af9b008c07545a3a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 59. Zero volume in 24h; tax already at the 100 bps floor, so no room to cut further. Locker_share is at its 25% constitutional cap — cannot raise. Buyback fund holds ~0.000000000000000000000012 NEAR, far below the cost of any burnable amount, so buyback_burn is 0 this meeting; the daily-buyback petition is sound in principle but unfundable today. Endowment at 30% keeps the brain funded while leaving 45% of any future tax flow to buybacks. Hold all levers steady and wait for volume to return.\\\",\\\"answers\\\":[\\\"holder-166.near: Agreed in spirit — tax is already at the 100 bps constitutional floor. Nothing lower is permitted. Volume must come from the market, not the lever.\\\",\\\"holder-169.near: The compounding floor is the right instinct, but the buyback fund is effectively empty (~1.2e-23 NEAR). No burn is payable today. The 45% tax share will refill it the moment trading resumes.\\\",\\\"holder-150.near: Lockers are appreciated, but locker_share sits at the 25% constitutional maximum. It cannot go higher. Your 266M weight-days already earn the full allowed share.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 59. Zero volume 24h. Tax at 100 (floor), endowment 30, locker 25, buyback share 45. Buyback fund ~0, so buyback_burn must be 0 (can't pay). Petitions: lower tax (already at floor 100), small buyback daily (fund empty — can't), raise locker_share (already at max 25).\\n\\nKeep levers unchanged; buyback_burn 0. Answer petitions in order.\"},\"finish_reason\":\"stop\"}],\"created\":1794273346,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":696,\"completion_tokens\":401,\"total_tokens\":1097,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":247,\"audio_tokens\":0,\"reasoning_tokens\":102,\"rejected_prediction_tokens\":215}},\"cost\":{\"usd\":0.0003049,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

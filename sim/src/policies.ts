@@ -1,14 +1,16 @@
 // The four chairs. Every ruling goes through the same constitution (Chair.hold → clampRuling).
+import { createHash } from "node:crypto";
 import { CFG } from "./config.ts";
 import { type Chair, type Ruling, type FallbackReason, ladderModel, toNear } from "./token.ts";
-import { buildBrief, buildRequest } from "./prompt.ts";
+import { SYSTEM_PROMPT, buildBrief, buildRequest } from "./prompt.ts";
 import type { LlmClient } from "./llm.ts";
 
 export interface Decision {
   ruling: Ruling | null; // null → the fallback rule runs
   reason: FallbackReason | "fixed_rule" | null;
   model?: string | null;
-  llm?: { requestSha256: string; cached: boolean; promptTokens: number; completionTokens: number; usd: number; content: string; error?: string };
+  brief?: string;
+  llm?: { requestSha256: string; cacheKey: string; cached: boolean; promptTokens: number; completionTokens: number; usd: number; content: string; error?: string };
 }
 
 export interface Policy {
@@ -67,34 +69,64 @@ export function controllerPolicy(): Policy {
   };
 }
 
-/** Contract check 3: the content must parse as a ruling. Mirrors what the contract accepts. */
-export function parseRuling(content: string): Ruling | null {
-  let t = content.trim();
-  const fence = t.match(/^```(?:json)?\s*\n?([\s\S]*?)\n?```$/);
-  if (fence) t = fence[1].trim();
-  let j: any;
-  try { j = JSON.parse(t); } catch { return null; }
-  if (!j || typeof j !== "object" || Array.isArray(j)) return null;
-  for (const f of ["tax_bps", "endowment_share", "locker_share", "buyback_burn"]) if (!Number.isInteger(j[f])) return null;
-  if (typeof j.minutes !== "string") return null;
-  if (!Array.isArray(j.answers) || j.answers.length !== 3 || !j.answers.every((x: unknown) => typeof x === "string")) return null;
-  return { tax_bps: j.tax_bps, endowment_share: j.endowment_share, locker_share: j.locker_share, buyback_burn: j.buyback_burn, minutes: j.minutes, answers: j.answers };
+/** `extract_object`: the whole trimmed content if it is a JSON object, else the first '{' to the last '}'. */
+function extractObject(content: string): Record<string, unknown> | null {
+  const obj = (t: string) => {
+    try { const v = JSON.parse(t); return v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : null; } catch { return null; }
+  };
+  const whole = obj(content.trim());
+  if (whole) return whole;
+  const a = content.indexOf("{"), b = content.lastIndexOf("}");
+  if (a < 0 || b <= a) return null;
+  return obj(content.slice(a, b + 1));
+}
+
+const I64_MAX = 9223372036854775807, I64_MIN = -9223372036854775808;
+/** `int_field`: an integral JSON number (saturating at the i64 range); fractions, strings, missing fail. */
+function intField(m: Record<string, unknown>, k: string): number | null {
+  const v = m[k];
+  if (typeof v !== "number" || !Number.isFinite(v) || !Number.isInteger(v)) return null;
+  return Math.max(I64_MIN, Math.min(I64_MAX, v));
+}
+
+/** Contract check 3 (`parse_ruling`) on the message content, for a brief with `petitions` petitions. */
+export function parseRuling(content: string, petitions: number): Ruling | null {
+  const m = extractObject(content);
+  if (!m) return null;
+  const tax_bps = intField(m, "tax_bps"), endowment_share = intField(m, "endowment_share");
+  const locker_share = intField(m, "locker_share"), buyback_burn = intField(m, "buyback_burn");
+  if (tax_bps === null || endowment_share === null || locker_share === null || buyback_burn === null) return null;
+  if (typeof m.minutes !== "string") return null;
+  let answers: string[];
+  if (!("answers" in m)) {
+    if (petitions !== 0) return null;
+    answers = [];
+  } else {
+    if (!Array.isArray(m.answers) || m.answers.length < petitions) return null;
+    const first = m.answers.slice(0, petitions);
+    if (!first.every((x) => typeof x === "string")) return null;
+    answers = first as string[];
+  }
+  return { tax_bps, endowment_share, locker_share, buyback_burn, minutes: m.minutes, answers };
 }
 
 /** (d) LLM chair: the real meeting request to the model the IQ ladder selects. */
-export function llmPolicy(client: LlmClient): Policy {
+export function llmPolicy(client: LlmClient, opts: { key?: string; name?: string; systemPrompt?: string } = {}): Policy {
+  const systemPrompt = opts.systemPrompt ?? SYSTEM_PROMPT;
   return {
-    key: "llm", name: "LLM chair",
+    key: opts.key ?? "llm", name: opts.name ?? "LLM chair",
     async decide(c: Chair) {
       const model = ladderModel(c.brainReported);
       if (!model) return { ruling: null, reason: "asleep", model: null };
-      const body = buildRequest(model, buildBrief(c));
-      const res = await client.complete(body);
-      const llm = { requestSha256: res.key, cached: res.cached, promptTokens: res.promptTokens, completionTokens: res.completionTokens, usd: res.usd, content: res.content ?? "", error: res.error };
-      if (res.error || res.content == null) return { ruling: null, reason: "unsigned", model, llm };
-      const ruling = parseRuling(res.content);
-      if (!ruling) return { ruling: null, reason: "unparseable", model, llm };
-      return { ruling, reason: null, model, llm };
+      const brief = buildBrief(c);
+      const request = buildRequest(model, brief, systemPrompt);
+      const requestSha256 = createHash("sha256").update(request).digest("hex");
+      const res = await client.complete(request);
+      const llm = { requestSha256, cacheKey: res.key, cached: res.cached, promptTokens: res.promptTokens, completionTokens: res.completionTokens, usd: res.usd, content: res.content ?? "", error: res.error };
+      if (res.error || res.content == null) return { ruling: null, reason: "unsigned", model, brief, llm };
+      const ruling = parseRuling(res.content, c.topPetitions().length);
+      if (!ruling) return { ruling: null, reason: "unparseable", model, brief, llm };
+      return { ruling, reason: null, model, brief, llm };
     },
   };
 }

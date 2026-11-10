@@ -1,0 +1,22 @@
+{
+ "request_sha256": "9d1251350f70c33be83e07149cf0e2fb2c17b43e466c1c2e849671efdd9c6512",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:01.964Z",
+ "latency_ms": 4118,
+ "usage": {
+  "prompt_tokens": 639,
+  "completion_tokens": 458,
+  "total_tokens": 1097,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 257,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Buy volume (125 NEAR) dwarfs sells (27.5), so demand is strong enough to absorb a modest tax increase. Raising tax_bps 125→150 captures more revenue from the buy flow without choking momentum, staying within the 50bp move limit. Split stays 50/25/25: endowment funding is healthy (11.55 NEAR), locker pool keeps lockers engaged, and a quarter of tax still flows to buybacks. Buyback fund holds only 0.487 NEAR; at ~0.0000394 NEAR/CHAIR, buying and burning 2bps of supply (~76.5k CHAIR) costs roughly 0.30 NEAR on the curve, well within the fund. Setting burn to 2 delivers a visible, affordable burn this meeting.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-2414152d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Buy volume (125 NEAR) dwarfs sells (27.5), so demand is strong enough to absorb a modest tax increase. Raising tax_bps 125→150 captures more revenue from the buy flow without choking momentum, staying within the 50bp move limit. Split stays 50/25/25: endowment funding is healthy (11.55 NEAR), locker pool keeps lockers engaged, and a quarter of tax still flows to buybacks. Buyback fund holds only 0.487 NEAR; at ~0.0000394 NEAR/CHAIR, buying and burning 2bps of supply (~76.5k CHAIR) costs roughly 0.30 NEAR on the curve, well within the fund. Setting burn to 2 delivers a visible, affordable burn this meeting.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 16. Buy volume 125 NEAR, sell 27.5 — buy pressure strong. Tax 125 bps, could raise slightly to capture revenue? Buyback fund tiny (0.486 NEAR). Buyback burn: price 0.0000394, supply 38.2M. Cost to buy b bps of supply: 38,235,968 * 0.0001 = 3823.6 CHAIR per bp... wait bps of supply: 1 bp = 3823.6 CHAIR, cost ≈ 3823.6 * 0.0000394 ≈ 0.15 NEAR per bp (roughly, curve price rises). Fund 0.4869 NEAR → maybe ~2-3 bps affordable. Set buyback_burn = 2.\\n\\nTax: strong buy volume, raise tax modestly to 150? Max move 50. Buy pressure suggests raising tax captures more. But raising tax dampens buying. Moderate: 150.\\n\\nEndowment 50, locker 25, buyback 25. Keep. Maybe shift locker_share down since locker pool small? Keep stable.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272758,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":639,\"completion_tokens\":458,\"total_tokens\":1097,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":257,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00029413,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

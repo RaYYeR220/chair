@@ -1,0 +1,23 @@
+{
+ "request_sha256": "e159336008ce5cc2f272744153cc38cf6459c7fb7112814b3fc10afb8a6622ab",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:25.636Z",
+ "latency_ms": 9027,
+ "usage": {
+  "prompt_tokens": 583,
+  "completion_tokens": 408,
+  "total_tokens": 991,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 249,
+   "audio_tokens": 0,
+   "reasoning_tokens": 222,
+   "rejected_prediction_tokens": 228
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 48: zero buy and sell volume over 24h, so no tax revenue was generated and the buyback fund sits at 0.016 NEAR — enough to repurchase roughly 330 CHAIR, about 0.07 bps of supply, below the minimum meaningful burn. With no flow to redistribute, adjusting shares would only change how future (currently nonexistent) revenue is split, so I hold all levers: tax 100 bps keeps trading friction minimal to encourage activity; endowment 30% keeps the brain funded from the 38 NEAR reserve; locker share stays at its 25% cap to reward the 14M CHAIR-days of locker weight; remainder to buyback. Reassess if volume returns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-4bb297111b59437eaee5d31552a194b8\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 48: zero buy and sell volume over 24h, so no tax revenue was generated and the buyback fund sits at 0.016 NEAR — enough to repurchase roughly 330 CHAIR, about 0.07 bps of supply, below the minimum meaningful burn. With no flow to redistribute, adjusting shares would only change how future (currently nonexistent) revenue is split, so I hold all levers: tax 100 bps keeps trading friction minimal to encourage activity; endowment 30% keeps the brain funded from the 38 NEAR reserve; locker share stays at its 25% cap to reward the 14M CHAIR-days of locker weight; remainder to buyback. Reassess if volume returns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No volume, no petitions. Buyback fund tiny (0.016 NEAR). Price ~0.0000489. Supply 47.47M, sold 47.87M (sold > supply? odd, but fine). Locker pool empty, locker_share 25 but no funds. Volume zero — keep levers stable, maybe nudge locker_share down since pool empty? Locker share 25 max; endowment 30. Buyback share 45. No activity, so minimal changes. Buyback burn: fund 0.016 NEAR at price 0.0000489 buys ~332 CHAIR, which is ~0.0007% of supply — under 1 bps. So buyback_burn 0 or 1? 332/47,470,964 ≈ 0.0007% = 0.07 bps, so 0.\\n\\nKeep everything steady. Maybe reduce locker_share since locker_pool is 0 and no volume means nothing accrues anyway — but stability is fine. I'll hold.\"},\"finish_reason\":\"stop\"}],\"created\":1794273196,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":583,\"completion_tokens\":408,\"total_tokens\":991,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":249,\"audio_tokens\":0,\"reasoning_tokens\":222,\"rejected_prediction_tokens\":228}},\"cost\":{\"usd\":0.00026073,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

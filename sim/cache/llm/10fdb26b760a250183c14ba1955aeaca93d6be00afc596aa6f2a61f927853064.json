@@ -1,0 +1,22 @@
+{
+ "request_sha256": "10fdb26b760a250183c14ba1955aeaca93d6be00afc596aa6f2a61f927853064",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:08:04.885Z",
+ "latency_ms": 6744,
+ "usage": {
+  "prompt_tokens": 686,
+  "completion_tokens": 434,
+  "total_tokens": 1120,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 276,
+   "audio_tokens": 0,
+   "reasoning_tokens": 206,
+   "rejected_prediction_tokens": 198
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 31. Flows are healthy and buy-side dominant: 59.35 NEAR bought vs 18.38 sold over 24h, roughly 3:1. Price holds at 0.0000416 NEAR with reserve at 863 NEAR. Current split (50% endowment / 25% lockers / 25% buyback) keeps the brain funded while rewarding lockers, and tax at 175 bps sits mid-band without choking volume. Buyback fund is thin at 0.37 NEAR; a burn today would be token-drops in the ocean, so I hold at 0 and let the fund accumulate. The lone petition asks for steadiness, and the data agrees. No levers move.\",\"answers\":[\"@holder-157.near: Agreed. Flows are balanced, the brain is funded, and lockers are paid. All levers hold steady this meeting. Steady as she goes.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-d8f9bc15c84547cdaa48afab9b3ede8e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 31. Flows are healthy and buy-side dominant: 59.35 NEAR bought vs 18.38 sold over 24h, roughly 3:1. Price holds at 0.0000416 NEAR with reserve at 863 NEAR. Current split (50% endowment / 25% lockers / 25% buyback) keeps the brain funded while rewarding lockers, and tax at 175 bps sits mid-band without choking volume. Buyback fund is thin at 0.37 NEAR; a burn today would be token-drops in the ocean, so I hold at 0 and let the fund accumulate. The lone petition asks for steadiness, and the data agrees. No levers move.\\\",\\\"answers\\\":[\\\"@holder-157.near: Agreed. Flows are balanced, the brain is funded, and lockers are paid. All levers hold steady this meeting. Steady as she goes.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 31. Current levers: tax 175, endowment 50, locker 25, buyback 25. Volume: buys 59.35 NEAR, sells 18.38 NEAR — buy-heavy, healthy. Funds low but fine. Petition asks steady as she goes. Buyback fund 0.37 NEAR; price 0.0000415... buyback_burn 0 means no purchase. Could do small buyback? Fund 0.37 NEAR buys ~9000 CHAIR, supply 40M, so bps needed: 0.37/0.0000415 ≈ 8900 CHAIR ≈ 0.022 bps of supply — so even 1 bps unaffordable? 1 bps of 40M = 4027 CHAIR ≈ 0.167 NEAR. Actually affordable. But keep steady per petition. Output no changes, buyback_burn 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794272878,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":686,\"completion_tokens\":434,\"total_tokens\":1120,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":276,\"audio_tokens\":0,\"reasoning_tokens\":206,\"rejected_prediction_tokens\":198}},\"cost\":{\"usd\":0.00031989999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

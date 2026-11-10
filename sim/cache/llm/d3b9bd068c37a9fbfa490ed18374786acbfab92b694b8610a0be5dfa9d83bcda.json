@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d3b9bd068c37a9fbfa490ed18374786acbfab92b694b8610a0be5dfa9d83bcda",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:07:40.842Z",
+ "latency_ms": 7809,
+ "usage": {
+  "prompt_tokens": 695,
+  "completion_tokens": 436,
+  "total_tokens": 1131,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 271,
+   "audio_tokens": 0,
+   "reasoning_tokens": 206,
+   "rejected_prediction_tokens": 221
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Sell volume (32.66 NEAR) outpaces buys (22.91), but price holds and reserve is stable, so no need to shock the tax; hold at 150 bps. Locker_share is already at the constitutional maximum of 25, so the petition's request is already satisfied to the fullest extent allowed. Endowment stays at 30 to keep the brain funded while maximizing locker and buyback flows. Buyback fund holds 0.4374 NEAR; at price 0.000044329, each bps of burn costs ~0.191 NEAR, so I can afford 2 bps (~9,870 CHAIR burned). Modest burn to tighten supply without draining the fund to zero.\",\"answers\":[\"Locker_share is already at the constitutional cap of 25% — I cannot raise it further. Lockers currently receive the maximum share the charter permits, plus the buyback burn supports price. Your weight is noted and appreciated.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-5e45aa5d0c334a52bff9af7e022f2a9d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Sell volume (32.66 NEAR) outpaces buys (22.91), but price holds and reserve is stable, so no need to shock the tax; hold at 150 bps. Locker_share is already at the constitutional maximum of 25, so the petition's request is already satisfied to the fullest extent allowed. Endowment stays at 30 to keep the brain funded while maximizing locker and buyback flows. Buyback fund holds 0.4374 NEAR; at price 0.000044329, each bps of burn costs ~0.191 NEAR, so I can afford 2 bps (~9,870 CHAIR burned). Modest burn to tighten supply without draining the fund to zero.\\\",\\\"answers\\\":[\\\"Locker_share is already at the constitutional cap of 25% — I cannot raise it further. Lockers currently receive the maximum share the charter permits, plus the buyback burn supports price. Your weight is noted and appreciated.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"One petition. Current: tax 150, endowment 30, locker 25, buyback 45. Sell pressure exceeds buys. Locker share already at max 25. So can't raise. Maybe keep steady, or adjust tax. Volume sell > buy; modest tax fine. Keep levers, buyback_burn: fund 0.437 NEAR, price 0.0000443 NEAR → ~9870 CHAIR. Supply 43,097,915. 50 bps = 0.5% = ~215,489 CHAIR, way beyond fund. Cost per bps: supply*0.0001*price ≈ 43097915*0.0001*0.00004433 ≈ 0.191 NEAR per bps. Fund 0.437 → ~2 bps. Set buyback_burn 2.\\n\\nMinutes: note sell pressure, locker share at cap, small burn.\"},\"finish_reason\":\"stop\"}],\"created\":1794272853,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":695,\"completion_tokens\":436,\"total_tokens\":1131,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":271,\"audio_tokens\":0,\"reasoning_tokens\":206,\"rejected_prediction_tokens\":221}},\"cost\":{\"usd\":0.00032225,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

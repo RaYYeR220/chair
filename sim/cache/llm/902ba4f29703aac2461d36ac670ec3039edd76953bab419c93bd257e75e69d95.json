@@ -1,0 +1,22 @@
+{
+ "request_sha256": "902ba4f29703aac2461d36ac670ec3039edd76953bab419c93bd257e75e69d95",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:14.752Z",
+ "latency_ms": 3920,
+ "usage": {
+  "prompt_tokens": 636,
+  "completion_tokens": 399,
+  "total_tokens": 1035,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 218,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":11,\"minutes\":\"Steady hand at meeting 6. Volume is healthy on both sides (133 NEAR buys, 96 NEAR sells) and price holds near 0.0000372, so no need to disturb the 200 bps tax or the 60/10/30 split, which keeps the endowment well funded while rewarding lockers and buybacks. The binding constraint is the buyback fund: 1.478 NEAR at ~0.0000372 NEAR/CHAIR buys ~39.8k CHAIR, about 11 bps of the 36.03M supply, so burn is set to 11 rather than the 50 cap. Reassess if sell pressure builds.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-26b1bb43\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":11,\\\"minutes\\\":\\\"Steady hand at meeting 6. Volume is healthy on both sides (133 NEAR buys, 96 NEAR sells) and price holds near 0.0000372, so no need to disturb the 200 bps tax or the 60/10/30 split, which keeps the endowment well funded while rewarding lockers and buybacks. The binding constraint is the buyback fund: 1.478 NEAR at ~0.0000372 NEAR/CHAIR buys ~39.8k CHAIR, about 11 bps of the 36.03M supply, so burn is set to 11 rather than the 50 cap. Reassess if sell pressure builds.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. No petitions. Set levers. Tax 200, endowment 60, locker 10, buyback share 30 (rest goes to buyback fund). Buyback burn: fund 1.478 NEAR, price 0.0000371653 NEAR per CHAIR. Supply 36M. 50 bps = 0.5% of supply = 180,155 CHAIR. Cost = 180155 * 0.000037165 ≈ 6.70 NEAR. Fund only 1.478 NEAR → can buy ~39,760 CHAIR ≈ 11 bps of supply. So buyback_burn = 11 (or compute: 1.478/0.000037165 = 39,772 CHAIR; /36,031,047 = 0.0011036 → 11.04 bps). Set 11.\\n\\nVolume decent, price stable. Keep tax 200, maybe keep everything. Minutes concise.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272711,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":636,\"completion_tokens\":399,\"total_tokens\":1035,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":218,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00026418,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

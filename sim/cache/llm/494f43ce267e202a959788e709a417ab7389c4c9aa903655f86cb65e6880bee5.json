@@ -1,0 +1,22 @@
+{
+ "request_sha256": "494f43ce267e202a959788e709a417ab7389c4c9aa903655f86cb65e6880bee5",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:10:30.377Z",
+ "latency_ms": 18287,
+ "usage": {
+  "prompt_tokens": 627,
+  "completion_tokens": 567,
+  "total_tokens": 1194,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 361,
+   "audio_tokens": 0,
+   "reasoning_tokens": 362,
+   "rejected_prediction_tokens": 257
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 34. Flow is one-sided: 66.46 NEAR of sells, zero buys — mild net exit pressure. Tax sits at the 100 floor; I nudge it to 125 (within the 50 cap) to slow the bleed without choking future buyers. Split stays 30/25/45: endowment is healthy at 37.07 NEAR, lockers earn their 25%, and the remainder rebuilds the buyback fund, which is nearly empty at 0.36 NEAR. That fund covers exactly one basis point of supply (~0.27 NEAR at price 0.0000527), so I burn 1 bps this meeting — small, but it's a real, funded burn and signals the buyback is alive. No petitions to answer. Reassess if sell pressure persists.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-aac575fbcf79470796079f9abe02e0a3\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 34. Flow is one-sided: 66.46 NEAR of sells, zero buys — mild net exit pressure. Tax sits at the 100 floor; I nudge it to 125 (within the 50 cap) to slow the bleed without choking future buyers. Split stays 30/25/45: endowment is healthy at 37.07 NEAR, lockers earn their 25%, and the remainder rebuilds the buyback fund, which is nearly empty at 0.36 NEAR. That fund covers exactly one basis point of supply (~0.27 NEAR at price 0.0000527), so I burn 1 bps this meeting — small, but it's a real, funded burn and signals the buyback is alive. No petitions to answer. Reassess if sell pressure persists.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 34. No petitions. Volume: only sells 66.46 NEAR, no buys. Price 0.0000527. Tax at 100 bps minimum. Endowment 37 NEAR is healthy. Buyback fund tiny (0.36 NEAR). Buyback_burn: fund can pay for how much? Price 0.0000527 NEAR per CHAIR. 0.3646 NEAR buys ~6918 CHAIR, which is ~0.0135 bps of supply (51346634 * 1e-4 = 5134 CHAIR per bps). So fund covers ~0.13 bps... wait 0.3646/0.0000527 ≈ 6919 CHAIR ≈ 0.135 bps. So buyback_burn max affordable is 0 (integer, since 1 bps costs ~0.27 NEAR > 0.36? Actually 5134 CHAIR * 0.0000527 = 0.2706 NEAR per bps. Fund 0.3646 > 0.2706, so 1 bps affordable). Set buyback_burn=1.\\n\\nSell-only pressure: maybe raise tax slightly to dampen sells? Tax at 100, can move up to 150. Modest sell pressure; keep tax 100 or bump to 120? Sells 66 NEAR with no buys — net outflow. Raising tax discourages selling but also discourages buying. Modest bump to 125 seems reasonable. Keep endowment 30, locker 25 (sum 55, buyback 45). Fine.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794273012,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":627,\"completion_tokens\":567,\"total_tokens\":1194,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":361,\"audio_tokens\":0,\"reasoning_tokens\":362,\"rejected_prediction_tokens\":257}},\"cost\":{\"usd\":0.00037755,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3c20a3b6994d6bc8cd8da7b5a478c77ba9d568bf664f8669a1954914532b52e4",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:16.023Z",
+ "latency_ms": 9645,
+ "usage": {
+  "prompt_tokens": 688,
+  "completion_tokens": 472,
+  "total_tokens": 1160,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 301,
+   "audio_tokens": 0,
+   "reasoning_tokens": 233,
+   "rejected_prediction_tokens": 209
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":0,\"minutes\":\"Meeting 8. Flows are healthy and buy-heavy: 25.8 NEAR bought vs 2.5 sold over 24h, so the tax base is holding. Current settings (150 bps tax, 60/20/20 split) are working; no reason to move any lever more than the petition asks. Buyback fund holds only 0.0857 NEAR — a 1 bps burn would cost roughly 0.12 NEAR, so even the minimum is unaffordable this meeting. Set buyback_burn to 0 and let the 20% share accumulate the fund for a future burn. Hold steady.\",\"answers\":[\"holder-153.near: Agreed. Steady as she goes — all levers unchanged this meeting. The only exception is buyback_burn at 0, not from policy but arithmetic: the fund (0.086 NEAR) cannot yet cover even 1 bps of supply. It accumulates via the 20% share.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a0d85d52c167402aa01be888b2534ec4\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 8. Flows are healthy and buy-heavy: 25.8 NEAR bought vs 2.5 sold over 24h, so the tax base is holding. Current settings (150 bps tax, 60/20/20 split) are working; no reason to move any lever more than the petition asks. Buyback fund holds only 0.0857 NEAR — a 1 bps burn would cost roughly 0.12 NEAR, so even the minimum is unaffordable this meeting. Set buyback_burn to 0 and let the 20% share accumulate the fund for a future burn. Hold steady.\\\",\\\"answers\\\":[\\\"holder-153.near: Agreed. Steady as she goes — all levers unchanged this meeting. The only exception is buyback_burn at 0, not from policy but arithmetic: the fund (0.086 NEAR) cannot yet cover even 1 bps of supply. It accumulates via the 20% share.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 8. Volume: buys 25.8 NEAR, sells 2.49 NEAR — buy-heavy, healthy. Tax 150, endowment 60, locker 20, buyback share 20 (rest). Petition: steady as she goes.\\n\\nBuyback fund is tiny (0.0857 NEAR). Buyback burn: 50 bps of supply = 34,239,739.9 * 0.005 = 171,198.7 CHAIR. Cost = amount * price ≈ 171,198.7 * 0.00003534 ≈ 6.05 NEAR. Fund only has 0.0857 NEAR, so max affordable ≈ 0.0857/0.00003534 ≈ 2,425 CHAIR ≈ 0.07 bps of supply. So buyback_burn must be 0 (or tiny). 0 is fine — keep fund accumulating.\\n\\nSteady: keep tax 150, endowment 60, locker 20, buyback_burn 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794272706,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":688,\"completion_tokens\":472,\"total_tokens\":1160,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":301,\"audio_tokens\":0,\"reasoning_tokens\":233,\"rejected_prediction_tokens\":209}},\"cost\":{\"usd\":0.0003392,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

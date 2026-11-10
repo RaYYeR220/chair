@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e4681b467b235c015daba83625632557a3240a10b8ff05ebf6552a931b9fa63c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:14:11.261Z",
+ "latency_ms": 5011,
+ "usage": {
+  "prompt_tokens": 766,
+  "completion_tokens": 540,
+  "total_tokens": 1306,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 241,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Sell pressure dominates (122.5 NEAR sold vs 9.4 bought), so I raise the tax 50 bps to 150 to slow churn and refill the funds. locker_share is already at the constitutional maximum of 25; it cannot go higher. Endowment stays 30. Buyback fund holds only 0.81 NEAR (~14,800 CHAIR), so a 50 bps burn (~265k CHAIR) is unpayable; I set 1 bps (~5,308 CHAIR, ~0.29 NEAR), which the fund covers, keeping a small daily burn alive.\",\"answers\":[\"holder-159.near: Lockers are already paid at the constitutional cap of 25%. I cannot raise it further this meeting or any meeting. The 150 bps tax will grow your pool faster.\",\"holder-166.near: Agreed in principle. The fund only affords ~1 bps of supply today (~0.29 NEAR), so I burn 1 bps now and let the higher tax rebuild the fund for bigger burns.\",\"holder-154.near: Your service is real, but 25% is the hard ceiling the contract enforces. The tax increase to 150 bps means more absolute NEAR flows to lockers at the same share.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-d233268f\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Sell pressure dominates (122.5 NEAR sold vs 9.4 bought), so I raise the tax 50 bps to 150 to slow churn and refill the funds. locker_share is already at the constitutional maximum of 25; it cannot go higher. Endowment stays 30. Buyback fund holds only 0.81 NEAR (~14,800 CHAIR), so a 50 bps burn (~265k CHAIR) is unpayable; I set 1 bps (~5,308 CHAIR, ~0.29 NEAR), which the fund covers, keeping a small daily burn alive.\\\",\\\"answers\\\":[\\\"holder-159.near: Lockers are already paid at the constitutional cap of 25%. I cannot raise it further this meeting or any meeting. The 150 bps tax will grow your pool faster.\\\",\\\"holder-166.near: Agreed in principle. The fund only affords ~1 bps of supply today (~0.29 NEAR), so I burn 1 bps now and let the higher tax rebuild the fund for bigger burns.\\\",\\\"holder-154.near: Your service is real, but 25% is the hard ceiling the contract enforces. The tax increase to 150 bps means more absolute NEAR flows to lockers at the same share.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 54. Heavy sell volume (122.5 NEAR sells vs 9.4 buys). Tax at 100 bps is low; raise to 150. Locker share already at 25 max. Endowment 30, buyback_share 45 (rest goes to buyback fund). Petitions: locker_share up 10 — already at max 25, can't. Buyback: fund only 0.81 NEAR. Price ~0.0000548, supply 53M. buyback_burn in bps of supply: 50 bps = 0.5% of 53M ≈ 265,388 CHAIR ≈ 14.5 NEAR — can't afford. Fund 0.81 NEAR buys ~14,800 CHAIR ≈ 0.028 bps. So set buyback_burn small, e.g., 1 bps = 5307 CHAIR ≈ 0.29 NEAR — affordable. Set buyback_burn = 1.\\n\\nLocker share stays 25 (max). Endowment 30. Tax: raise to 150 given sell pressure.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273246,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":766,\"completion_tokens\":540,\"total_tokens\":1306,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":241,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00035418,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

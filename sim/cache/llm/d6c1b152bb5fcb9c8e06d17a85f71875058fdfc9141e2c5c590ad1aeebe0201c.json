@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d6c1b152bb5fcb9c8e06d17a85f71875058fdfc9141e2c5c590ad1aeebe0201c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:11:42.067Z",
+ "latency_ms": 4846,
+ "usage": {
+  "prompt_tokens": 710,
+  "completion_tokens": 536,
+  "total_tokens": 1246,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 274,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Quiet tape: 14 NEAR of sells, zero buys. Tax stays 150 to avoid choking the little flow there is. Locker_share is already at the constitutional cap of 25, so it holds. Endowment stays 30; the brain is funded (37.9 NEAR). Buyback fund holds 0.647 NEAR; at price 0.00004907 that buys ~13,185 CHAIR, which is ~2.76 bps of the 47.68M supply. I set buyback_burn to 2 bps — the largest whole step the fund can fully pay for — keeping the daily compounding habit without overextending. Rest of tax flows to buyback fund to rebuild capacity.\",\"answers\":[\"Agreed. I've set a 2 bps buyback-and-burn this meeting — the most the fund can pay for today. Each meeting the fund refills from tax, so the floor compounds daily.\",\"You're heard, but locker_share sits at the constitutional maximum of 25 and cannot go higher. The 45% buyback share indirectly supports the price you lock around.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c75ed147\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Quiet tape: 14 NEAR of sells, zero buys. Tax stays 150 to avoid choking the little flow there is. Locker_share is already at the constitutional cap of 25, so it holds. Endowment stays 30; the brain is funded (37.9 NEAR). Buyback fund holds 0.647 NEAR; at price 0.00004907 that buys ~13,185 CHAIR, which is ~2.76 bps of the 47.68M supply. I set buyback_burn to 2 bps — the largest whole step the fund can fully pay for — keeping the daily compounding habit without overextending. Rest of tax flows to buyback fund to rebuild capacity.\\\",\\\"answers\\\":[\\\"Agreed. I've set a 2 bps buyback-and-burn this meeting — the most the fund can pay for today. Each meeting the fund refills from tax, so the floor compounds daily.\\\",\\\"You're heard, but locker_share sits at the constitutional maximum of 25 and cannot go higher. The 45% buyback share indirectly supports the price you lock around.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Volume is tiny: 14 NEAR sells, no buys. Buyback fund only 0.647 NEAR. Buyback_burn: bps of supply to buy and burn, max 50 bps but limited by fund. Supply 47.68M, 1 bps = 4768 CHAIR ≈ 0.234 NEAR at price 0.000049. Fund 0.647 NEAR buys ~13,187 CHAIR ≈ 2.77 bps. So buyback_burn = 2 (or 2.7 → integer, so 2). Let's compute: 0.6469/0.0000490668 = 13,185 CHAIR. 13,185/47,682,388 = 0.0002765 = 2.765 bps. So set 2 to be safe.\\n\\nTax: low volume; keep 150 or trim slightly? Sell pressure only. Maybe keep 150. Endowment 30, locker 25 — locker_share max is 25, already at cap. Petition 2 asks raise locker_share — can't, at cap. Petition 1: small buyback daily — yes, 2 bps.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273097,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":710,\"completion_tokens\":536,\"total_tokens\":1246,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":274,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00034377999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

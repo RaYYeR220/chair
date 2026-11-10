@@ -1,0 +1,14 @@
+{
+ "file": "docs/SIMULATION.md",
+ "section": "PREREG-V2:BEGIN..PREREG-V2:END",
+ "sha256": "6cdf5220dff64bb194f585b4c768eb85ac8ba2b73fb6a7db27d9752c7a2ae660",
+ "modelSha256": "2826cde30c311197eb1832e63a1019dcdbe1076c3b7bb8bfc4592a29b871d27f",
+ "writtenAt": "2026-11-10T01:04:30.387Z",
+ "llmMeetingsRunBefore": 0,
+ "budgetCalls": 350,
+ "plannedRuns": [
+  "llm seed 1 x 5 scenarios (v2)",
+  "llm_b50 whale seed 1 (control, locker max 50)",
+  "extra seeds only if >= 60 calls remain"
+ ]
+}

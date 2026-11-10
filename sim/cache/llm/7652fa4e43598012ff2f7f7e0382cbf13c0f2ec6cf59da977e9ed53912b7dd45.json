@@ -1,0 +1,22 @@
+{
+ "request_sha256": "7652fa4e43598012ff2f7f7e0382cbf13c0f2ec6cf59da977e9ed53912b7dd45",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:08:36.896Z",
+ "latency_ms": 17004,
+ "usage": {
+  "prompt_tokens": 762,
+  "completion_tokens": 494,
+  "total_tokens": 1256,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 315,
+   "audio_tokens": 0,
+   "reasoning_tokens": 210,
+   "rejected_prediction_tokens": 222
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Volume is modest (29 NEAR/24h) and the tax is already at the constitutional floor of 100 bps, so no cut is possible. Locker_share sits at its 25 cap; endowment stays 30 to keep the brain funded. The buyback fund holds only 0.354 NEAR, which buys ~5,888 CHAIR at 0.0000601 — about 1 bp of the 58.8M supply. I burn that 1 bp today: a small but real, compounding floor bid, exactly as petitioned. Levers unchanged; the standing 45% buyback share will rebuild the fund for larger burns as volume returns.\",\"answers\":[\"Agreed. The fund covers ~1 bp of supply today, so I burn 1 bp — a small daily floor bid that compounds. As the 45% buyback share accumulates, daily burns grow.\",\"The tax is already at the constitutional floor of 100 bps; I cannot go lower. Growth must come from volume and the burn floor, not a smaller tax.\",\"Locker_share is at its 25 cap and cannot move up. The pool keeps accruing at 25% of tax; only a constitutional change could raise it.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-215533644acb4ae3a735ed157159fb7d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Volume is modest (29 NEAR/24h) and the tax is already at the constitutional floor of 100 bps, so no cut is possible. Locker_share sits at its 25 cap; endowment stays 30 to keep the brain funded. The buyback fund holds only 0.354 NEAR, which buys ~5,888 CHAIR at 0.0000601 — about 1 bp of the 58.8M supply. I burn that 1 bp today: a small but real, compounding floor bid, exactly as petitioned. Levers unchanged; the standing 45% buyback share will rebuild the fund for larger burns as volume returns.\\\",\\\"answers\\\":[\\\"Agreed. The fund covers ~1 bp of supply today, so I burn 1 bp — a small daily floor bid that compounds. As the 45% buyback share accumulates, daily burns grow.\\\",\\\"The tax is already at the constitutional floor of 100 bps; I cannot go lower. Growth must come from volume and the burn floor, not a smaller tax.\\\",\\\"Locker_share is at its 25 cap and cannot move up. The pool keeps accruing at 25% of tax; only a constitutional change could raise it.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 21. Current: tax 100, endowment 30, locker 25, buyback_share 45 (remainder). Buyback fund is tiny: 0.354 NEAR. Price 0.0000601 NEAR. Buyback_burn: bps of supply bought with buyback fund. Fund 0.354 NEAR / price ≈ 5888 CHAIR ≈ 0.01% of supply (58814425). 0.01% = 1 bps. So buyback_burn max ~1 bps. Set buyback_burn = 1.\\n\\nPetitions: 1) small buyback daily — yes, 1 bps. 2) lower tax — already at floor 100, can't go lower. 3) locker_share up 10 → 25 is max, can't. Keep levers unchanged: tax 100, endowment 30, locker 25.\\n\\nAnswers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\"}],\"created\":1794272900,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":762,\"completion_tokens\":494,\"total_tokens\":1256,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":315,\"audio_tokens\":0,\"reasoning_tokens\":210,\"rejected_prediction_tokens\":222}},\"cost\":{\"usd\":0.0003613,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

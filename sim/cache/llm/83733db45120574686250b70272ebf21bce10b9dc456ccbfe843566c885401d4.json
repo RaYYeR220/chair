@@ -1,0 +1,22 @@
+{
+ "request_sha256": "83733db45120574686250b70272ebf21bce10b9dc456ccbfe843566c885401d4",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:49.736Z",
+ "latency_ms": 4876,
+ "usage": {
+  "prompt_tokens": 769,
+  "completion_tokens": 580,
+  "total_tokens": 1349,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 324,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Volume is healthy but modest (35 NEAR total). Holder-152's case for a modest tax cut is sound: 150→125 bps keeps revenue meaningful while reducing friction. Shares stay at 50/25/25 — endowment funded, lockers rewarded, buyback fed. Buyback fund of 0.397 NEAR at ~0.0000348 NEAR/CHAIR buys ~11,420 CHAIR ≈ 3.4 bps of supply; setting burn to 3 bps, fully payable. Holder-153's steadiness honored on shares; Holder-169's compounding floor delivered via daily burn.\",\"answers\":[\"Agreed in part — cutting tax 150→125 bps to trim friction and invite volume, while keeping the endowment and locker funding intact.\",\"Shares held steady at 50/25/25 this meeting; stability itself is a policy choice I'm honoring today.\",\"Delivered: 3 bps of supply bought and burned from the buyback fund (~11.4k CHAIR). Small, daily, compounding — exactly as requested.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-fca0a9d1\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Volume is healthy but modest (35 NEAR total). Holder-152's case for a modest tax cut is sound: 150→125 bps keeps revenue meaningful while reducing friction. Shares stay at 50/25/25 — endowment funded, lockers rewarded, buyback fed. Buyback fund of 0.397 NEAR at ~0.0000348 NEAR/CHAIR buys ~11,420 CHAIR ≈ 3.4 bps of supply; setting burn to 3 bps, fully payable. Holder-153's steadiness honored on shares; Holder-169's compounding floor delivered via daily burn.\\\",\\\"answers\\\":[\\\"Agreed in part — cutting tax 150→125 bps to trim friction and invite volume, while keeping the endowment and locker funding intact.\\\",\\\"Shares held steady at 50/25/25 this meeting; stability itself is a policy choice I'm honoring today.\\\",\\\"Delivered: 3 bps of supply bought and burned from the buyback fund (~11.4k CHAIR). Small, daily, compounding — exactly as requested.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 13. Tax 150, endowment 50, locker 25, buyback_share 25 (implied). Buyback fund 0.397 NEAR. Price ~0.0000348 NEAR. Buyback burn: basis points of supply to buy and burn, 0-50, limited by fund.\\n\\nSupply 33.65M CHAIR. 1 bp = 3365 CHAIR ≈ 0.117 NEAR at current price. Fund 0.397 NEAR can buy ~11,420 CHAIR ≈ 3.4 bps. So buyback_burn = 3 (or 3.4 → integer 3). Let's compute: 0.397/0.000034772 ≈ 11,423 CHAIR. 11,423/33,653,217 ≈ 3.39 bps. So 3 bps.\\n\\nPetitions: lower tax a little → maybe reduce to 125? Volume is modest. Steady petition says no changes. Buyback petition: small buyback daily — yes, 3 bps.\\n\\nI'll lower tax slightly to 125 (max 50 move, so fine), keep shares, buyback 3. Or keep tax steady? Holder-152 wants lower tax; volume buy 21.45, sell 13.45 — decent. Lowering tax to 125 could stimulate volume. I'll do 125.\\n\\nMinutes under 1000 chars. Answers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272745,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":769,\"completion_tokens\":580,\"total_tokens\":1349,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":324,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00037463,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

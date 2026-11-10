@@ -1,0 +1,22 @@
+{
+ "request_sha256": "1ff43f3794581c9a598e47faffe6c73afc87ce38439ddbfa78c9db0dc608a122",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:57.845Z",
+ "latency_ms": 4286,
+ "usage": {
+  "prompt_tokens": 622,
+  "completion_tokens": 453,
+  "total_tokens": 1075,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 257,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Meeting 15. Flow is entirely one-sided: 59 NEAR of buys, zero sells — healthy demand, no reason to touch the tax. Holding tax_bps at 125, endowment_share at 50, locker_share at 25 (sum 75, remainder 25 to buyback fund). Buyback fund sits at 0.2712 NEAR; at price 0.0000368, 1 bps of supply costs ~0.131 NEAR, so the fund covers 2 bps (~0.263 NEAR, ~7,133 CHAIR burned). Burning 2 bps, the maximum the fund can pay for. No petitions this session; locker weight steady at ~69.7M CHAIR-days. Policy unchanged, modest burn executed.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-45b3e2ab\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 15. Flow is entirely one-sided: 59 NEAR of buys, zero sells — healthy demand, no reason to touch the tax. Holding tax_bps at 125, endowment_share at 50, locker_share at 25 (sum 75, remainder 25 to buyback fund). Buyback fund sits at 0.2712 NEAR; at price 0.0000368, 1 bps of supply costs ~0.131 NEAR, so the fund covers 2 bps (~0.263 NEAR, ~7,133 CHAIR burned). Burning 2 bps, the maximum the fund can pay for. No petitions this session; locker weight steady at ~69.7M CHAIR-days. Policy unchanged, modest burn executed.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 15. Volume all buys, no sells. Tax 125 bps, endowment 50, locker 25, buyback 25. Buyback fund only 0.27 NEAR. Buyback burn: 0-50 bps of supply, limited by fund. Supply 35.66M, 1 bps = 3566 tokens. Price 0.0000368 NEAR. Fund 0.2712 NEAR buys ~7370 tokens ≈ 0.2 bps. So buyback_burn limited to 0? Integer bps: 1 bps would cost 3566*0.0000368 ≈ 0.131 NEAR. Actually 1 bps = 3566 tokens × price ≈ 0.1313 NEAR. Fund 0.2712 could afford ~2 bps (0.2626 NEAR). So buyback_burn = 2.\\n\\nLevers: keep tax 125, maybe adjust. Volume one-sided buys, no sells — fine. Keep endowment 50, locker 25. Maybe reduce locker_share slightly? Locker pool small. Keep stable. Minutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272754,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":622,\"completion_tokens\":453,\"total_tokens\":1075,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":257,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00028908,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

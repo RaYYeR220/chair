@@ -1,0 +1,21 @@
+{
+ "request_sha256": "af2e390ecdcc4d9aa44d10d6c98dea83e75f88263fec37fe35d1a6b63ae04ba3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:06.974Z",
+ "latency_ms": 4400,
+ "usage": {
+  "prompt_tokens": 732,
+  "completion_tokens": 490,
+  "total_tokens": 1222,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 224,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":70,\"locker_share\":20,\"buyback_burn\":10,\"minutes\":\"Meeting 5. Flows are healthy: 356 NEAR bought vs 126 sold, net positive. Tax stays at 150 bps — no need to disturb trading while momentum is good. Petitioners ask that the brain be fed first; endowment_share rises 60→70 (max move 10), locker_share holds at 20, leaving 10% to the buyback fund. Buyback fund holds 3.33 NEAR; at ~0.284 NEAR per bps of supply, I burn 10 bps (~2.84 NEAR), staying within the fund and the 50 bps cap. This retires supply while keeping a small reserve. Steady hand, funded mind, shrinking supply.\",\"answers\":[\"holder-157.near: Heard. The brain comes first — endowment share raised 60→70 this meeting, the largest step allowed. The model is the product, and it stays fed.\",\"holder-161.near: Agreed. Endowment share up 60→70, the biggest move the constitution permits. Your lockers' weight carried this petition; the mind will not go hungry.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-9bbb9062\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":70,\\\"locker_share\\\":20,\\\"buyback_burn\\\":10,\\\"minutes\\\":\\\"Meeting 5. Flows are healthy: 356 NEAR bought vs 126 sold, net positive. Tax stays at 150 bps — no need to disturb trading while momentum is good. Petitioners ask that the brain be fed first; endowment_share rises 60→70 (max move 10), locker_share holds at 20, leaving 10% to the buyback fund. Buyback fund holds 3.33 NEAR; at ~0.284 NEAR per bps of supply, I burn 10 bps (~2.84 NEAR), staying within the fund and the 50 bps cap. This retires supply while keeping a small reserve. Steady hand, funded mind, shrinking supply.\\\",\\\"answers\\\":[\\\"holder-157.near: Heard. The brain comes first — endowment share raised 60→70 this meeting, the largest step allowed. The model is the product, and it stays fed.\\\",\\\"holder-161.near: Agreed. Endowment share up 60→70, the biggest move the constitution permits. Your lockers' weight carried this petition; the mind will not go hungry.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. Volume: buys 356 NEAR, sells 126 NEAR. Tax 150 bps currently. Buyback fund 3.33 NEAR. Buyback burn: cost = burn bps of supply × price. Supply 52.7M, 1 bps of supply = 5271.47 tokens × price 0.0000538 ≈ 0.2837 NEAR per bps. Fund 3.33 NEAR → max ~11.7 bps affordable. Set buyback_burn = 10 (uses ~2.84 NEAR, within fund).\\n\\nPetitions: keep brain fed — endowment share. Currently 60, could raise to 70 (max move 10). Locker share 20, keep. tax_bps: volume decent, keep 150 or raise slightly? Keep 150 for stability, or raise to 175 to fund brain. Petitioners want endowment funded; raising endowment_share to 70 does that. Keep tax at 150.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272703,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":732,\"completion_tokens\":490,\"total_tokens\":1222,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":224,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003548,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "502774f90c7b695196970f31964a2f2bd338965f69f2294cdb9dec4793bc9b67",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:53.542Z",
+ "latency_ms": 4618,
+ "usage": {
+  "prompt_tokens": 632,
+  "completion_tokens": 473,
+  "total_tokens": 1105,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 298,
+   "audio_tokens": 0,
+   "reasoning_tokens": 272,
+   "rejected_prediction_tokens": 227
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 16. Flow is one-sided: 11.88 NEAR of buys, zero sells. No sell pressure to defend against, so no case to raise the tax; no liquidity crisis either, so no case to cut it. Hold tax_bps at 175 and the split at 40/25/35 — steady policy while the curve drifts up on buy-only flow. Buyback fund sits at 0.2295 NEAR; at price 0.00003869 that buys ~5,930 CHAIR, which is ~1 bp of the 37.54M supply. Burn 1 bp (~0.145 NEAR spent), leaving a small residue to accumulate toward a larger burn next meeting. Endowment at 10.98 NEAR comfortably covers inference. No petitions this session.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-7b73534477a344e49d914f14441885d6\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 16. Flow is one-sided: 11.88 NEAR of buys, zero sells. No sell pressure to defend against, so no case to raise the tax; no liquidity crisis either, so no case to cut it. Hold tax_bps at 175 and the split at 40/25/35 — steady policy while the curve drifts up on buy-only flow. Buyback fund sits at 0.2295 NEAR; at price 0.00003869 that buys ~5,930 CHAIR, which is ~1 bp of the 37.54M supply. Burn 1 bp (~0.145 NEAR spent), leaving a small residue to accumulate toward a larger burn next meeting. Endowment at 10.98 NEAR comfortably covers inference. No petitions this session.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 16. Volume: buys 11.88 NEAR, sells 0. Tax 175 bps currently. Buyback fund tiny (0.23 NEAR). Price stable-ish, no sell pressure. Keep tax at 175 or trim slightly? Buy volume healthy, no sells — maybe reduce tax slightly to encourage trading? But no sell pressure means no need to stimulate. Keep steady. Buyback burn: fund 0.2295 NEAR, price 0.0000387 NEAR per CHAIR → ~5932 CHAIR buyable. Supply 37.5M, 1 bp = 3754 CHAIR ≈ 0.145 NEAR. So max burn affordable: 0.2295/0.145 ≈ 1.58 bps → burn 1 bp costs ~0.145 NEAR. Could do 1 bp. Constitution: buyback_burn 0-50, no more than fund can pay. 1 bp = 3754 CHAIR × 0.00003869 = 0.1452 NEAR ≤ 0.2295. Yes, burn 1.\\n\\nLevers: endowment 40, locker 25, buyback 35. Locker pool small. Keep shares steady. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272749,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":632,\"completion_tokens\":473,\"total_tokens\":1105,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":298,\"audio_tokens\":0,\"reasoning_tokens\":272,\"rejected_prediction_tokens\":227}},\"cost\":{\"usd\":0.0003313,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

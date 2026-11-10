@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3fc74335b079a490431d6325ae854ee6955ba139552d1e605121245ac879f898",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:27.962Z",
+ "latency_ms": 7461,
+ "usage": {
+  "prompt_tokens": 642,
+  "completion_tokens": 473,
+  "total_tokens": 1115,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 301,
+   "audio_tokens": 0,
+   "reasoning_tokens": 242,
+   "rejected_prediction_tokens": 218
+  }
+ },
+ "content": "{\"tax_bps\":250,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":40,\"minutes\":\"Meeting 10. Flows are sell-heavy: 36.1 NEAR sold vs 22.4 bought over 24h, so net pressure is downward. I raise the tax 50bps to 250 — the maximum step — to dampen churn and rebuild the buyback fund, which sits at only 0.43 NEAR. Shares stay at 50/20/30: endowment funding is healthy at 7.8 NEAR, locker pool is modest but the locker weight is stable, and the remainder keeps feeding buybacks. On burn: 50bps of supply (~15,967 CHAIR) would cost ~0.53 NEAR at price 0.000033, more than the 0.4279 NEAR fund. The contract would clamp it, so I set 40bps (~12,950 CHAIR, ~0.428 NEAR), fully payable. Hold steady otherwise; reassess flows tomorrow.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-d8df9f187a2d4a7790c76b6b1a4db2ee\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":250,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":40,\\\"minutes\\\":\\\"Meeting 10. Flows are sell-heavy: 36.1 NEAR sold vs 22.4 bought over 24h, so net pressure is downward. I raise the tax 50bps to 250 — the maximum step — to dampen churn and rebuild the buyback fund, which sits at only 0.43 NEAR. Shares stay at 50/20/30: endowment funding is healthy at 7.8 NEAR, locker pool is modest but the locker weight is stable, and the remainder keeps feeding buybacks. On burn: 50bps of supply (~15,967 CHAIR) would cost ~0.53 NEAR at price 0.000033, more than the 0.4279 NEAR fund. The contract would clamp it, so I set 40bps (~12,950 CHAIR, ~0.428 NEAR), fully payable. Hold steady otherwise; reassess flows tomorrow.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 10. No petitions. Current: tax 200, endowment 50, locker 20, buyback 30 (implied). Buyback fund tiny (0.43 NEAR). Supply ~31.9M. 50 bps max burn = ~15,967 CHAIR. Price 0.000033 NEAR → cost ~0.527 NEAR for 50bps. Fund only 0.4279 NEAR → can afford ~40.6 bps. Let's compute: 0.4279/0.0000330267 ≈ 12,956 CHAIR → 12,956/31,933,670 ≈ 40.6 bps. So buyback_burn = 40.\\n\\nVolume: sells exceed buys (36.1 vs 22.4). Net selling pressure. Maybe raise tax slightly? Tax at 200, could go to 250 to dampen selling and fund buyback. Modest move: tax 250, keep shares. Endowment 50, locker 20, buyback 30 — fine.\\n\\nMinutes ≤1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272720,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":642,\"completion_tokens\":473,\"total_tokens\":1115,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":301,\"audio_tokens\":0,\"reasoning_tokens\":242,\"rejected_prediction_tokens\":218}},\"cost\":{\"usd\":0.0003328,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

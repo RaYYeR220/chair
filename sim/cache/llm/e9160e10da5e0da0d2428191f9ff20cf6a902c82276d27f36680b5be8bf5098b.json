@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e9160e10da5e0da0d2428191f9ff20cf6a902c82276d27f36680b5be8bf5098b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:02.572Z",
+ "latency_ms": 3685,
+ "usage": {
+  "prompt_tokens": 720,
+  "completion_tokens": 393,
+  "total_tokens": 1113,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 243,
+   "audio_tokens": 0,
+   "reasoning_tokens": 158,
+   "rejected_prediction_tokens": 207
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":10,\"minutes\":\"Buy volume dominates (562 vs 97 NEAR), so demand is healthy and we can afford a modest tax cut to 150 bps to keep the flow growing, per petition 2. Split stays 60/20/20 — endowment funding is steady and lockers keep a real share. Buyback fund holds 4.27 NEAR; a 10 bps burn (~4,827 CHAIR, ~0.24 NEAR) is a small, sustainable daily floor-builder as petition 1 asks, leaving plenty of fund headroom. No panic, no overreach: steady compounding beats spikes.\",\"answers\":[\"Agreed. Starting today: 10 bps of supply bought and burned each meeting the fund allows. Small, daily, compounding — the floor builds itself.\",\"Done. Tax cut 200 → 150 bps, the full step allowed this meeting. Buy volume is strong; cheaper trading should grow it further. We'll watch 24h volume before cutting again.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-07d0ab99d6324c0e8eb3fd12961f70c5\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":10,\\\"minutes\\\":\\\"Buy volume dominates (562 vs 97 NEAR), so demand is healthy and we can afford a modest tax cut to 150 bps to keep the flow growing, per petition 2. Split stays 60/20/20 — endowment funding is steady and lockers keep a real share. Buyback fund holds 4.27 NEAR; a 10 bps burn (~4,827 CHAIR, ~0.24 NEAR) is a small, sustainable daily floor-builder as petition 1 asks, leaving plenty of fund headroom. No panic, no overreach: steady compounding beats spikes.\\\",\\\"answers\\\":[\\\"Agreed. Starting today: 10 bps of supply bought and burned each meeting the fund allows. Small, daily, compounding — the floor builds itself.\\\",\\\"Done. Tax cut 200 → 150 bps, the full step allowed this meeting. Buy volume is strong; cheaper trading should grow it further. We'll watch 24h volume before cutting again.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 4. Volume strong buy-side (562 NEAR buy vs 97 sell). Tax 200, could lower slightly to 150 to encourage volume per petition 2. Buyback: fund 4.27 NEAR, price ~0.0000493 NEAR per CHAIR. Buyback burn max 50 bps of supply = 24132 CHAIR ≈ 1.19 NEAR cost. Fund can cover. Petition 1 wants small daily buyback — do e.g. 10 bps = 4826 CHAIR ≈ 0.238 NEAR. Keep endowment 60, locker 20.\\n\\nSet tax_bps 150 (down 50, allowed). Buyback_burn 10.\"},\"finish_reason\":\"stop\"}],\"created\":1794272699,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":720,\"completion_tokens\":393,\"total_tokens\":1113,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":243,\"audio_tokens\":0,\"reasoning_tokens\":158,\"rejected_prediction_tokens\":207}},\"cost\":{\"usd\":0.0003045,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

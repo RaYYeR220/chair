@@ -1,0 +1,22 @@
+{
+ "request_sha256": "076ee5ef297c78a3529d5502167c4ab8b9ae33bad7c918c6d874ffc914078240",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:04:58.885Z",
+ "latency_ms": 9102,
+ "usage": {
+  "prompt_tokens": 725,
+  "completion_tokens": 488,
+  "total_tokens": 1213,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 305,
+   "audio_tokens": 0,
+   "reasoning_tokens": 246,
+   "rejected_prediction_tokens": 244
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":10,\"minutes\":\"Meeting 3. Flow is heavily buy-skewed (476 NEAR bought vs 25 sold), price stable at 0.0000387. Levers are working; no case to move tax or shares this early. Buyback fund holds 3.09 NEAR; at current price 50 bps of supply would cost ~7.3 NEAR, so I clamp well below. A 10 bps burn costs ~1.46 NEAR, buys ~37,700 CHAIR, and preserves fund runway for daily compounding. Petition 1 granted in scaled form; petition 2 honored on the levers.\",\"answers\":[\"Granted in spirit: 10 bps of supply bought and burned today (~1.46 NEAR of the 3.09 fund). Daily compounding, sized so the fund never runs dry.\",\"Heard. Tax stays 200, endowment 60, locker 20 — no changes this meeting. The only motion is the modest burn, which supports the floor you want steady.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-31dbc494d6194fae8e17e076f3522c9d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":10,\\\"minutes\\\":\\\"Meeting 3. Flow is heavily buy-skewed (476 NEAR bought vs 25 sold), price stable at 0.0000387. Levers are working; no case to move tax or shares this early. Buyback fund holds 3.09 NEAR; at current price 50 bps of supply would cost ~7.3 NEAR, so I clamp well below. A 10 bps burn costs ~1.46 NEAR, buys ~37,700 CHAIR, and preserves fund runway for daily compounding. Petition 1 granted in scaled form; petition 2 honored on the levers.\\\",\\\"answers\\\":[\\\"Granted in spirit: 10 bps of supply bought and burned today (~1.46 NEAR of the 3.09 fund). Daily compounding, sized so the fund never runs dry.\\\",\\\"Heard. Tax stays 200, endowment 60, locker 20 — no changes this meeting. The only motion is the modest burn, which supports the floor you want steady.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 3. Volume heavily buy-skewed (476 buy vs 25 sell). Price low. Tax 200, endowment 60, locker 20, buyback share 20 (rest).\\n\\nPetitions: 1) small buyback every day — buyback_burn limited by fund: buyback fund 3.09 NEAR, price 0.0000387 NEAR per CHAIR. 50 bps of supply = 0.005 * 37.7M = 188,494 CHAIR ≈ 7.29 NEAR — too expensive. Fund can buy 3.09/0.0000387 ≈ 79,850 CHAIR ≈ 21 bps of supply. So buyback_burn max ~21. Choose small: maybe 10 bps? \\\"Small buyback every day\\\" — do 10 bps, cost ~1.46 NEAR, leaves fund. Actually burning supports floor. Let's do 10.\\n\\n2) steady as she goes — keep levers unchanged. Buy-skew suggests tax could rise, but steady petition + early days; keep 200/60/20.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272689,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":725,\"completion_tokens\":488,\"total_tokens\":1213,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":305,\"audio_tokens\":0,\"reasoning_tokens\":246,\"rejected_prediction_tokens\":244}},\"cost\":{\"usd\":0.00035275,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

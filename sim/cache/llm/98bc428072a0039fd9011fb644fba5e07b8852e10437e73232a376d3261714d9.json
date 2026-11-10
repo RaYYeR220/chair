@@ -1,0 +1,22 @@
+{
+ "request_sha256": "98bc428072a0039fd9011fb644fba5e07b8852e10437e73232a376d3261714d9",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:30.813Z",
+ "latency_ms": 2850,
+ "usage": {
+  "prompt_tokens": 623,
+  "completion_tokens": 346,
+  "total_tokens": 969,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 157,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":250,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":32,\"minutes\":\"Meeting 11. Flow is entirely one-sided: ~49.95 NEAR of buys, zero sells. The 250 bps tax is not choking demand, so I hold it. Split stays 50/20 with 30 to buyback; endowment balance of 8.39 NEAR comfortably covers inference costs. Buyback fund holds 0.3746 NEAR; at 0.0000345 NEAR/CHAIR that retires ~10,852 CHAIR, about 32 bps of the 33.41M supply. I set buyback_burn to 32, the maximum the fund can pay for, well under the 50 bps cap. Steady policy while momentum is positive; no petitions to weigh.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-cd859900\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":250,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":32,\\\"minutes\\\":\\\"Meeting 11. Flow is entirely one-sided: ~49.95 NEAR of buys, zero sells. The 250 bps tax is not choking demand, so I hold it. Split stays 50/20 with 30 to buyback; endowment balance of 8.39 NEAR comfortably covers inference costs. Buyback fund holds 0.3746 NEAR; at 0.0000345 NEAR/CHAIR that retires ~10,852 CHAIR, about 32 bps of the 33.41M supply. I set buyback_burn to 32, the maximum the fund can pay for, well under the 50 bps cap. Steady policy while momentum is positive; no petitions to weigh.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 11. No petitions. Volume all buys, no sells. Tax 250, endowment 50, locker 20, buyback 30. Buyback fund 0.3746 NEAR. Price 0.0000345. Supply 33.4M CHAIR. Buyback burn max 50 bps of supply = 16706 CHAIR ≈ 0.5767 NEAR at price. Fund can pay 0.3746 NEAR → 10852 CHAIR ≈ 32.5 bps. Set buyback_burn = 32.\\n\\nLevers: keep tax 250 (one-sided buy volume suggests tax fine). Maybe keep steady. Endowment 50, locker 20. Keep.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272728,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":623,\"completion_tokens\":346,\"total_tokens\":969,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":157,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00023573000000000002,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "4829219c44831948626a8e488e45188279b36b87d3321ed8dd98edddafd468e5",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:25.985Z",
+ "latency_ms": 11272,
+ "usage": {
+  "prompt_tokens": 774,
+  "completion_tokens": 596,
+  "total_tokens": 1370,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 374,
+   "audio_tokens": 0,
+   "reasoning_tokens": 335,
+   "rejected_prediction_tokens": 292
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Volume is heavily buy-skewed (140 NEAR buys vs 8.7 sells), so cutting tax 125→100 to let flow grow is low-risk. Endowment stays at the 30 floor; the brain's pending balance is modest but the endowment holds 28.8 NEAR, enough runway. locker_share is already at the constitutional cap of 25, so petitions to raise it are clamped. Buyback fund is 0.9986 NEAR; at price 0.00005726 that buys ~17,450 CHAIR, about 3 bps of the 55.6M supply. Set burn to 3, the maximum the fund can pay for.\",\"answers\":[\"Agreed — tax cut from 125 to 100 bps this meeting. Buy volume is strong; cheaper trading should keep it growing.\",\"locker_share is at the constitutional maximum of 25 and cannot go higher. The contract would clamp any raise. It stays at 25.\",\"Same petition, same answer: 25 is the hard cap. Nothing outside the constitution can be applied, so locker_share holds at 25.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-f171115291494589ab945253c1efe468\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Volume is heavily buy-skewed (140 NEAR buys vs 8.7 sells), so cutting tax 125→100 to let flow grow is low-risk. Endowment stays at the 30 floor; the brain's pending balance is modest but the endowment holds 28.8 NEAR, enough runway. locker_share is already at the constitutional cap of 25, so petitions to raise it are clamped. Buyback fund is 0.9986 NEAR; at price 0.00005726 that buys ~17,450 CHAIR, about 3 bps of the 55.6M supply. Set burn to 3, the maximum the fund can pay for.\\\",\\\"answers\\\":[\\\"Agreed — tax cut from 125 to 100 bps this meeting. Buy volume is strong; cheaper trading should keep it growing.\\\",\\\"locker_share is at the constitutional maximum of 25 and cannot go higher. The contract would clamp any raise. It stays at 25.\\\",\\\"Same petition, same answer: 25 is the hard cap. Nothing outside the constitution can be applied, so locker_share holds at 25.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 52. Tax 125, endowment 30, locker 25, buyback share 45 (implied). Volume heavily buy-skewed (140 buy vs 8.7 sell). Buyback fund ~1 NEAR, can afford small burn. Price 0.0000572.\\n\\nPetitions: 1) lower tax a bit — reasonable, volume is buy-heavy; lower tax to 100? Move at most 50, so 125→100 fine. 2&3) raise locker_share — locker_share already at max 25. Can't raise. Explain.\\n\\nEndowment share 30 is minimum; brain needs funding. Keep 30. Buyback burn: fund 0.9986 NEAR, price 0.0000572 → ~17,450 CHAIR per NEAR... supply 55.5M, 50bps = ~277,928 CHAIR, cost ≈ 277928 * 0.0000572 ≈ 15.9 NEAR. Fund only ~1 NEAR → max affordable ≈ 1/0.0000572 ≈ 17,458 CHAIR ≈ 0.031 bps of supply. So buyback_burn must be small; compute bps: 17458/55585736 *10000 ≈ 3.14 bps. Set buyback_burn = 3.\\n\\nMinutes: note buy-heavy volume, lower tax to 100 to encourage volume, keep endowment 30, locker at cap 25, burn 3bps affordable.\"},\"finish_reason\":\"stop\"}],\"created\":1794273194,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":774,\"completion_tokens\":596,\"total_tokens\":1370,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":374,\"audio_tokens\":0,\"reasoning_tokens\":335,\"rejected_prediction_tokens\":292}},\"cost\":{\"usd\":0.0004141,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

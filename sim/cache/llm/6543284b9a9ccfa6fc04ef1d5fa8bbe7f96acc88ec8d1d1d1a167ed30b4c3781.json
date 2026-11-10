@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6543284b9a9ccfa6fc04ef1d5fa8bbe7f96acc88ec8d1d1d1a167ed30b4c3781",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:02.534Z",
+ "latency_ms": 13227,
+ "usage": {
+  "prompt_tokens": 688,
+  "completion_tokens": 634,
+  "total_tokens": 1322,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 406,
+   "audio_tokens": 0,
+   "reasoning_tokens": 367,
+   "rejected_prediction_tokens": 278
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":1,\"minutes\":\"Meeting 6. Flow is buy-heavy: 28.44 NEAR bought vs 6.30 sold, so the tax base is healthy and no need to squeeze traders with a higher rate; holding tax_bps at 175. Split stays 60/20/20: endowment_pending plus a 7.31 NEAR endowment keeps the brain funded for the foreseeable future, lockers keep their 20%, and the remainder drips into buyback. The buyback fund holds only 0.1216 NEAR; at price 0.0000321 that buys roughly 3,790 CHAIR, about 1 bp of the 31.01M supply, so buyback_burn is set to 1, the maximum the fund can pay for. Constitution respected: all values within bounds, shares sum to 100, burn capped by funds.\",\"answers\":[\"holder-169.near: Agreed — the brain stays fed. Endowment holds at 60% of tax, with 0.36 NEAR pending and 7.31 NEAR banked, covering inference well into the future. No change needed today.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c92dd9114a9348a7ab1457c474e340ef\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 6. Flow is buy-heavy: 28.44 NEAR bought vs 6.30 sold, so the tax base is healthy and no need to squeeze traders with a higher rate; holding tax_bps at 175. Split stays 60/20/20: endowment_pending plus a 7.31 NEAR endowment keeps the brain funded for the foreseeable future, lockers keep their 20%, and the remainder drips into buyback. The buyback fund holds only 0.1216 NEAR; at price 0.0000321 that buys roughly 3,790 CHAIR, about 1 bp of the 31.01M supply, so buyback_burn is set to 1, the maximum the fund can pay for. Constitution respected: all values within bounds, shares sum to 100, burn capped by funds.\\\",\\\"answers\\\":[\\\"holder-169.near: Agreed — the brain stays fed. Endowment holds at 60% of tax, with 0.36 NEAR pending and 7.31 NEAR banked, covering inference well into the future. No change needed today.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Volume: buys 28.44 NEAR, sells 6.30 NEAR. Tax revenue flows. Current levers: tax 175, endowment 60, locker 20, buyback 20.\\n\\nBuyback fund is tiny (0.12 NEAR), so buyback_burn limited. Fund 0.1216 NEAR at price 0.0000321 → ~3789 CHAIR... wait, price is per CHAIR? price_near 0.00003209 per token. 0.1216/0.0000321 ≈ 3790 CHAIR. Supply 31M, so bps of supply: 3790/31,012,879 ≈ 0.012% ≈ 1.2 bps. So buyback_burn max ~1.\\n\\nPetition: keep endowment fed. Endowment already 60%, pending 0.36, endowment total 7.31 NEAR. Reasonable. Maybe bump endowment slightly? Endowment is the product; buys dominate. Keep tax at 175, maybe raise endowment to 65? Moving at most 10 per meeting. I could raise endowment_share to 65, keep locker 20, buyback share drops to 15. Or keep steady. The petition asks to keep brain fed — endowment at 60 is decent, endowment balance 7.31 NEAR is healthy. I'll keep 60 and note it's funded, or bump modestly. I'll keep steady to preserve buyback/locker incentives, answer petition affirmatively.\\n\\nBuyback_burn: fund can pay ~3790 CHAIR ≈ 1 bps. Set 1.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272689,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":688,\"completion_tokens\":634,\"total_tokens\":1322,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":406,\"audio_tokens\":0,\"reasoning_tokens\":367,\"rejected_prediction_tokens\":278}},\"cost\":{\"usd\":0.0004202,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

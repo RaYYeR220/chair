@@ -1,0 +1,23 @@
+{
+ "request_sha256": "d25773cd4fb1c0a6dd03564199e5c64e8ff4af9f7348940a3e514f9d445f3d0f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:09:27.030Z",
+ "latency_ms": 7398,
+ "usage": {
+  "prompt_tokens": 625,
+  "completion_tokens": 603,
+  "total_tokens": 1228,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 380,
+   "audio_tokens": 0,
+   "reasoning_tokens": 336,
+   "rejected_prediction_tokens": 289
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"24h volume is zero on both sides, so no tax flowed this meeting: buyback fund holds just 0.0198 NEAR, locker pool and endowment pending are empty. At price ~0.0000595 NEAR the fund covers ~334 CHAIR, far below 1 bp of the 58.1M supply, so buyback_burn must be 0 this meeting. Tax stays at the 100 floor to keep trading as cheap as possible and invite flow; endowment_share stays 30 (brain is funded at 35.84 NEAR) and locker_share stays 25, already at its constitutional cap. With no churn, no lever can manufacture rewards; the priority is volume, which low tax best supports. Revisit buyback once the fund accumulates.\",\"answers\":[\"holder-160.near: I hear you, but locker_share is already at its constitutional maximum of 25%. With zero 24h volume there is no tax to split, so the locker pool sits at 0 regardless. Lockers earn when traders churn — I kept tax at the 100 bps floor to invite that flow.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-9222f1883fcc4df3bb8deddd34c3a1d5\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"24h volume is zero on both sides, so no tax flowed this meeting: buyback fund holds just 0.0198 NEAR, locker pool and endowment pending are empty. At price ~0.0000595 NEAR the fund covers ~334 CHAIR, far below 1 bp of the 58.1M supply, so buyback_burn must be 0 this meeting. Tax stays at the 100 floor to keep trading as cheap as possible and invite flow; endowment_share stays 30 (brain is funded at 35.84 NEAR) and locker_share stays 25, already at its constitutional cap. With no churn, no lever can manufacture rewards; the priority is volume, which low tax best supports. Revisit buyback once the fund accumulates.\\\",\\\"answers\\\":[\\\"holder-160.near: I hear you, but locker_share is already at its constitutional maximum of 25%. With zero 24h volume there is no tax to split, so the locker pool sits at 0 regardless. Lockers earn when traders churn — I kept tax at the 100 bps floor to invite that flow.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 28. Zero volume 24h. Tax at 100, endowment 30, locker 25, buyback_share 45 (rest goes to buyback fund). Buyback fund tiny: 0.0198 NEAR. Supply ~58.1M CHAIR. buyback_burn max 50 bps of supply = ~29,063 CHAIR. Price 0.00005945 NEAR. Cost of 29,063 CHAIR ≈ 1.73 NEAR — fund can't pay. Fund buys: 0.0198/0.00005945 ≈ 334 CHAIR ≈ 0.0006 bps of supply. So buyback_burn effectively 0 (or minimal). Set buyback_burn 0.\\n\\nPetition: raise locker_share. Locker pool is 0, no volume means no tax inflow anyway. Locker weight 200M CHAIR-days. With zero volume, raising locker_share doesn't help lockers—no tax to distribute. But it's a request; modest move? locker_share max 25 already at cap. So can't raise. Answer: already at max 25%.\\n\\nLevers: with zero volume, tax level doesn't matter much; keep 100 to encourage activity. Endowment 30 fine. Keep everything, buyback_burn 0 (fund insufficient). Actually could set buyback_burn to what fund can pay: floor. 0.0198 NEAR buys ~334 CHAIR = 0.00057 bps. Integer bps, so 0.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272959,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":625,\"completion_tokens\":603,\"total_tokens\":1228,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":380,\"audio_tokens\":0,\"reasoning_tokens\":336,\"rejected_prediction_tokens\":289}},\"cost\":{\"usd\":0.00036453,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

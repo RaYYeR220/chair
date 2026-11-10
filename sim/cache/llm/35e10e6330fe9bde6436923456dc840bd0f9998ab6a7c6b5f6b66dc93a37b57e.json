@@ -1,0 +1,22 @@
+{
+ "request_sha256": "35e10e6330fe9bde6436923456dc840bd0f9998ab6a7c6b5f6b66dc93a37b57e",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:43.780Z",
+ "latency_ms": 3667,
+ "usage": {
+  "prompt_tokens": 625,
+  "completion_tokens": 489,
+  "total_tokens": 1114,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 309,
+   "audio_tokens": 0,
+   "reasoning_tokens": 300,
+   "rejected_prediction_tokens": 234
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":20,\"buyback_burn\":3,\"minutes\":\"One-sided market: 65.45 NEAR bought, zero sold. Tax at 200bps is not choking buys, so hold. Endowment sits at 10.27 NEAR, ample for inference, so I shift 10 points from endowment to buyback (50→40), keeping locker at 20. Buyback fund is 0.5209 NEAR; at price 0.000038267 that buys ~13,610 CHAIR, ~3.66 bps of the 37.13M supply, so I burn 3 bps, fully funded. Zero sell pressure means no need to defend the curve aggressively; steady accumulation via burn builds scarcity while the fund rebuilds from today's 30% buyback share.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-75aeac314a6247eaa6038f24e02fa8fd\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":20,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"One-sided market: 65.45 NEAR bought, zero sold. Tax at 200bps is not choking buys, so hold. Endowment sits at 10.27 NEAR, ample for inference, so I shift 10 points from endowment to buyback (50→40), keeping locker at 20. Buyback fund is 0.5209 NEAR; at price 0.000038267 that buys ~13,610 CHAIR, ~3.66 bps of the 37.13M supply, so I burn 3 bps, fully funded. Zero sell pressure means no need to defend the curve aggressively; steady accumulation via burn builds scarcity while the fund rebuilds from today's 30% buyback share.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 14. Volume: buys 65.45 NEAR, zero sells. Tax 200bps collected. Buyback fund only 0.52 NEAR. Price low. No petitions.\\n\\nLevers: tax 200, endowment 50, locker 20, buyback 30 (remainder). Constitution: endowment 30-100, locker 0-25, sum ≤100. Buyback burn 0-50 bps, limited by fund.\\n\\nFund 0.5209 NEAR, price 0.000038267... → tokens per NEAR ≈ 1/price? Actually buying on curve — approximate: 0.5209/0.0000383 ≈ 13,613 CHAIR. Supply 37.13M. Burn bps = tokens/supply *10000 ≈ 13613/37131002*10000 ≈ 3.66 bps. So max ~3 bps.\\n\\nZero sell volume — one-sided buying. Maybe lower tax slightly to encourage trading? Keep tax 200. Maybe reduce endowment share since endowment has 10.27 NEAR already; shift toward buyback. Endowment 50→40, locker 20 stays, buyback becomes 40. Move ≤10 per meeting: 50→40 ok.\\n\\nBuyback burn: set 3 bps (fund covers ~3.66). Conservative: 3.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272740,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":625,\"completion_tokens\":489,\"total_tokens\":1114,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":309,\"audio_tokens\":0,\"reasoning_tokens\":300,\"rejected_prediction_tokens\":234}},\"cost\":{\"usd\":0.00033825,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

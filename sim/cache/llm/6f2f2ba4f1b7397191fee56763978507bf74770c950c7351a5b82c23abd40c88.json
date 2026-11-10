@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6f2f2ba4f1b7397191fee56763978507bf74770c950c7351a5b82c23abd40c88",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:36.563Z",
+ "latency_ms": 14269,
+ "usage": {
+  "prompt_tokens": 722,
+  "completion_tokens": 532,
+  "total_tokens": 1254,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 344,
+   "audio_tokens": 0,
+   "reasoning_tokens": 258,
+   "rejected_prediction_tokens": 220
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Steady meeting. Volume is healthy (51.5 NEAR buys vs 15.3 sells), price stable, so no tax change: 200 bps stands. Splits stay at 40/25/35 — locker_share is constitutionally capped at 25, so the petition's demand for 50 is impossible regardless of weight. Buyback fund holds only 0.534 NEAR; at price ~0.0000685 that buys ~7,794 CHAIR, about 1.16 bps of the 67.36M supply. I set buyback_burn to 1 — the maximum the fund can actually pay for. Requesting 50 bps without funding would be an empty gesture; the fund will rebuild from the 35% buyback share of today's tax flow.\",\"answers\":[\"Denied on both counts. locker_share is capped at 25 by the constitution — no weight changes that. On buyback: the fund holds 0.534 NEAR, enough for ~1 bps of supply, not 50. I burned the maximum the fund can pay for (1). Lockers still receive 25% of tax flow.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-f72309f082f94c57b45b575c6dba44fd\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Steady meeting. Volume is healthy (51.5 NEAR buys vs 15.3 sells), price stable, so no tax change: 200 bps stands. Splits stay at 40/25/35 — locker_share is constitutionally capped at 25, so the petition's demand for 50 is impossible regardless of weight. Buyback fund holds only 0.534 NEAR; at price ~0.0000685 that buys ~7,794 CHAIR, about 1.16 bps of the 67.36M supply. I set buyback_burn to 1 — the maximum the fund can actually pay for. Requesting 50 bps without funding would be an empty gesture; the fund will rebuild from the 35% buyback share of today's tax flow.\\\",\\\"answers\\\":[\\\"Denied on both counts. locker_share is capped at 25 by the constitution — no weight changes that. On buyback: the fund holds 0.534 NEAR, enough for ~1 bps of supply, not 50. I burned the maximum the fund can pay for (1). Lockers still receive 25% of tax flow.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Petition asks locker_share 50 — clamped to 25 max. Constitution: locker_share max 25. So deny. Buyback_burn 50 bps of supply: supply 67.36M, 50 bps = 0.5% = ~336,782 CHAIR. Price ~0.0000685 NEAR → cost ≈ 23.07 NEAR. Fund only 0.534 NEAR. So buyback limited by fund: 0.534/0.0000685 ≈ 7,794 CHAIR ≈ 0.0116% of supply ≈ 1.16 bps. So set buyback_burn to what fund can pay: floor(0.534/price)/supply in bps. 7794/67356467 ≈ 0.0001157 → 1.16 bps → set 1.\\n\\nTax: volume buy 51.5, sell 15.25 NEAR. Current tax 200. Keep 200? Maybe modest. Keep stable. Endowment 40, locker 25, buyback 35 — keep.\\n\\nMinutes ≤1000 chars, answer ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272722,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":722,\"completion_tokens\":532,\"total_tokens\":1254,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":344,\"audio_tokens\":0,\"reasoning_tokens\":258,\"rejected_prediction_tokens\":220}},\"cost\":{\"usd\":0.00037430000000000005,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

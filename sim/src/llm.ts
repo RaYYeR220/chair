@@ -1,5 +1,5 @@
 // OpenAI-compatible client for Venice AI with a content-addressed response cache.
-// Cache key = sha256 of the exact request bytes sent; reruns replay the cache and cost nothing.
+// Cache key = sha256 of the exact bytes sent to Venice; reruns replay the cache and cost nothing.
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -22,11 +22,19 @@ export const CACHE_DIR = join(SIM_DIR, "cache", "llm");
 /** The API key comes from the environment, or from sim/.env (VENICE_API_KEY=...). Never logged. */
 function readKey(): string | null {
   if (process.env.VENICE_API_KEY) return process.env.VENICE_API_KEY.trim();
-  const file = process.env.CHAIR_ENV_FILE ?? join(SIM_DIR, ".env");
+  const file = join(SIM_DIR, ".env");
   if (!existsSync(file)) return null;
   const line = readFileSync(file, "utf8").split(/\r?\n/).find((l) => l.startsWith("VENICE_API_KEY="));
   const v = line?.slice(line.indexOf("=") + 1).trim().replace(/^["']|["']$/g, "");
   return v || null;
+}
+
+/** The body sent to Venice: the contract's request with Venice's model id, and Venice's own system prompt off. */
+export function veniceBody(request: string): string {
+  const body = JSON.parse(request);
+  const vm = CFG.venice.model_map[body.model];
+  if (!vm) throw new Error(`no Venice mapping for ${body.model}`);
+  return JSON.stringify({ ...body, model: vm, venice_parameters: { include_venice_system_prompt: false } });
 }
 
 export class LlmClient {
@@ -36,12 +44,14 @@ export class LlmClient {
     mkdirSync(CACHE_DIR, { recursive: true });
   }
 
-  private veniceBody(body: Record<string, unknown>): string {
-    const model = body.model as string;
-    const vm = CFG.venice.model_map[model];
-    if (!vm) throw new Error(`no Venice mapping for ${model}`);
-    // Venice-only addition: turn off Venice's own system prompt so the model sees only ours.
-    return JSON.stringify({ ...body, model: vm, venice_parameters: { include_venice_system_prompt: false } });
+  /** API calls this client may still make. */
+  remaining(): number { return this.opts.maxCalls - this.stats.calls; }
+
+  /** True if this exact request is already cached. */
+  isCached(request: string): boolean {
+    const file = join(CACHE_DIR, `${createHash("sha256").update(veniceBody(request)).digest("hex")}.json`);
+    if (!existsSync(file)) return false;
+    return !JSON.parse(readFileSync(file, "utf8")).error || !this.opts.retryErrors;
   }
 
   private account(vm: string, pt: number, ct: number): number {
@@ -53,8 +63,9 @@ export class LlmClient {
     return usd;
   }
 
-  async complete(body: Record<string, unknown>): Promise<LlmResult> {
-    const bytes = this.veniceBody(body);
+  /** `request` is the contract's exact request bytes. */
+  async complete(request: string): Promise<LlmResult> {
+    const bytes = veniceBody(request);
     const key = createHash("sha256").update(bytes).digest("hex");
     const file = join(CACHE_DIR, `${key}.json`);
     const vm = JSON.parse(bytes).model as string;

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "5f994d6ee7338ad5a5baee458a697367fb1c30db5a89ced8bf0f80f74900cff4",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:20.500Z",
+ "latency_ms": 4267,
+ "usage": {
+  "prompt_tokens": 644,
+  "completion_tokens": 473,
+  "total_tokens": 1117,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 297,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":1,\"minutes\":\"Steady meeting. Volume is modest (31 NEAR total) and price is flat; no case to change the tax, holding at 200 bps. The brain's endowment sits at 7.43 NEAR with only 0.37 pending—well funded for inference—so I shift 10 points from endowment to the buyback fund, where scarcity work is needed. Locker share stays 20 to keep lockers paid. Buyback fund of 0.1847 NEAR covers roughly one basis point of supply on the curve once rising curve cost is accounted for, so I set burn to 1 and let the enlarged 30% buyback allocation rebuild the fund for future burns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-bfa7e636\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Steady meeting. Volume is modest (31 NEAR total) and price is flat; no case to change the tax, holding at 200 bps. The brain's endowment sits at 7.43 NEAR with only 0.37 pending—well funded for inference—so I shift 10 points from endowment to the buyback fund, where scarcity work is needed. Locker share stays 20 to keep lockers paid. Buyback fund of 0.1847 NEAR covers roughly one basis point of supply on the curve once rising curve cost is accounted for, so I set burn to 1 and let the enlarged 30% buyback allocation rebuild the fund for future burns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 9. No petitions. Current levers: tax 200, endowment 60, locker 20, buyback share 20 (implied). Volume modest. Buyback fund 0.18 NEAR. Price ~0.0000334. Buyback burn: cost of buying bps of supply on curve — supply 32.3M, 1 bps = 3234 tokens. Price near 0.0000334, but curve price rises; roughly cost ≈ 3234 * 0.0000334 ≈ 0.108 NEAR per bps. Fund 0.1847 → can afford ~1-2 bps. Set buyback_burn = 1 (conservative, since curve price increases). Actually cost of buying q tokens: reserve grows; average price higher. Let's set 1 bps.\\n\\nKeep levers stable: tax 200, endowment 60, locker 20. Maybe nudge endowment down since endowment balance 7.4 NEAR is plenty? Endowment pending 0.37, endowment total 7.4 — brain well funded. Could shift endowment_share down to 50, giving more to buyback. Move at most 10 per meeting. Let's do endowment 50, keep locker 20, tax 200. Then buyback share becomes 30.\\n\\nMinutes ≤1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272716,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":644,\"completion_tokens\":473,\"total_tokens\":1117,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":297,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00030238,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

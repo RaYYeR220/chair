@@ -1,0 +1,23 @@
+{
+ "request_sha256": "11cc3639087b49669cab34a80ec651a76ceca4239ce2dc986791657659b2eb2c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:15:43.589Z",
+ "latency_ms": 10110,
+ "usage": {
+  "prompt_tokens": 658,
+  "completion_tokens": 374,
+  "total_tokens": 1032,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 230,
+   "audio_tokens": 0,
+   "reasoning_tokens": 127,
+   "rejected_prediction_tokens": 202
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 57: zero buy and sell volume in 24h; the curve is quiet. Locker_share already sits at the constitutional maximum of 25, so both petitions asking for an increase cannot be granted — the contract clamps anything above 25. Tax is at its floor of 100 bps; with no flow, changing levers would only add noise, so I hold all settings. Buyback fund is effectively empty (~1e-23 NEAR), so buyback_burn is 0. Endowment share stays 30; the brain's 38.1 NEAR reserve is ample for inference. Steady hands while the market sleeps.\",\"answers\":[\"Locker_share is already at the constitutional cap of 25 — the contract clamps anything higher. I cannot raise it further. Your lock-up still earns from every trade's tax at the maximum rate.\",\"Respectfully denied: locker_share is at its maximum of 25 and cannot move up 10. The remaining 45% of tax already flows to buybacks, which support the price you lock against.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-1d3ebc12e2894c46b01d253dd6987db3\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 57: zero buy and sell volume in 24h; the curve is quiet. Locker_share already sits at the constitutional maximum of 25, so both petitions asking for an increase cannot be granted — the contract clamps anything above 25. Tax is at its floor of 100 bps; with no flow, changing levers would only add noise, so I hold all settings. Buyback fund is effectively empty (~1e-23 NEAR), so buyback_burn is 0. Endowment share stays 30; the brain's 38.1 NEAR reserve is ample for inference. Steady hands while the market sleeps.\\\",\\\"answers\\\":[\\\"Locker_share is already at the constitutional cap of 25 — the contract clamps anything higher. I cannot raise it further. Your lock-up still earns from every trade's tax at the maximum rate.\\\",\\\"Respectfully denied: locker_share is at its maximum of 25 and cannot move up 10. The remaining 45% of tax already flows to buybacks, which support the price you lock against.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 57. No volume, no trades. Locker share already at max 25. Petitions ask to raise locker_share — it's at cap 25, can't go higher. Tax at 100 (min). Buyback fund ~0, so buyback_burn 0. No activity — keep levers steady. Maybe consider raising tax? No volume, so tax changes don't matter much; keep stable. Endowment 30, fine.\\n\\nAnswers: petition 1 — locker_share already at constitutional max 25; petition 2 — same, can't move up 10, clamped at 25.\"},\"finish_reason\":\"stop\"}],\"created\":1794273333,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":658,\"completion_tokens\":374,\"total_tokens\":1032,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":230,\"audio_tokens\":0,\"reasoning_tokens\":127,\"rejected_prediction_tokens\":202}},\"cost\":{\"usd\":0.00025498,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

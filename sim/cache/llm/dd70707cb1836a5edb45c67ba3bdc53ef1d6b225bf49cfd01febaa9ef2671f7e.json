@@ -1,0 +1,23 @@
+{
+ "request_sha256": "dd70707cb1836a5edb45c67ba3bdc53ef1d6b225bf49cfd01febaa9ef2671f7e",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:07:27.907Z",
+ "latency_ms": 7656,
+ "usage": {
+  "prompt_tokens": 684,
+  "completion_tokens": 554,
+  "total_tokens": 1238,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 354,
+   "audio_tokens": 0,
+   "reasoning_tokens": 294,
+   "rejected_prediction_tokens": 246
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Sells outnumber buys 3.4:1 (35.7 vs 10.6 NEAR), so I raise tax 150→200 to dampen sell pressure and grow the buyback fund. Locker pool is thin (0.17 NEAR) but lockers are the constitution's constituency; hold locker_share at 25. Endowment at 33.4 NEAR is ample for inference, hold 40. Buyback fund is only 0.74 NEAR; at price ~0.00006 that buys ~12.3k CHAIR ≈ 2.1 bps of the 58.7M supply, so buyback_burn=2 — the max the fund can pay for. Small daily burns compound the floor as petitioned; the higher tax refills the fund for future meetings.\",\"answers\":[\"Agreed, holder-155.near. The fund only covers ~2 bps today, so I burn 2 bps now and raised the tax to 200 bps to refill the buyback fund. Small burns, every day, compounding the floor — that is the plan.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a4811dab7ac54aceae74f59267a2b180\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Sells outnumber buys 3.4:1 (35.7 vs 10.6 NEAR), so I raise tax 150→200 to dampen sell pressure and grow the buyback fund. Locker pool is thin (0.17 NEAR) but lockers are the constitution's constituency; hold locker_share at 25. Endowment at 33.4 NEAR is ample for inference, hold 40. Buyback fund is only 0.74 NEAR; at price ~0.00006 that buys ~12.3k CHAIR ≈ 2.1 bps of the 58.7M supply, so buyback_burn=2 — the max the fund can pay for. Small daily burns compound the floor as petitioned; the higher tax refills the fund for future meetings.\\\",\\\"answers\\\":[\\\"Agreed, holder-155.near. The fund only covers ~2 bps today, so I burn 2 bps now and raised the tax to 200 bps to refill the buyback fund. Small burns, every day, compounding the floor — that is the plan.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Let me think. Price 0.00006 NEAR, supply ~58.7M, sold ~59M. Sell volume dominates (35.7 vs 10.6). Buyback fund only 0.74 NEAR. Buyback_burn: basis points of supply to buy and burn, max 50 bps = 0.5% of supply ≈ 293,700 CHAIR. Cost at price ~0.00006 → ~17.6 NEAR. Fund only has 0.74 NEAR, so limited by fund. 0.74 NEAR buys ~12,340 CHAIR ≈ 0.021% of supply ≈ 2.1 bps. So buyback_burn = 2 (or compute: 0.74/0.00006 = 12,341 CHAIR; /58,741,819 = 0.00021 = 2.1 bps). Set 2.\\n\\nTax: sell pressure heavy. Keep tax at 150? Maybe raise slightly to 200 to slow selling and fund buybacks. Move max 50. Raise to 200.\\n\\nEndowment 33.4 NEAR is healthy; endowment_share 40 fine. Locker share 25 max. Keep both. Actually endowment+locker=65, buyback gets 35%. Fine.\\n\\nMinutes under 1000 chars. Answer petition.\"},\"finish_reason\":\"stop\"}],\"created\":1794272840,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":684,\"completion_tokens\":554,\"total_tokens\":1238,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":354,\"audio_tokens\":0,\"reasoning_tokens\":294,\"rejected_prediction_tokens\":246}},\"cost\":{\"usd\":0.00034888,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "2e7b4869864aec28bdecc23b7f0e2a315cfe1e462409d1868d5d8c8faeffde8a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:40.112Z",
+ "latency_ms": 4911,
+ "usage": {
+  "prompt_tokens": 723,
+  "completion_tokens": 548,
+  "total_tokens": 1271,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 283,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":3,\"minutes\":\"Volume is heavily buy-skewed (55.7 vs 6.4 NEAR), so a modest tax cut from 250 to 200 bps keeps revenue healthy while answering the growth petition. Shares stay at 50/20/30: endowment funded, lockers rewarded, 30% still flows to buybacks. Buyback fund is 0.5157 NEAR; at ~0.0000365 NEAR/CHAIR, 3 bps of supply (~10,614 CHAIR) costs ~0.39 NEAR — a small daily burn that compounds the floor without draining the fund. 4 bps would exceed the fund. Holding shares steady preserves predictability at meeting 13.\",\"answers\":[\"Agreed — cutting the tax 250→200 bps. Buy volume dominates right now, so a lighter levy should keep traders coming while the tax still funds the brain, lockers, and buybacks.\",\"Done — burning 3 bps of supply today (~10,600 CHAIR) with the buyback fund, the most the balance safely covers. Small, steady, compounding — exactly as you ask.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-fc133002\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Volume is heavily buy-skewed (55.7 vs 6.4 NEAR), so a modest tax cut from 250 to 200 bps keeps revenue healthy while answering the growth petition. Shares stay at 50/20/30: endowment funded, lockers rewarded, 30% still flows to buybacks. Buyback fund is 0.5157 NEAR; at ~0.0000365 NEAR/CHAIR, 3 bps of supply (~10,614 CHAIR) costs ~0.39 NEAR — a small daily burn that compounds the floor without draining the fund. 4 bps would exceed the fund. Holding shares steady preserves predictability at meeting 13.\\\",\\\"answers\\\":[\\\"Agreed — cutting the tax 250→200 bps. Buy volume dominates right now, so a lighter levy should keep traders coming while the tax still funds the brain, lockers, and buybacks.\\\",\\\"Done — burning 3 bps of supply today (~10,600 CHAIR) with the buyback fund, the most the balance safely covers. Small, steady, compounding — exactly as you ask.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 13. Tax 250, buy volume 55.67 NEAR, sell 6.39. Petitions: lower tax a bit to grow volume; small daily buyback.\\n\\nBuyback fund: 0.5157 NEAR. Price ~0.0000365 NEAR per CHAIR. Supply 35.38M. buyback_burn in bps of supply: 1 bp = 3538 CHAIR ≈ 0.129 NEAR cost. Fund can pay for ~0.5157/0.129 ≈ 4 bps. So buyback_burn = 4 (cost ~0.516 NEAR, just fits). Let's compute: 4 bps = 35380594*0.0004 = 14152 CHAIR × 0.0000365 ≈ 0.5167 NEAR. Slightly over fund. 3 bps = 10614 CHAIR ≈ 0.3875 NEAR. Safe. Choose 3.\\n\\nTax: lower a little, max 50 move. 250→200. Endowment 50, locker 20, buyback 30. Keep shares. Maybe shift locker_share up? Petition 2 wants buybacks — buyback share is fixed at remainder (30). Keep as is.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272735,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":723,\"completion_tokens\":548,\"total_tokens\":1271,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":283,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00035172999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

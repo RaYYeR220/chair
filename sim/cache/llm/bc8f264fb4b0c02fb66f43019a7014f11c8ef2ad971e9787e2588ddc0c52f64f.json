@@ -1,0 +1,22 @@
+{
+ "request_sha256": "bc8f264fb4b0c02fb66f43019a7014f11c8ef2ad971e9787e2588ddc0c52f64f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:27.001Z",
+ "latency_ms": 6297,
+ "usage": {
+  "prompt_tokens": 689,
+  "completion_tokens": 625,
+  "total_tokens": 1314,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 396,
+   "audio_tokens": 0,
+   "reasoning_tokens": 415,
+   "rejected_prediction_tokens": 288
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Buy volume dwarfs sells (62.5 vs 4.2 NEAR), so the 125 bps tax is not choking demand; hold it. Locker_share is already at the constitutional maximum of 25, so the petition's request cannot be granted beyond current policy. Endowment at 14.5 NEAR is healthy; hold 40. Buyback fund holds 0.533 NEAR; at ~0.0000454 NEAR/CHAIR and accounting for curve slippage, that funds roughly 2 bps of supply burned this meeting. Split stays 40/25/35.\",\"answers\":[\"Locker_share is already at the constitutional cap of 25 bps — the contract clamps anything higher. Lockers currently earn from a 25% tax split plus the pool; I'll keep it at max and let the buyback support price instead.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c885ee74ebda4a47a7a8816060256fcc\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Buy volume dwarfs sells (62.5 vs 4.2 NEAR), so the 125 bps tax is not choking demand; hold it. Locker_share is already at the constitutional maximum of 25, so the petition's request cannot be granted beyond current policy. Endowment at 14.5 NEAR is healthy; hold 40. Buyback fund holds 0.533 NEAR; at ~0.0000454 NEAR/CHAIR and accounting for curve slippage, that funds roughly 2 bps of supply burned this meeting. Split stays 40/25/35.\\\",\\\"answers\\\":[\\\"Locker_share is already at the constitutional cap of 25 bps — the contract clamps anything higher. Lockers currently earn from a 25% tax split plus the pool; I'll keep it at max and let the buyback support price instead.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 19. Tax 125, endowment 40, locker 25, buyback_share 35 (rest). Volume: buys 62.48 NEAR, sells 4.23 NEAR. Buy-heavy. Tax revenue: 66.7 NEAR * 1.25% ≈ 0.834 NEAR/day. Locker pool small (0.208). Locker weight 181M CHAIR-days.\\n\\nPetition: raise locker_share. It's already at max 25. Can't go above 25. So deny, explain cap.\\n\\nLevers: keep tax at 125? Buy volume strong, sell pressure low. Buyback fund 0.533 NEAR. Price 0.0000454. Supply 44.28M. buyback_burn: bps of supply to buy and burn, max 50 bps = 0.5% of supply = 221,391 CHAIR. Cost: at price ~0.00004545, 221,391 CHAIR ≈ 10.06 NEAR — fund only has 0.533 NEAR. So affordable: 0.533/0.00004545 ≈ 11,733 CHAIR ≈ 0.0265 bps of supply. So buyback_burn limited by fund. Set buyback_burn to what fund can pay: floor. 0.533286 NEAR buys ~11,733 CHAIR; as bps of supply: 11733/44278335 * 10000 ≈ 2.65 bps. Set 2 bps to be safe (curve price rises as you buy). Actually buying on curve moves price up, so cost more. Set 2.\\n\\nEndowment 14.5 NEAR, healthy. Keep endowment_share 40, locker_share 25 (max). Tax 125 fine given buy dominance — maybe keep steady.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272780,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":689,\"completion_tokens\":625,\"total_tokens\":1314,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":396,\"audio_tokens\":0,\"reasoning_tokens\":415,\"rejected_prediction_tokens\":288}},\"cost\":{\"usd\":0.00041585,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

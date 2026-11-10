@@ -1,0 +1,22 @@
+{
+ "request_sha256": "1eba786d513d03cab1d8612614c417d0039147d0022038b764b2b956f5f0ad59",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:11.769Z",
+ "latency_ms": 7909,
+ "usage": {
+  "prompt_tokens": 715,
+  "completion_tokens": 535,
+  "total_tokens": 1250,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 330,
+   "audio_tokens": 0,
+   "reasoning_tokens": 267,
+   "rejected_prediction_tokens": 282
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Volume is healthy on buys (54.6 NEAR) but sells lag. Holder-162 asks for a lower tax to grow volume; I agree modestly: 125→100 bps, within the 50 bps step. Holder-152 wants locker_share +10, but it is already at the constitutional maximum of 25, so the contract would clamp any raise; it stays 25, endowment 40, buyback 35. Buyback fund is only 0.427 NEAR; at price 0.00003949 that buys ~10.8k CHAIR, ~2.8 bps of supply, so I burn 2 bps this meeting and let the fund rebuild from the tax flow.\",\"answers\":[\"Agreed in part: tax cut 125→100 bps to let volume grow. Full step down would starve the buyback fund, which is nearly empty; a modest cut keeps revenue while easing friction.\",\"Respectfully, locker_share is already at the constitutional cap of 25% — the contract would clamp any increase. It stays at 25; the remaining tax flow still funds your pool each meeting.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-93f40c11ac194d68bb3bac3ab0cc6f73\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Volume is healthy on buys (54.6 NEAR) but sells lag. Holder-162 asks for a lower tax to grow volume; I agree modestly: 125→100 bps, within the 50 bps step. Holder-152 wants locker_share +10, but it is already at the constitutional maximum of 25, so the contract would clamp any raise; it stays 25, endowment 40, buyback 35. Buyback fund is only 0.427 NEAR; at price 0.00003949 that buys ~10.8k CHAIR, ~2.8 bps of supply, so I burn 2 bps this meeting and let the fund rebuild from the tax flow.\\\",\\\"answers\\\":[\\\"Agreed in part: tax cut 125→100 bps to let volume grow. Full step down would starve the buyback fund, which is nearly empty; a modest cut keeps revenue while easing friction.\\\",\\\"Respectfully, locker_share is already at the constitutional cap of 25% — the contract would clamp any increase. It stays at 25; the remaining tax flow still funds your pool each meeting.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 19. Current: tax 125, endowment 40, locker 25, buyback 35 (implied). Petitions: lower tax a bit; locker_share up 10 (already at max 25, so can't go up — clamp at 25).\\n\\nTax: lower a little, say 125→100 (move ≤50). Volume buy 54.6 NEAR, sell 22.9. Price low. Buyback fund tiny (0.427 NEAR). Buyback burn: fund can pay for how much? Price 0.00003949 NEAR per CHAIR. 0.427 NEAR buys ~10,818 CHAIR. Supply 38.3M, so 50 bps = 191,619 CHAIR — can't afford. 0.427/779 ≈ 0.055% of reserve... burn amount affordable: 10818/38323896 ≈ 0.028% ≈ 2.8 bps. So buyback_burn = 2.\\n\\nLocker share already at max 25, so petition 2: explain it's at cap. Keep locker_share 25, endowment 40, buyback 35.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272764,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":715,\"completion_tokens\":535,\"total_tokens\":1250,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":330,\"audio_tokens\":0,\"reasoning_tokens\":267,\"rejected_prediction_tokens\":282}},\"cost\":{\"usd\":0.00037475,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

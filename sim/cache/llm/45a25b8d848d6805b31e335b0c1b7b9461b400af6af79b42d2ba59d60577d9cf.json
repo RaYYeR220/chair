@@ -1,0 +1,21 @@
+{
+ "request_sha256": "45a25b8d848d6805b31e335b0c1b7b9461b400af6af79b42d2ba59d60577d9cf",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:04:49.396Z",
+ "latency_ms": 3886,
+ "usage": {
+  "prompt_tokens": 619,
+  "completion_tokens": 459,
+  "total_tokens": 1078,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 288,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":20,\"minutes\":\"Buy volume (127 NEAR) dwarfs sells (18 NEAR); demand is healthy, so tax stays at 200 bps. Locker weight is zero — nobody is locking, so paying 20% of tax to an empty locker pool is waste. I cut locker_share to 10 (max step) to keep a future incentive while redirecting the rest to buybacks. Endowment holds at 60 to secure inference funding. Buyback fund of 1.92 NEAR at ~0.0000298 NEAR/CHAIR buys ~64.4k CHAIR, ~22 bps of supply; I burn 20 bps, staying within the fund.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-56ca1be0\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":20,\\\"minutes\\\":\\\"Buy volume (127 NEAR) dwarfs sells (18 NEAR); demand is healthy, so tax stays at 200 bps. Locker weight is zero — nobody is locking, so paying 20% of tax to an empty locker pool is waste. I cut locker_share to 10 (max step) to keep a future incentive while redirecting the rest to buybacks. Endowment holds at 60 to secure inference funding. Buyback fund of 1.92 NEAR at ~0.0000298 NEAR/CHAIR buys ~64.4k CHAIR, ~22 bps of supply; I burn 20 bps, staying within the fund.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. Volume: buys 127 NEAR, sells 18 NEAR — buy-heavy, healthy. Locker weight 0, so locker_share paying to nobody — could shift to buyback or endowment. Buyback fund 1.92 NEAR. Price 0.0000298, supply ~28.8M.\\n\\nBuyback_burn: bps of supply to buy and burn. Fund 1.92 NEAR / price 0.0000298 ≈ 64,400 CHAIR ≈ 0.22% of supply ≈ 22 bps. So max affordable ~22 bps. Set buyback_burn maybe 20.\\n\\nLocker weight 0: reduce locker_share to 0? But lockers may come later; keep small incentive? Constitution allows 0-25. With no lockers, redirect to buyback. Move locker_share 20→10 (max 10 per meeting), endowment 60 stays, buyback gets rest. Actually endowment+locker=80, rest 20 to buyback. Maybe reduce locker to 10, keep endowment 60, buyback share 30.\\n\\nTax 200 bps fine, buy pressure strong; keep 200.\\n\\nbuyback_burn: fund 1.92 NEAR buys ~64,400 CHAIR = 22.4 bps of supply. Set 20.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272686,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":619,\"completion_tokens\":459,\"total_tokens\":1078,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":288,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00032235,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

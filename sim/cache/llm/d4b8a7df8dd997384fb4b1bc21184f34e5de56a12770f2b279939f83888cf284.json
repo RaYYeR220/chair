@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d4b8a7df8dd997384fb4b1bc21184f34e5de56a12770f2b279939f83888cf284",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:08.337Z",
+ "latency_ms": 6372,
+ "usage": {
+  "prompt_tokens": 684,
+  "completion_tokens": 504,
+  "total_tokens": 1188,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 318,
+   "audio_tokens": 0,
+   "reasoning_tokens": 259,
+   "rejected_prediction_tokens": 240
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Buys dominate (91.7 vs 6.9 NEAR) yet price sits near 0.0000415 NEAR; lowering tax from 150 to 100 bps (within the 50 bps step) supports the petition and volume growth while keeping revenue flowing. Endowment at 12.5 NEAR is ample, so hold endowment_share at 50 and locker_share at 25 (max). Buyback fund holds only 0.556 NEAR; at ~0.0000415 NEAR/CHAIR it buys ~13.4k CHAIR, about 0.03 bps of supply — below the 1 bps granularity, so buyback_burn is 0 this meeting; let the fund accumulate.\",\"answers\":[\"Holder-156: heard. Tax cut from 150 to 100 bps this meeting — the biggest step the constitution allows. Buys already outweigh sells 13:1, so cheaper trading should compound that momentum. Reassess at meeting 18.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a1a9c1403f664ba3b2f65e3300f9e2fe\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Buys dominate (91.7 vs 6.9 NEAR) yet price sits near 0.0000415 NEAR; lowering tax from 150 to 100 bps (within the 50 bps step) supports the petition and volume growth while keeping revenue flowing. Endowment at 12.5 NEAR is ample, so hold endowment_share at 50 and locker_share at 25 (max). Buyback fund holds only 0.556 NEAR; at ~0.0000415 NEAR/CHAIR it buys ~13.4k CHAIR, about 0.03 bps of supply — below the 1 bps granularity, so buyback_burn is 0 this meeting; let the fund accumulate.\\\",\\\"answers\\\":[\\\"Holder-156: heard. Tax cut from 150 to 100 bps this meeting — the biggest step the constitution allows. Buys already outweigh sells 13:1, so cheaper trading should compound that momentum. Reassess at meeting 18.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 17. Tax 150, buy volume 91.7 NEAR vs sell 6.9 — strong buy pressure. Petition asks lower tax. Constitution: tax can move at most 50 bps per meeting. Lowering tax to 100-125 seems reasonable given buy-heavy volume. Buyback fund only 0.5557 NEAR; buyback_burn max 50 bps of supply = 0.5% of 40.3M = ~201,658 CHAIR. Price ~0.0000415 NEAR per CHAIR, so cost ≈ 8.36 NEAR — fund can't cover. Fund covers 0.5557/0.0000415 ≈ 13,396 CHAIR ≈ 0.0332 bps of supply. So buyback_burn must be 0 (integer bps, min meaningful). Actually buyback_burn is in bps, integer, 0-50; 0.03 bps rounds to 0. So set 0.\\n\\nEndowment 12.5 NEAR is healthy; endowment_share 50 fine. Locker share 25 max. Keep shares. Lower tax to 100 to encourage volume per petition.\"},\"finish_reason\":\"stop\"}],\"created\":1794272762,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":684,\"completion_tokens\":504,\"total_tokens\":1188,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":318,\"audio_tokens\":0,\"reasoning_tokens\":259,\"rejected_prediction_tokens\":240}},\"cost\":{\"usd\":0.0003546,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

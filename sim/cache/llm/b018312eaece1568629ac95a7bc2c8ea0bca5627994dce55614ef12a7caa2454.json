@@ -1,0 +1,22 @@
+{
+ "request_sha256": "b018312eaece1568629ac95a7bc2c8ea0bca5627994dce55614ef12a7caa2454",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:06.011Z",
+ "latency_ms": 16614,
+ "usage": {
+  "prompt_tokens": 626,
+  "completion_tokens": 454,
+  "total_tokens": 1080,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 283,
+   "audio_tokens": 0,
+   "reasoning_tokens": 262,
+   "rejected_prediction_tokens": 230
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":50,\"minutes\":\"Meeting 6. Flow is one-sided: 53.5 NEAR of buys, zero sells — demand is healthy, no need to defend the price with tax changes, so hold tax_bps at 200. Split stays 60/10/30: endowment pending 0.64 NEAR covers inference comfortably, locker pool keeps accruing on 54.97M weight, and the 30% buyback share rebuilt the fund to 0.52 NEAR. At price 0.0000316, 50 bps of supply (~15,270 CHAIR) costs ~0.48 NEAR, which the buyback fund can fully pay, so I burn the constitutional maximum this meeting. Steady levers, aggressive burn while the fund allows it.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-b3948ed187ec467c8be38dad266aa99a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Meeting 6. Flow is one-sided: 53.5 NEAR of buys, zero sells — demand is healthy, no need to defend the price with tax changes, so hold tax_bps at 200. Split stays 60/10/30: endowment pending 0.64 NEAR covers inference comfortably, locker pool keeps accruing on 54.97M weight, and the 30% buyback share rebuilt the fund to 0.52 NEAR. At price 0.0000316, 50 bps of supply (~15,270 CHAIR) costs ~0.48 NEAR, which the buyback fund can fully pay, so I burn the constitutional maximum this meeting. Steady levers, aggressive burn while the fund allows it.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Volume: buys 53.5 NEAR, sells 0. Price low. Tax 200, endowment 60, locker 10, buyback 30.\\n\\nBuyback fund only 0.52 NEAR. Buyback burn max 50 bps of supply = ~15270 CHAIR. Cost at price 0.0000316 ≈ 0.48 NEAR. Fund can pay ~0.52 NEAR → ~16,540 CHAIR. So 50 bps affordable? 15270 * 0.0000316 ≈ 0.482 NEAR < 0.5227. Yes, 50 bps affordable.\\n\\nBut should we burn max? Buy-only volume, no sells. Tax revenue flowing. Keep tax at 200? Buy pressure strong, no sell pressure — could lower tax to encourage more buying? Or keep. Endowment at 60, pending 0.64. Maybe keep stable. Locker share 10, weight large. Keep levers, burn 50 bps since fund covers it. Actually maybe burn slightly less to leave buffer? 50 bps costs ~0.482, leaving 0.04. Fine.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272689,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":626,\"completion_tokens\":454,\"total_tokens\":1080,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":283,\"audio_tokens\":0,\"reasoning_tokens\":262,\"rejected_prediction_tokens\":230}},\"cost\":{\"usd\":0.0003209,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "8f64ceb7fc5cf67e3a9f8bacb8d1b151536fcdfcbc1de05be90b580b6163fc73",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:35.199Z",
+ "latency_ms": 4385,
+ "usage": {
+  "prompt_tokens": 638,
+  "completion_tokens": 428,
+  "total_tokens": 1066,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 263,
+   "audio_tokens": 0,
+   "reasoning_tokens": 201,
+   "rejected_prediction_tokens": 232
+  }
+ },
+ "content": "{\"tax_bps\":250,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":2,\"minutes\":\"Meeting 12. Flow is healthy and buy-skewed: 29.6 NEAR bought vs 8.9 sold over 24h, so the 250 bps tax is not choking demand. Hold tax_bps at 250 for stability rather than tinkering. Split stays 50/20/30: endowment at 50 keeps inference funded (9.01 NEAR on hand), lockers earn 20 for 74M weight-days of commitment, and 30 flows to buybacks. The buyback fund holds only 0.289 NEAR; at price ~0.0000351 that buys roughly 8,230 CHAIR, about 0.024% of the 34M supply, so the burn is capped at 2 bps this meeting. No petitions received; no answers owed. Policy: steady levers, small burn, let the buy-skew accumulate fund for a larger burn later.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-06a1ba4f68cf40c29f13cade7a883b24\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":250,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 12. Flow is healthy and buy-skewed: 29.6 NEAR bought vs 8.9 sold over 24h, so the 250 bps tax is not choking demand. Hold tax_bps at 250 for stability rather than tinkering. Split stays 50/20/30: endowment at 50 keeps inference funded (9.01 NEAR on hand), lockers earn 20 for 74M weight-days of commitment, and 30 flows to buybacks. The buyback fund holds only 0.289 NEAR; at price ~0.0000351 that buys roughly 8,230 CHAIR, about 0.024% of the 34M supply, so the burn is capped at 2 bps this meeting. No petitions received; no answers owed. Policy: steady levers, small burn, let the buy-skew accumulate fund for a larger burn later.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 12. Volume buy 29.6 NEAR, sell 8.9 NEAR. Tax 250 bps currently. Buyback fund tiny (0.29 NEAR). Price ~0.000035. Supply 34M CHAIR.\\n\\nBuyback_burn: fund 0.289 NEAR buys at price 0.0000351 → ~8230 CHAIR, which is ~0.024% of supply → 2.4 bps. So buyback_burn max ~2 bps. Set 2.\\n\\nTax: volume decent, keep 250 or trim slightly? Buy pressure > sell. Keep 250, maybe reduce to 200 to encourage trading? Constitution: max 50 change. I'll keep 250 steady for stability, or lower slightly. Keep 250.\\n\\nEndowment 50, locker 20, buyback 30. Fine. Keep.\\n\\nMinutes under 1000 chars. No petitions, answers [].\"},\"finish_reason\":\"stop\"}],\"created\":1794272730,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":638,\"completion_tokens\":428,\"total_tokens\":1066,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":263,\"audio_tokens\":0,\"reasoning_tokens\":201,\"rejected_prediction_tokens\":232}},\"cost\":{\"usd\":0.0003097,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

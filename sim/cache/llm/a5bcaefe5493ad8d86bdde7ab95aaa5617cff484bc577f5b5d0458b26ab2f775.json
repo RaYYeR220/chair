@@ -1,0 +1,22 @@
+{
+ "request_sha256": "a5bcaefe5493ad8d86bdde7ab95aaa5617cff484bc577f5b5d0458b26ab2f775",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:14:08.938Z",
+ "latency_ms": 11640,
+ "usage": {
+  "prompt_tokens": 674,
+  "completion_tokens": 502,
+  "total_tokens": 1176,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 319,
+   "audio_tokens": 0,
+   "reasoning_tokens": 288,
+   "rejected_prediction_tokens": 230
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Volume is thin (4.3 NEAR sells, zero buys), so tax revenue is negligible; changing levers now moves almost nothing. Lockers already receive the constitutional maximum of 25%, so the petition's request is at the cap. Buyback fund holds only 0.0356 NEAR; at price 0.0000488 that buys ~729 CHAIR, far below 1 bp of supply (~47,381 CHAIR, ~2.31 NEAR), so buyback_burn must be 0. Hold all levers steady and let the fund accumulate until volume returns.\",\"answers\":[\"holder-156.near: Lockers already get the constitutional maximum 25% of tax — I cannot raise it further. With today's tiny volume the pool grew only ~0.011 NEAR. More volume, not a higher cap, is what fills your pool.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-49d1aa8c708d4dd68fabe34f3d794ce7\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Volume is thin (4.3 NEAR sells, zero buys), so tax revenue is negligible; changing levers now moves almost nothing. Lockers already receive the constitutional maximum of 25%, so the petition's request is at the cap. Buyback fund holds only 0.0356 NEAR; at price 0.0000488 that buys ~729 CHAIR, far below 1 bp of supply (~47,381 CHAIR, ~2.31 NEAR), so buyback_burn must be 0. Hold all levers steady and let the fund accumulate until volume returns.\\\",\\\"answers\\\":[\\\"holder-156.near: Lockers already get the constitutional maximum 25% of tax — I cannot raise it further. With today's tiny volume the pool grew only ~0.011 NEAR. More volume, not a higher cap, is what fills your pool.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Volume is tiny: 4.29 NEAR sell in 24h, buy 0. Tax revenue tiny. Locker pool is small. Petition: raise locker_share by 10 (25→35? max is 25). locker_share max is 25, already at 25. So can't go up. Clamp: locker_share already at cap 25.\\n\\nBuyback: fund 0.0356 NEAR, price 0.0000488 NEAR per CHAIR. 0.0356/0.0000488 ≈ 729 CHAIR. Supply 47.38M; 50 bps = 0.5% = 236,904 CHAIR. Can't afford that. Max affordable: 729 CHAIR ≈ 0.0015% of supply ≈ 0.15 bps. So buyback_burn must be 0 (integer bps; 1 bp = 47,380 CHAIR, costs ~2.31 NEAR, fund only 0.0356). So buyback_burn = 0.\\n\\nLevers: keep tax at 100? Volume low, sell-only. Maybe keep steady. Endowment 30, locker 25, rest 45 buyback. Keep as is.\\n\\nAnswer petition: locker_share already at constitutional max 25; can't raise.\"},\"finish_reason\":\"stop\"}],\"created\":1794273237,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":674,\"completion_tokens\":502,\"total_tokens\":1176,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":319,\"audio_tokens\":0,\"reasoning_tokens\":288,\"rejected_prediction_tokens\":230}},\"cost\":{\"usd\":0.0003521,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

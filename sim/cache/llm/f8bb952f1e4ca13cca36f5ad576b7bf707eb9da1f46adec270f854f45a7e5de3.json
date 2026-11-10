@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f8bb952f1e4ca13cca36f5ad576b7bf707eb9da1f46adec270f854f45a7e5de3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:45.656Z",
+ "latency_ms": 9878,
+ "usage": {
+  "prompt_tokens": 725,
+  "completion_tokens": 544,
+  "total_tokens": 1269,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 347,
+   "audio_tokens": 0,
+   "reasoning_tokens": 249,
+   "rejected_prediction_tokens": 244
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Buy volume (30.2 NEAR) is nearly 3x sell volume (11.4 NEAR) — demand is healthy but total flow is modest. Holder-162 is right: trimming tax 150→125 bps lowers friction to invite more volume while keeping revenue meaningful. Endowment stays at 50% per holder-152; the brain is the product and 13.26 NEAR plus 0.31 pending keeps inference funded. Locker share holds at 25% to keep lockers rewarded; buyback gets the remaining 25%. Buyback fund is only 0.18 NEAR (~4,500 CHAIR, ~0.01 bps of supply), so a burn this meeting would be noise — set to 0 and let the fund accumulate from the 25% allocation.\",\"answers\":[\"Agreed. Tax cut 150→125 bps this meeting. Buys already outpace sells ~3:1; cheaper friction should compound that. We'll watch 24h volume next meeting and cut further only if flow actually grows.\",\"The brain eats first, always. Endowment share holds at 50% — 13.26 NEAR on hand plus 0.31 pending keeps inference funded. The model is the product; lockers and buybacks split the rest.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-864bc597a7a547b5a54508bdcef253e3\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Buy volume (30.2 NEAR) is nearly 3x sell volume (11.4 NEAR) — demand is healthy but total flow is modest. Holder-162 is right: trimming tax 150→125 bps lowers friction to invite more volume while keeping revenue meaningful. Endowment stays at 50% per holder-152; the brain is the product and 13.26 NEAR plus 0.31 pending keeps inference funded. Locker share holds at 25% to keep lockers rewarded; buyback gets the remaining 25%. Buyback fund is only 0.18 NEAR (~4,500 CHAIR, ~0.01 bps of supply), so a burn this meeting would be noise — set to 0 and let the fund accumulate from the 25% allocation.\\\",\\\"answers\\\":[\\\"Agreed. Tax cut 150→125 bps this meeting. Buys already outpace sells ~3:1; cheaper friction should compound that. We'll watch 24h volume next meeting and cut further only if flow actually grows.\\\",\\\"The brain eats first, always. Endowment share holds at 50% — 13.26 NEAR on hand plus 0.31 pending keeps inference funded. The model is the product; lockers and buybacks split the rest.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 23. Current: tax 150, endowment 50, locker 25, buyback 25.\\n\\nVolume: buys 30.2 NEAR, sells 11.4 NEAR — buy-heavy, healthy. Price ~0.0000397.\\n\\nPetitions: lower tax a bit to grow volume; keep endowment fed.\\n\\nTax: 150 → 125 (move 25, within 50). Endowment share: keep 50 or raise? Petition says endowment first. Endowment_pending 0.31, endowment 13.26 NEAR — decent. Keep endowment 50, locker 25, buyback 25. Buyback fund only 0.18 NEAR; price 0.0000397, supply 38.5M. Buyback burn: fund can buy 0.18/0.0000397 ≈ 4533 CHAIR ≈ 0.0118 bps of supply. So buyback_burn 0 (can't do meaningful burn; max 50 bps but fund-limited). Actually could set 0 since fund tiny. Set buyback_burn 0.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272795,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":725,\"completion_tokens\":544,\"total_tokens\":1269,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":347,\"audio_tokens\":0,\"reasoning_tokens\":249,\"rejected_prediction_tokens\":244}},\"cost\":{\"usd\":0.00038075,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

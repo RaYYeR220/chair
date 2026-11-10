@@ -1,43 +1,44 @@
 {
-  "_about": "Curve, constitution and ladder parameters for the CHAIR simulation. Every key under `new_args` is meant to be passed 1:1 to the token contract's `new` so the sim and the chain run the same numbers. Big integers are decimal strings (yoctoNEAR = 1e-24 NEAR; token base units = 1e-18 CHAIR).",
+  "_about": "Parameters of the CHAIR simulation. `new_args` has the shape of the token contract's `new` (the fields the sim uses; owner, brain, outlayer and signers are left out). `constitution` holds the contract's compile-time constants (contracts/token/src/constitution.rs and lib.rs). Big integers are decimal strings: yoctoNEAR (1e-24 NEAR) and token base units (1e-18 CHAIR).",
+  "_source": "new_args are the testnet launch args of token.chair-dev.testnet (`new` in tx g34ooCPWFv6hKCy6zbJ5mpPfWxs3eDyBkp5LToEZwf4, block 276993898). docs/LAUNCH.md with the mainnet values did not exist when v2 ran; if mainnet differs, change new_args and rerun. meeting_interval_s is the mainnet 23 h; the sim holds one meeting per simulated day.",
   "new_args": {
-    "token_decimals": 18,
-    "curve": {
-      "p0_yocto_per_token": "100000000000000000",
-      "k_yocto_per_token_per_token": "20000000000"
-    },
-    "launch_levers": {
-      "tax_bps": 300,
-      "endowment_share_pct": 60,
-      "locker_share_pct": 10
-    },
-    "constitution": {
-      "tax_bps": { "min": 100, "max": 300, "max_step": 50 },
-      "endowment_share_pct": { "min": 30, "max": 100, "max_step": 10 },
-      "locker_share_pct": { "min": 0, "max": 50, "max_step": 10 },
-      "buyback_burn_max_bps_of_supply": 50,
-      "fallback": { "tax_target_bps": 200, "tax_step_bps": 10 }
-    },
-    "lock_days": [1, 7, 30],
-    "petition": { "fee_tokens": "10000", "max_chars": 280, "top_n": 3 },
-    "meeting_interval_hours": 23,
-    "iq_ladder": [
-      { "min_endowment_near": "1", "model": "z-ai/glm-5.3-flash" },
-      { "min_endowment_near": "50", "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017" },
-      { "min_endowment_near": "500", "model": "moonshotai/kimi-k3" }
-    ]
+    "curve": { "p0": "1000000000000000000", "k": "1000000000000" },
+    "ladder": [
+      { "min_endowment": "1000000000000000000000000", "model": "z-ai/glm-5.3-flash" },
+      { "min_endowment": "50000000000000000000000000", "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017" },
+      { "min_endowment": "500000000000000000000000000", "model": "moonshotai/kimi-k3" }
+    ],
+    "meeting_interval_s": 82800,
+    "petition_fee": "1000000000000000000000",
+    "levers": null
   },
-  "assumptions_not_in_spec": {
-    "buyback_is_tax_exempt": "The meeting's buyback buys on the curve without paying tau.",
-    "burns_leave_s_unchanged": "Both buyback burns and petition-fee burns reduce supply, never s.",
-    "tax_rounding": "tax = ceil(curve_amount * tax_bps / 10000); endowment = floor(tax * endowment_share / 100); locker = floor(tax * locker_share / 100); buyback fund gets the remainder.",
-    "share_sum_clamp": "If endowment_share + locker_share > 100 after the per-lever clamp, locker_share is cut to 100 - endowment_share.",
-    "fallback_buyback": "The fallback rule performs no buyback (buyback_burn = 0).",
-    "locker_payout": "The whole locker pool is paid out at each meeting, pro rata to weight of locks active at the meeting; integer dust stays in the pool.",
-    "floor_definition": "floor = reserve / total supply (locked tokens count; burned tokens do not).",
-    "endowment_reporting": "The brief and the IQ ladder use the endowment the brain reported at the previous meeting (one-meeting lag).",
-    "ruling_units": "tax_bps in bps; endowment_share and locker_share in integer percent of tax; buyback_burn in bps of current supply.",
-    "ruling_parse": "Content is trimmed; one surrounding ```json fence is stripped; it must be a JSON object whose four numeric fields are integers (any sign; bounds are enforced by the clamp), minutes a string, answers an array of 3 strings."
+  "constitution": {
+    "version": "v2",
+    "tax_bps": { "min": 100, "max": 300, "max_step": 50 },
+    "endowment_share": { "min": 30, "max": 100, "max_step": 10 },
+    "locker_share": { "min": 0, "max": 25, "max_step": 10 },
+    "buyback_burn_max_bps": 50,
+    "fallback": { "tax_target_bps": 200, "tax_step_bps": 10 },
+    "default_levers": { "tax_bps": 200, "endowment_share": 60, "locker_share": 20 },
+    "lock_days": [1, 7, 30],
+    "petition_max_chars": 280,
+    "petitions_in_brief": 3,
+    "storage_deposit": "25000000000000000000000",
+    "reward_scale": "1000000000000000000000000000000000000",
+    "token_decimals": 18
+  },
+  "contract_mechanics": {
+    "curve": "R(s) = ceil((2*p0*D*s + k*s^2) / (2*D^2)), D = 1e18. A buy of d costs R(s+d) - R(s), a sell returns R(s) - R(s-d), so the reserve always equals R(s). Price p(s) = p0 + floor(k*s/D) yocto per CHAIR.",
+    "buy": "budget = floor(deposit * 10000 / (10000 + tax_bps)); the largest d with R(s+d) <= R(s) + budget; tax = ceil(cost * tax_bps / 10000). An unregistered buyer pays the 0.025 NEAR storage deposit first.",
+    "sell": "tax = min(gross, ceil(gross * tax_bps / 10000)).",
+    "tax_split": "endowment = floor(tax * endowment_share / 100) to endowment_pending; locker = floor(tax * locker_share / 100) to the locker pool; the buyback fund gets the remainder. Shares are whole percent.",
+    "locker_rewards": "At each meeting the whole pool is credited to a reward-per-weight accumulator, floor(pool * 1e36 / total_weight); a lock earns floor(weight * delta_acc / 1e36) and the holder claims it. The sim's holders claim when a lock expires; unclaimed rewards count as theirs. With no lock weight the pool carries over.",
+    "buyback": "target = floor(supply * bps / 10000), bought on the curve with fund NEAR, tax-exempt, and burned: supply unchanged, s and the reserve up. If the fund can't pay, the largest amount it can.",
+    "fallback": "Tax moves 10 bps toward 200, the rest holds, no buyback; lockers are still paid and the endowment is still sent.",
+    "meeting_order": "levers, buyback, locker payout, endowment sent to the brain. The brain reports what it holds after the meeting (the sim's one-meeting lag).",
+    "brief_volume": "volume_24h_near is the curve amount traded in the last 24 h. The sim keeps one bucket per simulated day, so a meeting sees that day's trades.",
+    "petitions": "Lockers only, one per 24 h, fee burned from unlocked CHAIR (supply falls, s does not). The three heaviest by weight at filing reach the brief; earlier wins ties.",
+    "ruling_parse": "choices[0].message.content: the whole trimmed content if it is a JSON object, else the span from the first '{' to the last '}'. The four lever fields must be integral numbers (any sign; the clamp handles bounds), minutes a string, answers an array with at least one string per petition in the brief (extras ignored; missing is fine with no petitions)."
   },
   "venice": {
     "base_url": "https://api.venice.ai/api/v1",
@@ -51,6 +52,6 @@
       "deepseek-v4-1-flash-1017": { "input": 0.3, "output": 1.2 },
       "kimi-k3": { "input": 3.75, "output": 18.75 }
     },
-    "max_calls_per_run": 300
+    "max_calls_per_run": 350
   }
 }

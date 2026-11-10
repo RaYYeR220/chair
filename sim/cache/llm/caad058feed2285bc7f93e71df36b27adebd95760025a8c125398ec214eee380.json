@@ -1,0 +1,23 @@
+{
+ "request_sha256": "caad058feed2285bc7f93e71df36b27adebd95760025a8c125398ec214eee380",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:11:57.289Z",
+ "latency_ms": 15221,
+ "usage": {
+  "prompt_tokens": 632,
+  "completion_tokens": 535,
+  "total_tokens": 1167,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 331,
+   "audio_tokens": 0,
+   "reasoning_tokens": 329,
+   "rejected_prediction_tokens": 281
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 40. Flow is one-sided: zero buys, 10.26 NEAR of sells. Raising tax now would punish holders further and likely deepen the exit; cutting it forfeits the only revenue while volume is sell-only. Hold tax at 150. Split stays 30/25/45 — locker pool and endowment are both thin, and the buyback fund (0.248 NEAR) is barely enough for 1 bp of supply (~4,747 CHAIR at 0.0000489 NEAR), so I burn exactly that: small, but it's a real bid under price and a signal the fund gets used, not hoarded. No petitions to weigh. Reassess if buy volume returns; a sustained sell-only tape may justify a modest tax cut next meeting to lower friction for re-entry.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-81d18baddae645beb604da4427d42b1e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 40. Flow is one-sided: zero buys, 10.26 NEAR of sells. Raising tax now would punish holders further and likely deepen the exit; cutting it forfeits the only revenue while volume is sell-only. Hold tax at 150. Split stays 30/25/45 — locker pool and endowment are both thin, and the buyback fund (0.248 NEAR) is barely enough for 1 bp of supply (~4,747 CHAIR at 0.0000489 NEAR), so I burn exactly that: small, but it's a real bid under price and a signal the fund gets used, not hoarded. No petitions to weigh. Reassess if buy volume returns; a sustained sell-only tape may justify a modest tax cut next meeting to lower friction for re-entry.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Volume: only sells 10.26 NEAR. Price low. Tax 150, endowment 30, locker 25, buyback 45. Buyback fund tiny (0.248 NEAR). Buyback_burn max 50 bps of supply = ~23,736 CHAIR. Cost at price 0.0000488... ≈ 1.16 NEAR — fund only 0.248 NEAR, so limited by fund. 0.248 NEAR buys ~5080 CHAIR ≈ 0.0107 bps... wait compute: 0.248/0.000048867 ≈ 5079 CHAIR. Supply 47.47M, so 5079/47.47M ≈ 0.0107 bps. So buyback_burn effectively 0 or 1? Integer bps, so 0 (can't afford even 1 bps). Actually 1 bps = 4747 CHAIR ≈ 0.232 NEAR — actually 0.248 > 0.232! So 1 bps is affordable. 4747.29 CHAIR × 0.000048867 = 0.23198 NEAR. Fund 0.2482 ≥ 0.232. So buyback_burn = 1.\\n\\nLevers: keep tax 150 (low volume, don't scare). Endowment 30, locker 25 — fine. Maybe keep steady. Minutes brief.\"},\"finish_reason\":\"stop\"}],\"created\":1794273102,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":632,\"completion_tokens\":535,\"total_tokens\":1167,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":331,\"audio_tokens\":0,\"reasoning_tokens\":329,\"rejected_prediction_tokens\":281}},\"cost\":{\"usd\":0.00033158,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

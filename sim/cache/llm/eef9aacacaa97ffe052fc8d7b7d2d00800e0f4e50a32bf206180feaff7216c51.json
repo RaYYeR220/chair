@@ -1,0 +1,22 @@
+{
+ "request_sha256": "eef9aacacaa97ffe052fc8d7b7d2d00800e0f4e50a32bf206180feaff7216c51",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:10.830Z",
+ "latency_ms": 15931,
+ "usage": {
+  "prompt_tokens": 637,
+  "completion_tokens": 481,
+  "total_tokens": 1118,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 307,
+   "audio_tokens": 0,
+   "reasoning_tokens": 292,
+   "rejected_prediction_tokens": 215
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":11,\"minutes\":\"Meeting 5. Flows are near-balanced: 131.5 NEAR bought vs 117.3 NEAR sold, so no need to move the tax from 200 bps. Split stays 60/10/30 — endowment funded at 2.99 NEAR pending, lockers earning steady share. Buyback fund holds 1.4978 NEAR; at price 0.0000361 that buys ~41,480 CHAIR, about 11.85 bps of the 35.01M supply. Constitution caps burn at what the fund can pay, so I burn 11 bps and let the remainder roll into next meeting's fund. No petitions this session; policy holds steady while the curve finds its level.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-00ca36ec0f2046238041f301421c910e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":11,\\\"minutes\\\":\\\"Meeting 5. Flows are near-balanced: 131.5 NEAR bought vs 117.3 NEAR sold, so no need to move the tax from 200 bps. Split stays 60/10/30 — endowment funded at 2.99 NEAR pending, lockers earning steady share. Buyback fund holds 1.4978 NEAR; at price 0.0000361 that buys ~41,480 CHAIR, about 11.85 bps of the 35.01M supply. Constitution caps burn at what the fund can pay, so I burn 11 bps and let the remainder roll into next meeting's fund. No petitions this session; policy holds steady while the curve finds its level.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. No petitions. Current: tax 200, endowment 60, locker 10, buyback 30 (implied). Volume balanced: buy 131.5, sell 117.3 — slightly buy-heavy. Price stable-ish.\\n\\nBuyback fund 1.4977 NEAR. Price ~0.0000361 NEAR per CHAIR. Buyback burn max 50 bps of supply = 0.5% of 35M = ~175,074 CHAIR. Cost = 175074 * 0.0000361 ≈ 6.32 NEAR. Fund only 1.4977 NEAR → can buy ~41,480 CHAIR ≈ 11.85 bps of supply. So buyback_burn limited by fund: 1.4977/0.0000361 ≈ 41,487 CHAIR → /35014969 ≈ 0.1185% ≈ 11.85 bps. So set buyback_burn = 11 (or 11.85 → integer 11).\\n\\nWait — does buyback_burn use the buyback fund at current price? Assume yes. Set 11.\\n\\nLevers: keep tax 200 (balanced volume). Maybe keep everything. Endowment 60, locker 10, rest 30 buyback. Fine.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272695,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":637,\"completion_tokens\":481,\"total_tokens\":1118,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":307,\"audio_tokens\":0,\"reasoning_tokens\":292,\"rejected_prediction_tokens\":215}},\"cost\":{\"usd\":0.00033605,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

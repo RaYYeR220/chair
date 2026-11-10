@@ -1,0 +1,23 @@
+{
+ "request_sha256": "4fb06d0f023736bbfd9a8ae47613ef88f0a56b47af4c207bba7cc47f673a8e6f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:08:18.991Z",
+ "latency_ms": 7328,
+ "usage": {
+  "prompt_tokens": 778,
+  "completion_tokens": 574,
+  "total_tokens": 1352,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 361,
+   "audio_tokens": 0,
+   "reasoning_tokens": 285,
+   "rejected_prediction_tokens": 278
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":35,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Volume is healthy (127.5 NEAR taxed at 100bps ≈ 1.27 NEAR/day). Locker_share is already at the constitutional maximum of 25, so petitions to raise it cannot be honored — the contract would clamp it anyway. Buyback fund holds 0.63 NEAR; at price 0.0000496, 1bp of supply (≈4,833 CHAIR) costs ≈0.24 NEAR, so the fund covers ~2.6bp. I burn 2bp, leaving a small buffer. Holding tax and shares steady to keep flows predictable while the buyback compounds the floor.\",\"answers\":[\"Locker_share is at the constitutional cap of 25 and cannot move higher — the contract would clamp any increase. Your weight is heard; the lever is simply maxed.\",\"Granted in part: buyback_burn set to 2bp this meeting (~9,665 CHAIR, ≈0.48 NEAR). The fund (0.63 NEAR) cannot yet fund more; daily accrual will compound it.\",\"Denied: locker_share is already at its maximum of 25. It cannot rise 10 this meeting or any meeting. The 25% flow continues to your pool each day.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-d45663ce1252407c971e1807dc04e1f0\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":35,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Volume is healthy (127.5 NEAR taxed at 100bps ≈ 1.27 NEAR/day). Locker_share is already at the constitutional maximum of 25, so petitions to raise it cannot be honored — the contract would clamp it anyway. Buyback fund holds 0.63 NEAR; at price 0.0000496, 1bp of supply (≈4,833 CHAIR) costs ≈0.24 NEAR, so the fund covers ~2.6bp. I burn 2bp, leaving a small buffer. Holding tax and shares steady to keep flows predictable while the buyback compounds the floor.\\\",\\\"answers\\\":[\\\"Locker_share is at the constitutional cap of 25 and cannot move higher — the contract would clamp any increase. Your weight is heard; the lever is simply maxed.\\\",\\\"Granted in part: buyback_burn set to 2bp this meeting (~9,665 CHAIR, ≈0.48 NEAR). The fund (0.63 NEAR) cannot yet fund more; daily accrual will compound it.\\\",\\\"Denied: locker_share is already at its maximum of 25. It cannot rise 10 this meeting or any meeting. The 25% flow continues to your pool each day.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 29. Current: tax 100, endowment 35, locker 25, buyback_share 40 (rest). Volume: buys 79 NEAR, sells 48.5 NEAR. Tax revenue: 100bps = 1% of ~127.5 NEAR ≈ 1.27 NEAR/day. Split: endowment 35%, locker 25%, buyback 40%.\\n\\nPetitions: raise locker_share (already at max 25). Buyback small daily — buyback fund only 0.63 NEAR. buyback_burn: 0-50 bps of supply, no more than fund can pay for. Supply 48.3M CHAIR. 1 bps = 4832.77 CHAIR. Price 0.0000496 NEAR → 4832.77 CHAIR ≈ 0.24 NEAR. Fund 0.63 NEAR → can afford ~2.6 bps. So buyback_burn = 2.\\n\\nLocker_share already at 25 max — can't raise. Petitions 1 and 3 ask to raise; deny, explain cap. Petition 2: grant small buyback, 2 bps.\\n\\nMaybe adjust tax? Volume healthy. Keep tax at 100. Endowment 35 fine. Keep everything else. Minutes ≤1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272891,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":778,\"completion_tokens\":574,\"total_tokens\":1352,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":361,\"audio_tokens\":0,\"reasoning_tokens\":285,\"rejected_prediction_tokens\":278}},\"cost\":{\"usd\":0.00037297999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

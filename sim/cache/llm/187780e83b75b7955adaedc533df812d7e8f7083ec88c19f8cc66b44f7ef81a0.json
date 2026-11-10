@@ -1,0 +1,22 @@
+{
+ "request_sha256": "187780e83b75b7955adaedc533df812d7e8f7083ec88c19f8cc66b44f7ef81a0",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:09:45.608Z",
+ "latency_ms": 3753,
+ "usage": {
+  "prompt_tokens": 761,
+  "completion_tokens": 445,
+  "total_tokens": 1206,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 189,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Volume is healthy and balanced (61.9 buy / 40.0 sell NEAR), price stable. Levers are working: 100 bps tax, 30/25 split leaves 45% to buybacks. Buyback fund holds 0.4584 NEAR; at ~0.195 NEAR per bp of supply, we can afford 2 bps (~8,687 CHAIR, ~0.39 NEAR), keeping a small reserve. Burn 2 bps to compound the floor per petition 1, hold everything else steady per petitions 2 and 3. No reason to move tax or shares this meeting.\",\"answers\":[\"Agreed. Burning 2 bps of supply today (~8,687 CHAIR, ~0.39 NEAR) — the most the fund covers while keeping reserve. Small, daily, compounding.\",\"Steady she goes: tax 100, endowment 30, locker 25 all unchanged this meeting.\",\"Held firm — no changes to any lever. Only action was the routine 2 bp buyback-and-burn.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6bc186ad\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Volume is healthy and balanced (61.9 buy / 40.0 sell NEAR), price stable. Levers are working: 100 bps tax, 30/25 split leaves 45% to buybacks. Buyback fund holds 0.4584 NEAR; at ~0.195 NEAR per bp of supply, we can afford 2 bps (~8,687 CHAIR, ~0.39 NEAR), keeping a small reserve. Burn 2 bps to compound the floor per petition 1, hold everything else steady per petitions 2 and 3. No reason to move tax or shares this meeting.\\\",\\\"answers\\\":[\\\"Agreed. Burning 2 bps of supply today (~8,687 CHAIR, ~0.39 NEAR) — the most the fund covers while keeping reserve. Small, daily, compounding.\\\",\\\"Steady she goes: tax 100, endowment 30, locker 25 all unchanged this meeting.\\\",\\\"Held firm — no changes to any lever. Only action was the routine 2 bp buyback-and-burn.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 41. Current levers: tax 100, endowment 30, locker 25, buyback_share 45 (rest to buyback fund). Buyback fund is 0.458 NEAR. Price ~0.0000449 NEAR per CHAIR. Supply 43.43M CHAIR. buyback_burn in bps of supply: 1 bp = 4343 CHAIR ≈ 0.195 NEAR. Fund can pay for ~0.458/0.195 ≈ 2.35 bps. So buyback_burn max affordable ~2 bps (0.39 NEAR). Petition asks small buyback every day — do 2 bps.\\n\\nKeep steady: tax 100, endowment 30, locker 25. Buyback 2.\\n\\nMinutes under 1000 chars. Answers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272982,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":761,\"completion_tokens\":445,\"total_tokens\":1206,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":189,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00030593,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

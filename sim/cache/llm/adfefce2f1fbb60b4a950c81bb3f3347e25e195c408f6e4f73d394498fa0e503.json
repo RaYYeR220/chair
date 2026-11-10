@@ -1,0 +1,23 @@
+{
+ "request_sha256": "adfefce2f1fbb60b4a950c81bb3f3347e25e195c408f6e4f73d394498fa0e503",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:12:49.341Z",
+ "latency_ms": 67929,
+ "usage": {
+  "prompt_tokens": 764,
+  "completion_tokens": 502,
+  "total_tokens": 1266,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 312,
+   "audio_tokens": 0,
+   "reasoning_tokens": 210,
+   "rejected_prediction_tokens": 255
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Tax is already at the constitutional floor of 100 bps; I cannot lower it further, so volume growth must come from the price itself. Locker_share sits at its 25% cap, so lockers are already receiving the maximum share the charter allows. The buyback fund holds 0.95 NEAR; at price ~0.0000517 NEAR, 1 bps of the 50.12M supply costs ~0.26 NEAR, so I burn 3 bps (~15,036 CHAIR, ~0.78 NEAR), leaving buffer in the fund. Endowment stays at 30 to keep the brain funded while maximizing flow to buybacks and lockers. Small, steady burns compound the floor as petitioned.\",\"answers\":[\"Tax is already at the floor of 100 bps — the constitution forbids going lower. Volume must grow on its own; I will not breach the charter.\",\"Locker_share is at its 25% maximum. The contract clamps anything higher, so I cannot raise it. Your lockup is valued and the daily locker pool continues.\",\"Agreed. I burn 3 bps of supply today (~15k CHAIR), fully funded by the buyback fund. Small daily burns compound the floor without draining reserves.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a29d6346665646e69d262cc742aa4d05\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Tax is already at the constitutional floor of 100 bps; I cannot lower it further, so volume growth must come from the price itself. Locker_share sits at its 25% cap, so lockers are already receiving the maximum share the charter allows. The buyback fund holds 0.95 NEAR; at price ~0.0000517 NEAR, 1 bps of the 50.12M supply costs ~0.26 NEAR, so I burn 3 bps (~15,036 CHAIR, ~0.78 NEAR), leaving buffer in the fund. Endowment stays at 30 to keep the brain funded while maximizing flow to buybacks and lockers. Small, steady burns compound the floor as petitioned.\\\",\\\"answers\\\":[\\\"Tax is already at the floor of 100 bps — the constitution forbids going lower. Volume must grow on its own; I will not breach the charter.\\\",\\\"Locker_share is at its 25% maximum. The contract clamps anything higher, so I cannot raise it. Your lockup is valued and the daily locker pool continues.\\\",\\\"Agreed. I burn 3 bps of supply today (~15k CHAIR), fully funded by the buyback fund. Small daily burns compound the floor without draining reserves.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 49. Current: tax 100, endowment 30, locker 25, buyback remainder 45.\\n\\nPetitions: lower tax a little (already at floor 100, can't go lower). Raise locker_share (at max 25). Small buyback every day — buyback_burn 0-50 bps, fund is 0.95 NEAR. Price 0.0000517 NEAR per CHAIR. Supply ~50.1M CHAIR. 1 bps of supply = ~5012 CHAIR ≈ 0.259 NEAR. Fund 0.95 NEAR can buy ~3.67 bps. So buyback_burn = 3.\\n\\nTax at floor 100, can't lower. Locker share at max 25, can't raise. Endowment 30 at floor.\\n\\nBuyback: 3 bps costs ~0.26 NEAR, fund 0.95 — fine. Maybe 3.\\n\\nMinutes: explain constraints.\"},\"finish_reason\":\"stop\"}],\"created\":1794273101,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":764,\"completion_tokens\":502,\"total_tokens\":1266,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":312,\"audio_tokens\":0,\"reasoning_tokens\":210,\"rejected_prediction_tokens\":255}},\"cost\":{\"usd\":0.00033487999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

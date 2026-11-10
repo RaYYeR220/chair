@@ -7,35 +7,43 @@ export const REPO_DIR = join(SIM_DIR, "..");
 
 const raw = JSON.parse(readFileSync(join(SIM_DIR, "chair.config.json"), "utf8"));
 const a = raw.new_args;
+const k = raw.constitution;
 
 export const YOCTO = 10n ** 24n;
-export const DECIMALS: number = a.token_decimals;
+export const DECIMALS: number = k.token_decimals;
 export const ONE = 10n ** BigInt(DECIMALS); // base units per whole token
 
 export interface Bound { min: number; max: number; max_step: number }
+export interface LeverSet { tax_bps: number; endowment_share: number; locker_share: number }
+export interface Tier { min: bigint; model: string }
+
+/** The constitution's bounds: compile-time constants in the contract. */
+export interface Rules { tax: Bound; endowment: Bound; locker: Bound; buybackMaxBps: number; fallbackTaxTarget: number; fallbackTaxStep: number }
+
+export const RULES: Rules = {
+  tax: k.tax_bps as Bound,
+  endowment: k.endowment_share as Bound,
+  locker: k.locker_share as Bound,
+  buybackMaxBps: k.buyback_burn_max_bps as number,
+  fallbackTaxTarget: k.fallback.tax_target_bps as number,
+  fallbackTaxStep: k.fallback.tax_step_bps as number,
+};
+
+/** The same rules with a different locker_share ceiling (the v1-bound control run). */
+export const withLockerMax = (max: number): Rules => ({ ...RULES, locker: { ...RULES.locker, max } });
 
 export const CFG = {
-  p0: BigInt(a.curve.p0_yocto_per_token) as bigint, // yocto per whole token
-  k: BigInt(a.curve.k_yocto_per_token_per_token) as bigint, // yocto per whole token per whole token of s
-  launch: {
-    tax_bps: a.launch_levers.tax_bps as number,
-    endowment_share: a.launch_levers.endowment_share_pct as number,
-    locker_share: a.launch_levers.locker_share_pct as number,
-  },
-  tax: a.constitution.tax_bps as Bound,
-  endowment: a.constitution.endowment_share_pct as Bound,
-  locker: a.constitution.locker_share_pct as Bound,
-  buybackMaxBps: a.constitution.buyback_burn_max_bps_of_supply as number,
-  fallbackTaxTarget: a.constitution.fallback.tax_target_bps as number,
-  fallbackTaxStep: a.constitution.fallback.tax_step_bps as number,
-  lockDays: a.lock_days as number[],
-  petitionFee: BigInt(a.petition.fee_tokens) * ONE,
-  petitionMaxChars: a.petition.max_chars as number,
-  petitionTopN: a.petition.top_n as number,
-  ladder: (a.iq_ladder as { min_endowment_near: string; model: string }[]).map((r) => ({
-    min: BigInt(r.min_endowment_near) * YOCTO,
-    model: r.model,
-  })),
+  p0: BigInt(a.curve.p0) as bigint, // yocto per whole token
+  k: BigInt(a.curve.k) as bigint, // yocto per whole token per whole token of s
+  launch: (a.levers ?? k.default_levers) as LeverSet,
+  ...RULES,
+  lockDays: k.lock_days as number[],
+  petitionFee: BigInt(a.petition_fee) as bigint, // base units
+  petitionMaxChars: k.petition_max_chars as number,
+  petitionTopN: k.petitions_in_brief as number,
+  storageDeposit: BigInt(k.storage_deposit) as bigint,
+  rewardScale: BigInt(k.reward_scale) as bigint,
+  ladder: (a.ladder as { min_endowment: string; model: string }[]).map((r): Tier => ({ min: BigInt(r.min_endowment), model: r.model })),
   venice: raw.venice as {
     base_url: string;
     model_map: Record<string, string>;
@@ -43,5 +51,7 @@ export const CFG = {
     max_calls_per_run: number;
   },
   rawNewArgs: a,
-  assumptions: raw.assumptions_not_in_spec as Record<string, string>,
+  rawConstitution: k,
+  source: raw._source as string,
+  mechanics: raw.contract_mechanics as Record<string, string>,
 };

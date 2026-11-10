@@ -1,0 +1,22 @@
+{
+ "request_sha256": "86872d1bd7d40a4208cbb34fc6b226f97ead8b6747a7028248cf559faed8a6cc",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:58.664Z",
+ "latency_ms": 16190,
+ "usage": {
+  "prompt_tokens": 685,
+  "completion_tokens": 517,
+  "total_tokens": 1202,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 327,
+   "audio_tokens": 0,
+   "reasoning_tokens": 326,
+   "rejected_prediction_tokens": 243
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Volume is modest (13.5 buy / 5.2 sell NEAR) and the buyback fund is nearly empty (0.17 NEAR), so buyback_burn stays 0 — even 1 bp of supply costs ~20 NEAR, far beyond the fund. I raise tax 100→150 bps to rebuild the buyback fund without choking trade. Endowment holds at 40% (16 NEAR covers inference for now); locker_share stays at its constitutional maximum of 25%. Petition answered below.\",\"answers\":[\"holder-167.near: Lockers are valued, but locker_share is already at the constitutional cap of 25% — I cannot raise it further. The higher tax I set today will still flow 25% to your pool. Hold steady.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-dbb3b9d3abc5442497471ac15f84c8c4\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Volume is modest (13.5 buy / 5.2 sell NEAR) and the buyback fund is nearly empty (0.17 NEAR), so buyback_burn stays 0 — even 1 bp of supply costs ~20 NEAR, far beyond the fund. I raise tax 100→150 bps to rebuild the buyback fund without choking trade. Endowment holds at 40% (16 NEAR covers inference for now); locker_share stays at its constitutional maximum of 25%. Petition answered below.\\\",\\\"answers\\\":[\\\"holder-167.near: Lockers are valued, but locker_share is already at the constitutional cap of 25% — I cannot raise it further. The higher tax I set today will still flow 25% to your pool. Hold steady.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 22. Tax at 100 bps (minimum). Volume modest: buys 13.49 NEAR, sells 5.21 NEAR. Price 0.0000456. Locker share already at max 25. Petition asks to raise locker_share — it's capped at 25, can't go higher. So deny politely.\\n\\nEndowment at 40, buyback share 35. Buyback fund tiny (0.173 NEAR). Buyback_burn: 50 bps of supply = ~222,180 CHAIR. Cost at price ~0.00004564 → ~10.14 NEAR. Fund only 0.173 NEAR, so max affordable: 0.173/0.00004564 ≈ 3,792 CHAIR ≈ 0.0085 bps of supply. So buyback_burn must be 0 (integer bps, min 1 would be 444,360 CHAIR ≈ 20.3 NEAR — unaffordable). So buyback_burn = 0.\\n\\nTax: volume low-ish, reserve 1041 NEAR. Keep tax at 100? Maybe raise slightly to fund buyback? Moving at most 50 per meeting. Could raise to 150 to build buyback fund. Modest sell pressure. I'll raise tax to 150 to accumulate buyback funds, keep endowment 40, locker 25 (max). Actually endowment_pending is small; endowment at 16 NEAR total. Keep 40.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272802,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":685,\"completion_tokens\":517,\"total_tokens\":1202,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":327,\"audio_tokens\":0,\"reasoning_tokens\":326,\"rejected_prediction_tokens\":243}},\"cost\":{\"usd\":0.00036125,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

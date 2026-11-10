@@ -1,0 +1,22 @@
+{
+ "request_sha256": "fdcfc2450bf41685889b2eb48268c43d4b299e4c9c350724c9cc3f1e0ccafc1a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:51.254Z",
+ "latency_ms": 5597,
+ "usage": {
+  "prompt_tokens": 725,
+  "completion_tokens": 587,
+  "total_tokens": 1312,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 369,
+   "audio_tokens": 0,
+   "reasoning_tokens": 283,
+   "rejected_prediction_tokens": 285
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":18,\"minutes\":\"Meeting 24. Flow is strongly buy-side: 34.22 NEAR bought vs 2.79 sold, so the curve is absorbing demand and the tax is not choking trade. Hold tax_bps at 125. Split stays 50/25/25: endowment_pending (0.231 NEAR) covers inference comfortably against a 13.57 NEAR endowment, lockers are at their 25% constitutional cap, and the remainder feeds buybacks. Buyback fund is 0.2955 NEAR; at price 0.0000404648 that buys ~7,303 CHAIR, which is ~18.6 bps of the 39.26M supply — so buyback_burn is set to 18, the largest burn the fund can actually pay for. Daily compounding continues as tax flow refills the fund.\",\"answers\":[\"Agreed. Burning 18 bps today (~7,303 CHAIR) — the full buyback fund at current price. Every meeting the tax refills the fund and we buy and burn again. The floor compounds.\",\"Respectfully at the cap: locker_share is 25, the constitutional maximum. It cannot rise further. You are already receiving the largest share the contract permits — 25% of every tax plus the locker pool.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-49295f0c02af41de9b57b921f84ca7fa\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":18,\\\"minutes\\\":\\\"Meeting 24. Flow is strongly buy-side: 34.22 NEAR bought vs 2.79 sold, so the curve is absorbing demand and the tax is not choking trade. Hold tax_bps at 125. Split stays 50/25/25: endowment_pending (0.231 NEAR) covers inference comfortably against a 13.57 NEAR endowment, lockers are at their 25% constitutional cap, and the remainder feeds buybacks. Buyback fund is 0.2955 NEAR; at price 0.0000404648 that buys ~7,303 CHAIR, which is ~18.6 bps of the 39.26M supply — so buyback_burn is set to 18, the largest burn the fund can actually pay for. Daily compounding continues as tax flow refills the fund.\\\",\\\"answers\\\":[\\\"Agreed. Burning 18 bps today (~7,303 CHAIR) — the full buyback fund at current price. Every meeting the tax refills the fund and we buy and burn again. The floor compounds.\\\",\\\"Respectfully at the cap: locker_share is 25, the constitutional maximum. It cannot rise further. You are already receiving the largest share the contract permits — 25% of every tax plus the locker pool.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 24. Volume: buys 34.22 NEAR, sells 2.79 NEAR — buy-heavy, healthy. Tax 125 bps. Buyback fund only 0.2955 NEAR. Price ~0.00004046.\\n\\nBuyback_burn: max 50 bps of supply, but limited by fund. Supply 39.26M CHAIR, 50 bps = 19,630 CHAIR ≈ 0.794 NEAR at current price. Fund only 0.2955 NEAR → can buy ~7,303 CHAIR ≈ 18.6 bps. So buyback_burn = 18 (or compute: 0.2955/0.0000404648 ≈ 7303.5 CHAIR; /39260600 = 0.000186 → 18.6 bps). Set 18.\\n\\nPetition 1: small buyback daily — yes, doing 18 bps, funded by tax flow. Agree.\\n\\nPetition 2: locker_share up 10 → currently 25 (max). Can't go higher; it's at cap. Explain.\\n\\nLevers: keep tax 125, endowment 50, locker 25. Buy-heavy volume, fine. Maybe keep steady.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272805,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":725,\"completion_tokens\":587,\"total_tokens\":1312,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":369,\"audio_tokens\":0,\"reasoning_tokens\":283,\"rejected_prediction_tokens\":285}},\"cost\":{\"usd\":0.00040225,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

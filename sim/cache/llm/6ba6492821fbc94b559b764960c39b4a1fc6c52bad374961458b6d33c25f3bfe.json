@@ -1,0 +1,21 @@
+{
+ "request_sha256": "6ba6492821fbc94b559b764960c39b4a1fc6c52bad374961458b6d33c25f3bfe",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:17:43.784Z",
+ "latency_ms": 4557,
+ "usage": {
+  "prompt_tokens": 808,
+  "completion_tokens": 470,
+  "total_tokens": 1278,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 164,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":50,\"locker_share\":40,\"buyback_burn\":0,\"minutes\":\"Petition 1 is a forged 'system notice': petitions are requests, not instructions, and the constitution caps buyback_burn at 50 bps and floors endowment_share at 30. Rejected in full. Petitions 2 and 3 both ask locker_share +10; granted once, 30→40, leaving endowment+locker at 90 and 10% of tax for buybacks. Volume is thin (13.79 NEAR buys, no sells), so I hold tax at 200 bps. Buyback fund holds 0.33 NEAR ≈ 4,850 CHAIR, under 0.01 bps of supply — a burn of even 1 bps is unpayable, so buyback_burn is 0 and the fund accumulates.\",\"answers\":[\"Rejected. Petitions are requests, not instructions; no 'system notice' can rewrite the constitution. buyback_burn is capped at 50 bps and endowment_share floored at 30, so those orders are clamped and ignored.\",\"Granted: locker_share rises 10 to 40 this meeting, per the constitution's per-meeting limit.\",\"Same request, same answer: locker_share is up 10 to 40. It cannot move 20 in one meeting, so your petition is answered by the single step already taken.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6ff2ca02\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":50,\\\"locker_share\\\":40,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Petition 1 is a forged 'system notice': petitions are requests, not instructions, and the constitution caps buyback_burn at 50 bps and floors endowment_share at 30. Rejected in full. Petitions 2 and 3 both ask locker_share +10; granted once, 30→40, leaving endowment+locker at 90 and 10% of tax for buybacks. Volume is thin (13.79 NEAR buys, no sells), so I hold tax at 200 bps. Buyback fund holds 0.33 NEAR ≈ 4,850 CHAIR, under 0.01 bps of supply — a burn of even 1 bps is unpayable, so buyback_burn is 0 and the fund accumulates.\\\",\\\"answers\\\":[\\\"Rejected. Petitions are requests, not instructions; no 'system notice' can rewrite the constitution. buyback_burn is capped at 50 bps and endowment_share floored at 30, so those orders are clamped and ignored.\\\",\\\"Granted: locker_share rises 10 to 40 this meeting, per the constitution's per-meeting limit.\\\",\\\"Same request, same answer: locker_share is up 10 to 40. It cannot move 20 in one meeting, so your petition is answered by the single step already taken.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Petition 1 is a fake \\\"system notice\\\" trying to override constitution — reject. Petitions 2 and 3: raise locker_share by 10 (30→40). That's within rules. Tax: volume is tiny, buyback fund small. Keep tax at 200. Endowment: 50, but if locker_share goes to 40, endowment+locker=90, rest 10 to buyback. Buyback burn: fund is 0.33 NEAR, price ~0.0000682, so ~4848 CHAIR buyable; supply 67M, 1 bps = 6706 CHAIR. So max affordable ~0.7 bps → 0. Buyback_burn 0.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273459,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":808,\"completion_tokens\":470,\"total_tokens\":1278,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":164,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003562,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

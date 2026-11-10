@@ -3,7 +3,8 @@
 #   sim/run                 baselines (20 seeds) + LLM chair replayed from sim/cache/llm (no network)
 #   sim/run --live          also call Venice for any cache miss (reads VENICE_API_KEY from the environment or sim/.env)
 #   sim/run --no-llm        baselines only
-#   sim/run test            unit tests of the token model
+#   sim/run test            unit tests of the token model + the golden test against the testnet contract
+# Writes results/sim-v2-<date>.json/.html. The v1 run (results/sim-2026-11-10.*) came from commit d5782c6.
 set -euo pipefail
 cd "$(dirname "$0")"
 TSX="npx --yes tsx@4.23.15"

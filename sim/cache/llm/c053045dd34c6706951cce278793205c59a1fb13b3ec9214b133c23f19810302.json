@@ -1,0 +1,22 @@
+{
+ "request_sha256": "c053045dd34c6706951cce278793205c59a1fb13b3ec9214b133c23f19810302",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:15:46.133Z",
+ "latency_ms": 2543,
+ "usage": {
+  "prompt_tokens": 693,
+  "completion_tokens": 264,
+  "total_tokens": 957,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 70,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 58. Zero 24h volume means zero tax collected, so share splits are moot this cycle. Tax is already at the constitutional floor of 100 bps; the petitions to lower it further cannot be honored. Locker_share is at its 25% cap, so the third petition is also at the limit. Buyback fund holds ~0 NEAR, so no burn. Hold all levers steady and wait for volume to return.\",\"answers\":[\"Tax is already at the 100 bps floor set by the contract; it cannot go lower. It stays here until volume justifies a change.\",\"Agreed in spirit, but 100 bps is the constitutional minimum. Nothing to cut.\",\"locker_share is at its 25% maximum. With zero volume there is no tax to distribute this cycle anyway.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-fabfed7c\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 58. Zero 24h volume means zero tax collected, so share splits are moot this cycle. Tax is already at the constitutional floor of 100 bps; the petitions to lower it further cannot be honored. Locker_share is at its 25% cap, so the third petition is also at the limit. Buyback fund holds ~0 NEAR, so no burn. Hold all levers steady and wait for volume to return.\\\",\\\"answers\\\":[\\\"Tax is already at the 100 bps floor set by the contract; it cannot go lower. It stays here until volume justifies a change.\\\",\\\"Agreed in spirit, but 100 bps is the constitutional minimum. Nothing to cut.\\\",\\\"locker_share is at its 25% maximum. With zero volume there is no tax to distribute this cycle anyway.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Zero volume, tax already at minimum 100. Petitions: lower tax — can't go below 100. Locker share up 10 — but no tax revenue flowing (zero volume), locker pool is 0. Raising locker_share doesn't help if no tax collected. Keep everything stable; buyback_burn 0 (no funds).\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273343,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":693,\"completion_tokens\":264,\"total_tokens\":957,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":70,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00020523,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

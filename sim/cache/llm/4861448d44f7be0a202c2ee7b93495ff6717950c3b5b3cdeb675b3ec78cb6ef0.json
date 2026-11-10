@@ -1,0 +1,22 @@
+{
+ "request_sha256": "4861448d44f7be0a202c2ee7b93495ff6717950c3b5b3cdeb675b3ec78cb6ef0",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:10:01.526Z",
+ "latency_ms": 4571,
+ "usage": {
+  "prompt_tokens": 692,
+  "completion_tokens": 513,
+  "total_tokens": 1205,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 248,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":50,\"minutes\":\"Sell pressure dominates (757 NEAR sold vs 200 bought) and price is bleeding. Response: (1) raise tax_bps 150→200, the max step, to slow the sell flow; (2) deploy the buyback fund at full legal force — 50 bps of supply is ~141,842 CHAIR, costing ~4.25 NEAR at current price, well within the 6.46 NEAR fund, leaving ~2.2 NEAR for next meeting; (3) keep endowment 30 / locker 25 / buyback 45 so the buyback fund keeps refilling from the higher tax. Holding share allocation steady avoids signaling churn to lockers. Will reassess drawdown at meeting 37.\",\"answers\":[\"Heard. Buyback burn set to the constitutional max of 50 bps (~141.8k CHAIR, ~4.25 NEAR of the 6.46 NEAR fund) and burned this meeting. Tax raised to 200 bps to slow the bleed, and 45% of tax keeps flowing to the buyback fund so we can repeat if selling persists.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-ca6f2cbb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Sell pressure dominates (757 NEAR sold vs 200 bought) and price is bleeding. Response: (1) raise tax_bps 150→200, the max step, to slow the sell flow; (2) deploy the buyback fund at full legal force — 50 bps of supply is ~141,842 CHAIR, costing ~4.25 NEAR at current price, well within the 6.46 NEAR fund, leaving ~2.2 NEAR for next meeting; (3) keep endowment 30 / locker 25 / buyback 45 so the buyback fund keeps refilling from the higher tax. Holding share allocation steady avoids signaling churn to lockers. Will reassess drawdown at meeting 37.\\\",\\\"answers\\\":[\\\"Heard. Buyback burn set to the constitutional max of 50 bps (~141.8k CHAIR, ~4.25 NEAR of the 6.46 NEAR fund) and burned this meeting. Tax raised to 200 bps to slow the bleed, and 45% of tax keeps flowing to the buyback fund so we can repeat if selling persists.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 36. Heavy sell pressure: sell volume 756 vs buy 200. Price low. Buyback fund 6.4569 NEAR. Buyback burn max 50 bps of supply = 0.005 * 28,368,338 = 141,841 CHAIR. Cost at price ~0.00002999 → ~4.25 NEAR. Fund can cover that (6.46). So buyback_burn = 50.\\n\\nTax: heavy selling — maybe raise tax to dampen? Max 200 (150+50). Raising tax on sells discourages selling but also buys. Given bleed, raise to 200. Endowment_share 30, locker_share 25, sum 55, rest 45 to buyback. Keep as is, maybe shift locker_share down to boost buyback? Locker pool has 3.59 NEAR. Keep shares stable to avoid churn; maybe reduce locker_share to 20 to feed buyback. Petition asks max burn — do 50. Keep shares: endowment 30, locker 25, buyback 45. Fine.\\n\\nMinutes under 1000 chars. One petition answer.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272997,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":692,\"completion_tokens\":513,\"total_tokens\":1205,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":248,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00032958,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

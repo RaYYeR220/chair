@@ -1,0 +1,22 @@
+{
+ "request_sha256": "b120b652abbeac627f143f035e4ec071b479be4233a6a34a46e1513617bd012f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:11:37.220Z",
+ "latency_ms": 23925,
+ "usage": {
+  "prompt_tokens": 673,
+  "completion_tokens": 602,
+  "total_tokens": 1275,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 373,
+   "audio_tokens": 0,
+   "reasoning_tokens": 364,
+   "rejected_prediction_tokens": 314
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Flow is one-sided: 67.66 NEAR of sells, zero buys. Lockers are absorbing exit pressure, and the buyback fund (0.55 NEAR) is too thin to burn anything meaningful — 50 bps of supply costs ~11.8 NEAR at current price, so buyback_burn clamps to 0. I raise tax 100→150 bps to slow the churn and rebuild the buyback fund; sellers at 1.5% still face modest friction. Locker_share stays at 25, the constitutional maximum — the petition asks for what we already have. Endowment at 30% keeps inference funded (37.7 NEAR banked) while 45% of tax flows to buybacks.\",\"answers\":[\"Locker_share is already at the constitutional maximum of 25% — there is nowhere to raise it. Every further point of tax I collect this cycle is flowing 45% to buybacks, which supports the price you lock up. Thank you for holding the line.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-7d653fc91a6b428e8923461a0550da43\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Flow is one-sided: 67.66 NEAR of sells, zero buys. Lockers are absorbing exit pressure, and the buyback fund (0.55 NEAR) is too thin to burn anything meaningful — 50 bps of supply costs ~11.8 NEAR at current price, so buyback_burn clamps to 0. I raise tax 100→150 bps to slow the churn and rebuild the buyback fund; sellers at 1.5% still face modest friction. Locker_share stays at 25, the constitutional maximum — the petition asks for what we already have. Endowment at 30% keeps inference funded (37.7 NEAR banked) while 45% of tax flows to buybacks.\\\",\\\"answers\\\":[\\\"Locker_share is already at the constitutional maximum of 25% — there is nowhere to raise it. Every further point of tax I collect this cycle is flowing 45% to buybacks, which supports the price you lock up. Thank you for holding the line.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 38. Volume: only sells, 67.66 NEAR. Tax 100 bps = 1% → ~0.676 NEAR tax generated? But funds show small amounts. Buyback fund 0.55 NEAR. Buyback_burn: 0-50 bps of supply, and no more than fund can pay for. Supply 47.97M, 50 bps = 239,859 CHAIR. Price 0.00004935 NEAR per CHAIR. Cost of 239,859 CHAIR ≈ 11.84 NEAR. Fund only 0.55 NEAR → can buy ~11,175 CHAIR ≈ 0.023 bps of supply. So buyback_burn effectively clamped to ~0 (integer bps, 0.023 bps rounds to 0). So buyback_burn = 0.\\n\\nLevers: tax 100, endowment 30, locker 25, buyback remainder 45. Locker petition asks raise locker_share. Locker share max 25 already at cap. So deny politely — already at max.\\n\\nEndowment 37.7 NEAR, healthy for inference. Volume is sell-only; maybe raise tax slightly to fund buybacks? Tax can move at most 50 per meeting, range 100-300. With heavy selling, raising tax to 150 could dampen selling and fund lockers/buyback. But raising tax on sellers may worsen selling. Modest raise to 150 seems reasonable to build buyback fund. Keep endowment 30, locker 25 (at cap). Buyback gets 45%.\\n\\nMinutes ≤1000 chars. Answers: one reply to petition ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794273073,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":673,\"completion_tokens\":602,\"total_tokens\":1275,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":373,\"audio_tokens\":0,\"reasoning_tokens\":364,\"rejected_prediction_tokens\":314}},\"cost\":{\"usd\":0.00040195,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

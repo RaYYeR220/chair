@@ -1,0 +1,21 @@
+{
+ "request_sha256": "dcae4f43a4d6ae4e036942e23a87c8b46eecd08b91c48041c0cea3669f754965",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:04:49.782Z",
+ "latency_ms": 4344,
+ "usage": {
+  "prompt_tokens": 685,
+  "completion_tokens": 558,
+  "total_tokens": 1243,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 313,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":2,\"minutes\":\"Meeting 2. Flow is heavily buy-side (98 NEAR buys vs 1.6 sells), so the 200 bps tax is not choking demand; hold it. Endowment holds 2.41 NEAR with 1.19 pending — healthy. Keep endowment_share at 60 and locker_share at 20, leaving 20% to the buyback fund, which has accrued 1.20 NEAR. At price 0.0000244 NEAR, that funds roughly 49k CHAIR of burn, about 2 bps of the 23.4M supply. Set buyback_burn to 2 — the maximum the fund can pay for. Stability in the early curve phase; revisit levers as volume matures.\",\"answers\":[\"holder-169.near: Agreed — the brain is the product. Endowment sits at 2.41 NEAR with 1.19 more pending, and endowment_share stays at 60%. The model stays fed before lockers or buybacks get a larger cut.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c966ddc1\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 2. Flow is heavily buy-side (98 NEAR buys vs 1.6 sells), so the 200 bps tax is not choking demand; hold it. Endowment holds 2.41 NEAR with 1.19 pending — healthy. Keep endowment_share at 60 and locker_share at 20, leaving 20% to the buyback fund, which has accrued 1.20 NEAR. At price 0.0000244 NEAR, that funds roughly 49k CHAIR of burn, about 2 bps of the 23.4M supply. Set buyback_burn to 2 — the maximum the fund can pay for. Stability in the early curve phase; revisit levers as volume matures.\\\",\\\"answers\\\":[\\\"holder-169.near: Agreed — the brain is the product. Endowment sits at 2.41 NEAR with 1.19 more pending, and endowment_share stays at 60%. The model stays fed before lockers or buybacks get a larger cut.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 2. Volume mostly buys (98 NEAR buy vs 1.6 sell). Tax 200, endowment 60, locker 20, buyback 20.\\n\\nPetition: keep endowment funded. Endowment balance 2.4 NEAR, pending 1.19. Reasonable to keep endowment at 60 or bump slightly. Buyback: fund 1.2 NEAR, price 0.0000244 NEAR/CHAIR. 1.2 NEAR buys ~49,180 CHAIR. Supply 23.4M, 1 bps = 2339.87 CHAIR. 50 bps = 1,169,938 CHAIR ≈ 28.5 NEAR — can't afford. Max affordable burn: 1.2/0.0000244 ≈ 49,180 CHAIR ≈ 2.1 bps. So buyback_burn = 2.\\n\\nActually buyback_burn is bps of supply bought with buyback fund. Fund 1.2014 NEAR. Cost = burn_amount * price (roughly, curve price rises as you buy, but approximate). 2 bps = 46,797 CHAIR * 0.0000244 ≈ 1.14 NEAR. Affordable. Set 2.\\n\\nKeep tax 200 (early, healthy buy volume). Endowment 60, locker 20. Maybe keep stable. Minutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272685,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":685,\"completion_tokens\":558,\"total_tokens\":1243,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":313,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00038175000000000004,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

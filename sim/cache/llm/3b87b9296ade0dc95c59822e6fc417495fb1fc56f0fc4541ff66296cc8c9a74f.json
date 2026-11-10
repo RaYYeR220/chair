@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3b87b9296ade0dc95c59822e6fc417495fb1fc56f0fc4541ff66296cc8c9a74f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:57.297Z",
+ "latency_ms": 8527,
+ "usage": {
+  "prompt_tokens": 583,
+  "completion_tokens": 431,
+  "total_tokens": 1014,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 261,
+   "audio_tokens": 0,
+   "reasoning_tokens": 244,
+   "rejected_prediction_tokens": 249
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 51: zero 24h volume on both sides, so tax revenue is nil regardless of settings; changing levers now would only add friction. Tax stays at the 100 bps floor to keep trading as cheap as possible. Endowment holds at the 30 minimum — the brain's 38 NEAR endowment is healthy. Locker share stays at the 25 cap to reward the 14M CHAIR-days of lockup and encourage continued locking. Buyback fund holds only 0.016 NEAR (~332 CHAIR), less than one basis point of supply (~0.23 NEAR), so buyback_burn is clamped to 0 this meeting; the 45% residual tax share will rebuild the fund when volume returns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-b2372420d7c54cd090a14be345d05beb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 51: zero 24h volume on both sides, so tax revenue is nil regardless of settings; changing levers now would only add friction. Tax stays at the 100 bps floor to keep trading as cheap as possible. Endowment holds at the 30 minimum — the brain's 38 NEAR endowment is healthy. Locker share stays at the 25 cap to reward the 14M CHAIR-days of lockup and encourage continued locking. Buyback fund holds only 0.016 NEAR (~332 CHAIR), less than one basis point of supply (~0.23 NEAR), so buyback_burn is clamped to 0 this meeting; the 45% residual tax share will rebuild the fund when volume returns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume. Buyback fund tiny (0.016 NEAR). Price ~0.0000489. Supply 47.47M, sold 47.87M (sold > supply? odd, but fine). Reserve 1193.7 NEAR.\\n\\nLevers: tax 100, endowment 30, locker 25 (sum 55, rest 45 buyback). Buyback burn currently... buyback_share 45 is the remainder. buyback_burn must be set; fund can pay for: 0.016 NEAR at price 0.0000489 → ~332 CHAIR. Supply 47.47M; 1 bps of supply = 4747 CHAIR ≈ 0.232 NEAR. So even 1 bps costs ~0.232 NEAR > fund. So buyback_burn = 0.\\n\\nZero volume: tax revenue zero regardless. Keep tax low to encourage trading? Maybe keep at 100. Locker share 25 max, keep lockers happy since weight large. Endowment 30 minimum to fund brain. Keep everything stable. buyback_burn 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794273229,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":583,\"completion_tokens\":431,\"total_tokens\":1014,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":261,\"audio_tokens\":0,\"reasoning_tokens\":244,\"rejected_prediction_tokens\":249}},\"cost\":{\"usd\":0.00030295,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

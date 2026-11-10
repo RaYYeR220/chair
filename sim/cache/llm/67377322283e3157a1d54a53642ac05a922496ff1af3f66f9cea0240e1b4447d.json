@@ -1,0 +1,23 @@
+{
+ "request_sha256": "67377322283e3157a1d54a53642ac05a922496ff1af3f66f9cea0240e1b4447d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:09:56.849Z",
+ "latency_ms": 6937,
+ "usage": {
+  "prompt_tokens": 670,
+  "completion_tokens": 586,
+  "total_tokens": 1256,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 355,
+   "audio_tokens": 0,
+   "reasoning_tokens": 336,
+   "rejected_prediction_tokens": 338
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Flow is one-sided: 75.57 NEAR of sells, zero buys. Tax at 100 bps is light for this pressure; I raise it 50 to 150 bps to slow churn and refill the buyback fund. Locker_share is already at its constitutional maximum of 25, so the petition's request is granted in spirit but capped by law. Endowment stays at 30; its balance of 35.85 NEAR comfortably covers inference. Buyback fund holds 0.372 NEAR; at price 0.0000581 that buys roughly 6,400 CHAIR, about 1 bp of the 56.79M supply. I burn 1 bp to absorb sell pressure, leaving fund headroom for tomorrow.\",\"answers\":[\"holder-168.near: Lockers do hold the floor, and I value that. But locker_share sits at its constitutional ceiling of 25 bps — the contract clamps anything higher. It stays at 25; the tax rise to 150 bps will grow your pool in absolute terms.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-48fa5b5f92bf409d83b219fd7cb59706\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Flow is one-sided: 75.57 NEAR of sells, zero buys. Tax at 100 bps is light for this pressure; I raise it 50 to 150 bps to slow churn and refill the buyback fund. Locker_share is already at its constitutional maximum of 25, so the petition's request is granted in spirit but capped by law. Endowment stays at 30; its balance of 35.85 NEAR comfortably covers inference. Buyback fund holds 0.372 NEAR; at price 0.0000581 that buys roughly 6,400 CHAIR, about 1 bp of the 56.79M supply. I burn 1 bp to absorb sell pressure, leaving fund headroom for tomorrow.\\\",\\\"answers\\\":[\\\"holder-168.near: Lockers do hold the floor, and I value that. But locker_share sits at its constitutional ceiling of 25 bps — the contract clamps anything higher. It stays at 25; the tax rise to 150 bps will grow your pool in absolute terms.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 31. Volume: only sells, 75.57 NEAR. Tax at 100 bps = 1%. Sell volume 75.57 NEAR → tax ~0.7557 NEAR. Split: endowment 30%, locker 25%, buyback 45%.\\n\\nLevers: tax 100, endowment 30, locker 25, buyback remainder 45.\\n\\nPetition: raise locker_share. Locker_share is at max 25 already. So can't raise. Answer: already at cap.\\n\\nBuyback fund 0.372 NEAR. Price 0.0000581 NEAR per CHAIR. Buyback_burn: bps of supply to buy and burn. Supply 56.79M CHAIR. 1 bp = 5679 CHAIR ≈ 0.33 NEAR at price. Fund 0.372 NEAR buys ~6400 CHAIR ≈ 1.13 bps. So buyback_burn max ~1. Should I burn? Sell pressure only, no buys. Buyback supports price. Burn 1 bp costs ~0.33 NEAR, affordable. Modest: set buyback_burn 1.\\n\\nTax: only sell volume; raising tax dampens selling but also reduces locker/endowment income. Keep 100? Maybe raise slightly to 150 to capture sell pressure and fund buybacks. Movement max 50. I'll go to 150.\\n\\nEndowment 30, locker 25 — keep. Could shift endowment up? Endowment 35.85 NEAR is decent. Keep shares.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272990,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":670,\"completion_tokens\":586,\"total_tokens\":1256,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":355,\"audio_tokens\":0,\"reasoning_tokens\":336,\"rejected_prediction_tokens\":338}},\"cost\":{\"usd\":0.00036278,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "22d5a6b0013bf2b4b0409fddfc78220b2cddb488aa02729c3c0fa7dbe6111c10",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:09:03.250Z",
+ "latency_ms": 4052,
+ "usage": {
+  "prompt_tokens": 625,
+  "completion_tokens": 433,
+  "total_tokens": 1058,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 222,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 25. Activity is thin: 4.76 NEAR of sells in 24h, no buys. Tax at 100 bps keeps friction minimal while volume is weak; raising it now would only suppress what little flow exists. Splits stand at 30/25 with 45 to buybacks, which remains a sensible balance—locker weight is substantial (205M CHAIR-days) and the endowment holds 35.7 NEAR, ample for inference costs. Buyback fund is 0.146 NEAR; at ~0.0000596 NEAR/CHAIR that retires roughly 2,450 CHAIR, about 0.4 bps of supply—below the 1 bps minimum step, so burn is 0 this meeting and the fund accumulates. No petitions. Hold all levers; revisit if volume picks up.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-7786a332\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 25. Activity is thin: 4.76 NEAR of sells in 24h, no buys. Tax at 100 bps keeps friction minimal while volume is weak; raising it now would only suppress what little flow exists. Splits stand at 30/25 with 45 to buybacks, which remains a sensible balance—locker weight is substantial (205M CHAIR-days) and the endowment holds 35.7 NEAR, ample for inference costs. Buyback fund is 0.146 NEAR; at ~0.0000596 NEAR/CHAIR that retires roughly 2,450 CHAIR, about 0.4 bps of supply—below the 1 bps minimum step, so burn is 0 this meeting and the fund accumulates. No petitions. Hold all levers; revisit if volume picks up.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Low volume, tiny funds. Tax at 100, locker_share 25, endowment 30, buyback_share 45 (rest). Buyback fund 0.145 NEAR; price ~0.0000596 NEAR per CHAIR. Buyback burn: 0.145 NEAR buys ~2445 CHAIR, supply 58.27M, so bps of supply: 2445/58271127 ≈ 0.0042% = 0.42 bps. So buyback_burn 0 (can't do 1 bps meaningfully? 1 bps = 5827 CHAIR ≈ 0.347 NEAR > fund). So 0.\\n\\nVolume is low; keep tax at 100 to not deter trading. Maybe raise endowment slightly? Endowment pending small, endowment balance 35.7 NEAR — plenty. Keep everything stable. Maybe shift locker_share down? Locker weight is large; keep 25 to reward lockers. Keep stable.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272939,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":625,\"completion_tokens\":433,\"total_tokens\":1058,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":222,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00027953,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

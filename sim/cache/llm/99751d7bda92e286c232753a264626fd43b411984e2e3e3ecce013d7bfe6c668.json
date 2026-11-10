@@ -1,0 +1,22 @@
+{
+ "request_sha256": "99751d7bda92e286c232753a264626fd43b411984e2e3e3ecce013d7bfe6c668",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:12:25.720Z",
+ "latency_ms": 3293,
+ "usage": {
+  "prompt_tokens": 582,
+  "completion_tokens": 342,
+  "total_tokens": 924,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 164,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 42: zero 24h volume on both sides, so tax changes would collect nothing; hold tax_bps at 100 to keep trading friction minimal and invite activity. Distribution stays at 30/25 with 45% flowing to buyback accumulation. Buyback fund holds only 0.0162 NEAR (~332 CHAIR at curve price), far below one basis point of supply (~4,747 CHAIR), so buyback_burn must be 0 this meeting. Locker weight steady at ~76.9M CHAIR-days; locker pool empty pending tax flow. No petitions received. Policy: patience — accumulate buyback fuel while volume is dormant, revisit levers when flow resumes.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-bf0e130b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 42: zero 24h volume on both sides, so tax changes would collect nothing; hold tax_bps at 100 to keep trading friction minimal and invite activity. Distribution stays at 30/25 with 45% flowing to buyback accumulation. Buyback fund holds only 0.0162 NEAR (~332 CHAIR at curve price), far below one basis point of supply (~4,747 CHAIR), so buyback_burn must be 0 this meeting. Locker weight steady at ~76.9M CHAIR-days; locker pool empty pending tax flow. No petitions received. Policy: patience — accumulate buyback fuel while volume is dormant, revisit levers when flow resumes.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume. Buyback fund tiny (0.016 NEAR). Price low. Keep tax at 100? Maybe raise tax slightly to build funds? No volume, so tax changes don't matter much. Buyback burn: fund 0.0162 NEAR, price 0.0000488 → ~332 CHAIR purchasable. Supply 47.47M; 1 bps = 4747 CHAIR. So max affordable burn ≈ 0 bps (332 CHAIR < 4747). buyback_burn 0.\\n\\nKeep levers stable. Maybe raise endowment_share since endowment is 38 NEAR, fine. locker_share 25 max. endowment+locker=55, fine. Keep everything.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273142,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":582,\"completion_tokens\":342,\"total_tokens\":924,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":164,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00022758,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

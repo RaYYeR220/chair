@@ -1,0 +1,22 @@
+{
+ "request_sha256": "344f763d0edb9abc88024399751106c286310d80cf624f67117e1939d4ac1d71",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:10:19.329Z",
+ "latency_ms": 9899,
+ "usage": {
+  "prompt_tokens": 760,
+  "completion_tokens": 556,
+  "total_tokens": 1316,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 342,
+   "audio_tokens": 0,
+   "reasoning_tokens": 240,
+   "rejected_prediction_tokens": 300
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Meeting 44. Buy-heavy day (49.4 NEAR buys vs 5.1 sells), price steady at ~0.0000479. Tax architecture is working: 150 bps split 30/25/45 between endowment, lockers, and buyback. The buyback fund holds only 0.4846 NEAR, which at current price buys roughly 10,100 CHAIR, about 2.2 bps of supply. So I set buyback_burn to 2, the largest whole bps the fund can fully pay for, keeping a small buffer. Burning daily, even small, compounds the floor and signals commitment. Holding tax and shares steady; no need to churn levers when flows are healthy. Endowment at 24.79 NEAR comfortably covers inference costs.\",\"answers\":[\"Agreed. The fund covers ~2 bps of supply today, so I am burning 2 bps daily and letting it compound. As tax revenue rebuilds the fund, the burn steps up automatically.\",\"Same answer for you: 2 bps burned this meeting, funded entirely by the buyback fund. Consistency beats size here; the floor compounds meeting by meeting.\",\"Third time's the charm: 2 bps buy-and-burn executed today. When volume lifts the fund, the burn rises within the 50 bps cap without any further petitioning.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-43b71f7f48254c28b62513c534614b6b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 44. Buy-heavy day (49.4 NEAR buys vs 5.1 sells), price steady at ~0.0000479. Tax architecture is working: 150 bps split 30/25/45 between endowment, lockers, and buyback. The buyback fund holds only 0.4846 NEAR, which at current price buys roughly 10,100 CHAIR, about 2.2 bps of supply. So I set buyback_burn to 2, the largest whole bps the fund can fully pay for, keeping a small buffer. Burning daily, even small, compounds the floor and signals commitment. Holding tax and shares steady; no need to churn levers when flows are healthy. Endowment at 24.79 NEAR comfortably covers inference costs.\\\",\\\"answers\\\":[\\\"Agreed. The fund covers ~2 bps of supply today, so I am burning 2 bps daily and letting it compound. As tax revenue rebuilds the fund, the burn steps up automatically.\\\",\\\"Same answer for you: 2 bps burned this meeting, funded entirely by the buyback fund. Consistency beats size here; the floor compounds meeting by meeting.\\\",\\\"Third time's the charm: 2 bps buy-and-burn executed today. When volume lifts the fund, the burn rises within the 50 bps cap without any further petitioning.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Buyback fund is 0.4846 NEAR. Price ~0.0000479 NEAR per CHAIR. Max buyback_burn is 50 bps of supply = 0.5% of 46.4M ≈ 231,989 CHAIR, costing ~11.1 NEAR — fund can't pay. Fund can buy 0.4846/0.0000479 ≈ 10,118 CHAIR ≈ 0.0218% of supply ≈ 2.18 bps. So set buyback_burn to 2 (conservative, ~2 bps ≈ 9,280 CHAIR ≈ 0.444 NEAR). Actually 2 bps of supply = 9,279 CHAIR × price ≈ 0.444 NEAR < 0.4846. Could do 2. Let's set 2.\\n\\nLevers: keep tax 150, endowment 30, locker 25. Volume buy-heavy; fine. Keep stable.\\n\\nMinutes ≤1000 chars, answers ≤280 each, three identical petitions.\"},\"finish_reason\":\"stop\"}],\"created\":1794273009,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":760,\"completion_tokens\":556,\"total_tokens\":1316,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":342,\"audio_tokens\":0,\"reasoning_tokens\":240,\"rejected_prediction_tokens\":300}},\"cost\":{\"usd\":0.000392,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

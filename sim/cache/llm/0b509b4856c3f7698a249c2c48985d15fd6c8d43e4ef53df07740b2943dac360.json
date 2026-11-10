@@ -1,0 +1,22 @@
+{
+ "request_sha256": "0b509b4856c3f7698a249c2c48985d15fd6c8d43e4ef53df07740b2943dac360",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:25.001Z",
+ "latency_ms": 3855,
+ "usage": {
+  "prompt_tokens": 688,
+  "completion_tokens": 518,
+  "total_tokens": 1206,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 340,
+   "audio_tokens": 0,
+   "reasoning_tokens": 275,
+   "rejected_prediction_tokens": 194
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Volume is thin (5.3 NEAR total 24h) and the petition asks for a lower tax to stimulate flow. I cut tax_bps by the full allowed 50, from 150 to 100, the floor-adjacent stance that best supports growth. Shares stay at 60/25/15: endowment funding is healthy at 9.44 NEAR and lockers deserve their full 25. Buyback fund holds only 0.047 NEAR; at price 0.0000344 that buys ~1,366 CHAIR, about 0.4 bps of supply, below the 1 bps minimum step, so buyback_burn is 0 this meeting. Reassess after volume responds.\",\"answers\":[\"holder-170.near: Agreed. Tax cut from 150 to 100 bps, the largest step allowed, to let volume grow. Shares unchanged; buyback burn is 0 this meeting since the fund is too small to fund even 1 bps.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-eb9531596d874e77a9f487bc354a507e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Volume is thin (5.3 NEAR total 24h) and the petition asks for a lower tax to stimulate flow. I cut tax_bps by the full allowed 50, from 150 to 100, the floor-adjacent stance that best supports growth. Shares stay at 60/25/15: endowment funding is healthy at 9.44 NEAR and lockers deserve their full 25. Buyback fund holds only 0.047 NEAR; at price 0.0000344 that buys ~1,366 CHAIR, about 0.4 bps of supply, below the 1 bps minimum step, so buyback_burn is 0 this meeting. Reassess after volume responds.\\\",\\\"answers\\\":[\\\"holder-170.near: Agreed. Tax cut from 150 to 100 bps, the largest step allowed, to let volume grow. Shares unchanged; buyback burn is 0 this meeting since the fund is too small to fund even 1 bps.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 10. Tax 150, endowment 60, locker 25, buyback share 15. Volume low: 4.43 buy, 0.89 sell. Petition: lower tax a bit to grow volume. Move tax down 50 → 100. Keep endowment 60, locker 25. Buyback burn: fund 0.047 NEAR, price ~0.0000344 NEAR per CHAIR → ~1366 CHAIR per NEAR... wait, price_near is per CHAIR? 0.0000344 NEAR per CHAIR. Fund 0.047 NEAR buys ~1366 CHAIR. Supply 33.29M; 50 bps = 16645 CHAIR. Cost of 16645 CHAIR ≈ 0.573 NEAR > fund. So burn limited by fund: max burn = fund/price ≈ 1366 CHAIR ≈ 0.0041 bps... in bps: 1366/33289830 ≈ 0.0041% = 0.41 bps. So buyback_burn = 0 (integer bps, can't do fractional). Actually 0.41 bps rounds to 0. Set 0.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272721,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":688,\"completion_tokens\":518,\"total_tokens\":1206,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":340,\"audio_tokens\":0,\"reasoning_tokens\":275,\"rejected_prediction_tokens\":194}},\"cost\":{\"usd\":0.0003622,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

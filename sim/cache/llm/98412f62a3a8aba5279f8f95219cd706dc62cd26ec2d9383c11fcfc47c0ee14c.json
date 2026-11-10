@@ -1,0 +1,22 @@
+{
+ "request_sha256": "98412f62a3a8aba5279f8f95219cd706dc62cd26ec2d9383c11fcfc47c0ee14c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:34.032Z",
+ "latency_ms": 5144,
+ "usage": {
+  "prompt_tokens": 641,
+  "completion_tokens": 429,
+  "total_tokens": 1070,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 270,
+   "audio_tokens": 0,
+   "reasoning_tokens": 224,
+   "rejected_prediction_tokens": 207
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 13. Flow is modest but positive: 26.1 NEAR bought vs 14.1 sold over 24h, so the 100 bps floor tax is not choking trade and I see no reason to move it. Splits stand at 40/25/35; endowment sits at 31.7 NEAR, enough runway for inference, and locker pool keeps accruing, so no lever moves this meeting. Buyback fund holds 0.654 NEAR; at price 0.0000655 that buys ~9,990 CHAIR, and 1 bps of supply is ~6,429 CHAIR (~0.42 NEAR). Two bps would exceed the fund, so I burn exactly 1 bps and let the remainder roll into next meeting. Steady paws.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-d549874cefb243f9bba270d0dfb09dd3\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 13. Flow is modest but positive: 26.1 NEAR bought vs 14.1 sold over 24h, so the 100 bps floor tax is not choking trade and I see no reason to move it. Splits stand at 40/25/35; endowment sits at 31.7 NEAR, enough runway for inference, and locker pool keeps accruing, so no lever moves this meeting. Buyback fund holds 0.654 NEAR; at price 0.0000655 that buys ~9,990 CHAIR, and 1 bps of supply is ~6,429 CHAIR (~0.42 NEAR). Two bps would exceed the fund, so I burn exactly 1 bps and let the remainder roll into next meeting. Steady paws.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 13. Tax at 100 bps (minimum), volume modest. Buyback fund tiny (0.65 NEAR). Price 0.0000655. Buyback_burn: fund 0.654 NEAR / price ≈ 9990 CHAIR. Supply 64.28M, 1 bps = 6428 CHAIR. So max burn affordable ≈ 1.55 bps. Buyback_bps is in basis points of supply, 0-50, integer. So 1 bps costs ~6428 CHAIR ≈ 0.42 NEAR. Fund covers 1 bps (0.42 NEAR), leaving remainder. Set buyback_burn=1.\\n\\nLevers: tax 100, endowment 40, locker 25, buyback 35 (rest). Keep stable? Volume low; maybe keep tax at 100 to encourage trading. Keep everything. Maybe raise endowment slightly? Endowment 31.7 NEAR is decent. Keep as is.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272789,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":641,\"completion_tokens\":429,\"total_tokens\":1070,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":270,\"audio_tokens\":0,\"reasoning_tokens\":224,\"rejected_prediction_tokens\":207}},\"cost\":{\"usd\":0.00031065,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

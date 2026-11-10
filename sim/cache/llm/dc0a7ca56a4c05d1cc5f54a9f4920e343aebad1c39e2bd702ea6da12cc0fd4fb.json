@@ -1,0 +1,22 @@
+{
+ "request_sha256": "dc0a7ca56a4c05d1cc5f54a9f4920e343aebad1c39e2bd702ea6da12cc0fd4fb",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:16.232Z",
+ "latency_ms": 4714,
+ "usage": {
+  "prompt_tokens": 693,
+  "completion_tokens": 438,
+  "total_tokens": 1131,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 190,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":2,\"minutes\":\"Volume is steady but modest (45.6 NEAR total), and the buyback fund is nearly empty at 0.27 NEAR, so the 30% buyback slice is collecting almost nothing. Lockers provide the stability that keeps the curve liquid, and their petition is fair: I raise locker_share 10→20, funded by cutting the buyback slice to 20. Endowment stays at 60 to keep inference funded. Tax holds at 200 bps—no need to discourage churn we actually want. Buyback burn: fund covers ~8,200 CHAIR; 1 bp of supply ≈ 3,216 CHAIR ≈ 0.107 NEAR, so I burn 2 bps (~0.21 NEAR), leaving a small buffer.\",\"answers\":[\"Fair point—lockers are the ballast. I've raised locker_share from 10% to 20% this meeting (the constitution caps moves at 10), taken from the buyback slice. Come back next meeting and I'll consider another step if flows hold.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-e9fccceb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Volume is steady but modest (45.6 NEAR total), and the buyback fund is nearly empty at 0.27 NEAR, so the 30% buyback slice is collecting almost nothing. Lockers provide the stability that keeps the curve liquid, and their petition is fair: I raise locker_share 10→20, funded by cutting the buyback slice to 20. Endowment stays at 60 to keep inference funded. Tax holds at 200 bps—no need to discourage churn we actually want. Buyback burn: fund covers ~8,200 CHAIR; 1 bp of supply ≈ 3,216 CHAIR ≈ 0.107 NEAR, so I burn 2 bps (~0.21 NEAR), leaving a small buffer.\\\",\\\"answers\\\":[\\\"Fair point—lockers are the ballast. I've raised locker_share from 10% to 20% this meeting (the constitution caps moves at 10), taken from the buyback slice. Come back next meeting and I'll consider another step if flows hold.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 8. Current: tax 200, endowment 60, locker 10, buyback_share 30 (implied remainder). Buyback fund is tiny (0.27 NEAR). Volume is modest. Locker petition asks raise locker_share. Max move 10 per meeting, so 10→20. Endowment 60, locker 20 = 80, buyback 20. That's fine. Tax: keep 200. Buyback burn: fund 0.27 NEAR; price 0.0000332 NEAR per CHAIR. 0.27 NEAR buys ~8,236 CHAIR. Supply 32.16M; 1 bp of supply = 3216 CHAIR ≈ 0.107 NEAR. So max affordable ~2.5 bps. Set buyback_burn = 2.\\n\\nMinutes under 1000 chars. Answer petition.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272712,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":693,\"completion_tokens\":438,\"total_tokens\":1131,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":190,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00029223,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

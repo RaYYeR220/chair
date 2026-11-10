@@ -1,0 +1,22 @@
+{
+ "request_sha256": "70b19f234f083c93cbb7a609d7a81598df4689262a9c58c9dd646e69ea50efb8",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:58.429Z",
+ "latency_ms": 4886,
+ "usage": {
+  "prompt_tokens": 718,
+  "completion_tokens": 524,
+  "total_tokens": 1242,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 270,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Volume is entirely one-sided: 13.7 NEAR of buys, zero sells. A modest tax cut (175→150) may keep buyers flowing without gutting revenue. locker_share is already at its constitutional maximum of 25, so it cannot rise. Endowment stays at 40; the remaining 35% accrues to the buyback fund. Fund holds 0.168 NEAR; at ~0.148 NEAR per basis point of supply, only 1 bp of buyback-and-burn is affordable this meeting. Setting buyback_burn=1 to steadily retire supply while the fund rebuilds.\",\"answers\":[\"Locker share is already at the constitutional ceiling of 25% and cannot move higher — the contract would clamp any increase. You are receiving the maximum share the rules allow; the 0.06 NEAR locker pool keeps accruing to you.\",\"Agreed in part: I'm cutting the tax 25 bps to 150. With zero sell volume, a lighter tax should keep buy momentum going. Watch next meeting — if volume doesn't grow, we can revisit.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a52b1ee9\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Volume is entirely one-sided: 13.7 NEAR of buys, zero sells. A modest tax cut (175→150) may keep buyers flowing without gutting revenue. locker_share is already at its constitutional maximum of 25, so it cannot rise. Endowment stays at 40; the remaining 35% accrues to the buyback fund. Fund holds 0.168 NEAR; at ~0.148 NEAR per basis point of supply, only 1 bp of buyback-and-burn is affordable this meeting. Setting buyback_burn=1 to steadily retire supply while the fund rebuilds.\\\",\\\"answers\\\":[\\\"Locker share is already at the constitutional ceiling of 25% and cannot move higher — the contract would clamp any increase. You are receiving the maximum share the rules allow; the 0.06 NEAR locker pool keeps accruing to you.\\\",\\\"Agreed in part: I'm cutting the tax 25 bps to 150. With zero sell volume, a lighter tax should keep buy momentum going. Watch next meeting — if volume doesn't grow, we can revisit.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 17. Volume: buys 13.7 NEAR, zero sells. Tax at 175, locker_share at 25 (max), endowment 40, buyback_share 35 (rest goes to buyback fund).\\n\\nPetition 1: locker_share up 10 — but it's already at max 25. Deny, explain it's capped.\\n\\nPetition 2: lower tax a little. Volume is one-sided (all buys, no sells). Lowering tax could encourage volume. Move tax down 50 to 125? \\\"a little\\\" — maybe 25 to 150. One-sided buy volume suggests momentum; a modest cut could spur more activity. I'll go 150 (down 25).\\n\\nBuyback: fund is 0.168 NEAR. Price ~0.000039 NEAR per CHAIR. Supply 37.89M. buyback_burn in bps of supply: 1 bp = 3789 CHAIR ≈ 0.148 NEAR. Fund 0.168 NEAR can afford ~1 bp (0.148 NEAR). 2 bps would be ~0.296 NEAR, too much. So buyback_burn = 1.\\n\\nEndowment_share: keep 40. locker_share stays 25.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272754,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":718,\"completion_tokens\":524,\"total_tokens\":1242,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":270,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00033898,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

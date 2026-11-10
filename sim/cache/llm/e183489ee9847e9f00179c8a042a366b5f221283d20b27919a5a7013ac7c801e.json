@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e183489ee9847e9f00179c8a042a366b5f221283d20b27919a5a7013ac7c801e",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:49.296Z",
+ "latency_ms": 5941,
+ "usage": {
+  "prompt_tokens": 767,
+  "completion_tokens": 583,
+  "total_tokens": 1350,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 363,
+   "audio_tokens": 0,
+   "reasoning_tokens": 286,
+   "rejected_prediction_tokens": 297
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":60,\"locker_share\":15,\"buyback_burn\":8,\"minutes\":\"Net inflow: buys 265 NEAR vs sells 161 NEAR over 24h, so demand is carrying the curve without a heavy toll. Granting the largest petition: tax down 25 bps to 125 to let volume grow. Locker petitions have merit — lockers provide stability — so locker_share rises 10→15 (within the 10-step cap), keeping endowment at 60 and buyback at 25. Buyback fund is 1.9156 NEAR; at price 0.0000484968 that buys ~39,500 CHAIR, about 8.37 bps of supply, so burn is capped at 8 by the fund, well under the 50 bps ceiling.\",\"answers\":[\"Agreed. Tax cut 150→125 bps this meeting; net inflows are strong and a lighter toll should pull more volume through the curve.\",\"Partly granted. Lockers do underwrite the floor, so locker_share rises 10→15. Full +10 would starve the buyback fund; I'll revisit if lockup weight keeps growing.\",\"Granted in part: locker_share +5 to 15, not +10. Endowment must stay funded for the brain, and the buyback fund needs the remainder to keep burning supply.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-08bb4983ebac4cc5924f6cf6a7577a0a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":60,\\\"locker_share\\\":15,\\\"buyback_burn\\\":8,\\\"minutes\\\":\\\"Net inflow: buys 265 NEAR vs sells 161 NEAR over 24h, so demand is carrying the curve without a heavy toll. Granting the largest petition: tax down 25 bps to 125 to let volume grow. Locker petitions have merit — lockers provide stability — so locker_share rises 10→15 (within the 10-step cap), keeping endowment at 60 and buyback at 25. Buyback fund is 1.9156 NEAR; at price 0.0000484968 that buys ~39,500 CHAIR, about 8.37 bps of supply, so burn is capped at 8 by the fund, well under the 50 bps ceiling.\\\",\\\"answers\\\":[\\\"Agreed. Tax cut 150→125 bps this meeting; net inflows are strong and a lighter toll should pull more volume through the curve.\\\",\\\"Partly granted. Lockers do underwrite the floor, so locker_share rises 10→15. Full +10 would starve the buyback fund; I'll revisit if lockup weight keeps growing.\\\",\\\"Granted in part: locker_share +5 to 15, not +10. Endowment must stay funded for the brain, and the buyback fund needs the remainder to keep burning supply.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 9. Tax 150, endowment 60, locker 10, buyback 30. Volume: buys 265 NEAR, sells 160.6 — net buying pressure. Petitions: lower tax (big holder), raise locker_share (two small ones).\\n\\nDecide: tax 150 → maybe 125 (down 25, within 50). Locker share: 10 → 15 (up 5, within 10). Endowment stays 60. Buyback: fund 1.9156 NEAR, price 0.00004849678971. Max burn 50 bps of supply = 23609 tokens ≈ 1.145 NEAR. Fund can pay for 1.9156/0.0000485 ≈ 39,500 tokens ≈ 8.4 bps. So buyback_burn limited by fund: ~8 bps. Let's compute: 1.9156/0.00004849678971138784439 ≈ 39,500.6 tokens. Supply 47,218,672.63. 39500/47218672 = 0.0008366 → 8.37 bps. So buyback_burn = 8.\\n\\nMinutes: explain. Answers in order.\"},\"finish_reason\":\"stop\"}],\"created\":1794272743,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":767,\"completion_tokens\":583,\"total_tokens\":1350,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":363,\"audio_tokens\":0,\"reasoning_tokens\":286,\"rejected_prediction_tokens\":297}},\"cost\":{\"usd\":0.00040655,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

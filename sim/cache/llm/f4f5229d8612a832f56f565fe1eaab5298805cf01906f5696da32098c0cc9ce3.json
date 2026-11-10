@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f4f5229d8612a832f56f565fe1eaab5298805cf01906f5696da32098c0cc9ce3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:00.237Z",
+ "latency_ms": 19146,
+ "usage": {
+  "prompt_tokens": 582,
+  "completion_tokens": 381,
+  "total_tokens": 963,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 230,
+   "audio_tokens": 0,
+   "reasoning_tokens": 212,
+   "rejected_prediction_tokens": 223
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 46. Zero volume on both sides for 24h, so tax levers are inert today; no reason to move them and every reason to keep the regime predictable for when flow returns. Tax stays at the 100 floor, splits unchanged (30/25/45). Buyback fund holds only 0.0162 NEAR; at ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR against a 47.5M supply, well under 1 bps, so burn is 0 — burning dust would be theater. Endowment at 38 NEAR comfortably covers inference. Hold steady, wait for volume.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-d877cf1d9e6f4b2bbee2112d9ce1bb4e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 46. Zero volume on both sides for 24h, so tax levers are inert today; no reason to move them and every reason to keep the regime predictable for when flow returns. Tax stays at the 100 floor, splits unchanged (30/25/45). Buyback fund holds only 0.0162 NEAR; at ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR against a 47.5M supply, well under 1 bps, so burn is 0 — burning dust would be theater. Endowment at 38 NEAR comfortably covers inference. Hold steady, wait for volume.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume 24h. Buyback fund tiny (0.016 NEAR). Price low. Keep tax low to encourage activity? Tax at 100 already minimum. Endowment 30, locker 25, buyback_share 45 (that's the remainder). Buyback burn: fund 0.016 NEAR, price ~0.0000489 → ~332 CHAIR, supply 47.47M → bps = 332/47470964 ≈ 0.0007 bps → rounds to 0. So buyback_burn 0.\\n\\nMaybe raise endowment share since endowment is 38 NEAR, decent. Volume zero — nothing happening. Keep things stable. Maybe shift locker_share down since no volume means no tax anyway. Keep as is, or reduce locker_share to build buyback? With zero volume, tax changes don't matter much. Keep stable: tax 100, endowment 30, locker 25, buyback 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794273161,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":582,\"completion_tokens\":381,\"total_tokens\":963,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":230,\"audio_tokens\":0,\"reasoning_tokens\":212,\"rejected_prediction_tokens\":223}},\"cost\":{\"usd\":0.0002778,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "8d56d8a3afe31dcf06aed2346bb18e986f86c8642aecf694f350ce4f04cc7cec",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:16.608Z",
+ "latency_ms": 16370,
+ "usage": {
+  "prompt_tokens": 583,
+  "completion_tokens": 458,
+  "total_tokens": 1041,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 284,
+   "audio_tokens": 0,
+   "reasoning_tokens": 288,
+   "rejected_prediction_tokens": 238
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 47. Zero volume in 24h on both sides; nothing to manage reactively. Tax stays at the floor of 100 bps to keep trading friction minimal while activity is dormant. Endowment at 30 and locker_share at 25 remain within constitution bounds and unchanged; the rest (45) accrues to the buyback fund, which stands at only 0.0162 NEAR. One basis point of supply (~4,747 CHAIR) would cost ~0.23 NEAR at the current curve price, far exceeding the fund, so buyback_burn must be 0 this meeting. Accumulate quietly; act when flow returns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-218fa6542b904e20b6b0651ba94d928f\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 47. Zero volume in 24h on both sides; nothing to manage reactively. Tax stays at the floor of 100 bps to keep trading friction minimal while activity is dormant. Endowment at 30 and locker_share at 25 remain within constitution bounds and unchanged; the rest (45) accrues to the buyback fund, which stands at only 0.0162 NEAR. One basis point of supply (~4,747 CHAIR) would cost ~0.23 NEAR at the current curve price, far exceeding the fund, so buyback_burn must be 0 this meeting. Accumulate quietly; act when flow returns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume. Buyback fund tiny (0.016 NEAR). Price ~0.0000488. Supply 47.47M, sold 47.87M (sold > supply? odd but fine). Buyback burn: fund 0.0162 NEAR buys ~0.0162/0.0000488 ≈ 332 CHAIR, which is ~0.0007% of supply — well under 50bps. Could set buyback_burn small. 50 bps of supply = 23,735 CHAIR ≈ 1.16 NEAR — can't afford. So burn what fund can pay: ~332 CHAIR ≈ 0.0007 bps... integer bps, so 0? buyback_burn is integer bps; 0.0007 bps rounds to 0. But maybe we can still burn the fund? The rule: \\\"no more than the fund can pay for\\\" — integer bps means minimum 1 bps = 4747 CHAIR ≈ 0.232 NEAR, unaffordable. So 0.\\n\\nLevers: keep tax at 100 (low volume, don't deter), endowment 30, locker 25. Maybe shift locker_share down since locker pool is 0 and weight exists? Keep stable. Minutes brief.\"},\"finish_reason\":\"stop\"}],\"created\":1794273180,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":583,\"completion_tokens\":458,\"total_tokens\":1041,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":284,\"audio_tokens\":0,\"reasoning_tokens\":288,\"rejected_prediction_tokens\":238}},\"cost\":{\"usd\":0.00031645,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

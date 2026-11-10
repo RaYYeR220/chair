@@ -1,0 +1,23 @@
+{
+ "request_sha256": "84714a1250f17e96b6e2fafe8ead7c3a6cfb2e96c64a3868d360aacfa87f3ffb",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:09:31.194Z",
+ "latency_ms": 4163,
+ "usage": {
+  "prompt_tokens": 582,
+  "completion_tokens": 341,
+  "total_tokens": 923,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 218,
+   "audio_tokens": 0,
+   "reasoning_tokens": 146,
+   "rejected_prediction_tokens": 151
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 29. Zero 24h volume in both directions; no trading activity to tax or stimulate via burn. Buyback fund holds only 0.0198 NEAR — at price 0.0000594 that buys ~334 CHAIR, roughly 0.000006 bps of supply, so any nonzero buyback_burn would be clamped to nothing meaningful; setting 0. Locker pool empty while locker_weight is 232.7M CHAIR-days — nothing to distribute regardless. Endowment at 35.84 NEAR comfortably covers inference costs. With no petitions and no flow, hold all levers: tax 100 bps, endowment 30%, locker 25%, remainder 45% to buyback fund. Reassess if volume returns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-84fdb304d95e4c6eacad4aa14e5fe004\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 29. Zero 24h volume in both directions; no trading activity to tax or stimulate via burn. Buyback fund holds only 0.0198 NEAR — at price 0.0000594 that buys ~334 CHAIR, roughly 0.000006 bps of supply, so any nonzero buyback_burn would be clamped to nothing meaningful; setting 0. Locker pool empty while locker_weight is 232.7M CHAIR-days — nothing to distribute regardless. Endowment at 35.84 NEAR comfortably covers inference costs. With no petitions and no flow, hold all levers: tax 100 bps, endowment 30%, locker 25%, remainder 45% to buyback fund. Reassess if volume returns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume. Buyback fund tiny (0.0198 NEAR). Price ~0.0000594. Supply 58M, sold 58.45M — sold > supply? Whatever. Buyback_burn: fund 0.0198 NEAR at price 0.0000594 → ~334 CHAIR, supply 58.1M → 334/58.1M ≈ 0.0000057 bps of supply... essentially 0 bps. Max 50 bps would need huge funds. So buyback_burn 0.\\n\\nNo volume, keep levers stable. Maybe keep everything as is. Minutes short.\"},\"finish_reason\":\"stop\"}],\"created\":1794272967,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":582,\"completion_tokens\":341,\"total_tokens\":923,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":218,\"audio_tokens\":0,\"reasoning_tokens\":146,\"rejected_prediction_tokens\":151}},\"cost\":{\"usd\":0.00022708,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

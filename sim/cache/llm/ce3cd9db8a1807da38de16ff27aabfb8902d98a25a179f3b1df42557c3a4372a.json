@@ -1,0 +1,21 @@
+{
+ "request_sha256": "ce3cd9db8a1807da38de16ff27aabfb8902d98a25a179f3b1df42557c3a4372a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:04:49.305Z",
+ "latency_ms": 3794,
+ "usage": {
+  "prompt_tokens": 680,
+  "completion_tokens": 425,
+  "total_tokens": 1105,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 206,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":50,\"minutes\":\"Volume is healthy and buy-heavy (175 NEAR buys vs 60 sells), so we can afford a modest tax cut to keep momentum. Lowering tax_bps 200→175, within the 50 bps step limit. Shares stay at 60/20/20: endowment is funded (4.49 NEAR), locker pool growing, and 20% still feeds buybacks. Buyback fund holds 2.44 NEAR; 50 bps of supply is ~15,158 CHAIR, costing ~0.48 NEAR at current price, well within budget. Burning the maximum supports holders and tightens supply as the curve grows.\",\"answers\":[\"Agreed in part: tax cut from 200 to 175 bps this meeting. Volume is strong and buy-sided, so a modest cut should help growth without starving the endowment, locker pool, or buybacks. Revisit after a few meetings.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-3d815e80\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Volume is healthy and buy-heavy (175 NEAR buys vs 60 sells), so we can afford a modest tax cut to keep momentum. Lowering tax_bps 200→175, within the 50 bps step limit. Shares stay at 60/20/20: endowment is funded (4.49 NEAR), locker pool growing, and 20% still feeds buybacks. Buyback fund holds 2.44 NEAR; 50 bps of supply is ~15,158 CHAIR, costing ~0.48 NEAR at current price, well within budget. Burning the maximum supports holders and tightens supply as the curve grows.\\\",\\\"answers\\\":[\\\"Agreed in part: tax cut from 200 to 175 bps this meeting. Volume is strong and buy-sided, so a modest cut should help growth without starving the endowment, locker pool, or buybacks. Revisit after a few meetings.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. Tax 200, buy volume 175 NEAR, sell 59.6. Petition asks lower tax a bit. Move tax 200→175 (within 50). Endowment 60, locker 20, buyback 20. Keep shares. Buyback burn: fund 2.4366 NEAR, price 0.00003131926 NEAR per CHAIR. Supply 30.3M. 50 bps = 15158 CHAIR, cost = 15158 * 0.0000313 ≈ 0.475 NEAR. Fund can pay. But note buyback_burn buys with buyback fund — 2.43 NEAR covers it. Set buyback_burn 50? Maybe moderate: 40. Fund can afford 50 easily. Let's do 50 to support price? Actually price is low; burning supports holders. Go 50.\\n\\nMinutes under 1000 chars. Answer petition.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272686,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":680,\"completion_tokens\":425,\"total_tokens\":1105,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":206,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003145,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

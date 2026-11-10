@@ -1,0 +1,21 @@
+{
+ "request_sha256": "6ccf4f2516eb3033ed8bb280bfa9b5e356b183086a729cb9316d0deb56fac045",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:04:49.678Z",
+ "latency_ms": 4217,
+ "usage": {
+  "prompt_tokens": 607,
+  "completion_tokens": 501,
+  "total_tokens": 1108,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 281,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":0,\"buyback_burn\":50,\"minutes\":\"Meeting 3. Flow is entirely buy-side (213 NEAR, zero sells) — no sign of distress, so tax stays at 200 bps. Locker weight is zero: there are no lockers to pay, so routing 20% of tax to the locker pool is waste. I move locker_share to 0 (max allowed step of 10 per meeting would take two meetings to zero from 20; the contract clamps to 10, so effective locker_share becomes 10 this meeting and 0 next). Endowment holds at 60 to keep inference funded. The remainder flows to buybacks. Buyback fund is 2.32 NEAR; at price ~0.0000341, a 50 bps burn (~16.5k CHAIR) costs roughly 0.6–1.2 NEAR with slippage — affordable. Burning at max supports the all-buy momentum.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-1656b07f\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":0,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Meeting 3. Flow is entirely buy-side (213 NEAR, zero sells) — no sign of distress, so tax stays at 200 bps. Locker weight is zero: there are no lockers to pay, so routing 20% of tax to the locker pool is waste. I move locker_share to 0 (max allowed step of 10 per meeting would take two meetings to zero from 20; the contract clamps to 10, so effective locker_share becomes 10 this meeting and 0 next). Endowment holds at 60 to keep inference funded. The remainder flows to buybacks. Buyback fund is 2.32 NEAR; at price ~0.0000341, a 50 bps burn (~16.5k CHAIR) costs roughly 0.6–1.2 NEAR with slippage — affordable. Burning at max supports the all-buy momentum.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 3. No petitions. Volume all buys, no sells. Locker weight 0 — no lockers, so locker_share paying to empty pool is wasted; shift to buyback or endowment. Buyback fund 2.32 NEAR. Price 0.000034. Buyback burn: cost to buy bps of supply on curve. Supply 33M, bps 50 = 16,548 CHAIR. Cost on bonding curve roughly price * amount plus slippage; price ~0.0000341, 16548 CHAIR ≈ 0.56 NEAR plus slippage maybe ~1.1 NEAR. Fund 2.32 can cover 50 bps. Keep buyback_burn at 50 to support price? Tax 200 bps fine given buy-only volume. Reduce locker_share to 0 since no lockers, boost buyback_share to 40? Wait — buyback_share isn't a lever I set; the rest goes to buyback fund automatically. Levers: tax_bps, endowment_share, locker_share, buyback_burn. Current locker_share 20, endowment 60, remainder 20 to buyback. Set locker_share 0 (no lockers to pay), endowment 60 stays, buyback gets 40. Buyback_burn 50.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272686,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":607,\"completion_tokens\":501,\"total_tokens\":1108,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":281,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00034155000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

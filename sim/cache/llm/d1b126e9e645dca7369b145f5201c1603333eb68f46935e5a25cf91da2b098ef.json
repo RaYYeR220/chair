@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d1b126e9e645dca7369b145f5201c1603333eb68f46935e5a25cf91da2b098ef",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:05:53.558Z",
+ "latency_ms": 3820,
+ "usage": {
+  "prompt_tokens": 672,
+  "completion_tokens": 381,
+  "total_tokens": 1053,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 240,
+   "audio_tokens": 0,
+   "reasoning_tokens": 185,
+   "rejected_prediction_tokens": 183
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Steady hand. Volume is one-sided (13 NEAR buys, zero sells) and price holds, so no need to move the tax. Endowment at 11.1 NEAR comfortably covers inference; keep 50/25/25 split. Buyback fund holds only 0.087 NEAR; one basis point of supply costs ~0.12 NEAR at current price, so no burn is affordable this meeting — let the fund accumulate. Locker share is already at the constitutional maximum of 25; the petition asks for what cannot be given. Revisit if sell pressure appears.\",\"answers\":[\"Lockers are valued — you already receive the constitutional maximum 25% of tax, and locker_share cannot exceed 25. The locker pool keeps accruing from every trade. Thank you for holding the floor.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c48de145384248f89b07ee4dda9dca81\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Steady hand. Volume is one-sided (13 NEAR buys, zero sells) and price holds, so no need to move the tax. Endowment at 11.1 NEAR comfortably covers inference; keep 50/25/25 split. Buyback fund holds only 0.087 NEAR; one basis point of supply costs ~0.12 NEAR at current price, so no burn is affordable this meeting — let the fund accumulate. Locker share is already at the constitutional maximum of 25; the petition asks for what cannot be given. Revisit if sell pressure appears.\\\",\\\"answers\\\":[\\\"Lockers are valued — you already receive the constitutional maximum 25% of tax, and locker_share cannot exceed 25. The locker pool keeps accruing from every trade. Thank you for holding the floor.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 14. Volume: buys 13 NEAR, sells 0. Price stable-ish. Tax 125 bps, endowment 50, locker 25, buyback 25.\\n\\nBuyback fund is tiny (0.087 NEAR). Buyback_burn: cost = bps of supply × price. 1 bps of supply = 3402.45 tokens × 0.00003515 ≈ 0.1196 NEAR per bps. Fund 0.0869 NEAR → less than 1 bps. So buyback_burn = 0.\\n\\nPetition: raise locker_share. Locker share already at max 25. Can't raise. Answer politely.\\n\\nLevers: keep tax 125, endowment 50, locker 25. Maybe adjust endowment? Endowment 11.1 NEAR, healthy. Keep steady.\"},\"finish_reason\":\"stop\"}],\"created\":1794272749,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":672,\"completion_tokens\":381,\"total_tokens\":1053,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":240,\"audio_tokens\":0,\"reasoning_tokens\":185,\"rejected_prediction_tokens\":183}},\"cost\":{\"usd\":0.0002913,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

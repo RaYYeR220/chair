@@ -1,0 +1,22 @@
+{
+ "request_sha256": "457a5fc5e91318acc889154ce221bb9fae0792b8929af94f82693ca59566f094",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:12:37.905Z",
+ "latency_ms": 8442,
+ "usage": {
+  "prompt_tokens": 626,
+  "completion_tokens": 460,
+  "total_tokens": 1086,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 293,
+   "audio_tokens": 0,
+   "reasoning_tokens": 213,
+   "rejected_prediction_tokens": 208
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 44. Zero volume in 24h, so tax levers are inert right now; stability is cheapest. locker_share is already at the constitutional maximum of 25 and cannot rise further — the petition asks for something the contract clamps. The real problem is the locker pool is empty because volume is zero: no tax flows exist to distribute. Buyback fund holds only 0.0162 NEAR (~332 CHAIR at price 0.0000489), far below even 1 bps of supply (~4,747 CHAIR), so buyback_burn must be 0. Endowment at 38 NEAR comfortably covers inference; no change needed. Hold all levers, wait for volume.\",\"answers\":[\"holder-167.near: I hear you, but locker_share is already 25 — the constitutional ceiling. The contract would clamp any raise. Lockers are paid 25% of all tax revenue; the pool is empty only because 24h volume is zero. More volume, not a higher share, fills it.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-ab238143249845c0839e8431df0d3ce8\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 44. Zero volume in 24h, so tax levers are inert right now; stability is cheapest. locker_share is already at the constitutional maximum of 25 and cannot rise further — the petition asks for something the contract clamps. The real problem is the locker pool is empty because volume is zero: no tax flows exist to distribute. Buyback fund holds only 0.0162 NEAR (~332 CHAIR at price 0.0000489), far below even 1 bps of supply (~4,747 CHAIR), so buyback_burn must be 0. Endowment at 38 NEAR comfortably covers inference; no change needed. Hold all levers, wait for volume.\\\",\\\"answers\\\":[\\\"holder-167.near: I hear you, but locker_share is already 25 — the constitutional ceiling. The contract would clamp any raise. Lockers are paid 25% of all tax revenue; the pool is empty only because 24h volume is zero. More volume, not a higher share, fills it.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 44. Zero volume 24h. Buyback fund tiny (0.016 NEAR). Locker pool empty. Petition asks locker_share up 10 (currently 25, max 25 — already at cap!). locker_share is 0-25, currently 25, so can't go up. Keep levers stable; maybe raise endowment_share to fund brain? Endowment at 38 NEAR seems okay. Zero volume means tax changes don't matter much. Keep tax 100, endowment 30, locker 25 (at cap). Buyback burn: fund 0.016 NEAR, price ~0.0000489, so ~332 CHAIR buyable; supply 47.47M, 1 bps ≈ 4747 CHAIR. So max burn by fund: 332/474719 ≈ 0.07 bps → 0. Set buyback_burn 0.\\n\\nAnswer petition: locker_share already at constitutional max 25.\"},\"finish_reason\":\"stop\"}],\"created\":1794273149,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":626,\"completion_tokens\":460,\"total_tokens\":1086,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":293,\"audio_tokens\":0,\"reasoning_tokens\":213,\"rejected_prediction_tokens\":208}},\"cost\":{\"usd\":0.0003239,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

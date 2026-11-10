@@ -1,0 +1,23 @@
+{
+ "request_sha256": "87628b2358af565fc19885517f6d110105f7282c64ad27ffde60cb6b5f70302f",
+ "venice_model": "deepseek-v4-1-flash-1017",
+ "at": "2026-11-10T01:28:09.763Z",
+ "latency_ms": 3977,
+ "usage": {
+  "prompt_tokens": 720,
+  "completion_tokens": 620,
+  "total_tokens": 1340,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 398,
+   "audio_tokens": 0,
+   "reasoning_tokens": 403,
+   "rejected_prediction_tokens": 268
+  }
+ },
+ "content": "{\"tax_bps\":130,\"endowment_share\":40,\"locker_share\":50,\"buyback_burn\":2,\"minutes\":\"Hold tax and shares steady: tax is already low, sell volume exceeds buys, and the buyback fund is small. The fund holds 0.420 NEAR; at the current price, 2 bps of supply costs about 0.321 NEAR, while 3 bps would exceed the fund. A 2 bps burn is therefore the largest prudent daily buyback and directly supports the floor without draining reserves. Endowment and locker shares remain unchanged, leaving 10% of tax to the buyback fund.\",\"answers\":[\"No changes made. Tax, endowment share, and locker share remain steady as requested.\",\"No changes made. Tax, endowment share, and locker share remain steady as requested.\",\"Approved a small daily buyback: 2 bps of supply, the maximum the current buyback fund can pay for at today's price. This compounds the floor while preserving reserves.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4154d083aee847a7b1437b78fb81c8db\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":130,\\\"endowment_share\\\":40,\\\"locker_share\\\":50,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Hold tax and shares steady: tax is already low, sell volume exceeds buys, and the buyback fund is small. The fund holds 0.420 NEAR; at the current price, 2 bps of supply costs about 0.321 NEAR, while 3 bps would exceed the fund. A 2 bps burn is therefore the largest prudent daily buyback and directly supports the floor without draining reserves. Endowment and locker shares remain unchanged, leaving 10% of tax to the buyback fund.\\\",\\\"answers\\\":[\\\"No changes made. Tax, endowment share, and locker share remain steady as requested.\\\",\\\"No changes made. Tax, endowment share, and locker share remain steady as requested.\\\",\\\"Approved a small daily buyback: 2 bps of supply, the maximum the current buyback fund can pay for at today's price. This compounds the floor while preserving reserves.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"We need answer JSON only. Need reason. Need decide levers. Meeting 51. Current tax 130, endowment 40, locker 50, buyback_share 10 (residual). Constitution: tax 100-300 max move 50. endowment 30-100 max move 10. locker 0-50 max move 10. endowment+locker <=100. buyback_burn 0-50 bps supply, no more than fund can pay. Fund buyback 0.420 NEAR. Price 0.000041236858... NEAR per CHAIR. Fund can buy ~0.420/price = 10190 CHAIR. Supply 38,938,752. bps of supply: 1 bps = 3893.875 CHAIR. Fund can pay for ~2.616 bps. So buyback_burn max 2 bps (integer) if we want use fund. Could set 2. Need consider volume: sell > buy, price maybe. Tax 130 low. Petitions: two steady no changes, one small buyback every day compound floor. Need answer every petition. We can keep tax/endowment/locker same, buyback_burn 2. But \\\"small buyback every day\\\" aligns. Need ensure no more than fund can pay: 2 bps = 7787.75 CHAIR * price = 0.3212 NEAR < 0.420. 3 bps = 11681.6 * price = 0.4817 > fund. So max 2. Set buyback_burn 2. Levers unchanged. Minutes <=1000 chars. Answers <=280 each. Need mention petition 1/2 no changes, petition 3 approve small buyback 2 bps within fund. Need JSON only. Ensure integers. Minutes reasoning concise. Could mention sell pressure and fund limited. Need no extra. Final.\"},\"finish_reason\":\"stop\"}],\"created\":1794274085,\"model\":\"deepseek-v4-1-flash-1017\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":720,\"completion_tokens\":620,\"total_tokens\":1340,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":398,\"audio_tokens\":0,\"reasoning_tokens\":403,\"rejected_prediction_tokens\":268}},\"cost\":{\"usd\":0.00088512,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

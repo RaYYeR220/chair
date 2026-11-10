@@ -1,0 +1,23 @@
+{
+ "request_sha256": "4a35c542e80291dc2d96006733ee17907e07dd45f646a5c1d524ee90e30cf4b8",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:13:48.768Z",
+ "latency_ms": 10441,
+ "usage": {
+  "prompt_tokens": 583,
+  "completion_tokens": 405,
+  "total_tokens": 988,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 210,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 50. Zero 24h volume on both sides, so no tax revenue is flowing to any bucket and the buyback fund sits at 0.016 NEAR — enough for roughly 330 CHAIR, far below 1 bp of the 47.5M supply, so buyback_burn must be 0. With no flow to allocate, moving levers would be churn without effect: tax stays at the floor of 100 bps to keep trading friction minimal and encourage activity, locker_share holds at 25 to keep lockers rewarded when volume returns, endowment_share holds at 30 keeping the brain funded (38 NEAR on hand covers inference comfortably). Reassess if volume appears; a sustained buy side would justify testing a higher tax to build the buyback fund.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-250f1ec29de64f5db6cf10546bf5115a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 50. Zero 24h volume on both sides, so no tax revenue is flowing to any bucket and the buyback fund sits at 0.016 NEAR — enough for roughly 330 CHAIR, far below 1 bp of the 47.5M supply, so buyback_burn must be 0. With no flow to allocate, moving levers would be churn without effect: tax stays at the floor of 100 bps to keep trading friction minimal and encourage activity, locker_share holds at 25 to keep lockers rewarded when volume returns, endowment_share holds at 30 keeping the brain funded (38 NEAR on hand covers inference comfortably). Reassess if volume appears; a sustained buy side would justify testing a higher tax to build the buyback fund.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume 24h. Tax at 100 (minimum), locker_share 25 (max), endowment 30. Buyback fund tiny (0.016 NEAR). Buyback burn: fund can pay for how much? Price ~0.0000489 NEAR per CHAIR. 0.0162 NEAR buys ~332 CHAIR, supply 47.47M, so bps = 332/47469964 ≈ 0.0007 bps → 0. Keep buyback_burn 0.\\n\\nNo volume, so no tax revenue anyway. Maybe lower locker_share to build buyback? But no volume means nothing flows. Keep stable. Maybe reduce locker_share slightly since locker pool is 0 and no activity? Keep as is; minimal changes. Could shift locker_share down 10 to 15 to build buyback fund for future burns. But with zero volume it doesn't matter. I'll keep stable, buyback_burn 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794273218,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":583,\"completion_tokens\":405,\"total_tokens\":988,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":210,\"rejected_prediction_tokens\":0}},\"cost\":{\"usd\":0.00025923,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

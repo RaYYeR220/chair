@@ -1,0 +1,22 @@
+{
+ "request_sha256": "29f81897051ad366d5dc5b768efda6187c0b4fc18f026c00bf516b4e21342b71",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:12:22.426Z",
+ "latency_ms": 25135,
+ "usage": {
+  "prompt_tokens": 583,
+  "completion_tokens": 641,
+  "total_tokens": 1224,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 393,
+   "audio_tokens": 0,
+   "reasoning_tokens": 441,
+   "rejected_prediction_tokens": 351
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 41: Zero volume on both sides for the cycle. The 150bp tax is a plausible drag at the margin, so I cut it the full 50bp to the 100bp floor to lower the cost of transacting and invite flow back. Endowment sits at 38.0 NEAR, a comfortable runway, so endowment_share holds at 30. Locker_share stays at 25 to keep the locker pool accumulating once volume returns; it is currently empty and lockers deserve the accrual. Buyback fund holds only 0.0162 NEAR; at price ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR, well under 1bp of the 47.47M supply, so no burn is affordable this meeting. Wait for flow.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-24423be4799c4d58a49a0030723dc440\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 41: Zero volume on both sides for the cycle. The 150bp tax is a plausible drag at the margin, so I cut it the full 50bp to the 100bp floor to lower the cost of transacting and invite flow back. Endowment sits at 38.0 NEAR, a comfortable runway, so endowment_share holds at 30. Locker_share stays at 25 to keep the locker pool accumulating once volume returns; it is currently empty and lockers deserve the accrual. Buyback fund holds only 0.0162 NEAR; at price ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR, well under 1bp of the 47.47M supply, so no burn is affordable this meeting. Wait for flow.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 41. No volume, no petitions. Buyback fund tiny (0.016 NEAR). Price low. Tax 150, endowment 30, locker 25, buyback share 45.\\n\\nNo activity — maybe lower tax to stimulate trading? Tax at 150 bps with zero volume. Could reduce tax to 100 to encourage trading. Endowment at 30, has 38 NEAR — enough buffer. Locker share 25 max-ish. Keep locker at 25? Locker pool is 0. Maybe shift: reduce locker_share to 15, increase endowment? Endowment has 38 NEAR, plenty. Actually with zero volume, tax changes don't matter much. Keep things stable but nudge tax down to stimulate activity: 150→100 (max move 50). Buyback: fund 0.016 NEAR, price ~0.0000489 NEAR per CHAIR... wait price_near is per CHAIR? 0.0000488 NEAR per CHAIR. 0.016 NEAR buys ~332 CHAIR. Supply 47.5M, 50 bps = ~23,736 CHAIR, cost ~1.16 NEAR. Fund can't cover 50bps. Max affordable: 0.016/0.0000489 ≈ 332 CHAIR ≈ 0.0007% of supply. buyback_bps cap 50 but \\\"no more than the fund can pay for\\\" — set buyback_burn to something small. In bps of supply: 332/47,472,964 ≈ 0.0007 bps. Integer bps... 0? Setting 0 is safest since fund can't pay even 1 bp (1 bp = 4747 CHAIR ≈ 0.232 NEAR > 0.016). So buyback_burn = 0.\\n\\nMinutes: note zero volume, cut tax to floor to stimulate trading, keep locker share, endowment buffer healthy, buyback fund insufficient for even 1bp so 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794273117,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":583,\"completion_tokens\":641,\"total_tokens\":1224,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":393,\"audio_tokens\":0,\"reasoning_tokens\":441,\"rejected_prediction_tokens\":351}},\"cost\":{\"usd\":0.00040794999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

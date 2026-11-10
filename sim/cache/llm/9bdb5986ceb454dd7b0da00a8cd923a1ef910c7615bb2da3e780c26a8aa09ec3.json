@@ -1,0 +1,22 @@
+{
+ "request_sha256": "9bdb5986ceb454dd7b0da00a8cd923a1ef910c7615bb2da3e780c26a8aa09ec3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:08:40.310Z",
+ "latency_ms": 3412,
+ "usage": {
+  "prompt_tokens": 622,
+  "completion_tokens": 370,
+  "total_tokens": 992,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 176,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 22. Zero volume on both sides; no tax revenue generated, buyback fund near empty (0.0004 NEAR, cannot fund even 1 bps of burn at ~0.35 NEAR). With no flow to redistribute, all levers held. locker_share is already at the constitutional maximum of 25, so the petition cannot be granted further. Tax stays at the 100 floor to avoid deterring any returning traders; endowment stays at 30 to preserve locker and buyback shares. Reassess if volume returns.\",\"answers\":[\"Locker appreciation noted — but locker_share is already at the constitutional cap of 25%. Nothing to raise. With zero 24h volume there's no tax flowing to the pool anyway. Holders who lock still earn the max share when trades resume.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-48015719\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 22. Zero volume on both sides; no tax revenue generated, buyback fund near empty (0.0004 NEAR, cannot fund even 1 bps of burn at ~0.35 NEAR). With no flow to redistribute, all levers held. locker_share is already at the constitutional maximum of 25, so the petition cannot be granted further. Tax stays at the 100 floor to avoid deterring any returning traders; endowment stays at 30 to preserve locker and buyback shares. Reassess if volume returns.\\\",\\\"answers\\\":[\\\"Locker appreciation noted — but locker_share is already at the constitutional cap of 25%. Nothing to raise. With zero 24h volume there's no tax flowing to the pool anyway. Holders who lock still earn the max share when trades resume.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 22. Zero volume, zero buyback fund. Locker_share already at max 25. Petition asks to raise locker_share — it's capped at 25. Tax at 100 bps minimum. No activity, so keep things stable. Buyback burn: fund is 0.0004 NEAR, price ~0.00006, so could buy ~6.9 CHAIR — negligible; burn 0 or tiny. Buyback_burn is bps of supply: 1 bps = 5881 CHAIR, costing ~0.35 NEAR. Fund only has 0.0004 NEAR, so can't afford even 1 bps. Set 0.\\n\\nKeep tax 100 (minimum, no volume to tax anyway), endowment 30, locker 25 (max). Answer petition: already at cap.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794272917,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":622,\"completion_tokens\":370,\"total_tokens\":992,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":176,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00024758,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,23 @@
+{
+ "request_sha256": "432cb310e5a9b72df1d0bc99602e18487131c791998de2669f019731696fb93d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:06:28.475Z",
+ "latency_ms": 6284,
+ "usage": {
+  "prompt_tokens": 644,
+  "completion_tokens": 420,
+  "total_tokens": 1064,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 258,
+   "audio_tokens": 0,
+   "reasoning_tokens": 242,
+   "rejected_prediction_tokens": 228
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 21. Flow is buy-heavy (25.3 NEAR bought vs 4.8 sold) — the curve is being accumulated, no need to lean against sellers with a higher tax. Tax stays at the 100 bps floor. Split holds at 50/25/25: endowment at 11.96 NEAR comfortably covers inference, locker pool keeps accruing weight, and the buyback fund (0.34 NEAR) is too thin to burn anything — at price 0.000041 it buys ~8,400 CHAIR, under 0.01% of supply, so buyback_burn is 0 this meeting. Policy: steady hands while demand does the work.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-eb65f85f6c7346c19a766751aabc36cb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 21. Flow is buy-heavy (25.3 NEAR bought vs 4.8 sold) — the curve is being accumulated, no need to lean against sellers with a higher tax. Tax stays at the 100 bps floor. Split holds at 50/25/25: endowment at 11.96 NEAR comfortably covers inference, locker pool keeps accruing weight, and the buyback fund (0.34 NEAR) is too thin to burn anything — at price 0.000041 it buys ~8,400 CHAIR, under 0.01% of supply, so buyback_burn is 0 this meeting. Policy: steady hands while demand does the work.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 21. No petitions. Volume buy 25.3 NEAR, sell 4.76 — buy pressure. Price low. Tax at 100 bps minimum. Buyback fund only 0.34 NEAR. Buyback burn: 0.34 NEAR buys at price 0.000041 → ~8378 CHAIR, supply ~39.85M, so bps = 8378/39853610 ≈ 0.21 bps → 0. Keep buyback_burn 0 or small? Fund can pay for 0.21 bps, so max integer is 0. Set buyback_burn 0.\\n\\nLevers: tax 100, endowment 50, locker 25, buyback 25. Buy pressure suggests maybe lower tax? Tax already at floor. Endowment 11.96 NEAR is healthy. Could shift locker_share down to boost buyback? Locker pool tiny. Keep stable, maybe move locker_share down 10 to 15 to fund buybacks? But lockers petition... no petitions. Buy pressure means buybacks less needed. Keep everything steady. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794272782,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":644,\"completion_tokens\":420,\"total_tokens\":1064,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":258,\"audio_tokens\":0,\"reasoning_tokens\":242,\"rejected_prediction_tokens\":228}},\"cost\":{\"usd\":0.00027588,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

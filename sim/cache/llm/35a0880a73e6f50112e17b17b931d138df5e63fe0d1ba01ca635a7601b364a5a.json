@@ -1,0 +1,22 @@
+{
+ "request_sha256": "35a0880a73e6f50112e17b17b931d138df5e63fe0d1ba01ca635a7601b364a5a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:10:51.443Z",
+ "latency_ms": 21065,
+ "usage": {
+  "prompt_tokens": 710,
+  "completion_tokens": 577,
+  "total_tokens": 1287,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 353,
+   "audio_tokens": 0,
+   "reasoning_tokens": 325,
+   "rejected_prediction_tokens": 319
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Sell-only flow (75.9 NEAR, zero buys). Locker_share is already at the constitutional maximum of 25, so both petitions are granted in spirit but clamped by the contract. I raise tax_bps 125→150 to rebuild the buyback fund, which is nearly empty (0.52 NEAR) and cannot fund any burn this meeting: 0.52 NEAR buys ~10,143 CHAIR, ~0.2 bps of supply, below the 1 bps minimum increment, so buyback_burn stays 0. Endowment stays 30; split remains 30/25/45.\",\"answers\":[\"Granted as far as the constitution allows: locker_share is already at its hard cap of 25 and cannot move to 35. The full 25% of tax continues to flow to lockers — the lever is maxed, not ignored.\",\"You're right that lockers provide the floor while traders churn. locker_share is already at the maximum 25 the contract permits. I've raised the tax instead to grow the pool that pays you.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-b3d4ec748eb94f91a4df9c8abf084d0d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Sell-only flow (75.9 NEAR, zero buys). Locker_share is already at the constitutional maximum of 25, so both petitions are granted in spirit but clamped by the contract. I raise tax_bps 125→150 to rebuild the buyback fund, which is nearly empty (0.52 NEAR) and cannot fund any burn this meeting: 0.52 NEAR buys ~10,143 CHAIR, ~0.2 bps of supply, below the 1 bps minimum increment, so buyback_burn stays 0. Endowment stays 30; split remains 30/25/45.\\\",\\\"answers\\\":[\\\"Granted as far as the constitution allows: locker_share is already at its hard cap of 25 and cannot move to 35. The full 25% of tax continues to flow to lockers — the lever is maxed, not ignored.\\\",\\\"You're right that lockers provide the floor while traders churn. locker_share is already at the maximum 25 the contract permits. I've raised the tax instead to grow the pool that pays you.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 35. Current: tax 125, endowment 30, locker 25, buyback_share 45 (rest). Sell volume 75.92 NEAR, no buys. Tax revenue from sells: 75.92 * 1.25% ≈ 0.949 NEAR... but funds show small amounts. Buyback fund 0.52 NEAR. Buyback_burn: fund can buy at price 0.00005125 NEAR per CHAIR... 0.52/0.00005125 ≈ 10,143 CHAIR, supply ~49.88M, so bps = 10143/49884209 ≈ 0.2 bps. Very small. So buyback_burn 0 (can't do meaningful). Actually 0 to 50 bps; 0.2 bps rounds to 0. Set 0.\\n\\nPetitions ask locker_share up 10 → 35? Max is 25. Locker_share cap is 25. Already at 25. So can't raise. Answer: already at max.\\n\\nTax: only sells, no buys. Volume decent. Keep tax 125 or adjust? Maybe raise slightly to fund buyback? Moving at most 50. Keep 125 stable, or raise to 150 to build buyback fund. Sell pressure only; higher tax discourages... tax on sell hurts sellers. Modest raise to 150 seems reasonable to accumulate buyback fund. Endowment 30, locker 25, buyback 45.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794273030,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":710,\"completion_tokens\":577,\"total_tokens\":1287,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":353,\"audio_tokens\":0,\"reasoning_tokens\":325,\"rejected_prediction_tokens\":319}},\"cost\":{\"usd\":0.000395,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

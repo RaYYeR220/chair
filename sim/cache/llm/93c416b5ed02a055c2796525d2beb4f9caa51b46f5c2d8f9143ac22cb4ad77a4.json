@@ -1,0 +1,23 @@
+{
+ "request_sha256": "93c416b5ed02a055c2796525d2beb4f9caa51b46f5c2d8f9143ac22cb4ad77a4",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:14:20.124Z",
+ "latency_ms": 11185,
+ "usage": {
+  "prompt_tokens": 626,
+  "completion_tokens": 624,
+  "total_tokens": 1250,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 360,
+   "audio_tokens": 0,
+   "reasoning_tokens": 403,
+   "rejected_prediction_tokens": 432
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Flow is one-sided: 19.94 NEAR of sells, zero buys, price drifting at 0.0000484. With only sell-side volume, the tax is pure friction on exit and pure revenue for us, so I lift tax_bps 100→150 (within the 50/meeting cap) to slow distribution and build the funds. Split stays 30/25/45: the endowment at 38 NEAR is healthy, lockers earn their 25%, and the buyback fund keeps accumulating. On buyback_burn: the fund holds 0.1253 NEAR, which at curve price buys only ~2,590 CHAIR (~0.006 bps of supply). A burn that small is noise and would drain the fund to zero; better to let it compound under the 45% allocation and strike when it can move the curve. No petitions this session.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-898a86b0a6b64862a3d290e656345e12\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Flow is one-sided: 19.94 NEAR of sells, zero buys, price drifting at 0.0000484. With only sell-side volume, the tax is pure friction on exit and pure revenue for us, so I lift tax_bps 100→150 (within the 50/meeting cap) to slow distribution and build the funds. Split stays 30/25/45: the endowment at 38 NEAR is healthy, lockers earn their 25%, and the buyback fund keeps accumulating. On buyback_burn: the fund holds 0.1253 NEAR, which at curve price buys only ~2,590 CHAIR (~0.006 bps of supply). A burn that small is noise and would drain the fund to zero; better to let it compound under the 45% allocation and strike when it can move the curve. No petitions this session.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 53. Volume: only sells ~19.94 NEAR, no buys. Tax 100 bps currently. Locker share 25, endowment 30, buyback 45. Buyback fund tiny (0.125 NEAR). Price low. Supply ~47M CHAIR.\\n\\nNo petitions. Consider raising tax slightly since sell pressure exists? Tax max move 50 per meeting. Sell volume 19.94 NEAR/day; tax at 100bps = ~0.2 NEAR/day revenue. Buyback burn: fund 0.125 NEAR, price 0.00004837 → can buy ~2592 CHAIR. Supply 46.97M, so 50bps = ~234,851 CHAIR — can't afford. Compute affordable: 0.125/0.00004837 ≈ 2587 CHAIR ≈ 0.55 bps of supply. So buyback_burn small, maybe 0. Actually buyback_burn is bps of supply to buy and burn, capped by fund. Set 0 since fund too small? Or set 0 to accumulate. With only sells, buyback would support price. 0.125 NEAR buys ~2587 CHAIR, negligible. Maybe set 0 and let fund accumulate? But fund gets 45% of tax. Keep buyback_burn 0 this meeting to accumulate, or burn small amount. I'll set 0 to build the fund, or maybe 0... Actually burning even small amounts signals. But 2587 CHAIR is trivial. Keep 0.\\n\\nTax: sell-only volume suggests distribution/selling. Raising tax to 150 could dampen sells and raise revenue. Modest move: 150. Endowment 30 fine (endowment has 38 NEAR, plenty). Locker share 25 keeps lockers happy. Keep shares as-is.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794273249,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":626,\"completion_tokens\":624,\"total_tokens\":1250,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":360,\"audio_tokens\":0,\"reasoning_tokens\":403,\"rejected_prediction_tokens\":432}},\"cost\":{\"usd\":0.00037517999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

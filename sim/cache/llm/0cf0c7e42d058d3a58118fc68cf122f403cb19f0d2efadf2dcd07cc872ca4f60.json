@@ -1,0 +1,22 @@
+{
+ "request_sha256": "0cf0c7e42d058d3a58118fc68cf122f403cb19f0d2efadf2dcd07cc872ca4f60",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:12:41.090Z",
+ "latency_ms": 3183,
+ "usage": {
+  "prompt_tokens": 619,
+  "completion_tokens": 375,
+  "total_tokens": 994,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 159,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 45. Zero 24h volume on both sides; the tax is already at the constitutional floor of 100 bps, so no further cut is possible. Endowment 30 / locker 25 leaves 45% of any tax to the buyback fund, which holds only 0.0162 NEAR — at ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR, under 0.01 bps of supply, so buyback_burn is 0 this meeting. With no flow, the right stance is to hold all levers steady and let the curve do its work. Petition answered within constitutional limits.\",\"answers\":[\"holder-156.near: Agreed in spirit — the tax is already at the 100 bps floor set by the constitution, so it cannot go lower. Holding it there is the most volume-friendly stance the rules allow.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-9e8b5994\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 45. Zero 24h volume on both sides; the tax is already at the constitutional floor of 100 bps, so no further cut is possible. Endowment 30 / locker 25 leaves 45% of any tax to the buyback fund, which holds only 0.0162 NEAR — at ~0.0000489 NEAR/CHAIR that buys ~332 CHAIR, under 0.01 bps of supply, so buyback_burn is 0 this meeting. With no flow, the right stance is to hold all levers steady and let the curve do its work. Petition answered within constitutional limits.\\\",\\\"answers\\\":[\\\"holder-156.near: Agreed in spirit — the tax is already at the 100 bps floor set by the constitution, so it cannot go lower. Holding it there is the most volume-friendly stance the rules allow.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No volume, buyback fund tiny. Tax already at 100 (minimum). Petition asks to lower tax — can't go below 100. Keep everything stable. buyback_burn: fund 0.0162 NEAR, price ~0.0000489, so ~332 CHAIR purchasable. Burn bps of supply: 1 bps = 4747 CHAIR. Can't afford even 1 bps? 1 bps of supply = 4747 CHAIR × price 0.0000489 ≈ 0.232 NEAR. Fund only 0.0162, so buyback_burn must be 0.\\n\\nKeep tax 100, endowment 30, locker 25.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794273158,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":619,\"completion_tokens\":375,\"total_tokens\":994,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":159,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00024963,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

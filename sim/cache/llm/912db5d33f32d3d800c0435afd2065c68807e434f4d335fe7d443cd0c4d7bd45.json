@@ -1,0 +1,23 @@
+{
+ "request_sha256": "912db5d33f32d3d800c0435afd2065c68807e434f4d335fe7d443cd0c4d7bd45",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:07:04.478Z",
+ "latency_ms": 6247,
+ "usage": {
+  "prompt_tokens": 716,
+  "completion_tokens": 539,
+  "total_tokens": 1255,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 279,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Tax is already at the constitutional floor of 100 bps; I cannot go lower, so holder-170's ask is granted to the maximum extent possible. Locker_share is at its 25% cap; holder-164's ask is likewise already satisfied. Volume is one-sided (33 NEAR buys, zero sells), which keeps the curve rising but leaves the buyback fund thin at 0.082 NEAR. One basis point of supply costs ~0.166 NEAR at current price, more than the fund holds, so buyback_burn must be 0 this meeting. Hold all levers steady; endowment stays at 50 to keep inference funded while the split remains balanced.\",\"answers\":[\"The tax is already at the constitutional floor of 100 bps — I cannot legally go lower. You're getting the minimum tax possible; growth now depends on volume, which today is buy-only. Hold tight.\",\"Lockers are already at the maximum: locker_share is 25%, the constitutional cap. Your reward pool is funded at the highest rate allowed. I appreciate the floor-holding — the levers simply cannot go higher.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-0f9b7fe77e834fce88a1d055c52b8efa\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Tax is already at the constitutional floor of 100 bps; I cannot go lower, so holder-170's ask is granted to the maximum extent possible. Locker_share is at its 25% cap; holder-164's ask is likewise already satisfied. Volume is one-sided (33 NEAR buys, zero sells), which keeps the curve rising but leaves the buyback fund thin at 0.082 NEAR. One basis point of supply costs ~0.166 NEAR at current price, more than the fund holds, so buyback_burn must be 0 this meeting. Hold all levers steady; endowment stays at 50 to keep inference funded while the split remains balanced.\\\",\\\"answers\\\":[\\\"The tax is already at the constitutional floor of 100 bps — I cannot legally go lower. You're getting the minimum tax possible; growth now depends on volume, which today is buy-only. Hold tight.\\\",\\\"Lockers are already at the maximum: locker_share is 25%, the constitutional cap. Your reward pool is funded at the highest rate allowed. I appreciate the floor-holding — the levers simply cannot go higher.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 26. Tax at 100 bps (minimum), volume 33 NEAR buys, zero sells. Petitions: lower tax (already at floor 100, can't go lower), raise locker_share (at 25 max, can't go higher). Buyback fund tiny (0.082 NEAR), price ~0.0000414, buyback_burn max 50 bps but fund-limited. Supply ~40.2M, 50 bps = ~20,099 CHAIR ≈ 0.83 NEAR at price — fund only 0.082 NEAR, so burn limited to ~0.082/0.0000414 ≈ 1,986 CHAIR ≈ 0.49 bps of supply. So buyback_burn = 0 (or minimal). Actually buyback_burn is in bps of supply; can't do fractional. 1 bps = 4019 CHAIR ≈ 0.166 NEAR > fund. So 0.\\n\\nLevers: keep tax 100 (floor), endowment 50, locker 25 (cap). Maybe shift endowment up since lockers at cap? Keep steady. Buyback_burn 0.\\n\\nMinutes: explain floor/cap constraints, zero sell volume, tiny buyback fund.\"},\"finish_reason\":\"stop\"}],\"created\":1794272818,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":716,\"completion_tokens\":539,\"total_tokens\":1255,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":279,\"rejected_prediction_tokens\":0}},\"cost\":{\"usd\":0.00034617999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

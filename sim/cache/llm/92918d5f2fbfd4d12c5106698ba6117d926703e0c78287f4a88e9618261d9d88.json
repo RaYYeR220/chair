@@ -1,0 +1,22 @@
+{
+ "request_sha256": "92918d5f2fbfd4d12c5106698ba6117d926703e0c78287f4a88e9618261d9d88",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T01:07:33.032Z",
+ "latency_ms": 23340,
+ "usage": {
+  "prompt_tokens": 639,
+  "completion_tokens": 512,
+  "total_tokens": 1151,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 323,
+   "audio_tokens": 0,
+   "reasoning_tokens": 280,
+   "rejected_prediction_tokens": 244
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Meeting 24. Flow is healthy: 45.5 NEAR bought vs 18.2 sold over 24h, price steady at ~0.0000445. No reason to move tax from 150 bps; buys outpacing sells suggests the current toll isn't deterring demand. Endowment at 16.55 NEAR covers inference comfortably, so 30% share stands; lockers keep the max 25%. Buyback fund holds only 0.448 NEAR. At curve price that buys ~10,066 CHAIR, about 0.023% of the 43.3M supply — roughly 2 bps. A 50 bps burn would need ~9.6 NEAR we don't have, so I burn what the fund can pay for: 2 bps. Steady hands; let the buyback fund rebuild from the 45% residual share of tax before attempting a larger burn next meeting.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-22890b8ec1bc417ca12805f3b960449d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 24. Flow is healthy: 45.5 NEAR bought vs 18.2 sold over 24h, price steady at ~0.0000445. No reason to move tax from 150 bps; buys outpacing sells suggests the current toll isn't deterring demand. Endowment at 16.55 NEAR covers inference comfortably, so 30% share stands; lockers keep the max 25%. Buyback fund holds only 0.448 NEAR. At curve price that buys ~10,066 CHAIR, about 0.023% of the 43.3M supply — roughly 2 bps. A 50 bps burn would need ~9.6 NEAR we don't have, so I burn what the fund can pay for: 2 bps. Steady hands; let the buyback fund rebuild from the 45% residual share of tax before attempting a larger burn next meeting.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 24. No petitions. Current: tax 150, endowment 30, locker 25, buyback 45. Buyback fund tiny (0.448 NEAR). Price ~0.0000445. Volume modest, buys > sells. Supply 43.3M, sold 43.5M (sold > supply? odd but fine).\\n\\nBuyback_burn: fund 0.448 NEAR at price 0.0000445 → ~10,066 CHAIR ≈ 0.023% of supply. Max 50 bps = 0.5% = 216,592 CHAIR, cost ~9.65 NEAR. Can't afford. So buyback_burn limited by fund: ~10,066 CHAIR = 0.0232% ≈ 2 bps. Set buyback_burn = 2.\\n\\nLevers: keep tax 150 (volume balanced, buys exceed sells). Endowment 30 is low-ish; endowment 16.55 NEAR is decent. Locker share 25 max. Keep steady. Maybe raise endowment a bit? Endowment pending 0.287/day at 30% share. Endowment balance 16.55 NEAR is healthy. Keep as is for stability.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794272829,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":639,\"completion_tokens\":512,\"total_tokens\":1151,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":323,\"audio_tokens\":0,\"reasoning_tokens\":280,\"rejected_prediction_tokens\":244}},\"cost\":{\"usd\":0.00035185,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}
