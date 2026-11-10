@@ -1,0 +1,11 @@
+target/
+**/target/
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+**/.env
+**/.env.*
+!**/.env.example
+*.wasm
+sim/cache/
