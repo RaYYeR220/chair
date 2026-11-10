@@ -114,6 +114,16 @@ export async function viewAccount(accountId: string): Promise<AccountState | nul
   }
 }
 
+/** An account's access keys (`view_access_key_list`). The token account should have none. */
+export async function accessKeys(accountId: string): Promise<{ public_key: string }[]> {
+  const r = await rpc<{ keys: { public_key: string }[] }>("query", {
+    request_type: "view_access_key_list",
+    finality: "final",
+    account_id: accountId,
+  });
+  return r.keys;
+}
+
 // ---------------------------------------------------------------- transactions
 
 export interface ReceiptOutcome {

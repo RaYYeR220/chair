@@ -68,6 +68,15 @@ const schema = z.object({
   CHAIR_RELAY_IP_COOLDOWN_S: z.coerce.number().int().min(0).default(600),
   CHAIR_RELAY_IP_DAILY_MAX: z.coerce.number().int().min(1).default(5),
   CHAIR_CONVENE_IP_COOLDOWN_S: z.coerce.number().int().min(0).default(120),
+  /**
+   * Testing aid, off by default. `1`: the petition relay and convene validate
+   * the request and answer with a realistic response marked `dry_run`, worked
+   * out from read-only views. Nothing is signed or sent.
+   */
+  CHAIR_RELAY_DRY_RUN: z
+    .enum(["0", "1", "true", "false", ""])
+    .default("0")
+    .transform((v) => v === "1" || v === "true"),
 });
 
 function load() {
@@ -103,6 +112,7 @@ function load() {
       ipDailyMax: e.CHAIR_RELAY_IP_DAILY_MAX,
     },
     conveneIpCooldownS: e.CHAIR_CONVENE_IP_COOLDOWN_S,
+    dryRun: e.CHAIR_RELAY_DRY_RUN,
   };
 }
 

@@ -72,8 +72,8 @@ function spend(amount: bigint, balance: bigint) {
   addSpend(amount);
 }
 
-/** The first pool account that can file now: not in the queue, no petition in the last 24 h. */
-async function pickPetitioner(now: bigint, queue: Petition[]) {
+/** The first pool account that can file now: not in the queue, no petition in the last 24 h. Views only. */
+export async function pickPetitioner(now: bigint, queue: Petition[]) {
   const queued = new Set(queue.map((p) => p.account));
   for (let i = 0; i < env.relay.poolSize; i++) {
     const id = subId(i);
@@ -86,6 +86,8 @@ async function pickPetitioner(now: bigint, queue: Petition[]) {
 }
 
 export async function relayPetition(rawText: unknown) {
+  // The dry run never reaches this function; refuse anyway rather than sign anything while it is on.
+  if (env.dryRun) throw new RelayError("dry run is on: this server does not send petitions", 503);
   if (!isTestnet) throw new RelayError("the petition relay runs on testnet only", 403);
   if (!demoAvailable()) throw new RelayError("the petition relay is not configured", 503);
   const text = validatePetition(rawText);
@@ -185,7 +187,7 @@ export async function relayPetition(rawText: unknown) {
 }
 
 export async function relayStatus() {
-  if (!relayAvailable()) return { available: false };
+  if (!relayAvailable()) return env.dryRun ? { available: true, dry_run: true } : { available: false, dry_run: false };
   const [balance, queue] = await Promise.all([demoBalance(), chair.petitions()]);
   return {
     available: true,
@@ -194,5 +196,6 @@ export async function relayStatus() {
     floor_near: env.relay.floorNear,
     pool_size: env.relay.poolSize,
     queued: queue.length,
+    dry_run: env.dryRun,
   };
 }

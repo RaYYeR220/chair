@@ -50,6 +50,8 @@ async function conveneReceipt(hash: string, sender: string, deadline: number): P
 }
 
 export async function convene(opts: { waitMs?: number } = {}) {
+  // The dry run never reaches this function; refuse anyway rather than sign anything while it is on.
+  if (env.dryRun) throw new ConveneError("dry run is on: this server does not convene", 503);
   if (!demoAvailable()) throw new ConveneError("convening is not configured on this server", 503);
   const demo = demoAccountId()!;
   const started = Date.now();

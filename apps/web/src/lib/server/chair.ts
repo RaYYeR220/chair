@@ -14,8 +14,9 @@ import type {
   Stats,
   StatusView,
 } from "@/lib/chair-types";
+import { decimal, near, tokens } from "@/lib/units";
 import { env } from "./env";
-import { finalBlock, type Finality, view } from "./rpc";
+import { accessKeys, finalBlock, type Finality, view } from "./rpc";
 
 /**
  * Typed client for the token contract's views (contracts/token/src: lib.rs,
@@ -63,19 +64,7 @@ export function forget(prefix = "") {
 
 // ---------------------------------------------------------------- formatting
 
-/** Exact decimal of `v / 10^decimals`, trailing zeros trimmed (as the contract's `decimal`). */
-export function decimal(v: string | bigint, decimals: number): string {
-  const s = BigInt(v).toString();
-  const neg = s.startsWith("-");
-  const digits = neg ? s.slice(1) : s;
-  const padded = digits.padStart(decimals + 1, "0");
-  const int = padded.slice(0, padded.length - decimals);
-  const frac = padded.slice(padded.length - decimals).replace(/0+$/, "");
-  return `${neg ? "-" : ""}${int}${frac ? `.${frac}` : ""}`;
-}
-
-export const near = (yocto: string | bigint) => decimal(yocto, 24);
-export const tokens = (base: string | bigint) => decimal(base, 18);
+export { decimal, near, tokens };
 
 export function parseNear(n: number | string): bigint {
   const [i, f = ""] = String(n).split(".");
@@ -116,7 +105,7 @@ export function parseBrief(request: string | null) {
 }
 
 export async function getState() {
-  const [block, status, curve, funds, stats, petitions, preview, constitution, governance] = await Promise.all([
+  const [block, status, curve, funds, stats, petitions, preview, constitution, governance, keys] = await Promise.all([
     finalBlock(),
     chair.status(),
     chair.curve(),
@@ -126,6 +115,8 @@ export async function getState() {
     chair.requestPreview(),
     cached("constitution", 60_000, chair.constitution),
     cached("governance", 60_000, chair.governance),
+    // The token account's access keys: none means nobody can redeploy it. A failed read is `null`, never a guess.
+    cached("token-keys", 60_000, () => accessKeys(env.contractId)).catch(() => null),
   ]);
   const now = BigInt(block.timestamp_nanosec);
   const next = BigInt(status.next_meeting_at);
@@ -185,6 +176,7 @@ export async function getState() {
       request: preview.request,
     },
     governance,
+    token_account: { account_id: env.contractId, keys: keys ? keys.map((k) => k.public_key) : null },
     constitution: { ...constitution, system_prompt_bytes: Buffer.byteLength(constitution.system_prompt) },
   };
 }
