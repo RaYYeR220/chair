@@ -1,0 +1,40 @@
+[package]
+name = "chair-test-signer"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "CHAIR test signer (testnet only): an OutLayer module that stands in for the courier and NEAR AI, answering the meeting request with a ruling signed by a test model key"
+build = "build.rs"
+publish = false
+
+# Own workspace: nothing else in the repo is a Cargo workspace member.
+[workspace]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "chair-test-signer"
+path = "src/main.rs"
+
+[features]
+default = []
+# No `callers` gate, so the owner can run the module directly.
+scratch = []
+
+[dependencies]
+# The courier's own output type, so the result has exactly its shape.
+chair-courier = { path = "../courier" }
+k256 = { version = "0.13", default-features = false, features = ["ecdsa", "std"] }
+serde_json = "1"
+sha3 = "0.10"
+
+[dev-dependencies]
+sha2 = "0.10"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+debug = false
+codegen-units = 1
