@@ -1,9 +1,12 @@
 {
   "name": "chair",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "dev": "pnpm --filter @chair/web dev",
-    "build": "pnpm --filter @chair/web build"
+    "build": "pnpm --filter @chair/web build",
+    "readme": "node scripts/render-readme.ts",
+    "check:replay": "node scripts/check-replay.ts"
   }
 }
