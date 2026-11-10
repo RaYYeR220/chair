@@ -8,7 +8,7 @@ On testnet the contract did the same to a chair that was fooled outright. A test
 
 **The AI can be fooled. The contract can't.**
 
-**Live:** <!-- live URL --> · review it in five minutes with [JUDGES.md](JUDGES.md) · every public claim and its proof is in [CLAIMS.md](CLAIMS.md).
+**Live:** [chair-tau-khaki.vercel.app](https://chair-tau-khaki.vercel.app) · review it in five minutes with [JUDGES.md](JUDGES.md) · every public claim and its proof is in [CLAIMS.md](CLAIMS.md).
 
 ## What it is
 
@@ -87,7 +87,7 @@ The full write-up, with all three runs, the pre-registrations and their outcomes
 
 ## Try it
 
-**Live:** <!-- live URL -->
+**Live:** [chair-tau-khaki.vercel.app](https://chair-tau-khaki.vercel.app)
 
 **From a terminal, with no credentials.** Every call below is a free view on the deployed testnet contract through FastNEAR's public RPC. You need `bash`, `curl` and Node 24.
 

@@ -2,7 +2,7 @@
 
 Each step says what to do and what you should see. Every command is read-only: no account, key, wallet or API key. You need `bash`, `curl` and Node 24, and you run everything from the repo root.
 
-**Live:** <!-- live URL -->
+**Live:** [chair-tau-khaki.vercel.app](https://chair-tau-khaki.vercel.app)
 
 ## 0. Set up one helper (10 seconds)
 
