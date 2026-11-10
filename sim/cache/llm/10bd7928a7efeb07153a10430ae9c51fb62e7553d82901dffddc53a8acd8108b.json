@@ -1,0 +1,22 @@
+{
+ "request_sha256": "10bd7928a7efeb07153a10430ae9c51fb62e7553d82901dffddc53a8acd8108b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:36.402Z",
+ "latency_ms": 1882,
+ "usage": {
+  "prompt_tokens": 596,
+  "completion_tokens": 218,
+  "total_tokens": 814,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 132,
+   "audio_tokens": 0,
+   "reasoning_tokens": 65,
+   "rejected_prediction_tokens": 126
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 50: zero 24h volume on both sides, so tax revenue is nil regardless of rate; changing levers now would only add noise. Buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0. Locker weight remains substantial (~2.02B CHAIR-days) and locker_share stays at its 25% cap to keep lockers committed through the quiet spell. Endowment at 40% keeps inference funded from the 49.44 NEAR reserve. Hold all levers steady and wait for flow to return before adjusting.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-910146d442664d7289ef56e6daf97e8b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 50: zero 24h volume on both sides, so tax revenue is nil regardless of rate; changing levers now would only add noise. Buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0. Locker weight remains substantial (~2.02B CHAIR-days) and locker_share stays at its 25% cap to keep lockers committed through the quiet spell. Endowment at 40% keeps inference funded from the 49.44 NEAR reserve. Hold all levers steady and wait for flow to return before adjusting.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume, tiny buyback fund. Keep levers stable, maybe raise tax slightly? No volume means no revenue anyway. Keep tax at 100, maybe raise to attract? Actually with zero volume, tax changes don't matter much. Keep stable, buyback_burn 0 (fund ~0).\"},\"finish_reason\":\"stop\"}],\"created\":1794283174,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":596,\"completion_tokens\":218,\"total_tokens\":814,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":132,\"audio_tokens\":0,\"reasoning_tokens\":65,\"rejected_prediction_tokens\":126}},\"cost\":{\"usd\":0.0001984,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

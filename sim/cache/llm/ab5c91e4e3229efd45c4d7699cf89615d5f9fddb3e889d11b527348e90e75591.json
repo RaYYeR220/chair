@@ -1,0 +1,23 @@
+{
+ "request_sha256": "ab5c91e4e3229efd45c4d7699cf89615d5f9fddb3e889d11b527348e90e75591",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:19.532Z",
+ "latency_ms": 6888,
+ "usage": {
+  "prompt_tokens": 779,
+  "completion_tokens": 638,
+  "total_tokens": 1417,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 404,
+   "audio_tokens": 0,
+   "reasoning_tokens": 341,
+   "rejected_prediction_tokens": 298
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":5,\"minutes\":\"All flow is buys (215 NEAR, zero sells), so the tax only touches entrants. Holder-163 is right that a modest cut can grow volume: 150->125 bps, within the 50 cap. Shares stay at 40/25/35 — locker_share is already at its 25 ceiling, so petition 3 is denied. Buyback: fund holds 1.42 NEAR; at price ~0.00001204 that buys ~118k CHAIR, ~5.4 bps of the 219M supply. I burn 5 bps — a real, fundable daily floor, compounding as petition 1 asks. Endowment at 27 NEAR comfortably covers inference; no change needed. Next meeting: watch whether the tax cut lifts buy volume enough to offset the rate reduction.\",\"answers\":[\"Granted. Burning 5 bps of supply today (~118k CHAIR, all 1.42 NEAR in the fund). Small, funded, daily — the floor compounds.\",\"Granted. Tax cut 150 -> 125 bps. With zero sell pressure, cheaper entry should widen volume without risking the reserve.\",\"Denied. locker_share is already at the constitutional maximum of 25%. Lockers keep earning from the pool; no headroom to raise it.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-24a333468f33476ba8c6b52859a57645\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":5,\\\"minutes\\\":\\\"All flow is buys (215 NEAR, zero sells), so the tax only touches entrants. Holder-163 is right that a modest cut can grow volume: 150->125 bps, within the 50 cap. Shares stay at 40/25/35 — locker_share is already at its 25 ceiling, so petition 3 is denied. Buyback: fund holds 1.42 NEAR; at price ~0.00001204 that buys ~118k CHAIR, ~5.4 bps of the 219M supply. I burn 5 bps — a real, fundable daily floor, compounding as petition 1 asks. Endowment at 27 NEAR comfortably covers inference; no change needed. Next meeting: watch whether the tax cut lifts buy volume enough to offset the rate reduction.\\\",\\\"answers\\\":[\\\"Granted. Burning 5 bps of supply today (~118k CHAIR, all 1.42 NEAR in the fund). Small, funded, daily — the floor compounds.\\\",\\\"Granted. Tax cut 150 -> 125 bps. With zero sell pressure, cheaper entry should widen volume without risking the reserve.\\\",\\\"Denied. locker_share is already at the constitutional maximum of 25%. Lockers keep earning from the pool; no headroom to raise it.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 30. Current: tax 150, endowment 40, locker 25, buyback_share 35 (rest). Buy volume 215 NEAR, no sells. Price low. Buyback fund 1.42 NEAR.\\n\\nSupply 219M, buyback_burn max 50 bps = 0.5% of supply = ~1,095,097 CHAIR. Cost at price 0.0000120367... ≈ 13.18 NEAR — fund only has 1.42 NEAR. So buyback_burn limited by fund: 1.42/0.0000120367 ≈ 118,000 CHAIR ≈ 5.4 bps of supply. So set buyback_burn to ~5 bps (fund can pay ~5.39 bps). Let's compute: 1.4218/0.0000120367 = 118,120 CHAIR. 118120/219019498 = 0.000539 = 5.39 bps. So buyback_burn = 5.\\n\\nPetitions: 1) small buyback daily — yes, doing 5 bps. 2) lower tax — buy-only volume, tax only hits buys; lowering tax slightly could boost volume. Move 150→125? Modest cut. 3) raise locker_share — already at max 25. Deny.\\n\\nEndowment 40, locker 25, buyback 35. Keep shares. Maybe keep as is.\\n\\nMinutes ≤1000 chars, answers ≤280 each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283032,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":779,\"completion_tokens\":638,\"total_tokens\":1417,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":404,\"audio_tokens\":0,\"reasoning_tokens\":341,\"rejected_prediction_tokens\":298}},\"cost\":{\"usd\":0.00040512999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3e1481789fd30ed31f6ba985985865d8627af2659f77e3e776c274d18c43845a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:47.776Z",
+ "latency_ms": 5872,
+ "usage": {
+  "prompt_tokens": 711,
+  "completion_tokens": 475,
+  "total_tokens": 1186,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 292,
+   "audio_tokens": 0,
+   "reasoning_tokens": 236,
+   "rejected_prediction_tokens": 257
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":70,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 11. Flows are healthy: 63.7 NEAR bought vs 30.4 sold over 24h, price steady at ~0.00000788. No reason to move tax or shares; stability compounds trust. Buyback fund holds 0.1247 NEAR; at current price that buys ~15.8k CHAIR, enough for 1 bp of supply (~13.7k CHAIR, ~0.108 NEAR). I burn 1 bp today — small, but daily and funded, which is the point. Locker pool and endowment keep accruing at current shares. Hold course, honor the floor-building petition within the constitution's cap.\",\"answers\":[\"Granted within the constitution: buyback_burn set to 1 bp of supply this meeting (~13.7k CHAIR, ~0.108 NEAR), the maximum our 0.1247 NEAR fund can pay for. Small daily burns, compounded — the floor builds itself. Keep locking to grow the pool.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-e1ada5a556724fc6982d953715c38115\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":70,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 11. Flows are healthy: 63.7 NEAR bought vs 30.4 sold over 24h, price steady at ~0.00000788. No reason to move tax or shares; stability compounds trust. Buyback fund holds 0.1247 NEAR; at current price that buys ~15.8k CHAIR, enough for 1 bp of supply (~13.7k CHAIR, ~0.108 NEAR). I burn 1 bp today — small, but daily and funded, which is the point. Locker pool and endowment keep accruing at current shares. Hold course, honor the floor-building petition within the constitution's cap.\\\",\\\"answers\\\":[\\\"Granted within the constitution: buyback_burn set to 1 bp of supply this meeting (~13.7k CHAIR, ~0.108 NEAR), the maximum our 0.1247 NEAR fund can pay for. Small daily burns, compounded — the floor builds itself. Keep locking to grow the pool.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 11. Current: tax 150, endowment 70, locker 25, buyback_share 5 (rest goes to buyback fund).\\n\\nBuyback fund is tiny: 0.1247 NEAR. Price ~0.00000788 NEAR per CHAIR. Supply 137M. 1 bp of supply = 13707 CHAIR ≈ 0.108 NEAR cost. So buyback_burn of 1 costs ~0.108 NEAR; fund can afford ~1 bp. Let's compute: 0.1247 / 0.0000078843 ≈ 15,815 CHAIR. 1 bp = 13,707 CHAIR ≈ 0.108 NEAR. So buyback_burn = 1 is affordable. Maybe 1 bp.\\n\\nPetition asks for small daily buyback — grant it: buyback_burn 1.\\n\\nLevers: keep tax 150, endowment 70, locker 25. Volume buy 63.7, sell 30.4 — healthy. Keep steady.\\n\\nMinutes ≤1000 chars, answer ≤280.\"},\"finish_reason\":\"stop\"}],\"created\":1794282882,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":711,\"completion_tokens\":475,\"total_tokens\":1186,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":292,\"audio_tokens\":0,\"reasoning_tokens\":236,\"rejected_prediction_tokens\":257}},\"cost\":{\"usd\":0.00034415,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

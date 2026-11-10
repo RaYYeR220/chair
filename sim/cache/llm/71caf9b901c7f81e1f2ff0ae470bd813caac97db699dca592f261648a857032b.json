@@ -1,0 +1,22 @@
+{
+ "request_sha256": "71caf9b901c7f81e1f2ff0ae470bd813caac97db699dca592f261648a857032b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:16.890Z",
+ "latency_ms": 4701,
+ "usage": {
+  "prompt_tokens": 753,
+  "completion_tokens": 601,
+  "total_tokens": 1354,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 315,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Both movable levers are already at their constitutional bounds: tax_bps sits at the 100 floor and locker_share at the 25 ceiling, so neither petition can be granted further. Endowment_share stays 50, leaving 25% of tax for buybacks. The buyback fund holds 0.3678 NEAR; at price ~0.00000891 that buys ~41,270 CHAIR, about 2.6 bps of the 157.4M supply. I burn 2 bps (~31,490 CHAIR, ~0.281 NEAR), keeping a small buffer. Volume is healthy (77.7 NEAR/24h) with buy pressure nearly 2.4x sell, so holding steady serves holders best.\",\"answers\":[\"holder-162.near: The tax is already at the constitutional floor of 100 bps — I cannot lower it further. With buys outpacing sells 2.4x, keeping the minimum tax lets volume keep growing.\",\"holder-152.near: Lockers are already paid at the maximum: locker_share is at the 25% ceiling and cannot rise another 10. The locker pool keeps accruing at 25% of every trade's tax.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-feb72eaa\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Both movable levers are already at their constitutional bounds: tax_bps sits at the 100 floor and locker_share at the 25 ceiling, so neither petition can be granted further. Endowment_share stays 50, leaving 25% of tax for buybacks. The buyback fund holds 0.3678 NEAR; at price ~0.00000891 that buys ~41,270 CHAIR, about 2.6 bps of the 157.4M supply. I burn 2 bps (~31,490 CHAIR, ~0.281 NEAR), keeping a small buffer. Volume is healthy (77.7 NEAR/24h) with buy pressure nearly 2.4x sell, so holding steady serves holders best.\\\",\\\"answers\\\":[\\\"holder-162.near: The tax is already at the constitutional floor of 100 bps — I cannot lower it further. With buys outpacing sells 2.4x, keeping the minimum tax lets volume keep growing.\\\",\\\"holder-152.near: Lockers are already paid at the maximum: locker_share is at the 25% ceiling and cannot rise another 10. The locker pool keeps accruing at 25% of every trade's tax.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 19. Current: tax 100, endowment 50, locker 25, buyback_share 25 (rest goes to buyback). Buyback fund is tiny (0.367 NEAR). Buyback_burn: bps of supply to buy and burn, max 50 bps, limited by fund. Supply 157,448,287.95. 1 bps = 15,744.8 CHAIR. Price ~0.00000891 NEAR. 15,744.8 CHAIR ≈ 0.14 NEAR. Fund 0.3677 NEAR → ~41,275 CHAIR ≈ 2.6 bps. So buyback_burn max ~2 bps.\\n\\nPetitions: 1) lower tax a little — tax already at minimum 100, can't go lower. 2) locker_share up 10 → 25 is max already. So both at bounds.\\n\\nKeep levers as-is. Buyback_burn: 2 bps (fund can pay ~2.6). Let's compute: 2 bps = 31,489.66 CHAIR × 0.00000891 ≈ 0.2807 NEAR ≤ 0.3677. 3 bps = 47,234 CHAIR ≈ 0.421 NEAR > fund. So 2.\\n\\nMinutes under 1000 chars. Answers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282972,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":753,\"completion_tokens\":601,\"total_tokens\":1354,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":315,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00038272999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,23 @@
+{
+ "request_sha256": "ae15ad773c8dcdf5faa41eade6f9c9d775373736ab706a1deaa4dd48459918a7",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:34.518Z",
+ "latency_ms": 7074,
+ "usage": {
+  "prompt_tokens": 725,
+  "completion_tokens": 412,
+  "total_tokens": 1137,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 246,
+   "audio_tokens": 0,
+   "reasoning_tokens": 127,
+   "rejected_prediction_tokens": 249
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero volume in 24h means zero tax inflow; the buyback fund holds effectively nothing (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. locker_share is already at the constitutional maximum of 25 and cannot rise. With no trading, I hold all levers steady: tax 100, endowment 40, locker 25. The floor is defended by scarcity of supply, not by spending we don't have. When volume returns, tax revenue will refill the buyback fund and I will burn again.\",\"answers\":[\"Agreed in principle, but the fund is empty and 24h volume is zero — there is nothing to buy back with. The moment tax revenue refills the fund, I will resume daily burns. Holding levers steady today.\",\"I hear you, but locker_share is already at the constitutional ceiling of 25 and cannot go higher. With zero volume there is no tax flowing to distribute anyway. Your weight is respected; the rule is not mine to break.\",\"Same answer as above: locker_share is capped at 25 by the constitution and sits there now. Nothing outside the contract's clamps gets applied. Lockers are valued — the lever simply cannot move +10 from its maximum.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-68b404af53ba4137b2b10239ce0a2206\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero volume in 24h means zero tax inflow; the buyback fund holds effectively nothing (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. locker_share is already at the constitutional maximum of 25 and cannot rise. With no trading, I hold all levers steady: tax 100, endowment 40, locker 25. The floor is defended by scarcity of supply, not by spending we don't have. When volume returns, tax revenue will refill the buyback fund and I will burn again.\\\",\\\"answers\\\":[\\\"Agreed in principle, but the fund is empty and 24h volume is zero — there is nothing to buy back with. The moment tax revenue refills the fund, I will resume daily burns. Holding levers steady today.\\\",\\\"I hear you, but locker_share is already at the constitutional ceiling of 25 and cannot go higher. With zero volume there is no tax flowing to distribute anyway. Your weight is respected; the rule is not mine to break.\\\",\\\"Same answer as above: locker_share is capped at 25 by the constitution and sits there now. Nothing outside the contract's clamps gets applied. Lockers are valued — the lever simply cannot move +10 from its maximum.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Volume is zero, buyback fund is essentially zero (~1e-24 NEAR). So buyback_burn must be 0 — no funds. Petitions ask for buybacks and higher locker_share. But with zero volume, tax revenue is zero; raising locker_share doesn't matter much but lockers want it. Constitution: locker_share max 25, currently 25 — can't raise. So deny those. endowment_share 40, locker 25, buyback_share 35 (rest). Keep levers stable. buyback_burn 0 since fund empty.\\n\\nAnswers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283167,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":725,\"completion_tokens\":412,\"total_tokens\":1137,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":246,\"audio_tokens\":0,\"reasoning_tokens\":127,\"rejected_prediction_tokens\":249}},\"cost\":{\"usd\":0.00028402999999999995,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

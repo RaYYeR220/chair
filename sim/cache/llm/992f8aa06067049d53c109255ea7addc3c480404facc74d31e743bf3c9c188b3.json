@@ -1,0 +1,22 @@
+{
+ "request_sha256": "992f8aa06067049d53c109255ea7addc3c480404facc74d31e743bf3c9c188b3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:35.805Z",
+ "latency_ms": 5323,
+ "usage": {
+  "prompt_tokens": 712,
+  "completion_tokens": 522,
+  "total_tokens": 1234,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 330,
+   "audio_tokens": 0,
+   "reasoning_tokens": 262,
+   "rejected_prediction_tokens": 246
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":55,\"locker_share\":25,\"buyback_burn\":4,\"minutes\":\"Volume is heavily buy-skewed (342 NEAR buys vs 40 sells), so demand is strong and a modest tax cut can deepen the funnel without risking revenue. Cutting tax 175→150 (within the 50 bps cap) honors the petition while keeping the tax meaningful. Shares stay at 55/25, leaving 20% for buybacks; sum is 100. Buyback fund is 1.37 NEAR; at price ~0.0000136 NEAR/CHAIR that buys ~100,700 CHAIR, ~4 bps of the 250.8M supply — so burn is capped at 4, well under the 50 bps ceiling. Endowment at 34.95 NEAR comfortably covers inference; no change needed there.\",\"answers\":[\"holder-170.near: Agreed in part — tax cut 175→150 bps this meeting. Volume is 85% buys, so a modest cut should widen the funnel; I'll watch whether sell-side follows before cutting further. Buyback burn of 4 bps funded from the buyback fund continues supporting price.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-e3fe38e079cd4340986647b4215d8610\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":55,\\\"locker_share\\\":25,\\\"buyback_burn\\\":4,\\\"minutes\\\":\\\"Volume is heavily buy-skewed (342 NEAR buys vs 40 sells), so demand is strong and a modest tax cut can deepen the funnel without risking revenue. Cutting tax 175→150 (within the 50 bps cap) honors the petition while keeping the tax meaningful. Shares stay at 55/25, leaving 20% for buybacks; sum is 100. Buyback fund is 1.37 NEAR; at price ~0.0000136 NEAR/CHAIR that buys ~100,700 CHAIR, ~4 bps of the 250.8M supply — so burn is capped at 4, well under the 50 bps ceiling. Endowment at 34.95 NEAR comfortably covers inference; no change needed there.\\\",\\\"answers\\\":[\\\"holder-170.near: Agreed in part — tax cut 175→150 bps this meeting. Volume is 85% buys, so a modest cut should widen the funnel; I'll watch whether sell-side follows before cutting further. Buyback burn of 4 bps funded from the buyback fund continues supporting price.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 10. Volume heavily buy-skewed (342 buy vs 40 sell NEAR). Tax at 175, could lower slightly to 150 (max 50 move). Petition asks lower tax a little. Buyback fund 1.37 NEAR; price 0.0000136 NEAR per CHAIR. Buyback burn max 50 bps of supply = 250787109 * 0.005 = 1,253,935 CHAIR. Cost = 1,253,935 * 0.0000136 ≈ 17.05 NEAR. Fund only 1.37 NEAR → can buy 1.37/0.0000136 ≈ 100,700 CHAIR ≈ 0.4 bps of supply. So buyback_burn limited by fund: 100,700/250,787,109 ≈ 0.0402% = ~4 bps? Wait 0.0402% = 4.02 bps. So buyback_burn = 4.\\n\\nSet tax_bps 150, endowment 55, locker 25 (sum 100, ok). Buyback share becomes 20% implicitly.\"},\"finish_reason\":\"stop\"}],\"created\":1794282930,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":712,\"completion_tokens\":522,\"total_tokens\":1234,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":330,\"audio_tokens\":0,\"reasoning_tokens\":262,\"rejected_prediction_tokens\":246}},\"cost\":{\"usd\":0.0003678,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

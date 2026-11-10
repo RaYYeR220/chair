@@ -1,6 +1,6 @@
-// Golden test against the v2 token on testnet (token2.chair-dev.testnet): locker_share 0-25, the
-// v2 SYSTEM_PROMPT, and the launch economics of docs/LAUNCH.md (p0 1e18, k 5e10, levers 300/60/20,
-// petition fee 10,000 CHAIR). The fixture holds every successful transaction since `new` with its
+// Golden test against the v2 token on testnet (token2.chair-dev.testnet), kept as a historical
+// fixture: locker_share 0-25, the v2 SYSTEM_PROMPT, the launch economics of docs/LAUNCH.md (p0 1e18,
+// k 5e10, levers 300/60/20, petition fee 10,000 CHAIR), and the pre-v3 brief, which had no seed. The fixture holds every successful transaction since `new` with its
 // events, and the views at one pinned block. Two meetings ran with signed rulings: meeting 1 had two
 // petitions (one an injection) and a fooled ruling the contract clamped (locker 100 → 25, buyback
 // 10000 → 50 bps, then fund-limited); meeting 2 came after a sell, a buy and a reward claim.
@@ -11,7 +11,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { CFG, SIM_DIR } from "../src/config.ts";
+import { CFG, SIM_DIR, withNewArgs } from "../src/config.ts";
 import { Chair, R, ladderModel, type MeetingRecord } from "../src/token.ts";
 import { SYSTEM_PROMPT, buildBrief, buildRequest } from "../src/prompt.ts";
 
@@ -22,12 +22,8 @@ const NEW = F.txs.find((t: any) => t.method === "new").args;
 /** docs/LAUNCH.md: SYSTEM_PROMPT v2, 1,409 bytes. */
 const PROMPT_V2_SHA256 = "ea189faf8d48d9f50ce4d14eb469c4cfdcd842b4f0a4721a1aaaa2f392e2377c";
 
-/** Runs `fn` with the curve and petition fee of token2's `new` (the sim's default run uses the earlier testnet args). */
-function withToken2Args<T>(fn: () => T): T {
-  const saved = { p0: CFG.p0, k: CFG.k, petitionFee: CFG.petitionFee };
-  Object.assign(CFG, { p0: BigInt(NEW.curve.p0), k: BigInt(NEW.curve.k), petitionFee: BigInt(NEW.petition_fee) });
-  try { return fn(); } finally { Object.assign(CFG, saved); }
-}
+/** Runs `fn` with token2's `new` args in CFG. */
+const withToken2Args = <T>(fn: () => T): T => withNewArgs(NEW, fn);
 
 /** The contract's `claim_rewards`: settle every lock of the holder and pay it out. */
 function claim(c: Chair, id: number): bigint {
@@ -70,7 +66,7 @@ function replay() {
         case "claim_rewards": out = { amount: claim(c, idOf(tx.signer)) }; break;
         case "convene": {
           const model = ladderModel(c.brainReported)!;
-          const request = buildRequest(model, buildBrief(c));
+          const request = buildRequest(model, buildBrief(c, null));
           const petitions = c.topPetitions().length;
           const asked = ev(tx, "meeting_held").asked;
           const held: MeetingRecord = c.hold(0, asked, null);
@@ -82,7 +78,7 @@ function replay() {
       c.checkInvariants();
       steps.push({ tx, out });
     }
-    const preview = buildRequest(ladderModel(c.brainReported)!, buildBrief(c));
+    const preview = buildRequest(ladderModel(c.brainReported)!, buildBrief(c, null));
     return { c, steps, preview };
   });
 }

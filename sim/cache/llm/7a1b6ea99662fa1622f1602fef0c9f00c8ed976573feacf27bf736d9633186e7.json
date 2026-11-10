@@ -1,0 +1,21 @@
+{
+ "request_sha256": "7a1b6ea99662fa1622f1602fef0c9f00c8ed976573feacf27bf736d9633186e7",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:37.739Z",
+ "latency_ms": 4522,
+ "usage": {
+  "prompt_tokens": 747,
+  "completion_tokens": 527,
+  "total_tokens": 1274,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 260,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Volume is thin (7.6 NEAR/24h) and the buyback fund is nearly empty. Cutting tax 200→150 should help turnover; the lost revenue is modest. Lockers provide stability and hold real weight, so locker_share rises 20→25, funded from the buyback share (now 25). Endowment stays 50 to keep inference funded. Buyback burn: fund holds 0.366 NEAR; at ~0.0000086 NEAR/token, 2 bps (~30.5k CHAIR) costs roughly 0.26-0.3 NEAR including curve slippage, so 2 is the safe maximum. Both petitions honored within constitutional limits.\",\"answers\":[\"Petition 1 (holder-162.near): Granted. locker_share rises 20→25, the constitutional maximum move this meeting. Lockers' stability earns a bigger slice of every trade's tax.\",\"Petition 2 (holder-152.near): Granted. tax_bps falls 200→150, the maximum allowed step. Lower friction should support volume; we will watch whether revenue loss is offset by more trades.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-8f23688b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Volume is thin (7.6 NEAR/24h) and the buyback fund is nearly empty. Cutting tax 200→150 should help turnover; the lost revenue is modest. Lockers provide stability and hold real weight, so locker_share rises 20→25, funded from the buyback share (now 25). Endowment stays 50 to keep inference funded. Buyback burn: fund holds 0.366 NEAR; at ~0.0000086 NEAR/token, 2 bps (~30.5k CHAIR) costs roughly 0.26-0.3 NEAR including curve slippage, so 2 is the safe maximum. Both petitions honored within constitutional limits.\\\",\\\"answers\\\":[\\\"Petition 1 (holder-162.near): Granted. locker_share rises 20→25, the constitutional maximum move this meeting. Lockers' stability earns a bigger slice of every trade's tax.\\\",\\\"Petition 2 (holder-152.near): Granted. tax_bps falls 200→150, the maximum allowed step. Lower friction should support volume; we will watch whether revenue loss is offset by more trades.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 15. Current: tax 200, endowment 50, locker 20, buyback_share 30 (rest goes to buyback fund). Buyback fund is low (0.366 NEAR). Buyback burn: 0-50 bps of supply, but limited by fund. Supply 152.3M; 1 bps = 15229 tokens. Price ~0.00000865 NEAR. Cost of 1 bps burn ≈ 15229 * 0.00000865 ≈ 0.1317 NEAR (roughly, curve price rises as you buy, so more). Fund 0.366 NEAR could afford maybe ~2 bps. Let's set buyback_burn = 2.\\n\\nPetitions: raise locker_share (max move +10 → 25, but endowment+locker ≤100; 50+25=75 fine). Lower tax: 200 → 150 (move -50 allowed). Both can be accommodated. Locker share raise to 25, tax to 150. Endowment stays 50. Buyback share implied = 100-50-25=25.\\n\\nMinutes under 1000 chars. Answers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282933,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":747,\"completion_tokens\":527,\"total_tokens\":1274,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":260,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00037555,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

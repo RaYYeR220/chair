@@ -26,7 +26,7 @@ export interface Summary {
 export interface MeetingLog {
   day: number; meeting: number; tier: string | null; fallback: string | null;
   requested: MeetingRecord["requested"]; applied: MeetingRecord["applied"]; clamps: Clamp[];
-  brief?: string; content?: string; requestSha256?: string; cached?: boolean;
+  seed?: string; brief?: string; content?: string; requestSha256?: string; cached?: boolean;
 }
 
 export interface RunResult {
@@ -74,7 +74,7 @@ export async function runSim(scn: Scenario, policy: Policy, seed: number, opts: 
     for (const a of order) act({ chair: c, mv, seed, scn }, a);
 
     const volBuy = toNear(c.volBuy), volSell = toNear(c.volSell);
-    const dec: Decision = await policy.decide(c, day);
+    const dec: Decision = await policy.decide(c, day, { scenario: scn.key, seed });
     const rec = c.hold(day, dec.ruling, dec.reason === "fixed_rule" ? null : dec.reason);
     c.reportEndowment(c.brain); // the brain stakes what it received and reports it before the next meeting
     c.checkInvariants();
@@ -85,7 +85,7 @@ export async function runSim(scn: Scenario, policy: Policy, seed: number, opts: 
     const tier = isLlm(policy) ? dec.model ?? null : null;
     meetings.push({
       day, meeting: rec.meeting, tier, fallback: dec.reason, requested: rec.requested, applied: rec.applied, clamps: rec.clamps,
-      ...(dec.brief ? { brief: dec.brief } : {}), ...(dec.llm ? { content: dec.llm.content, requestSha256: dec.llm.requestSha256, cached: dec.llm.cached } : {}),
+      ...(dec.seed ? { seed: dec.seed } : {}), ...(dec.brief ? { brief: dec.brief } : {}), ...(dec.llm ? { content: dec.llm.content, requestSha256: dec.llm.requestSha256, cached: dec.llm.cached } : {}),
     });
 
     const price = toNear(c.price());
@@ -151,7 +151,7 @@ export async function runSim(scn: Scenario, policy: Policy, seed: number, opts: 
     fallbacks: meetings.filter((m) => m.fallback).length, fallbackReasons, tiers,
   };
   return {
-    scenario: scn.key, policy: policy.key, seed, variant: opts.variant ?? CFG.rawConstitution.version, lockerMax: rules.locker.max,
+    scenario: scn.key, policy: policy.key, seed, variant: opts.variant ?? CFG.tokenVersion, lockerMax: rules.locker.max,
     series: S, summary, meetings, ...(isLlm(policy) ? { llm: llmAcc } : {}),
   };
 }

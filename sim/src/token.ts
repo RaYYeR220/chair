@@ -1,7 +1,7 @@
 // Exact integer model of the CHAIR token contract (contracts/token, SPEC §2–§5).
 // All money is bigint: NEAR in yocto (1e-24), tokens in base units (1e-18). Every formula and
-// rounding mirrors the contract; sim/test/golden.test.ts replays the testnet deployment's
-// transactions through this class and gets the contract's request bytes back.
+// rounding mirrors the contract; the golden tests (sim/test/golden*.test.ts) replay all three testnet
+// deployments' transactions through this class and get the contract's request bytes back.
 import { CFG, ONE, RULES, type LeverSet, type Rules } from "./config.ts";
 
 export type Levers = LeverSet;
@@ -13,10 +13,13 @@ export interface Ruling {
   minutes?: string;
   answers?: string[];
 }
-export type FallbackReason = "unsigned" | "bad_signature" | "bad_hash" | "unparseable" | "asleep";
+export type FallbackReason = "unsigned" | "bad_signature" | "bad_hash" | "unparseable" | "asleep" | "lapsed";
 
 export interface Lock { owner: number; amount: bigint; days: number; weight: bigint; start: number; end: number; accStart: bigint }
-export interface Petition { owner: number; weight: bigint; text: string }
+/** A petition. In the queue `weight` is the weight at filing; in a brief, the weight at the meeting. */
+export interface Petition { owner: number; weight: bigint; text: string; filedAt: number }
+/** One row of `meeting_convened.reweighed`. */
+export interface Reweighed { owner: number; filedWeight: bigint; weight: bigint; inBrief: boolean }
 export interface Holder {
   near: bigint;
   tokens: bigint; // unlocked
@@ -152,8 +155,9 @@ export class Chair {
   rules: Rules;
   acc = 0n; // reward per weight, scaled by rewardScale
   locks: Lock[] = [];
-  petitions: Petition[] = []; // the three heaviest, in brief order
+  petitions: Petition[] = []; // the queue for the next meeting: at most 8, one per account, heaviest at filing first
   petitionsFiled = 0;
+  private filedSeq = 0; // filing order (the contract's filed_at)
   volBuy = 0n; // curve amounts traded today (the brief's 24 h window on a daily grid)
   volSell = 0n;
   day = 0;
@@ -285,15 +289,28 @@ export class Chair {
   }
 
   weightOf(id: number): bigint { return this.activeLocks(id).reduce((a, l) => a + l.weight, 0n); }
+  /**
+   * `active_weight` at the meeting held at the end of `day`: the holder's locks whose end is after
+   * that day. The sim holds one meeting per day, after the agents act, so a petition filed on `day`
+   * is for that day's meeting: this is both the filing weight (a lock that runs past the next
+   * meeting) and the weight `convene` recomputes.
+   */
+  weightAt(id: number, day: number): bigint {
+    return this.locks.reduce((a, l) => (l.owner === id && l.end > day ? a + l.weight : a), 0n);
+  }
   totalWeight(): bigint { return this.locks.reduce((a, l) => a + l.weight, 0n); }
   totalLocked(): bigint { return this.locks.reduce((a, l) => a + l.amount, 0n); }
 
-  /** `petition`: lockers only, one per day, fee burned from unlocked tokens; keeps the three heaviest. */
+  /**
+   * `petition`: only with a lock that runs past the next meeting, one per day, fee burned from
+   * unlocked tokens. Queued by that weight: at most 8, heaviest first, one per account (a newer
+   * petition replaces the older); a lighter one past the 8th is filed and burned but not queued.
+   */
   petition(id: number, text: string, today = this.day): boolean {
     const chars = [...text].length;
     if (chars === 0 || chars > CFG.petitionMaxChars) throw new Error("petition must be 1-280 characters");
     if (/\p{Cc}/u.test(text)) throw new Error("petition has control characters");
-    const w = this.weightOf(id);
+    const w = this.weightAt(id, today);
     if (w === 0n) return false;
     const h = this.holder(id);
     if (h.lastPetitionDay >= 0 && today < h.lastPetitionDay + 1) return false;
@@ -303,17 +320,36 @@ export class Chair {
     this.supply -= CFG.petitionFee;
     this.burned += CFG.petitionFee;
     this.petitionsFiled += 1;
-    const p = { owner: id, weight: w, text };
+    const p: Petition = { owner: id, weight: w, text, filedAt: this.filedSeq++ };
+    this.petitions = this.petitions.filter((q) => q.owner !== id);
     let pos = this.petitions.findIndex((q) => q.weight < w);
     if (pos < 0) pos = this.petitions.length;
-    if (pos < CFG.petitionTopN) {
+    if (pos < CFG.petitionQueueMax) {
       this.petitions.splice(pos, 0, p);
-      this.petitions.length = Math.min(this.petitions.length, CFG.petitionTopN);
+      this.petitions.length = Math.min(this.petitions.length, CFG.petitionQueueMax);
     }
     return true;
   }
 
-  topPetitions(): Petition[] { return this.petitions; }
+  /**
+   * The brief's petitions (`brief_petitions`) for the meeting at the end of `day`: every queued
+   * petitioner reweighed from their locks still active then, zeros dropped, the three heaviest kept
+   * (earlier filing wins ties).
+   */
+  briefPetitions(day = this.day): Petition[] {
+    return this.petitions
+      .map((p) => ({ ...p, weight: this.weightAt(p.owner, day) }))
+      .filter((p) => p.weight > 0n)
+      .sort((a, b) => (a.weight === b.weight ? a.filedAt - b.filedAt : b.weight > a.weight ? 1 : -1))
+      .slice(0, CFG.petitionTopN);
+  }
+  topPetitions(): Petition[] { return this.briefPetitions(); }
+
+  /** `meeting_convened.reweighed`: every queued petition, its weight at filing and now, and whether it made the brief. */
+  reweighed(day = this.day): Reweighed[] {
+    const brief = new Set(this.briefPetitions(day).map((p) => p.owner));
+    return this.petitions.map((p) => ({ owner: p.owner, filedWeight: p.weight, weight: this.weightAt(p.owner, day), inBrief: brief.has(p.owner) }));
+  }
 
   /** The brain reports its staked endowment; the IQ ladder reads this. */
   reportEndowment(staked: bigint) { this.brainReported = staked; }

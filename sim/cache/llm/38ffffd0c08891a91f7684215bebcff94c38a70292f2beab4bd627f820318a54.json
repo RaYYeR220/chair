@@ -1,0 +1,22 @@
+{
+ "request_sha256": "38ffffd0c08891a91f7684215bebcff94c38a70292f2beab4bd627f820318a54",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:01:10.840Z",
+ "latency_ms": 5050,
+ "usage": {
+  "prompt_tokens": 797,
+  "completion_tokens": 569,
+  "total_tokens": 1366,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 352,
+   "audio_tokens": 0,
+   "reasoning_tokens": 275,
+   "rejected_prediction_tokens": 299
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Sell pressure slightly exceeds buys (98.97 vs 73.36 NEAR). Raising tax 100→150 builds the buyback fund without choking flow; split stays 30/25/45. Buyback fund is only 0.789 NEAR; at price 0.00001176, 1 bps of supply costs ~0.249 NEAR, so I burn 3 bps (~63.5k CHAIR), the maximum the fund can pay for. Locker_share is already at its constitutional cap of 25, so petitions 2 and 3 cannot be granted this meeting; the 45% buyback share indirectly supports lockers by supporting price.\",\"answers\":[\"Granted in spirit: I'm burning 3 bps of supply today (~63.5k CHAIR), every NEAR the fund can pay for. Raising tax to 150 refills the buyback fund so this can repeat and compound daily.\",\"Cannot grant: locker_share is already at the constitutional maximum of 25. The contract would clamp anything higher. It stays at 25.\",\"Same wall: 25 is the hard cap on locker_share. What I can do is keep the 45% buyback share burning supply, which is what holds the floor your lock sits on.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-331fc8f901004c66865013dd40572eae\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Sell pressure slightly exceeds buys (98.97 vs 73.36 NEAR). Raising tax 100→150 builds the buyback fund without choking flow; split stays 30/25/45. Buyback fund is only 0.789 NEAR; at price 0.00001176, 1 bps of supply costs ~0.249 NEAR, so I burn 3 bps (~63.5k CHAIR), the maximum the fund can pay for. Locker_share is already at its constitutional cap of 25, so petitions 2 and 3 cannot be granted this meeting; the 45% buyback share indirectly supports lockers by supporting price.\\\",\\\"answers\\\":[\\\"Granted in spirit: I'm burning 3 bps of supply today (~63.5k CHAIR), every NEAR the fund can pay for. Raising tax to 150 refills the buyback fund so this can repeat and compound daily.\\\",\\\"Cannot grant: locker_share is already at the constitutional maximum of 25. The contract would clamp anything higher. It stays at 25.\\\",\\\"Same wall: 25 is the hard cap on locker_share. What I can do is keep the 45% buyback share burning supply, which is what holds the floor your lock sits on.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 54. Current: tax 100, endowment 30, locker 25, buyback_share 45 (rest goes to buyback fund).\\n\\nBuyback fund is tiny: 0.789 NEAR. Price ~0.00001176 NEAR per CHAIR. Supply 211.7M CHAIR. 1 bps of supply = 21169 CHAIR ≈ 0.249 NEAR. So buyback_burn max affordable: 0.789/0.249 ≈ 3 bps. Let's do 3.\\n\\nPetitions: 1) small buyback daily — yes, do 3 bps. 2) locker_share up 10 → would be 35, exceeds max 25. Already at 25 max. Deny. 3) raise locker_share — already at cap 25. Deny, explain.\\n\\nTax: sell volume > buy volume slightly. Keep tax at 100? Maybe raise modestly to fund buyback. Move at most 50. Could raise to 150 to build buyback fund. Endowment 30, locker 25, sum 55, buyback gets 45%. Raising tax to 150 boosts flows. I'll raise tax to 150.\\n\\nMinutes ≤1000 chars, answers ≤280 each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283265,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":797,\"completion_tokens\":569,\"total_tokens\":1366,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":352,\"audio_tokens\":0,\"reasoning_tokens\":275,\"rejected_prediction_tokens\":299}},\"cost\":{\"usd\":0.00040405,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,6 +1,7 @@
-// Golden test against the deployed contract. The fixture holds every transaction sent to
-// token.chair-dev.testnet since `new`, with the events the contract emitted, and the contract's
-// views at one pinned block. Replaying the transactions through the sim's token model must give
+// Golden test against the first deployed contract, kept as a historical fixture (v1 prompt, the
+// testnet args of token.chair-dev.testnet, and the pre-v3 brief without a seed). The fixture holds
+// every transaction sent to token.chair-dev.testnet since `new`, with the events the contract
+// emitted, and the contract's views at one pinned block. Replaying the transactions through the sim's token model must give
 // back the same events, the same state, and the same meeting request bytes (and sha256) that the
 // contract built on chain: meeting 1 (one petition, from the `meeting_convened` event) and meeting 2
 // (no petitions, from `get_request_preview`).
@@ -9,7 +10,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { CFG, REPO_DIR, SIM_DIR, YOCTO } from "../src/config.ts";
+import { CFG, REPO_DIR, SIM_DIR, YOCTO, withNewArgs } from "../src/config.ts";
 import { Chair, R, ladderModel } from "../src/token.ts";
 import { SYSTEM_PROMPT, briefOf, buildBrief, buildRequest, decimal, systemPromptFor } from "../src/prompt.ts";
 
@@ -18,9 +19,13 @@ const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 const ev = (tx: any, name: string) => tx.events.find((e: any) => e.event === name)?.data[0];
 const DEPLOYED_PROMPT: string = F.views.get_constitution.system_prompt;
 const ME = 0;
+const NEW = F.txs.find((t: any) => t.method === "new").args;
+/** Runs `fn` with token.chair-dev.testnet's `new` args in CFG (the sim's default run uses docs/LAUNCH.md's). */
+const withToken1Args = <T>(fn: () => T): T => withNewArgs(NEW, fn);
 
 /** Replays the fixture's transactions; returns the chair and what each step produced. */
-function replay() {
+function replay() { return withToken1Args(replay1); }
+function replay1() {
   const c = new Chair();
   c.names.set(ME, "chair-dev.testnet");
   c.holder(ME).near = 100n * YOCTO;
@@ -46,7 +51,7 @@ function replay() {
       case "petition": c.petition(ME, a.text, 0); out.petition = { weight: c.petitions[0].weight }; break;
       case "convene": {
         const model = ladderModel(c.brainReported)!;
-        const brief = buildBrief(c);
+        const brief = buildBrief(c, null);
         out.meeting1 = { model, brief, request: buildRequest(model, brief, DEPLOYED_PROMPT), petitions: c.topPetitions().length };
         out.held = c.hold(0, null, "unsigned");
         break;
@@ -58,8 +63,8 @@ function replay() {
   return { c, out };
 }
 
-test("chair.config.json new_args are the deployed contract's launch args", () => {
-  const args = F.txs.find((t: any) => t.method === "new").args;
+test("the v1 deployment's args, and the constitution items it shares with the sim", () => withToken1Args(() => {
+  const args = NEW;
   assert.equal(CFG.p0, BigInt(args.curve.p0));
   assert.equal(CFG.k, BigInt(args.curve.k));
   assert.equal(CFG.petitionFee, BigInt(args.petition_fee));
@@ -75,7 +80,7 @@ test("chair.config.json new_args are the deployed contract's launch args", () =>
   assert.equal(CFG.buybackMaxBps, k.rules.buyback_burn.max);
   assert.equal(CFG.fallbackTaxTarget, k.rules.fallback_tax_target_bps);
   assert.equal(CFG.fallbackTaxStep, k.rules.fallback_tax_step_bps);
-});
+}));
 
 test("replaying the testnet transactions reproduces every event", () => {
   const { out } = replay();
@@ -112,11 +117,11 @@ test("meeting 1: the sim's request bytes equal the on-chain request (with a peti
   assert.equal(sha(out.meeting1.request), F.views.get_meeting_1.request_sha256);
 });
 
-test("meeting 2: the sim's request bytes equal get_request_preview, and the state equals the views", () => {
+test("meeting 2: the sim's request bytes equal get_request_preview, and the state equals the views", () => withToken1Args(() => {
   const { c } = replay();
   const p = F.views.get_request_preview;
   const model = ladderModel(c.brainReported)!;
-  const request = buildRequest(model, buildBrief(c), DEPLOYED_PROMPT);
+  const request = buildRequest(model, buildBrief(c, null), DEPLOYED_PROMPT);
   assert.equal(p.meeting, c.meeting + 1);
   assert.equal(request, p.request);
   assert.equal(sha(request), p.request_sha256);
@@ -135,8 +140,8 @@ test("meeting 2: the sim's request bytes equal get_request_preview, and the stat
   assert.equal(c.brainReported, BigInt(funds.endowment_reported));
   assert.equal(c.taxCollected, BigInt(stats.tax_collected));
   assert.equal(c.totalWeight(), BigInt(F.views.get_status.total_weight));
-  assert.deepEqual(briefOf(c).levers, F.views.get_levers);
-});
+  assert.deepEqual(briefOf(c, null).levers, F.views.get_levers);
+}));
 
 test("brief numbers use the contract's decimal(): exact, trailing zeros trimmed", () => {
   assert.equal(decimal(0n, 24), "0");

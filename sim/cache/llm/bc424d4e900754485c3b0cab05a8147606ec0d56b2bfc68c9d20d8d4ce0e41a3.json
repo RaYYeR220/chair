@@ -1,0 +1,21 @@
+{
+ "request_sha256": "bc424d4e900754485c3b0cab05a8147606ec0d56b2bfc68c9d20d8d4ce0e41a3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:00.283Z",
+ "latency_ms": 3896,
+ "usage": {
+  "prompt_tokens": 788,
+  "completion_tokens": 502,
+  "total_tokens": 1290,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 200,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":65,\"locker_share\":20,\"buyback_burn\":10,\"minutes\":\"Volume is strongly buy-skewed (124 NEAR buys vs 4 NEAR sells), so a modest tax cut from 200 to 175 bps should support growth without gutting revenue. Keep endowment 65 and locker 20; the remaining 15% accrues to the buyback fund. Fund holds 4.87 NEAR; 10 bps of supply is ~229k CHAIR ≈ 2.87 NEAR at current price, affordable and leaves headroom. This delivers the small daily buyback petitioners want while trimming tax per the growth petition.\",\"answers\":[\"Agreed. I'm setting buyback_burn to 10 bps of supply today (~229k CHAIR, ~2.87 NEAR), paid from the 4.87 NEAR buyback fund and burned. The 15% buyback tax share refills it, so this compounds daily.\",\"Done. Tax moves 200 → 175 bps, the largest step I'll take in one meeting. With buys outnumbering sells ~30:1, lower friction should grow volume and likely widen the tax base.\",\"Same as the first: buyback_burn is 10 bps today and the 15% buyback share of tax keeps the fund topped up for a repeat tomorrow. Small, steady, compounding.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4adf70be\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":65,\\\"locker_share\\\":20,\\\"buyback_burn\\\":10,\\\"minutes\\\":\\\"Volume is strongly buy-skewed (124 NEAR buys vs 4 NEAR sells), so a modest tax cut from 200 to 175 bps should support growth without gutting revenue. Keep endowment 65 and locker 20; the remaining 15% accrues to the buyback fund. Fund holds 4.87 NEAR; 10 bps of supply is ~229k CHAIR ≈ 2.87 NEAR at current price, affordable and leaves headroom. This delivers the small daily buyback petitioners want while trimming tax per the growth petition.\\\",\\\"answers\\\":[\\\"Agreed. I'm setting buyback_burn to 10 bps of supply today (~229k CHAIR, ~2.87 NEAR), paid from the 4.87 NEAR buyback fund and burned. The 15% buyback tax share refills it, so this compounds daily.\\\",\\\"Done. Tax moves 200 → 175 bps, the largest step I'll take in one meeting. With buys outnumbering sells ~30:1, lower friction should grow volume and likely widen the tax base.\\\",\\\"Same as the first: buyback_burn is 10 bps today and the 15% buyback share of tax keeps the fund topped up for a repeat tomorrow. Small, steady, compounding.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 7. Tax 200, endowment 65, locker 20, buyback share 15 (implied). Buy volume 124 NEAR vs sell 4.2 — heavily buy-skewed. Petitions: two ask small daily buyback, one asks lower tax.\\n\\nBuyback_burn: bps of supply to buy and burn. Supply 229,431,811. 10 bps = 229,431 CHAIR ≈ 2.87 NEAR at price 0.0000125. Fund is 4.87 NEAR. 10 bps costs ~2.87 NEAR, affordable. Maybe 10 bps.\\n\\nTax: volume is buy-heavy; lowering tax a bit could boost volume. Move from 200 to 175 (within 50 limit). Keep endowment 65, locker 20 (sum 85, buyback 15). Fine.\\n\\nAnswers in order: three petitions.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282896,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":788,\"completion_tokens\":502,\"total_tokens\":1290,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":200,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003692,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

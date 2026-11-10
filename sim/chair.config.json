@@ -1,17 +1,18 @@
 {
   "_about": "Parameters of the CHAIR simulation. `new_args` has the shape of the token contract's `new` (the fields the sim uses; owner, brain, outlayer and signers are left out). `constitution` holds the contract's compile-time constants (contracts/token/src/constitution.rs and lib.rs). Big integers are decimal strings: yoctoNEAR (1e-24 NEAR) and token base units (1e-18 CHAIR).",
-  "_source": "new_args are the testnet launch args of token.chair-dev.testnet (`new` in tx g34ooCPWFv6hKCy6zbJ5mpPfWxs3eDyBkp5LToEZwf4, block 276993898). docs/LAUNCH.md with the mainnet values did not exist when v2 ran; if mainnet differs, change new_args and rerun. meeting_interval_s is the mainnet 23 h; the sim holds one meeting per simulated day.",
+  "_source": "new_args are the docs/LAUNCH.md mainnet `new` args for token.thechair.near (token v3): the economic fields only (curve, ladder, meeting_interval_s, petition_fee, levers). token3.chair-dev.testnet runs the same curve, ladder, petition fee and launch levers; it differs only in accounts, courier, signers and meeting_interval_s (300 s). sim/test/golden-v3.test.ts checks both. The sim holds one meeting per simulated day. v1 ran on token.chair-dev.testnet's args (commit d5782c6) and v2 on them too (commit 5ce467a); their golden tests pin their own args.",
   "new_args": {
-    "curve": { "p0": "1000000000000000000", "k": "1000000000000" },
+    "curve": { "p0": "1000000000000000000", "k": "50000000000" },
     "ladder": [
       { "min_endowment": "1000000000000000000000000", "model": "z-ai/glm-5.3-flash" },
       { "min_endowment": "50000000000000000000000000", "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017" },
       { "min_endowment": "500000000000000000000000000", "model": "moonshotai/kimi-k3" }
     ],
     "meeting_interval_s": 82800,
-    "petition_fee": "1000000000000000000000",
-    "levers": null
+    "petition_fee": "10000000000000000000000",
+    "levers": { "tax_bps": 300, "endowment_share": 60, "locker_share": 20 }
   },
+  "token_version": "v3",
   "constitution": {
     "version": "v2",
     "tax_bps": { "min": 100, "max": 300, "max_step": 50 },
@@ -23,6 +24,9 @@
     "lock_days": [1, 7, 30],
     "petition_max_chars": 280,
     "petitions_in_brief": 3,
+    "petition_queue_max": 8,
+    "seed_bytes": 16,
+    "max_response_bytes": 65536,
     "storage_deposit": "25000000000000000000000",
     "reward_scale": "1000000000000000000000000000000000000",
     "token_decimals": 18
@@ -37,7 +41,10 @@
     "fallback": "Tax moves 10 bps toward 200, the rest holds, no buyback; lockers are still paid and the endowment is still sent.",
     "meeting_order": "levers, buyback, locker payout, endowment sent to the brain. The brain reports what it holds after the meeting (the sim's one-meeting lag).",
     "brief_volume": "volume_24h_near is the curve amount traded in the last 24 h. The sim keeps one bucket per simulated day, so a meeting sees that day's trades.",
-    "petitions": "Lockers only, one per 24 h, fee burned from unlocked CHAIR (supply falls, s does not). The three heaviest by weight at filing reach the brief; earlier wins ties.",
+    "petitions": "Lockers only, one per 24 h, fee burned from unlocked CHAIR (supply falls, s does not). Filing needs a lock that runs past the next meeting (on the sim's daily grid: today's meeting), and queues the petition by that weight: at most 8, heaviest first, one per account (a newer one replaces the older). At the meeting every queued petitioner is reweighed from their locks still active then, zeros are dropped, and the three heaviest reach the brief; earlier filing wins ties.",
+    "brief_seed": "The brief's second field, after meeting: hex of 16 bytes. On chain it is the first 16 bytes of env::random_seed() at convene. In the sim it is the first 16 bytes of sha256(scenario + '|' + seed + '|' + meeting), e.g. sha256('whale|1|7'), so every policy and the control see the same seed at the same meeting, and a rerun sees it again.",
+    "response_size": "A response_text over 64 KiB is unparseable before it is hashed or parsed (the fallback runs).",
+    "lapsed": "A meeting whose ruling never arrives runs the fallback (reason lapsed) at the next convene. The sim's courier always answers, so it never lapses.",
     "ruling_parse": "choices[0].message.content: the whole trimmed content if it is a JSON object, else the span from the first '{' to the last '}'. The four lever fields must be integral numbers (any sign; the clamp handles bounds), minutes a string, answers an array with at least one string per petition in the brief (extras ignored; missing is fine with no petitions)."
   },
   "venice": {
@@ -52,6 +59,6 @@
       "deepseek-v4-1-flash-1017": { "input": 0.3, "output": 1.2 },
       "kimi-k3": { "input": 3.75, "output": 18.75 }
     },
-    "max_calls_per_run": 350
+    "max_calls_per_run": 360
   }
 }

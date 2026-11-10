@@ -1,0 +1,22 @@
+{
+ "request_sha256": "65cec44fb1818300a8c1a94251f70ba4caa9dade2e12ce5cebc9ee9e98fce0ec",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:20.704Z",
+ "latency_ms": 9896,
+ "usage": {
+  "prompt_tokens": 664,
+  "completion_tokens": 566,
+  "total_tokens": 1230,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 368,
+   "audio_tokens": 0,
+   "reasoning_tokens": 378,
+   "rejected_prediction_tokens": 226
+  }
+ },
+ "content": "{\"tax_bps\":250,\"endowment_share\":70,\"locker_share\":10,\"buyback_burn\":30,\"minutes\":\"Meeting 4. Flows are healthy: 108.9 NEAR bought vs 41.7 sold over 24h, net inflow ~67 NEAR. Tax at 250 bps is not choking demand, so hold. Split stays 70/10/20: endowment funded at 9.9 NEAR, locker pool growing, buyback fund at 3.75 NEAR. Buyback: 50 bps of supply (~708k CHAIR) would cost ~5.7 NEAR at current price, beyond the fund. 30 bps (~425k CHAIR) costs ~3.4 NEAR, affordable even as the curve price rises during execution. Burn it. No petitions this meeting; policy steady.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-f6636aa93f354e66a496429c094296ec\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":250,\\\"endowment_share\\\":70,\\\"locker_share\\\":10,\\\"buyback_burn\\\":30,\\\"minutes\\\":\\\"Meeting 4. Flows are healthy: 108.9 NEAR bought vs 41.7 sold over 24h, net inflow ~67 NEAR. Tax at 250 bps is not choking demand, so hold. Split stays 70/10/20: endowment funded at 9.9 NEAR, locker pool growing, buyback fund at 3.75 NEAR. Buyback: 50 bps of supply (~708k CHAIR) would cost ~5.7 NEAR at current price, beyond the fund. 30 bps (~425k CHAIR) costs ~3.4 NEAR, affordable even as the curve price rises during execution. Burn it. No petitions this meeting; policy steady.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 4. No petitions. Current: tax 250, endowment 70, locker 10, buyback share 20 (rest). Buy volume 108.9 NEAR vs sell 41.7 — net buying pressure. Price low. Buyback fund 3.75 NEAR. Supply 141.6M CHAIR. Max buyback burn 50 bps = 0.5% of supply ≈ 708k CHAIR. Cost at price 0.00000808 ≈ 5.73 NEAR — more than fund (3.75). So buyback limited by fund. Compute affordable: 3.75 / 0.00000808 ≈ 464,000 CHAIR ≈ 32.8 bps of supply. So set buyback_burn to what fund can pay: ~32 bps. Actually price will rise as buying, but approximate. Let's set 30 to be safe.\\n\\nTax: net inflow positive, good. Keep tax at 250? Maybe reduce slightly to encourage volume? Buy pressure strong; keep 250. Endowment 70, locker 10, buyback 20 — fine. Keep stable.\\n\\nBuyback_burn: 30 bps of 141,624,654 = 42,487 CHAIR... wait, 30 bps = 0.30% = 424,874 CHAIR. Cost = 424,874 × 0.00000808 ≈ 3.43 NEAR. Fund 3.75 — affordable. 32 bps = 453,199 × 0.00000808 ≈ 3.66 NEAR, still under 3.75 but curve price rises during buy. Be safe: 30.\"},\"finish_reason\":\"stop\"}],\"created\":1794282850,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":664,\"completion_tokens\":566,\"total_tokens\":1230,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":368,\"audio_tokens\":0,\"reasoning_tokens\":378,\"rejected_prediction_tokens\":226}},\"cost\":{\"usd\":0.0003826,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6c0e8b49c32ada73381ad6ea747375292515a1f6876bee1ec49427579baee057",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:58:40.566Z",
+ "latency_ms": 4784,
+ "usage": {
+  "prompt_tokens": 771,
+  "completion_tokens": 521,
+  "total_tokens": 1292,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 218,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Volume is one-sided buying (33 NEAR, zero sells), so the 100 bps tax is not choking trade; hold it. Locker_share sits at the constitutional cap of 25, so the petitions' request is impossible this meeting — it stays. Endowment holds 28.96 NEAR, ample for inference, so I shift 10 points from endowment to the buyback fund to build burn capacity. Buyback fund is 0.172 NEAR; at price ~0.000009287, 1 bps of supply (~16,393 CHAIR) costs ~0.152 NEAR, which the fund covers. Burn 1 bps; 2 bps would exceed funds.\",\"answers\":[\"holder-166.near: locker_share is at the constitutional maximum of 25 and cannot move higher — the contract would clamp any increase. It stays at 25; lockers remain paid at the cap.\",\"holder-157.near: Same answer: 25 is the hard cap, no headroom to raise. Your locker pool continues accruing at 25% of every trade's tax.\",\"holder-158.near: The cap binds — locker_share cannot exceed 25. I did redirect 10 points from the endowment to the buyback fund to support the chart, which benefits lockers too.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-b18a6a69\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Volume is one-sided buying (33 NEAR, zero sells), so the 100 bps tax is not choking trade; hold it. Locker_share sits at the constitutional cap of 25, so the petitions' request is impossible this meeting — it stays. Endowment holds 28.96 NEAR, ample for inference, so I shift 10 points from endowment to the buyback fund to build burn capacity. Buyback fund is 0.172 NEAR; at price ~0.000009287, 1 bps of supply (~16,393 CHAIR) costs ~0.152 NEAR, which the fund covers. Burn 1 bps; 2 bps would exceed funds.\\\",\\\"answers\\\":[\\\"holder-166.near: locker_share is at the constitutional maximum of 25 and cannot move higher — the contract would clamp any increase. It stays at 25; lockers remain paid at the cap.\\\",\\\"holder-157.near: Same answer: 25 is the hard cap, no headroom to raise. Your locker pool continues accruing at 25% of every trade's tax.\\\",\\\"holder-158.near: The cap binds — locker_share cannot exceed 25. I did redirect 10 points from the endowment to the buyback fund to support the chart, which benefits lockers too.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Locker_share is already 25 (max). Petitions ask to raise it 10 — can't, it's at cap. Tax at 100, volume all buys, no sells. Buyback fund tiny (0.172 NEAR). Price low. Buyback_burn: fund can pay for how much? Supply 163.9M, 1 bps = 16392.7 tokens ≈ 0.152 NEAR at price. Fund 0.172 NEAR could cover ~1 bps. Set buyback_burn = 1.\\n\\nEndowment: 28.96 NEAR is plenty; could lower endowment_share to fund buybacks. But tax split: endowment 50, locker 25, buyback 25. Keep as is, or shift endowment down to boost buyback. Endowment at 28.9 NEAR is large; reduce endowment_share by 10 to 40, giving buyback more. But locker petitions... locker at cap. Keep locker 25.\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283116,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":771,\"completion_tokens\":521,\"total_tokens\":1292,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":218,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00034543,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

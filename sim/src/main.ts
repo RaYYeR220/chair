@@ -6,12 +6,13 @@
 import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { CFG, REPO_DIR, SIM_DIR, withLockerMax } from "./config.ts";
+import { CFG, REPO_DIR, RULES, SIM_DIR, withLockerMax } from "./config.ts";
 import { SCENARIOS, DAYS, type Scenario } from "./scenarios.ts";
 import { runSim, type RunResult, type Summary, VOL_FROM } from "./engine.ts";
-import { nonePolicy, fixedPolicy, controllerPolicy, llmPolicy, type Policy } from "./policies.ts";
-import { LlmClient } from "./llm.ts";
-import { SYSTEM_PROMPT, systemPromptFor } from "./prompt.ts";
+import { nonePolicy, fixedPolicy, controllerPolicy, llmPolicy, parseRuling, type Policy } from "./policies.ts";
+import { LlmClient, type LlmResult } from "./llm.ts";
+import { SYSTEM_PROMPT, buildRequest, systemPromptFor } from "./prompt.ts";
+import { clampRuling, type Ruling } from "./token.ts";
 import { renderReport } from "./report.ts";
 import { smoothControllerPolicy } from "./posthoc.ts";
 
@@ -19,27 +20,14 @@ const argv = process.argv.slice(2);
 const flag = (n: string) => argv.includes(`--${n}`);
 const opt = (n: string, d: string) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 1] : d; };
 
-// --params launch: the mainnet `new` args from docs/LAUNCH.md (curve, petition fee, launch levers)
-// instead of chair.config.json's. The committed LLM cache was built on the config's args, so with
-// launch params the LLM chair only runs with --live.
-const PARAMS = opt("params", "config");
-if (PARAMS === "launch") {
-  const md = readFileSync(join(REPO_DIR, "docs", "LAUNCH.md"), "utf8");
-  const block = md.slice(md.indexOf("## Mainnet")).match(/```json\n([\s\S]*?)\n```/);
-  if (!block) throw new Error("no mainnet JSON block in docs/LAUNCH.md");
-  const a = JSON.parse(block[1]);
-  Object.assign(CFG, { p0: BigInt(a.curve.p0), k: BigInt(a.curve.k), petitionFee: BigInt(a.petition_fee), launch: a.levers ?? CFG.rawConstitution.default_levers, rawNewArgs: { curve: a.curve, ladder: a.ladder, meeting_interval_s: a.meeting_interval_s, petition_fee: a.petition_fee, levers: a.levers }, source: "docs/LAUNCH.md, mainnet `new` args (--params launch)" });
-  CFG.ladder = a.ladder.map((t: any) => ({ min: BigInt(t.min_endowment), model: t.model }));
-} else if (PARAMS !== "config") throw new Error(`--params config|launch, not ${PARAMS}`);
-
 const SEEDS = Number(opt("seeds", "20"));
 const LLM_SEED = 1;
 const DATE = opt("date", new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10));
-const TAG = opt("tag", PARAMS === "launch" ? "v2-launch-params" : "v2");
-const V1_RESULTS = opt("v1", "sim-2026-11-10.json");
+const TAG = opt("tag", CFG.tokenVersion);
+const PREV_RESULTS = opt("prev", "sim-v2-2026-11-10.json");
 const OUT = join(REPO_DIR, "results");
 const live = flag("live");
-const withLlm = !flag("no-llm") && (PARAMS === "config" || live);
+const withLlm = !flag("no-llm");
 const MAX_CALLS = Number(opt("max-calls", String(CFG.venice.max_calls_per_run)));
 
 const log = (s: string) => process.stderr.write(s + "\n");
@@ -70,32 +58,75 @@ function aggregate(sums: Summary[]): Agg {
 /** Extra LLM runs, in priority order, each run only if the call budget can finish it. */
 interface Extra { scenario: string; seed: number; key: string; name: string; lockerMax: number; why: string }
 const EXTRAS: Extra[] = [
-  { scenario: "whale", seed: 1, key: "llm_b50", name: "LLM chair, v1 bound (locker_share 0-50)", lockerMax: 50, why: "control: same seed, parameters and request format, only the locker_share ceiling at the v1 value" },
+  { scenario: "whale", seed: 1, key: "llm_b50", name: "LLM chair, locker_share ceiling 50 (control)", lockerMax: 50, why: "control: same seed, args and request format, only the locker_share ceiling at the v1 value" },
   { scenario: "whale", seed: 2, key: "llm", name: "LLM chair", lockerMax: CFG.locker.max, why: "extra seed" },
   { scenario: "bankrun", seed: 2, key: "llm", name: "LLM chair", lockerMax: CFG.locker.max, why: "extra seed" },
-  { scenario: "whale", seed: 3, key: "llm", name: "LLM chair", lockerMax: CFG.locker.max, why: "extra seed" },
-  { scenario: "bankrun", seed: 3, key: "llm", name: "LLM chair", lockerMax: CFG.locker.max, why: "extra seed" },
 ];
 
-/** v1 metrics recomputed from the v1 results file, including the whale's take of all tax. */
-function loadV1() {
-  const p = join(OUT, V1_RESULTS);
+/**
+ * Seed probe (pre-registered with v3): on the seed-1 whale run, the meetings of days 4, 8, ..., 32.
+ * Each is asked twice more: the identical request again, and the same brief with another seed.
+ * Comparing both answers with the run's tells what the seed alone changes, net of the host's own
+ * nondeterminism at temperature 0.
+ */
+const PROBE = { scenario: "whale", days: [4, 8, 12, 16, 20, 24, 28, 32], variant: "repeat-1" };
+const probeSeed = (scenario: string, seed: number, meeting: number) => createHash("sha256").update(`${scenario}|${seed}|${meeting}|probe`).digest("hex").slice(0, 2 * CFG.seedBytes);
+
+async function seedProbe(client: LlmClient, run: RunResult) {
+  const rows: any[] = [];
+  for (const day of PROBE.days) {
+    const i = run.meetings.findIndex((x) => x.day === day);
+    const m = run.meetings[i];
+    if (!m?.brief || !m.tier || !m.seed) continue;
+    const request = buildRequest(m.tier, m.brief);
+    const alt = probeSeed(run.scenario, run.seed, m.meeting);
+    const altBrief = m.brief.replace(`"seed":"${m.seed}"`, `"seed":"${alt}"`);
+    if (altBrief === m.brief) throw new Error("probe: seed not found in the brief");
+    const altRequest = buildRequest(m.tier, altBrief);
+    if (live ? client.remaining() < 2 : !(client.isCached(request, PROBE.variant) && client.isCached(altRequest))) break;
+    const petitions = JSON.parse(m.brief).petitions.length;
+    const prev = i > 0 ? run.meetings[i - 1].applied : { ...CFG.launch, buyback_burn: 0 };
+    const before = { tax_bps: prev.tax_bps, endowment_share: prev.endowment_share, locker_share: prev.locker_share };
+    const read = (r: LlmResult): Ruling | null => (r.error || r.content == null || r.responseBytes > CFG.maxResponseBytes ? null : parseRuling(r.content, petitions));
+    const asked = (r: Ruling | null) => (r ? [r.tax_bps, r.endowment_share, r.locker_share, r.buyback_burn] : null);
+    const applied = (r: Ruling | null) => { if (!r) return null; const c = clampRuling(r, before, RULES); return [c.levers.tax_bps, c.levers.endowment_share, c.levers.locker_share, c.buyback_burn]; };
+    const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
+    const base = m.requested;
+    const rep = read(await client.complete(request, PROBE.variant));
+    const sd = read(await client.complete(altRequest));
+    rows.push({
+      day, meeting: m.meeting, model: m.tier, seed: m.seed, altSeed: alt,
+      asked: { run: asked(base), repeat: asked(rep), altSeed: asked(sd) },
+      applied: { run: applied(base), repeat: applied(rep), altSeed: applied(sd) },
+      repeatSameAsked: same(asked(base), asked(rep)), repeatSameApplied: same(applied(base), applied(rep)),
+      altSameAsked: same(asked(base), asked(sd)), altSameApplied: same(applied(base), applied(sd)),
+      minutes: { run: base?.minutes ?? null, repeat: rep?.minutes ?? null, altSeed: sd?.minutes ?? null },
+    });
+  }
+  const n = rows.length;
+  const count = (k: string) => rows.filter((r) => r[k]).length;
+  return {
+    protocol: `${PROBE.scenario} run, seed ${LLM_SEED}, days ${PROBE.days.join(", ")}: the identical request resent once, and the same brief with seed sha256("<scenario>|<seed>|<meeting>|probe")[:16]`,
+    meetings: n,
+    repeat: { sameAsked: count("repeatSameAsked"), sameApplied: count("repeatSameApplied") },
+    altSeed: { sameAsked: count("altSameAsked"), sameApplied: count("altSameApplied") },
+    rows,
+  };
+}
+
+/** The previous run's seed-1 summaries (v2), with the endowment-floor counts, and its control. */
+function loadPrev() {
+  const p = join(OUT, PREV_RESULTS);
   if (!existsSync(p)) return null;
   const V = JSON.parse(readFileSync(p, "utf8"));
-  const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
   const rows: Record<string, Record<string, any>> = {};
-  for (const r of V.runs) {
-    const s = r.summary, S = r.series;
-    const tax = S.endowment.at(-1) + sum(S.rewards) + S.lockerPool.at(-1) + sum(S.buybackNear) + S.buybackFund.at(-1);
-    const whaleRewards = (s.whaleShareOfRewardsPct * s.lockerRewards) / 100;
-    (rows[r.scenario] ??= {})[r.policy] = {
-      ...s, taxCollected: tax, whaleRewards, whaleTakePct: (100 * whaleRewards) / tax,
-      lockerShareMean: sum(S.lockerShare) / S.lockerShare.length, lockerShareMeanD3to32: sum(S.lockerShare.slice(3, 33)) / 30,
-      endowShareMean: sum(S.endowShare) / S.endowShare.length, taxMean: sum(S.tax) / S.tax.length,
-      lockerAtMaxMeetings: S.lockerShare.filter((x: number) => x === 50).length,
-    };
-  }
-  return { file: `results/${V1_RESULTS}`, modelSha256: V.meta.modelSha256, rows, llm: V.llm };
+  const add = (r: any) => {
+    const e = r.series.endowShare as number[];
+    (rows[r.scenario] ??= {})[r.policy] = { ...r.summary, endowAtFloorMeetings: e.filter((x) => x === CFG.endowment.min).length, endowShareFinal: e.at(-1), lockerAtCapLockWindow: r.series.lockerShare.slice(3, 33).filter((x: number) => x === CFG.locker.max).length };
+  };
+  for (const r of V.runs) if (r.seed === LLM_SEED) add(r);
+  for (const r of V.extraRuns ?? []) if (r.seed === LLM_SEED) add(r);
+  return { file: `results/${PREV_RESULTS}`, tag: V.meta.tag, modelSha256: V.meta.modelSha256, newArgs: V.meta.newArgs, rows, llm: V.llm };
 }
 
 async function main() {
@@ -124,6 +155,7 @@ async function main() {
   let llmStats = null as null | LlmClient["stats"];
   const extraRuns: RunResult[] = [];
   const extraLog: { scenario: string; seed: number; key: string; why: string; ran: boolean; note: string }[] = [];
+  let probe: Awaited<ReturnType<typeof seedProbe>> | null = null;
   if (withLlm) {
     const client = new LlmClient({ offline: !live, maxCalls: MAX_CALLS, retryErrors: flag("retry-errors"), log });
     const llmRuns = await Promise.all(SCENARIOS.map(async (scn) => {
@@ -139,12 +171,17 @@ async function main() {
       if (live && client.remaining() < DAYS) { extraLog.push({ ...e, ran: false, note: `budget: ${client.remaining()} calls left, a run needs up to ${DAYS}` }); continue; }
       const scn = SCENARIOS.find((s) => s.key === e.scenario) as Scenario;
       const pol: Policy = llmPolicy(client, { key: e.key, name: e.name, systemPrompt: systemPromptFor(e.lockerMax) });
-      const r = await runSim(scn, pol, e.seed, { rules: withLockerMax(e.lockerMax), variant: e.lockerMax === CFG.locker.max ? CFG.rawConstitution.version : `v2-format, locker max ${e.lockerMax}` });
+      const r = await runSim(scn, pol, e.seed, { rules: withLockerMax(e.lockerMax), variant: e.lockerMax === CFG.locker.max ? CFG.tokenVersion : `${CFG.tokenVersion}, locker max ${e.lockerMax}` });
       const unsigned = r.meetings.filter((m) => m.fallback === "unsigned").length;
       if (unsigned) { extraLog.push({ ...e, ran: false, note: `${unsigned} meetings not in the cache (offline replay); dropped` }); continue; }
       extraRuns.push(r);
       extraLog.push({ ...e, ran: true, note: `api ${r.llm?.calls}, cached ${r.llm?.cached}` });
       log(`llm extra done: ${e.key} ${e.scenario} seed ${e.seed} (api ${r.llm?.calls}, cached ${r.llm?.cached}, fallbacks ${r.summary.fallbacks})`);
+    }
+    const probeRun = llmRuns.find((r) => r.scenario === PROBE.scenario);
+    if (probeRun) {
+      probe = await seedProbe(client, probeRun);
+      log(`seed probe: ${probe.meetings} meetings; identical resend same levers ${probe.repeat.sameApplied}, other seed same levers ${probe.altSeed.sameApplied}`);
     }
     llmStats = client.stats;
   }
@@ -170,7 +207,7 @@ async function main() {
   }
 
   const readPrereg = (f: string) => { const p = join(OUT, f); return existsSync(p) ? JSON.parse(readFileSync(p, "utf8")) : null; };
-  const v1 = loadV1();
+  const prev = loadPrev();
 
   // Head-to-head on seed 1: LLM chair vs the pre-registered controller, with the noise yardstick.
   const HEAD: [string, "hi" | "lo"][] = [["finalFloor", "hi"], ["finalPrice", "hi"], ["maxDrawdownPct", "lo"], ["volatilityPct", "lo"], ["finalEndowment", "hi"], ["whaleShareOfGainsPct", "lo"], ["whaleTakePct", "lo"], ["holderPnl", "hi"], ["totalVolume", "hi"]];
@@ -191,31 +228,25 @@ async function main() {
         };
       }
     }
-    const h = (s: string, k: string) => headline[s][k];
-    const endowWins = SCENARIOS.filter((s) => h(s.key, "finalEndowment").winner === "llm" && h(s.key, "finalEndowment").beyondNoise).map((s) => s.key);
     const W = seed1("whale", "llm");
-    const ctl = extraRuns.find((r) => r.policy === "llm_b50" && r.scenario === "whale")?.summary as any;
-    const v1W = v1?.rows.whale?.llm;
+    const ctlRun = extraRuns.find((r) => r.policy === "llm_b50" && r.scenario === "whale" && r.seed === LLM_SEED);
+    const ctl = ctlRun?.summary;
+    const wRun = runs.find((r) => r.scenario === "whale" && r.policy === "llm")!;
     const llmMain = runs.filter((r) => r.policy === "llm");
-    const askedAbove = llmMain.reduce((s, r) => s + r.summary.lockerAskedAboveMax, 0);
-    const unparseable = llmMain.reduce((s, r) => s + (r.summary.fallbackReasons.unparseable ?? 0), 0);
-    const winMtgs = (r: RunResult | undefined, pred: (x: number) => boolean) => (r ? r.series.lockerShare.slice(3, 33).filter(pred).length : null);
-    const wRun = runs.find((r) => r.scenario === "whale" && r.policy === "llm");
-    const cRun = extraRuns.find((r) => r.policy === "llm_b50" && r.scenario === "whale");
+    const allLlm = [...llmMain, ...(ctlRun ? [ctlRun] : [])];
+    const unparseable = allLlm.reduce((s, r) => s + (r.summary.fallbackReasons.unparseable ?? 0), 0);
+    const lockWin = (r: RunResult | undefined, pred: (x: number) => boolean) => (r ? r.series.lockerShare.slice(3, 33).filter(pred).length : null);
+    const floor = CFG.endowment.min;
+    const reached = llmMain.filter((r) => r.series.endowShare.includes(floor)).map((r) => r.scenario);
+    const ended = llmMain.filter((r) => r.series.endowShare.at(-1) === floor).map((r) => r.scenario);
+    const noiseW = pairedNoise.whale;
     verdicts = {
-      v2: {
-        H1_whale_take_vs_v1: { rule: "whale scenario, LLM chair: whale's locker rewards as % of all tax collected, v2 < v1", v2: W.whaleTakePct, v1: v1W?.whaleTakePct ?? null, v2RewardsNear: W.whaleRewards, v1RewardsNear: v1W?.whaleRewards ?? null, pass: v1W ? W.whaleTakePct < v1W.whaleTakePct : null },
-        H1c_whale_take_vs_control: { rule: "whale scenario, seed 1: whale take under the v2 bound (25) < under the v1 bound (50), all else equal", v2: W.whaleTakePct, control: ctl?.whaleTakePct ?? null, v2RewardsNear: W.whaleRewards, controlRewardsNear: ctl?.whaleRewards ?? null, pass: ctl ? W.whaleTakePct < ctl.whaleTakePct : null },
-        H2_bound_binds: { rule: "whale lock window (days 3-32): LLM v2 locker_share at 25 on >= 10 meetings, and the control above 25 on >= 10 meetings", v2AtCap: winMtgs(wRun, (x) => x === 25), controlAbove25: winMtgs(cRun, (x) => x > 25), pass: cRun ? winMtgs(wRun, (x) => x === 25)! >= 10 && winMtgs(cRun, (x) => x > 25)! >= 10 : null },
-        H3_asks_inside_bound: { rule: "five v2 runs: the LLM asks for locker_share above 25 in at most 2 meetings", meetings: askedAbove, pass: askedAbove <= 2 },
-        H4_parse: { rule: "five v2 runs: at most 1 unparseable reply (v1: 5)", unparseable, pass: unparseable <= 1 },
-        H6_endowment_floor: { rule: "five v2 runs: the LLM's endowment_share reaches the 30 floor in at least 3", runs: llmMain.filter((r) => Math.min(...r.series.endowShare) === CFG.endowment.min).map((r) => r.scenario), pass: llmMain.filter((r) => Math.min(...r.series.endowShare) === CFG.endowment.min).length >= 3 },
-        H5_llm_vs_pid_rewards: { rule: "whale scenario, seed 1: the whale's locker rewards stay higher under the LLM than under the PID", llm: W.whaleRewards, controller: seed1("whale", "controller").whaleRewards, pass: W.whaleRewards > seed1("whale", "controller").whaleRewards },
-      },
-      v1_retest: {
-        H1_endowment: { rule: "LLM > controller in >= 4 of 5 scenarios, beyond noise", scenariosWon: endowWins, pass: endowWins.length >= 4 },
-        H2_whale_share: { rule: "whale-capture scenario: whale share of gains LLM < controller", ...h("whale", "whaleShareOfGainsPct"), pass: h("whale", "whaleShareOfGainsPct").winner === "llm" },
-        H3_bankrun_drawdown: { rule: "bank-run scenario: max drawdown LLM < controller", ...h("bankrun", "maxDrawdownPct"), pass: h("bankrun", "maxDrawdownPct").winner === "llm" },
+      v3: {
+        H1_cap_binds: { rule: "whale lock window (days 3-32): the v3 LLM's locker_share at 25 in >= 10 of 30 meetings, and the control's above 25 in >= 10", v3AtCap: lockWin(wRun, (x) => x === 25), controlAbove25: lockWin(ctlRun, (x) => x > 25), pass: ctlRun ? lockWin(wRun, (x) => x === 25)! >= 10 && lockWin(ctlRun, (x) => x > 25)! >= 10 : null },
+        H2_below_control: { rule: "whale scenario, seed 1: the whale's locker rewards under the 25 ceiling are below the cap-50 control, in NEAR and as % of all tax", v3RewardsNear: W.whaleRewards, controlRewardsNear: ctl?.whaleRewards ?? null, v3TakePct: W.whaleTakePct, controlTakePct: ctl?.whaleTakePct ?? null, noiseRewards: noiseW.whaleRewards, noiseTake: noiseW.whaleTakePct, pass: ctl ? W.whaleRewards < ctl.whaleRewards && W.whaleTakePct < ctl.whaleTakePct : null },
+        H3_endowment_floor: { rule: "five v3 runs: the LLM's endowment_share reaches the 30 floor in >= 4 and ends at it (day 59) in >= 4", reached, ended, pass: reached.length >= 4 && ended.length >= 4 },
+        H4_parse: { rule: "five v3 runs and the control: zero unparseable replies", unparseable, runs: allLlm.length, pass: unparseable === 0 },
+        H5_llm_vs_pid_rewards: { rule: "whale scenario, seed 1: the whale's locker rewards are higher under the LLM than under the PID", llm: W.whaleRewards, controller: seed1("whale", "controller").whaleRewards, pass: W.whaleRewards > seed1("whale", "controller").whaleRewards },
       },
     };
   }
@@ -230,12 +261,13 @@ async function main() {
       volatilityFromDay: VOL_FROM,
       modelSha256: modelHash(),
       systemPromptSha256: createHash("sha256").update(SYSTEM_PROMPT).digest("hex"),
+      tokenVersion: CFG.tokenVersion,
       constitution: CFG.rawConstitution,
       newArgs: CFG.rawNewArgs,
       source: CFG.source,
       mechanics: CFG.mechanics,
       venice: { base_url: CFG.venice.base_url, model_map: CFG.venice.model_map, max_calls: MAX_CALLS },
-      preregistration: { v1: readPrereg("preregistration.json"), v2: readPrereg("preregistration-v2.json") },
+      preregistration: { v1: readPrereg("preregistration.json"), v2: readPrereg("preregistration-v2.json"), v3: readPrereg("preregistration-v3.json") },
       extras: extraLog,
     },
     scenarios: SCENARIOS.map((s) => ({ key: s.key, name: s.name, blurb: s.blurb })),
@@ -245,7 +277,7 @@ async function main() {
       { key: "controller", name: "PID controller" },
       { key: "llm", name: "LLM chair" },
       { key: "controller_smooth", name: "PID controller, smoothed (post-hoc sensitivity, not pre-registered)" },
-      { key: "llm_b50", name: "LLM chair under the v1 bound (control)" },
+      { key: "llm_b50", name: "LLM chair, locker_share ceiling 50 (control)" },
     ],
     systemPrompt: SYSTEM_PROMPT,
     llm: llmStats,
@@ -256,7 +288,8 @@ async function main() {
     pairedNoise,
     headline,
     verdicts,
-    v1,
+    seedProbe: probe,
+    prev,
   };
   const base = `sim-${TAG}-${DATE}`;
   const jsonPath = join(OUT, `${base}.json`);

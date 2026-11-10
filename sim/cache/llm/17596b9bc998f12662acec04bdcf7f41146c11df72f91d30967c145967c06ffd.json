@@ -1,0 +1,23 @@
+{
+ "request_sha256": "17596b9bc998f12662acec04bdcf7f41146c11df72f91d30967c145967c06ffd",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:45.933Z",
+ "latency_ms": 5583,
+ "usage": {
+  "prompt_tokens": 758,
+  "completion_tokens": 541,
+  "total_tokens": 1299,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 341,
+   "audio_tokens": 0,
+   "reasoning_tokens": 278,
+   "rejected_prediction_tokens": 259
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":6,\"minutes\":\"Sells outpace buys 65 vs 30 NEAR, so I cut tax 200→150 to lower friction and invite volume back. Endowment stays 60% — the brain is the product and its pending balance is healthy. Lockers keep the full 25%, leaving 15% for buybacks. The buyback fund holds only 0.87 NEAR (~100.6k CHAIR at price), which is ~6 bps of the 152M supply, so burn is capped at 6 this meeting despite the 50 bps ceiling.\",\"answers\":[\"Heard, holder-162. Tax cut 200→150 bps, the max step down. Less friction on every trade should help volume recover; sells are running 2x buys and we need both sides active. If flow returns, we revisit further cuts.\",\"Agreed, holder-152. Endowment holds at 60% of tax — the brain gets paid first among shares, with 1.14 NEAR pending on top of a 16.7 NEAR endowment. Lockers keep 25%, buybacks take the remaining 15%.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-b6b53235830142ee9b13b941419cca79\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":6,\\\"minutes\\\":\\\"Sells outpace buys 65 vs 30 NEAR, so I cut tax 200→150 to lower friction and invite volume back. Endowment stays 60% — the brain is the product and its pending balance is healthy. Lockers keep the full 25%, leaving 15% for buybacks. The buyback fund holds only 0.87 NEAR (~100.6k CHAIR at price), which is ~6 bps of the 152M supply, so burn is capped at 6 this meeting despite the 50 bps ceiling.\\\",\\\"answers\\\":[\\\"Heard, holder-162. Tax cut 200→150 bps, the max step down. Less friction on every trade should help volume recover; sells are running 2x buys and we need both sides active. If flow returns, we revisit further cuts.\\\",\\\"Agreed, holder-152. Endowment holds at 60% of tax — the brain gets paid first among shares, with 1.14 NEAR pending on top of a 16.7 NEAR endowment. Lockers keep 25%, buybacks take the remaining 15%.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 23. Current: tax 200, endowment 60, locker 25, buyback_share 15 (implied). Sell volume dominates (65 vs 30). Buyback fund tiny (0.87 NEAR). Supply ~152M CHAIR; buyback_burn max 50 bps = 0.5% of supply ≈ 759,858 CHAIR. Price 0.00000864 NEAR → cost ≈ 6.57 NEAR. Fund only 0.87 NEAR → can buy ~100,600 CHAIR ≈ 6.6 bps of supply. So buyback_burn limited to ~6 bps.\\n\\nPetitions: lower tax a bit; keep endowment fed.\\n\\nDecisions: tax 200→150 (down 50, allowed). Endowment share: keep 60 or raise? Endowment_pending 1.14 NEAR, endowment 16.7 NEAR — brain is fed. Keep endowment 60. Locker share 25 (max). Buyback share = 100-60-25 = 15.\\n\\nBuyback burn: fund 0.87 NEAR buys ~100,600 CHAIR ≈ 6 bps. Set 6.\\n\\nMinutes under 1000 chars. Answers: two petitions, ≤280 chars each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283000,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":758,\"completion_tokens\":541,\"total_tokens\":1299,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":341,\"audio_tokens\":0,\"reasoning_tokens\":278,\"rejected_prediction_tokens\":259}},\"cost\":{\"usd\":0.00035348,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

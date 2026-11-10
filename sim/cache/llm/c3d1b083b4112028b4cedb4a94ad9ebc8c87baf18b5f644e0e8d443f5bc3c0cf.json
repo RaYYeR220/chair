@@ -1,0 +1,22 @@
+{
+ "request_sha256": "c3d1b083b4112028b4cedb4a94ad9ebc8c87baf18b5f644e0e8d443f5bc3c0cf",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:50.931Z",
+ "latency_ms": 4997,
+ "usage": {
+  "prompt_tokens": 744,
+  "completion_tokens": 591,
+  "total_tokens": 1335,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 323,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Net flow is negative (47.8 NEAR sold vs 34.1 bought), so I nudge the tax up 25 bps to 175 to slow bleeding and refill the buyback fund, staying well inside the 50 bps step limit. Endowment 60 and locker 25 stay put; the remaining 15% of tax flows to buybacks. Buyback fund holds 0.267 NEAR; at price ~8.57e-6 that buys ~31k CHAIR, so I set burn to 2 bps of supply (~30k CHAIR), the most the fund can pay for. Small daily burns compound the floor exactly as petitioned.\",\"answers\":[\"Agreed, holder-162.near: I'm burning 2 bps of supply today — the full buyback fund at current price. Daily small burns it is; the 25 bp tax hike refills the fund so this repeats tomorrow.\",\"Agreed, holder-152.near: same for you — 2 bps burned today, every drop of buyback funds deployed. Raising tax to 175 bps keeps the floor-compounding machine running daily.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-0ad63ba8\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Net flow is negative (47.8 NEAR sold vs 34.1 bought), so I nudge the tax up 25 bps to 175 to slow bleeding and refill the buyback fund, staying well inside the 50 bps step limit. Endowment 60 and locker 25 stay put; the remaining 15% of tax flows to buybacks. Buyback fund holds 0.267 NEAR; at price ~8.57e-6 that buys ~31k CHAIR, so I set burn to 2 bps of supply (~30k CHAIR), the most the fund can pay for. Small daily burns compound the floor exactly as petitioned.\\\",\\\"answers\\\":[\\\"Agreed, holder-162.near: I'm burning 2 bps of supply today — the full buyback fund at current price. Daily small burns it is; the 25 bp tax hike refills the fund so this repeats tomorrow.\\\",\\\"Agreed, holder-152.near: same for you — 2 bps burned today, every drop of buyback funds deployed. Raising tax to 175 bps keeps the floor-compounding machine running daily.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 24. Current levers: tax 150, endowment 60, locker 25, buyback_share 15 (legacy field, not a lever I set — I set buyback_burn).\\n\\nVolume: buys 34.14 NEAR, sells 47.85 NEAR. Net selling pressure. Tax revenue: 82 NEAR * 1.5% = ~1.23 NEAR/day. Buyback fund only 0.267 NEAR.\\n\\nBuyback burn: 0-50 bps of supply. Supply 150,358,865. 1 bp = 15,035 CHAIR. Cost at price ~0.00000857 NEAR: 15,035 * 8.568e-6 ≈ 0.1288 NEAR per bp. Fund 0.267 NEAR → can afford ~2 bp. So buyback_burn = 2.\\n\\nPetitions ask for small daily buybacks — agree, set 2 bps.\\n\\nTax: net sell pressure, maybe raise tax slightly? Max move 50. Could go to 175 or 200 to dampen sells and fund buybacks. But higher tax also deters buys. Modest: 175. Endowment 60, locker 25 — sum 85, fine. Keep them. Actually locker pool fund is low (0.307) but locker_share 25 is max-ish; keep.\\n\\nMinutes under 1000 chars. Answers: two petitions, same text, reply each ≤280 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283006,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":744,\"completion_tokens\":591,\"total_tokens\":1335,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":323,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00037638,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

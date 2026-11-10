@@ -1,0 +1,22 @@
+{
+ "request_sha256": "9a29c0d49d63adf1fd578af43aae64a35801efe685e40e3b237d907601352afc",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:26.165Z",
+ "latency_ms": 5460,
+ "usage": {
+  "prompt_tokens": 673,
+  "completion_tokens": 608,
+  "total_tokens": 1281,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 377,
+   "audio_tokens": 0,
+   "reasoning_tokens": 403,
+   "rejected_prediction_tokens": 316
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":70,\"locker_share\":10,\"buyback_burn\":10,\"minutes\":\"Meeting 5. Flows are healthy: 124 NEAR buys vs 94 NEAR sells over 24h, buys leading. Tax at 250bps is a drag on this volume; trimming to 200bps should keep churn up while still funding the brain. Endowment pending (3.8) plus balance (12.5) comfortably covers inference, so endowment_share holds at 70. Locker pool is modest and locker_weight is large; holding locker_share at 10 keeps rewards flowing without starving buybacks. Buyback fund holds 1.40 NEAR; at price 0.0000082865, burning 10bps of supply (~145,266 CHAIR) costs roughly 1.20 NEAR on the curve, affordable within the fund. No petitions this session; levers move within constitutional limits.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-89c8dd4e7117460c9b20649b1e062028\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":70,\\\"locker_share\\\":10,\\\"buyback_burn\\\":10,\\\"minutes\\\":\\\"Meeting 5. Flows are healthy: 124 NEAR buys vs 94 NEAR sells over 24h, buys leading. Tax at 250bps is a drag on this volume; trimming to 200bps should keep churn up while still funding the brain. Endowment pending (3.8) plus balance (12.5) comfortably covers inference, so endowment_share holds at 70. Locker pool is modest and locker_weight is large; holding locker_share at 10 keeps rewards flowing without starving buybacks. Buyback fund holds 1.40 NEAR; at price 0.0000082865, burning 10bps of supply (~145,266 CHAIR) costs roughly 1.20 NEAR on the curve, affordable within the fund. No petitions this session; levers move within constitutional limits.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. No petitions. Current: tax 250, endowment 70, locker 10, buyback 20.\\n\\nVolume: buys 124 NEAR, sells 94 NEAR. Price ~0.0000083. Supply 145M, sold 145.7M (sold > supply? odd, but fine).\\n\\nTax revenue: 250bps on ~218 NEAR ≈ 5.45 NEAR/day. Endowment pending 3.8, endowment balance 12.5 — plenty for inference. Buyback fund 1.4 NEAR. Buyback burn: price 0.0000082865, 1.4 NEAR buys ~169M CHAIR? Wait, 1.4/0.0000082865 ≈ 168,960 CHAIR. Supply 145M, so 168,960/145M ≈ 0.116% = ~11.6 bps. Cap is 50 bps but fund limits. Actually buying on curve pushes price up; roughly can burn maybe ~0.1% of supply. Let's set buyback_burn to something affordable: 10 bps of supply = 145,265 CHAIR × price ≈ 1.20 NEAR. Fund is 1.40. So 10 bps costs ~1.2 NEAR, affordable. Maybe 11 bps ≈ 1.32 NEAR. Keep 10.\\n\\nLevers: volume healthy, balanced buy/sell. Tax 250 is high-ish; maybe reduce slightly to 200 to encourage volume? Moving at most 50. Consider reducing tax to 200 to stimulate trading, keep endowment 70, locker 10. Or hold steady. Sells slightly exceed... buys > sells actually. Steady state fine. I'll trim tax to 200 to support volume, keep shares. Buyback burn 10.\"},\"finish_reason\":\"stop\"}],\"created\":1794282860,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":673,\"completion_tokens\":608,\"total_tokens\":1281,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":377,\"audio_tokens\":0,\"reasoning_tokens\":403,\"rejected_prediction_tokens\":316}},\"cost\":{\"usd\":0.00040495,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

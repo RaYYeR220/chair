@@ -76,7 +76,7 @@ const METRICS: [string, string, (x: number) => string, "lo" | "hi" | ""][] = [
   ["fallbacks", "Fallback ran", f0, ""],
 ];
 
-const LABEL: Record<string, string> = { controller_smooth: "controller, smoothed (post-hoc)", llm_b50: "LLM, v1 bound 0-50 (control)" };
+const LABEL: Record<string, string> = { controller_smooth: "controller, smoothed (post-hoc)", llm_b50: "LLM, ceiling 50 (control)" };
 function table(scn: string, runs: Any[], agg: Any): string {
   const rows = [...POLICY_ORDER.filter((p) => p !== "llm_b50"), "controller_smooth", "llm_b50"].map((p) => runs.find((r: Any) => r.scenario === scn && r.policy === p && r.seed === 1)).filter(Boolean);
   const head = `<tr><th>Policy</th>${METRICS.map(([, l]) => `<th>${esc(l)}</th>`).join("")}</tr>`;
@@ -112,7 +112,7 @@ function minutes(r: Any, pick: number[]): string {
     const app = `applied tax ${m.applied.tax_bps}, endow ${m.applied.endowment_share}, locker ${m.applied.locker_share}, buyback ${m.applied.buyback_burn}`;
     const cl = m.clamps?.length ? ` · clamped: ${m.clamps.map((c: Any) => `${c.lever} ${c.asked}→${c.applied} (${c.rule})`).join(", ")}` : "";
     const why = m.fallback === "unparseable" ? `<div class="mr">The reply failed check 3 (${parsed ? `answers: ${Array.isArray(parsed.answers) ? parsed.answers.length : "none"} for ${brief?.petitions?.length ?? 0} petitions` : "no JSON object"}). The fallback ran; the reply is shown for the record.</div>` : "";
-    return `<div class="mn"><div class="mh">Day ${m.day} · meeting ${m.meeting} · ${esc(m.tier ?? "asleep")}${m.fallback ? ` · fallback (${esc(m.fallback)})` : ""}</div>
+    return `<div class="mn"><div class="mh">Day ${m.day} · meeting ${m.meeting} · ${esc(m.tier ?? "asleep")}${m.seed ? ` · seed <code>${esc(m.seed)}</code>` : ""}${m.fallback ? ` · fallback (${esc(m.fallback)})` : ""}</div>
 <div class="mr">${esc(req)}${req ? " · " : ""}${esc(app)}${esc(cl)}</div>${why}
 ${parsed?.minutes ? `<p class="mm">${esc(parsed.minutes)}</p>` : ""}${pet ? `<ol class="pt">${pet}</ol>` : ""}</div>`;
   }).join("");
@@ -141,28 +141,20 @@ function headline(R: Any): string {
     const verdict = c.winner === "tie" ? "tie" : `${c.winner === "llm" ? "LLM" : "PID"}${c.beyondNoise ? "" : " ~"}`;
     return `<td><b>${verdict}</b><span class="band">LLM ${f(c.llm)} · PID ${f(c.controller)}</span><span class="band">smoothed PID ${f(c.controller_smooth)}</span></td>`;
   }).join("")}</tr>`).join("");
-  const V = R.verdicts;
+  const V = R.verdicts?.v3;
   const pf = (p: Any) => (p === null || p === undefined ? "N/A" : p ? "PASS" : "FAIL");
   const f = (x: number) => (x == null ? "–" : x.toFixed(2));
-  const v2 = V?.v2, v1r = V?.v1_retest;
   const verd = V ? `<ol class="pv">
-<li><b>${pf(v2.H1_whale_take_vs_v1.pass)}</b> H1 whale take, v2 vs v1 (LLM, whale scenario): ${f(v2.H1_whale_take_vs_v1.v2)}% of all tax vs ${f(v2.H1_whale_take_vs_v1.v1)}% (${f(v2.H1_whale_take_vs_v1.v2RewardsNear)} vs ${f(v2.H1_whale_take_vs_v1.v1RewardsNear)} NEAR).</li>
-<li><b>${pf(v2.H1c_whale_take_vs_control.pass)}</b> H1c whale take, bound 25 vs bound 50, all else equal: ${f(v2.H1c_whale_take_vs_control.v2)}% vs ${f(v2.H1c_whale_take_vs_control.control)}% (${f(v2.H1c_whale_take_vs_control.v2RewardsNear)} vs ${f(v2.H1c_whale_take_vs_control.controlRewardsNear)} NEAR).</li>
-<li><b>${pf(v2.H2_bound_binds.pass)}</b> H2 the bound binds: v2 at 25 on ${v2.H2_bound_binds.v2AtCap} of 30 lock-window meetings; control above 25 on ${v2.H2_bound_binds.controlAbove25 ?? "–"}.</li>
-<li><b>${pf(v2.H3_asks_inside_bound.pass)}</b> H3 asks inside the bound: ${v2.H3_asks_inside_bound.meetings} meetings asked locker_share above 25.</li>
-<li><b>${pf(v2.H4_parse.pass)}</b> H4 parse: ${v2.H4_parse.unparseable} unparseable replies.</li>
-<li><b>${pf(v2.H5_llm_vs_pid_rewards.pass)}</b> H5 whale rewards LLM vs PID: ${f(v2.H5_llm_vs_pid_rewards.llm)} vs ${f(v2.H5_llm_vs_pid_rewards.controller)} NEAR.</li>
-<li><b>${pf(v2.H6_endowment_floor.pass)}</b> H6 endowment share reaches the 30 floor: ${v2.H6_endowment_floor.runs.length} of 5 runs (${v2.H6_endowment_floor.runs.join(", ") || "none"}).</li>
-</ol>
-<h3>v1 hypotheses, retested under v2</h3><ol class="pv">
-<li><b>${pf(v1r.H1_endowment.pass)}</b> H1 endowment: LLM above the PID beyond noise in ${v1r.H1_endowment.scenariosWon.length} of 5 (${v1r.H1_endowment.scenariosWon.join(", ") || "none"}); needed 4.</li>
-<li><b>${pf(v1r.H2_whale_share.pass)}</b> H2 whale share of gains: LLM ${f(v1r.H2_whale_share.llm)}% vs PID ${f(v1r.H2_whale_share.controller)}% (noise ±${f(v1r.H2_whale_share.noise)})${v1r.H2_whale_share.beyondNoise ? "" : ", within noise"}.</li>
-<li><b>${pf(v1r.H3_bankrun_drawdown.pass)}</b> H3 bank-run drawdown: LLM ${f(v1r.H3_bankrun_drawdown.llm)}% vs PID ${f(v1r.H3_bankrun_drawdown.controller)}% (noise ±${f(v1r.H3_bankrun_drawdown.noise)})${v1r.H3_bankrun_drawdown.beyondNoise ? "" : ", within noise"}.</li>
+<li><b>${pf(V.H1_cap_binds.pass)}</b> H1 the 25 ceiling binds under the whale: v3 at 25 in ${V.H1_cap_binds.v3AtCap} of 30 lock-window meetings; the ceiling-50 control above 25 in ${V.H1_cap_binds.controlAbove25 ?? "–"}.</li>
+<li><b>${pf(V.H2_below_control.pass)}</b> H2 the whale's locker rewards stay below the control: ${f(V.H2_below_control.v3RewardsNear)} vs ${f(V.H2_below_control.controlRewardsNear)} NEAR (${f(V.H2_below_control.v3TakePct)}% vs ${f(V.H2_below_control.controlTakePct)}% of all tax; seed noise ±${f(V.H2_below_control.noiseRewards)} NEAR, ±${f(V.H2_below_control.noiseTake)} pts).</li>
+<li><b>${pf(V.H3_endowment_floor.pass)}</b> H3 endowment share at the 30 floor: reached in ${V.H3_endowment_floor.reached.length} of 5 runs, ended there in ${V.H3_endowment_floor.ended.length} of 5.</li>
+<li><b>${pf(V.H4_parse.pass)}</b> H4 parse: ${V.H4_parse.unparseable} unparseable replies across ${V.H4_parse.runs} runs.</li>
+<li><b>${pf(V.H5_llm_vs_pid_rewards.pass)}</b> H5 whale rewards, LLM vs PID: ${f(V.H5_llm_vs_pid_rewards.llm)} vs ${f(V.H5_llm_vs_pid_rewards.controller)} NEAR.</li>
 </ol>` : "";
   return `<h2>LLM chair vs PID controller, seed 1</h2>
 <p class="note">Each cell names the better of the LLM chair and the pre-registered PID controller on that metric. "~" means the gap is smaller than the seed-noise yardstick (sd across 20 seeds of the paired controller − fixed-rule difference), so one seed can't call it. The smoothed PID was added after the v1 pre-registration as a sensitivity check and is shown for reference only.</p>
 <div class="tw"><table>${head}${body}</table></div>
-<h3>Pre-registered v2 hypotheses</h3>${verd}`;
+<h3>Pre-registered v3 hypotheses</h3>${verd}${probe(R)}`;
 }
 
 const VS: [string, string, (x: number) => string][] = [
@@ -175,27 +167,36 @@ const VS: [string, string, (x: number) => string][] = [
   ["taxCollected", "Tax collected (NEAR)", (x) => x.toFixed(1)],
 ];
 function versus(R: Any): string {
-  if (!R.v1) return "";
+  if (!R.prev) return "";
   const rows: string[] = [];
   for (const s of R.scenarios as Any[]) {
-    for (const p of ["llm", "controller", "fixed"]) {
-      const a = R.v1.rows[s.key]?.[p];
-      const b = (R.runs as Any[]).find((r) => r.scenario === s.key && r.policy === p && r.seed === 1)?.summary;
+    for (const p of ["llm", "llm_b50", "controller", "fixed"]) {
+      const a = R.prev.rows[s.key]?.[p];
+      const b = [...(R.runs as Any[]), ...((R.extraRuns as Any[]) ?? [])].find((r) => r.scenario === s.key && r.policy === p && r.seed === 1)?.summary;
       if (!a || !b) continue;
-      rows.push(`<tr><td>${p === "llm" ? esc(s.name) : ""}</td><td>${esc(p)}</td>${VS.map(([k, , fm]) => `<td>${a[k] == null ? "–" : fm(a[k])} → <b>${fm(b[k])}</b></td>`).join("")}</tr>`);
+      rows.push(`<tr><td>${p === "llm" ? esc(s.name) : ""}</td><td>${esc(LABEL[p] ?? p)}</td>${VS.map(([k, , fm]) => `<td>${a[k] == null ? "–" : fm(a[k])} → <b>${fm(b[k])}</b></td>`).join("")}</tr>`);
     }
-    const c = ((R.extraRuns as Any[]) ?? []).find((r) => r.scenario === s.key && r.policy === "llm_b50");
-    if (c) rows.push(`<tr><td></td><td>LLM, bound 50 (control)</td>${VS.map(([k, , fm]) => `<td><b>${fm(c.summary[k])}</b></td>`).join("")}</tr>`);
   }
   const extra = ((R.extraRuns as Any[]) ?? []).filter((r) => r.policy === "llm" && r.seed !== 1);
   const extraRows = extra.map((r) => {
     const pid = ((R.extraBaselineRuns as Any[]) ?? []).find((x) => x.scenario === r.scenario && x.seed === r.seed);
     return `<tr><td>${esc(r.scenario)}</td><td>${r.seed}</td>${VS.map(([k, , fm]) => `<td>${fm(r.summary[k])}<span class="band">PID ${pid ? fm(pid.summary[k]) : "–"}</span></td>`).join("")}</tr>`;
   }).join("");
-  return `<h2>v1 → v2</h2>
-<p class="note">v1 (${esc(R.v1.file)}): locker_share 0-50, the sim's own prompt and brief, launch levers 300/60/10, p0 1e-7, k 2e-14, petition fee 10,000 CHAIR. v2: locker_share 0-25, the contract's exact prompt and brief, the testnet launch args (200/60/20, p0 1e-6, k 1e-12, fee 1,000 CHAIR) and the contract's reward, storage and parse mechanics. So v1 → v2 changes more than the bound; the control row (bound 50, everything else v2) isolates the bound. Seed 1, cells read v1 → <b>v2</b>. Whale take = the whale's locker rewards as % of all tax collected over 60 days.</p>
+  return `<h2>v2 → v3</h2>
+<p class="note">v2 (${esc(R.prev.file)}) ran on the testnet args of token.chair-dev.testnet (p0 1e-6, k 1e-12, levers 200/60/20, petition fee 1,000 CHAIR) with a brief that had no seed. v3 runs on the docs/LAUNCH.md mainnet args (k 5e-14, levers 300/60/20, fee 10,000 CHAIR) with the brief's seed, and mirrors token v3's petition rules. Both change at once, so a v2 → v3 gap is not the seed's effect alone. Seed 1, cells read v2 → <b>v3</b>. Whale take = the whale's locker rewards as % of all tax collected over 60 days.</p>
 <div class="tw"><table><tr><th>Scenario</th><th>Policy</th>${VS.map(([, l]) => `<th>${esc(l)}</th>`).join("")}</tr>${rows.join("")}</table></div>
 ${extraRows ? `<h3>Extra LLM seeds</h3><div class="tw"><table><tr><th>Scenario</th><th>Seed</th>${VS.map(([, l]) => `<th>${esc(l)}</th>`).join("")}</tr>${extraRows}</table></div>` : ""}`;
+}
+
+/** The seed probe: the identical request resent, and the same brief with another seed. */
+function probe(R: Any): string {
+  const P = R.seedProbe;
+  if (!P || !P.meetings) return "";
+  const t = (x: Any) => (x ? x.join(" / ") : "fallback");
+  const rows = (P.rows as Any[]).map((r) => `<tr><td>${r.day}</td><td>${esc(r.model)}</td><td>${t(r.applied.run)}</td><td>${t(r.applied.repeat)}</td><td>${t(r.applied.altSeed)}</td></tr>`).join("");
+  return `<h3>Seed probe</h3>
+<p class="note">${esc(P.protocol)}. Applied levers (tax / endowment / locker / buyback bps, after the constitution, before the fund limit). Identical resend: same levers in ${P.repeat.sameApplied} of ${P.meetings}. Another seed: same levers in ${P.altSeed.sameApplied} of ${P.meetings}.</p>
+<div class="tw"><table><tr><th>Day</th><th>Model</th><th>Run</th><th>Identical resend</th><th>Another seed</th></tr>${rows}</table></div>`;
 }
 
 export function renderReport(R: Any): string {
@@ -231,7 +232,7 @@ ${llmRun ? `<p class="note">LLM chair tiers used: ${tiers}. Fallbacks: ${esc(JSO
   const L = R.llm;
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CHAIR simulation v2</title>
+<title>CHAIR simulation v3</title>
 <style>
 :root{color-scheme:light;--bg:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--line:rgba(11,11,11,.10);
 --s-none:#2a78d6;--s-fixed:#eb6834;--s-controller:#1baf7a;--s-llm:#6250d6;--s-llm_b50:#b0a7ec}
@@ -264,7 +265,7 @@ th,td{padding:4px 8px;border-bottom:1px solid var(--line);text-align:right;verti
 .pv{padding-left:18px}.pv li{margin:4px 0}
 pre{white-space:pre-wrap;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px;font-size:12px}
 </style></head><body><main>
-<h1>CHAIR: 60 days, five communities, four chairs (v2 constitution)</h1>
+<h1>CHAIR: 60 days, five communities, four chairs (token v3, mainnet launch args)</h1>
 <p class="sub">Generated ${esc(R.meta.date)}. Exact integer token model (SPEC §2–§5), agent-based holders with common random numbers, ${R.meta.baselineSeeds} seeds for the deterministic policies, seed ${R.meta.llmSeed} for the LLM chair. Model hash <code>${esc(R.meta.modelSha256.slice(0, 16))}</code>. Every policy's ruling passes through the same constitution clamp.</p>
 ${hasLlm && L ? `<p class="sub">LLM chair: ${(L.calls + L.cacheHits).toLocaleString()} model rulings (${L.cacheHits} replayed from the response cache in this build), ${L.promptTokens.toLocaleString()} input + ${L.completionTokens.toLocaleString()} output tokens, ≈ $${L.usd.toFixed(2)} at Venice list price for the original calls.</p>` : ""}
 ${headline(R)}

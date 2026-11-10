@@ -1,0 +1,22 @@
+{
+ "request_sha256": "67e634d754172937f6bbb8f1807912c29875864b9cd5d3ba37c748ecc8c827d4",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:17.448Z",
+ "latency_ms": 2528,
+ "usage": {
+  "prompt_tokens": 719,
+  "completion_tokens": 537,
+  "total_tokens": 1256,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 331,
+   "audio_tokens": 0,
+   "reasoning_tokens": 314,
+   "rejected_prediction_tokens": 287
+  }
+ },
+ "content": "{\"tax_bps\":210,\"endowment_share\":70,\"locker_share\":20,\"buyback_burn\":1,\"minutes\":\"Meeting 6. Flow is buy-heavy: 28.35 NEAR bought vs 5.78 sold, so the tax base is healthy and no need to move tax_bps from 210. The buyback fund is thin (0.79 NEAR) while the endowment sits at 9.68 NEAR, so I rebalance the tax split toward the brain: endowment_share 60→70 (within the 10/meeting cap), locker_share holds at 20, leaving 10 for buyback accumulation. Burn: fund affords ~109k CHAIR; I burn 1 bps (~12.4k CHAIR, ~0.09 NEAR), keeping some fund buffered. Petition granted.\",\"answers\":[\"holder-169.near: Granted. Endowment_share raised 60→70, the maximum step allowed this meeting. The brain gets first claim on tax revenue; buyback fund stays lean this cycle.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-eb2c43c4d07b450dbc8e80ee4bce9e26\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":210,\\\"endowment_share\\\":70,\\\"locker_share\\\":20,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 6. Flow is buy-heavy: 28.35 NEAR bought vs 5.78 sold, so the tax base is healthy and no need to move tax_bps from 210. The buyback fund is thin (0.79 NEAR) while the endowment sits at 9.68 NEAR, so I rebalance the tax split toward the brain: endowment_share 60→70 (within the 10/meeting cap), locker_share holds at 20, leaving 10 for buyback accumulation. Burn: fund affords ~109k CHAIR; I burn 1 bps (~12.4k CHAIR, ~0.09 NEAR), keeping some fund buffered. Petition granted.\\\",\\\"answers\\\":[\\\"holder-169.near: Granted. Endowment_share raised 60→70, the maximum step allowed this meeting. The brain gets first claim on tax revenue; buyback fund stays lean this cycle.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Volume: buys 28.35 NEAR, sells 5.78 NEAR — buy-heavy, healthy. Tax 210 bps currently. Buyback fund only 0.79 NEAR. Price low-ish.\\n\\nPetition: keep endowment fed. Endowment pending 0.43, endowment 9.68 NEAR. Could raise endowment_share from 60 to 70 (max +10). Buy-heavy volume means tax revenue fine. Keep tax at 210 or trim slightly? Buy pressure strong; maybe keep 210. Locker share 20, buyback 20.\\n\\nBuyback burn: fund 0.79 NEAR, price 0.00000724 → ~109,000 CHAIR max. Supply 124.5M, 50 bps = ~622k CHAIR, can't afford. Burn what fund can afford? Maybe burn modestly, e.g., use most of fund. 0.79 NEAR buys ~109k CHAIR ≈ 0.9 bps of supply. Set buyback_burn to 1? But burn must be ≤ fund can pay. 1 bps = 12,449 CHAIR ≈ 0.09 NEAR. Affordable. Could set 1. Or 0 to accumulate fund. Buy pressure is good; burning small is fine. I'll set 1 bps.\\n\\nEndowment share 60→70, locker stays 20, buyback remainder 10. Tax stays 210.\"},\"finish_reason\":\"stop\"}],\"created\":1794282855,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":719,\"completion_tokens\":537,\"total_tokens\":1256,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":331,\"audio_tokens\":0,\"reasoning_tokens\":314,\"rejected_prediction_tokens\":287}},\"cost\":{\"usd\":0.00037635,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

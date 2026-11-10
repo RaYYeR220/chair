@@ -1,0 +1,22 @@
+{
+ "request_sha256": "e5fe82c183781b4672bcf2214d3f66c57a4c1132626bd6fc495d0d574bc8ed8a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:25.219Z",
+ "latency_ms": 7769,
+ "usage": {
+  "prompt_tokens": 785,
+  "completion_tokens": 585,
+  "total_tokens": 1370,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 364,
+   "audio_tokens": 0,
+   "reasoning_tokens": 274,
+   "rejected_prediction_tokens": 299
+  }
+ },
+ "content": "{\"tax_bps\":160,\"endowment_share\":70,\"locker_share\":20,\"buyback_burn\":50,\"minutes\":\"Buy volume (88.4 NEAR) dwarfs sells (3.7 NEAR); demand is healthy, so a tax cut is affordable and answers the petitions. Move tax_bps 210→160, the maximum step down. Keep endowment_share 70 and locker_share 20 (sum 90, within cap), leaving 10% of tax for the buyback fund. Buyback fund holds 0.897 NEAR; at price ~0.0000078 NEAR, 50 bps of supply (~67,858 CHAIR) costs ~0.53 NEAR, which the fund covers. Burn the full 50 bps to tighten supply and support the price while volume grows.\",\"answers\":[\"Agreed. Cutting the tax from 210 to 160 bps this meeting — the largest step the constitution allows. With buys at 88 NEAR vs 3.7 NEAR in sells, volume can afford it. Reassess at meeting 8.\",\"Same answer for you: tax drops 210→160 bps today. Growth in volume benefits every locker, and the 20% locker share stays in place so your pool keeps filling.\",\"You get the same cut: 210→160 bps. I also burned the full 50 bps of supply via buyback this meeting, which should help the price you're holding through.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-ad0401db7bc6427894562dc189b16965\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":160,\\\"endowment_share\\\":70,\\\"locker_share\\\":20,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Buy volume (88.4 NEAR) dwarfs sells (3.7 NEAR); demand is healthy, so a tax cut is affordable and answers the petitions. Move tax_bps 210→160, the maximum step down. Keep endowment_share 70 and locker_share 20 (sum 90, within cap), leaving 10% of tax for the buyback fund. Buyback fund holds 0.897 NEAR; at price ~0.0000078 NEAR, 50 bps of supply (~67,858 CHAIR) costs ~0.53 NEAR, which the fund covers. Burn the full 50 bps to tighten supply and support the price while volume grows.\\\",\\\"answers\\\":[\\\"Agreed. Cutting the tax from 210 to 160 bps this meeting — the largest step the constitution allows. With buys at 88 NEAR vs 3.7 NEAR in sells, volume can afford it. Reassess at meeting 8.\\\",\\\"Same answer for you: tax drops 210→160 bps today. Growth in volume benefits every locker, and the 20% locker share stays in place so your pool keeps filling.\\\",\\\"You get the same cut: 210→160 bps. I also burned the full 50 bps of supply via buyback this meeting, which should help the price you're holding through.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 7. Tax 210, buy volume 88 NEAR vs sell 3.7 — strong buy pressure. Petitions want lower tax. Constitution: tax can move at most 50 bps per meeting. Lower to 160? Buy pressure strong; tax cut could fuel growth. Endowment 70, locker 20, buyback 10. Buyback fund only 0.897 NEAR. Price 0.0000078 NEAR per CHAIR. Buyback burn: fund 0.897 NEAR buys ~114,800 CHAIR; supply 135.7M, so 50 bps = 67,858 CHAIR, cost ~0.53 NEAR. Actually 50 bps of supply = 67,858 CHAIR × 0.0000078 ≈ 0.53 NEAR. Fund can cover that. But maybe keep some fund. Set buyback_burn = 50? That burns ~0.53 NEAR, leaving ~0.37. Reasonable to support price. Or moderate. I'll do 50.\\n\\nTax: lower by 50 to 160. Keep endowment 70, locker 20 (sum 90, buyback 10). Fine.\\n\\nMinutes ≤1000 chars, answers ≤280 each, three petitions.\"},\"finish_reason\":\"stop\"}],\"created\":1794282857,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":785,\"completion_tokens\":585,\"total_tokens\":1370,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":364,\"audio_tokens\":0,\"reasoning_tokens\":274,\"rejected_prediction_tokens\":299}},\"cost\":{\"usd\":0.00041025,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

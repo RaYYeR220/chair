@@ -1,0 +1,22 @@
+{
+ "request_sha256": "be355dac01f26c239fbadee2819b5a357fd0099103c3e1a589d55ecf3a0144c3",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:17:31.995Z",
+ "latency_ms": 5413,
+ "usage": {
+  "prompt_tokens": 747,
+  "completion_tokens": 589,
+  "total_tokens": 1336,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 372,
+   "audio_tokens": 0,
+   "reasoning_tokens": 318,
+   "rejected_prediction_tokens": 282
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Buy volume (51 NEAR) outweighs sells (15 NEAR); tax at 200 bps is working, no change. Locker_share is constitutionally capped at 25 — the petition's 50 is impossible, so it stays. Endowment at 40 keeps the brain funded; the endowment holds 38.5 NEAR but pending inflow is small, so I won't cut it to 30 this meeting. Buyback fund holds only 0.49 NEAR; at price 0.0000153 that buys ~32k CHAIR, roughly 1 bp of supply. Setting buyback_burn to 1 — the maximum the fund can actually pay for. Revisit once tax flow rebuilds the buyback fund.\",\"answers\":[\"Denied in part. locker_share is hard-capped at 25 by the constitution — 50 is not possible no matter the weight. endowment stays 40: the brain's 38.5 NEAR must cover daily inference and pending balance is thin. Granted what's payable: buyback_burn set to 1, the max the 0.49 NEAR fund can buy and burn today. Keep locking.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-19ba3313ebaa4f5c90a6073f0a4075cb\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Buy volume (51 NEAR) outweighs sells (15 NEAR); tax at 200 bps is working, no change. Locker_share is constitutionally capped at 25 — the petition's 50 is impossible, so it stays. Endowment at 40 keeps the brain funded; the endowment holds 38.5 NEAR but pending inflow is small, so I won't cut it to 30 this meeting. Buyback fund holds only 0.49 NEAR; at price 0.0000153 that buys ~32k CHAIR, roughly 1 bp of supply. Setting buyback_burn to 1 — the maximum the fund can actually pay for. Revisit once tax flow rebuilds the buyback fund.\\\",\\\"answers\\\":[\\\"Denied in part. locker_share is hard-capped at 25 by the constitution — 50 is not possible no matter the weight. endowment stays 40: the brain's 38.5 NEAR must cover daily inference and pending balance is thin. Granted what's payable: buyback_burn set to 1, the max the 0.49 NEAR fund can buy and burn today. Keep locking.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 9. Current: tax 200, endowment 40, locker 25. Buyback fund tiny (0.49 NEAR). Price low, sell pressure low. Buyback_burn limited by fund: 0.49 NEAR / price ≈ 0.49/0.0000153 ≈ 32,000 CHAIR ≈ 0.011% of supply ≈ 1.1 bps. So buyback_burn max ~1.\\n\\nPetition: raise locker_share to 50 — clamped at 25 max. Cut endowment to 30 — allowed (min 30, move ≤10, currently 40 → could go to 30). But brain needs funding; endowment 38.5 NEAR, pending 0.53. Keep endowment at 40 or lower to 35? Petition asks 30; I can decline or partially. Locker_share stays 25 (max). Buyback_burn: fund can afford ~1 bps. Compute: 50 bps of supply = 285188465 * 0.005 = 1,425,942 CHAIR ≈ 21.8 NEAR. Fund only 0.49 NEAR → 0.49/21.8 * 50 ≈ 1.1 bps. So set buyback_burn = 1.\\n\\nTax: volume buy 51 NEAR, sell 15. Keep 200. Maybe fine.\\n\\nAnswers: one reply to petition.\"},\"finish_reason\":\"stop\"}],\"created\":1794284246,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":747,\"completion_tokens\":589,\"total_tokens\":1336,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":372,\"audio_tokens\":0,\"reasoning_tokens\":318,\"rejected_prediction_tokens\":282}},\"cost\":{\"usd\":0.00040655,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

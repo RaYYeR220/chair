@@ -1,0 +1,23 @@
+{
+ "request_sha256": "e91006ab463b44fdd1a0906854ee99be20b198870f63e10a1dc413c518092062",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:17:36.331Z",
+ "latency_ms": 4335,
+ "usage": {
+  "prompt_tokens": 752,
+  "completion_tokens": 541,
+  "total_tokens": 1293,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 340,
+   "audio_tokens": 0,
+   "reasoning_tokens": 256,
+   "rejected_prediction_tokens": 263
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 9. Flow is healthy: 51.5 NEAR bought vs 15.2 sold over 24h, net accumulation. Tax at 200 bps is not choking trade; hold. Locker_share is already at its constitutional max of 25 — the petitioned 50 is outside the contract and would be clamped, so it cannot be granted regardless of weight. Endowment at 40 keeps the brain funded without starving lockers; hold. Buyback: petition asks 50 bps (~1.43M CHAIR, ~21.9 NEAR) but the buyback fund holds only 0.494 NEAR, buying ~32,250 CHAIR ≈ 1 bp of supply. Set buyback_burn to 1 — the maximum the fund can actually pay for. Constitution binds; clamps are not policy.\",\"answers\":[\"holder-170.near: Weight doesn't override the contract. locker_share is capped at 25 and already there — 50 would be clamped to nothing new. I did take your buyback ask as far as physics allows: the fund covers only ~1 bp of supply, so buyback_burn is 1, not 50. Tax and shares hold steady this meeting.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-0c1ad2154f404d95a23c039b2279873d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 9. Flow is healthy: 51.5 NEAR bought vs 15.2 sold over 24h, net accumulation. Tax at 200 bps is not choking trade; hold. Locker_share is already at its constitutional max of 25 — the petitioned 50 is outside the contract and would be clamped, so it cannot be granted regardless of weight. Endowment at 40 keeps the brain funded without starving lockers; hold. Buyback: petition asks 50 bps (~1.43M CHAIR, ~21.9 NEAR) but the buyback fund holds only 0.494 NEAR, buying ~32,250 CHAIR ≈ 1 bp of supply. Set buyback_burn to 1 — the maximum the fund can actually pay for. Constitution binds; clamps are not policy.\\\",\\\"answers\\\":[\\\"holder-170.near: Weight doesn't override the contract. locker_share is capped at 25 and already there — 50 would be clamped to nothing new. I did take your buyback ask as far as physics allows: the fund covers only ~1 bp of supply, so buyback_burn is 1, not 50. Tax and shares hold steady this meeting.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Petition: locker_share to 50 — clamped to 25 max. buyback_burn 50 bps of supply: 50 bps = 0.5% of 285M ≈ 1.43M CHAIR. Cost: price 0.00001531 NEAR per CHAIR... wait, price_near is per token presumably. 1.43M tokens × 0.0000153 ≈ 21.9 NEAR. Fund only has 0.49 NEAR. So buyback limited by fund: 0.4939 / 0.00001531 ≈ 32,250 CHAIR. In bps of supply: 32,250 / 285,188,465 ≈ 0.0113% ≈ 1.13 bps. So buyback_burn = 1.\\n\\nLevers: keep tax 200, endowment 40, locker 25. Volume buy 51.5 NEAR, sell 15.2 — net buying pressure. Tax fine. Maybe keep everything steady. Endowment 38.5 NEAR is decent; keep 40.\\n\\nMinutes ≤1000 chars, answer ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794284252,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":752,\"completion_tokens\":541,\"total_tokens\":1293,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":340,\"audio_tokens\":0,\"reasoning_tokens\":256,\"rejected_prediction_tokens\":263}},\"cost\":{\"usd\":0.00035258,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

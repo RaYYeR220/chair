@@ -1,0 +1,22 @@
+{
+ "request_sha256": "c512c767176cbac3af493195a4b6d896729e7c586b29160ac1ddb4bc234393f1",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:14.919Z",
+ "latency_ms": 6675,
+ "usage": {
+  "prompt_tokens": 702,
+  "completion_tokens": 419,
+  "total_tokens": 1121,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 258,
+   "audio_tokens": 0,
+   "reasoning_tokens": 179,
+   "rejected_prediction_tokens": 225
+  }
+ },
+ "content": "{\"tax_bps\":210,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":30,\"minutes\":\"Tax at 260 bps is heavy; buy volume (174 NEAR) outpaces sells (56 NEAR) but growth is being throttled. Petition asks for a modest cut — I'll move the full 50 bps down to 210, keeping revenue solid while easing friction. Split stays 60/20/20: endowment funded at 6.09 NEAR, locker pool growing, buyback fund at 3.23 NEAR. Burn: supply value ≈ 858 NEAR, so 1 bp ≈ 0.086 NEAR; 30 bps costs ≈ 2.57 NEAR, well within the fund. Burn 30, keep 0.66 NEAR buffer for next meeting.\",\"answers\":[\"Agreed, holder-152.near — cutting tax 260→210 bps, the full step allowed. Volume should breathe; we keep a strong 210 floor so the endowment and locker pool stay funded. Revisit next meeting if flow holds.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-813f4a00829f4eef952b61be3185df22\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":210,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":30,\\\"minutes\\\":\\\"Tax at 260 bps is heavy; buy volume (174 NEAR) outpaces sells (56 NEAR) but growth is being throttled. Petition asks for a modest cut — I'll move the full 50 bps down to 210, keeping revenue solid while easing friction. Split stays 60/20/20: endowment funded at 6.09 NEAR, locker pool growing, buyback fund at 3.23 NEAR. Burn: supply value ≈ 858 NEAR, so 1 bp ≈ 0.086 NEAR; 30 bps costs ≈ 2.57 NEAR, well within the fund. Burn 30, keep 0.66 NEAR buffer for next meeting.\\\",\\\"answers\\\":[\\\"Agreed, holder-152.near — cutting tax 260→210 bps, the full step allowed. Volume should breathe; we keep a strong 210 floor so the endowment and locker pool stay funded. Revisit next meeting if flow holds.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. Tax 260, high. Volume buy 174 NEAR, sell 56. Petition asks lower tax a bit. Move tax down max 50 → 210. Endowment 60, locker 20, buyback 20. Buyback fund 3.23 NEAR. Price ~0.00000707 NEAR. Buyback burn: cost = burn_bps/10000 * supply * price. Supply 121.35M, price 7.069e-6 → full supply value ≈ 858 NEAR. 1 bps ≈ 0.0858 NEAR. Fund 3.23 NEAR → max ~37 bps. Choose 30 bps burn: cost ≈ 2.57 NEAR, affordable. Keep endowment 60, locker 20.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282848,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":702,\"completion_tokens\":419,\"total_tokens\":1121,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":258,\"audio_tokens\":0,\"reasoning_tokens\":179,\"rejected_prediction_tokens\":225}},\"cost\":{\"usd\":0.0003148,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

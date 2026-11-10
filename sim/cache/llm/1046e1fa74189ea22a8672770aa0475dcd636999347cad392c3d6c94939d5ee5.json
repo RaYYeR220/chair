@@ -1,0 +1,22 @@
+{
+ "request_sha256": "1046e1fa74189ea22a8672770aa0475dcd636999347cad392c3d6c94939d5ee5",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:32.470Z",
+ "latency_ms": 4589,
+ "usage": {
+  "prompt_tokens": 652,
+  "completion_tokens": 556,
+  "total_tokens": 1208,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 361,
+   "audio_tokens": 0,
+   "reasoning_tokens": 328,
+   "rejected_prediction_tokens": 224
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 28. Zero volume in 24h: no tax flowed in any direction, so lever changes would move nothing today. Holding tax_bps at 125, endowment_share at 50, locker_share at 25 for stability. Buyback fund holds only 0.02996 NEAR; at price 0.0000132764 that buys roughly 2,257 CHAIR, about 0.009 bps of supply — effectively nothing, so buyback_burn is set to 0 rather than pretend. Endowment at 47.23 NEAR comfortably covers inference. Petition addressed in order below.\",\"answers\":[\"holder-160.near: I hear you, but locker_share is already at its constitutional maximum of 25 and the contract would clamp anything higher. Also, with zero 24h volume, no tax is flowing to anyone right now. Lockers keep their 25% share of whatever trade taxes arrive next.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-f5793431606541e08c2c113f54e7a34b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 28. Zero volume in 24h: no tax flowed in any direction, so lever changes would move nothing today. Holding tax_bps at 125, endowment_share at 50, locker_share at 25 for stability. Buyback fund holds only 0.02996 NEAR; at price 0.0000132764 that buys roughly 2,257 CHAIR, about 0.009 bps of supply — effectively nothing, so buyback_burn is set to 0 rather than pretend. Endowment at 47.23 NEAR comfortably covers inference. Petition addressed in order below.\\\",\\\"answers\\\":[\\\"holder-160.near: I hear you, but locker_share is already at its constitutional maximum of 25 and the contract would clamp anything higher. Also, with zero 24h volume, no tax is flowing to anyone right now. Lockers keep their 25% share of whatever trade taxes arrive next.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 28. No volume, buyback fund tiny (0.03 NEAR). Supply 243.5M CHAIR, buyback_burn max 50 bps = 0.5% of supply = ~1,217,508 CHAIR. Cost at price 0.0000132764 NEAR per CHAIR: 1,217,508 × 0.0000132764 ≈ 16.17 NEAR. Fund only has 0.03 NEAR → can buy ~2,257 CHAIR ≈ 0.0000927% of supply ≈ 0.93 bps... wait, compute: 0.03/0.0000132764 ≈ 2257 CHAIR. As bps of supply: 2257/2,435,016 ×10000 ≈ 0.00927 bps. So buyback_burn effectively 0 (integer). Set 0.\\n\\nPetition: raise locker_share. Locker_share already at max 25. Answer: it's capped at 25 by constitution; can't go higher. Also no volume means no tax revenue anyway.\\n\\nLevers: tax 125, endowment 50, locker 25. With zero volume, taxes don't matter much this meeting. Keep stable. Maybe lower endowment_share slightly to preserve endowment? Endowment is 47 NEAR, fine. Keep everything unchanged; buyback_burn 0 since fund insufficient.\\n\\nMinutes ≤1000 chars, answer ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794283048,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":652,\"completion_tokens\":556,\"total_tokens\":1208,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":361,\"audio_tokens\":0,\"reasoning_tokens\":328,\"rejected_prediction_tokens\":224}},\"cost\":{\"usd\":0.0003758,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

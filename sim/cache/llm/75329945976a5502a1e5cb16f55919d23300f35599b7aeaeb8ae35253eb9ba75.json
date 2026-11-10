@@ -1,0 +1,22 @@
+{
+ "request_sha256": "75329945976a5502a1e5cb16f55919d23300f35599b7aeaeb8ae35253eb9ba75",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:27.175Z",
+ "latency_ms": 5618,
+ "usage": {
+  "prompt_tokens": 748,
+  "completion_tokens": 626,
+  "total_tokens": 1374,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 396,
+   "audio_tokens": 0,
+   "reasoning_tokens": 334,
+   "rejected_prediction_tokens": 291
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":2,\"minutes\":\"Buy pressure is healthy: 55.7 NEAR bought vs 6.1 sold in 24h. The 240 bps tax is working but may be choking marginal buyers, so I cut to 200 (within the 50 bps step). Shares stay 60/20/20 — endowment is funded at 11.77 NEAR, locker pool keeps accruing on 432M weight. Buyback: fund holds only 0.297 NEAR; 50 bps of supply would cost ~5.9 NEAR, so I clamp to 2 bps (~0.24 NEAR), the most the fund can pay. Small daily burns compound the floor as holder-152 asks; the 20% buyback share will grow the fund for larger burns later.\",\"answers\":[\"Agreed, holder-170. Tax cut from 240 to 200 bps today. Buys outnumber sells 9:1, so we can afford to let volume breathe and collect on more flow at a lighter rate.\",\"Agreed, holder-152. Burning 2 bps of supply today (~0.24 NEAR, all the fund can pay). The 20% buyback share will rebuild the fund so daily burns can scale up from here.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-98ac39548c954d82bd15e8173eaceade\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Buy pressure is healthy: 55.7 NEAR bought vs 6.1 sold in 24h. The 240 bps tax is working but may be choking marginal buyers, so I cut to 200 (within the 50 bps step). Shares stay 60/20/20 — endowment is funded at 11.77 NEAR, locker pool keeps accruing on 432M weight. Buyback: fund holds only 0.297 NEAR; 50 bps of supply would cost ~5.9 NEAR, so I clamp to 2 bps (~0.24 NEAR), the most the fund can pay. Small daily burns compound the floor as holder-152 asks; the 20% buyback share will grow the fund for larger burns later.\\\",\\\"answers\\\":[\\\"Agreed, holder-170. Tax cut from 240 to 200 bps today. Buys outnumber sells 9:1, so we can afford to let volume breathe and collect on more flow at a lighter rate.\\\",\\\"Agreed, holder-152. Burning 2 bps of supply today (~0.24 NEAR, all the fund can pay). The 20% buyback share will rebuild the fund so daily burns can scale up from here.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 13. Tax 240, buy volume 55.7 NEAR vs sell 6.08 — strong buy pressure. Petitions: lower tax a bit, small buyback daily.\\n\\nTax: lower from 240 to 200 (max move 50). Buyback: fund is 0.2967 NEAR. Price ~0.0000082356 NEAR per CHAIR. Buyback burn max 50 bps of supply = 0.5% of 144M = 720,379 CHAIR. Cost = 720379 * 0.0000082356 ≈ 5.93 NEAR. Fund only 0.2967 NEAR → can buy ~36,000 CHAIR ≈ 0.25 bps of supply. So buyback_burn limited by fund: 0.2967/ (supply*price) ... supply*price ≈ 144075904 * 0.0000082356 ≈ 1186.7 NEAR market cap. 0.2967/1186.7 ≈ 0.00025 = 0.025% = 2.5 bps. So buyback_burn = 2 (safe, ~0.236 NEAR). Let's set 2.\\n\\nEndowment_share 60, locker_share 20, buyback 20. Keep or adjust. Locker pool weight large. Keep shares as-is, maybe keep 60/20/20. Fine.\\n\\nMinutes under 1000 chars. Answers two, each ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282921,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":748,\"completion_tokens\":626,\"total_tokens\":1374,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":396,\"audio_tokens\":0,\"reasoning_tokens\":334,\"rejected_prediction_tokens\":291}},\"cost\":{\"usd\":0.00042520000000000004,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

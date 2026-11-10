@@ -1,0 +1,23 @@
+{
+ "request_sha256": "08f7f22161cf7129f0304711f3318ba961a76a6be7a6d4dcfb1448110296803a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:27.443Z",
+ "latency_ms": 4515,
+ "usage": {
+  "prompt_tokens": 597,
+  "completion_tokens": 354,
+  "total_tokens": 951,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 216,
+   "audio_tokens": 0,
+   "reasoning_tokens": 145,
+   "rejected_prediction_tokens": 198
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 48. Zero 24h volume on both sides, so tax changes have no immediate revenue effect; hold tax_bps at 100 to keep trading friction minimal and encourage flow. Locker pool is empty and locker_weight is large, so keep locker_share at 25 (its cap) to honor the lockers' claim on future tax. Endowment sits at 49.44 NEAR and must fund the brain's inference; with no inflows, raise endowment_share 30→40 (within the 10-point step) to build a buffer. Buyback fund is effectively zero (~1e-24 NEAR), so buyback_burn must be 0 — the fund cannot pay for any purchase. Sum 40+25=65 ≤ 100; remainder 35% accrues to buyback fund once volume returns. All values within constitutional bounds.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-c33c5d4c27a44d35bac0be8775ba326f\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 48. Zero 24h volume on both sides, so tax changes have no immediate revenue effect; hold tax_bps at 100 to keep trading friction minimal and encourage flow. Locker pool is empty and locker_weight is large, so keep locker_share at 25 (its cap) to honor the lockers' claim on future tax. Endowment sits at 49.44 NEAR and must fund the brain's inference; with no inflows, raise endowment_share 30→40 (within the 10-point step) to build a buffer. Buyback fund is effectively zero (~1e-24 NEAR), so buyback_burn must be 0 — the fund cannot pay for any purchase. Sum 40+25=65 ≤ 100; remainder 35% accrues to buyback fund once volume returns. All values within constitutional bounds.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Volume zero. Levers: tax 100, endowment 30, locker 25 (sum 55, rest 45 buyback). Buyback fund ~0, so buyback_burn must be 0 (can't pay). Keep things stable; maybe raise endowment share slightly since endowment is 49 NEAR, low volume. Actually with zero volume, tax changes don't matter much. Keep tax at 100. Maybe shift endowment up to fund brain: endowment 30→40? Moving at most 10 per meeting, fine. Locker share stays 25. Buyback burn 0 since fund is ~0 NEAR — can't buy anything.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283163,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":597,\"completion_tokens\":354,\"total_tokens\":951,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":216,\"audio_tokens\":0,\"reasoning_tokens\":145,\"rejected_prediction_tokens\":198}},\"cost\":{\"usd\":0.00023583,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f1eedec837b15e9eed63a485c7197ce00e19d1dfc698afc975f19e61896bea83",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:00:55.672Z",
+ "latency_ms": 4211,
+ "usage": {
+  "prompt_tokens": 779,
+  "completion_tokens": 447,
+  "total_tokens": 1226,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 145,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Tax is already at the constitutional floor of 100 bps; I cannot go lower, and with sell volume at zero there is little to stimulate. Locker_share sits at its 25% cap, so the petitioned raise is out of bounds. Endowment stays at 30 to keep the brain funded while directing the remainder to buybacks. The buyback fund holds only ~0.0157 NEAR, roughly 1,460 CHAIR at the current price — far below even 1 bp of the 191M supply — so buyback_burn is set to 0 this meeting. Levers hold steady; accumulation of the buyback fund resumes as volume returns.\",\"answers\":[\"holder-155.near: The tax is already at the constitutional floor of 100 bps — I cannot lower it further. With sell volume at zero, holding the floor is the most growth-friendly stance available.\",\"holder-169.near: I hear you, but locker_share is at its 25% constitutional cap; I cannot raise it. Your weight is noted and the pool keeps accruing from every trade's tax.\",\"holder-166.near: Same answer as your fellow locker: 25% is the hard cap enforced by the contract. The buyback fund remains tiny this meeting, so no burn either. Stability serves holders best.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6847ccc4\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Tax is already at the constitutional floor of 100 bps; I cannot go lower, and with sell volume at zero there is little to stimulate. Locker_share sits at its 25% cap, so the petitioned raise is out of bounds. Endowment stays at 30 to keep the brain funded while directing the remainder to buybacks. The buyback fund holds only ~0.0157 NEAR, roughly 1,460 CHAIR at the current price — far below even 1 bp of the 191M supply — so buyback_burn is set to 0 this meeting. Levers hold steady; accumulation of the buyback fund resumes as volume returns.\\\",\\\"answers\\\":[\\\"holder-155.near: The tax is already at the constitutional floor of 100 bps — I cannot lower it further. With sell volume at zero, holding the floor is the most growth-friendly stance available.\\\",\\\"holder-169.near: I hear you, but locker_share is at its 25% constitutional cap; I cannot raise it. Your weight is noted and the pool keeps accruing from every trade's tax.\\\",\\\"holder-166.near: Same answer as your fellow locker: 25% is the hard cap enforced by the contract. The buyback fund remains tiny this meeting, so no burn either. Stability serves holders best.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Current: tax 100, endowment 30, locker 25. Note buyback_share 45 = remainder. Petitions: lower tax (already at floor 100), raise locker_share (at cap 25). Volume is tiny, buyback fund tiny. Keep levers stable; buyback_burn limited by fund: 0.0157 NEAR at price 0.0000107 ≈ 1463 CHAIR ≈ 0.00076% of supply — in bps of supply that's ~0.0076 bps, so 0. Set buyback_burn 0.\\n\\nTax already at floor; can't lower. Locker share at cap. Keep everything.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283251,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":779,\"completion_tokens\":447,\"total_tokens\":1226,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":145,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00030963,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

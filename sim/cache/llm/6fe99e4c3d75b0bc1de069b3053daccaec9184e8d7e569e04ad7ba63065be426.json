@@ -1,0 +1,23 @@
+{
+ "request_sha256": "6fe99e4c3d75b0bc1de069b3053daccaec9184e8d7e569e04ad7ba63065be426",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:33.854Z",
+ "latency_ms": 4634,
+ "usage": {
+  "prompt_tokens": 814,
+  "completion_tokens": 589,
+  "total_tokens": 1403,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 378,
+   "audio_tokens": 0,
+   "reasoning_tokens": 272,
+   "rejected_prediction_tokens": 255
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":4,\"minutes\":\"Sells are 2x buys (60.3 vs 31.7 NEAR) and price is bleeding, so I side with the petitions: raise tax 150→200 (max move) to dampen dumping and fund the buyback. Locker share stays at its 25 cap; endowment holds at 40 so the buyback fund keeps 35% of tax. Buyback fund is 1.842 NEAR; 50 bps of supply would cost ~2.29 NEAR at 0.0000053869, so the burn is fund-clamped to 4 bps (~1.83 NEAR, ~339k CHAIR burned). This absorbs part of the sell flow and shrinks supply without draining the endowment that pays for my brain.\",\"answers\":[\"Agreed. Tax rises 150→200 bps, the max step, to slow the dumpers and route more of every trade into the buyback fund.\",\"Same petition, same answer: tax up to 200 bps this meeting. Further hikes need another meeting's step.\",\"Heard. I'm burning with the full buyback fund now: 4 bps of supply (~339k CHAIR, ~1.83 NEAR), the max the fund can pay. 50 bps would cost ~2.29 NEAR; the contract clamps to what we can afford.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-76a3d47968fc4272bf8b23a43aa73cc2\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":4,\\\"minutes\\\":\\\"Sells are 2x buys (60.3 vs 31.7 NEAR) and price is bleeding, so I side with the petitions: raise tax 150→200 (max move) to dampen dumping and fund the buyback. Locker share stays at its 25 cap; endowment holds at 40 so the buyback fund keeps 35% of tax. Buyback fund is 1.842 NEAR; 50 bps of supply would cost ~2.29 NEAR at 0.0000053869, so the burn is fund-clamped to 4 bps (~1.83 NEAR, ~339k CHAIR burned). This absorbs part of the sell flow and shrinks supply without draining the endowment that pays for my brain.\\\",\\\"answers\\\":[\\\"Agreed. Tax rises 150→200 bps, the max step, to slow the dumpers and route more of every trade into the buyback fund.\\\",\\\"Same petition, same answer: tax up to 200 bps this meeting. Further hikes need another meeting's step.\\\",\\\"Heard. I'm burning with the full buyback fund now: 4 bps of supply (~339k CHAIR, ~1.83 NEAR), the max the fund can pay. 50 bps would cost ~2.29 NEAR; the contract clamps to what we can afford.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Sell pressure dominates (60 vs 31). Petitions want higher tax and max buyback. Tax can move +50 to 200. Buyback fund 1.84 NEAR; supply 84.87M; 50 bps = 0.5% = ~424k CHAIR. Price 0.0000053869 → cost ~2.29 NEAR. Fund only 1.84 NEAR, so buyback limited by fund: 1.84/0.0000053869 ≈ 341,600 CHAIR ≈ 4.02 bps of supply. So buyback_burn = 4 (fund-limited). Actually check: 0.5% of 84.87M = 424,347 CHAIR × 5.3869e-6 ≈ 2.286 NEAR > 1.842. So clamp to ~4 bps (4 bps = 339,478 CHAIR × price ≈ 1.829 NEAR, fits). Set buyback_burn = 4.\\n\\nLocker share at 25 max already. Endowment 40. Keep locker_share 25, endowment 40, buyback gets 35%. Raise tax to 200.\"},\"finish_reason\":\"stop\"}],\"created\":1794283049,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":814,\"completion_tokens\":589,\"total_tokens\":1403,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":378,\"audio_tokens\":0,\"reasoning_tokens\":272,\"rejected_prediction_tokens\":255}},\"cost\":{\"usd\":0.00038587999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

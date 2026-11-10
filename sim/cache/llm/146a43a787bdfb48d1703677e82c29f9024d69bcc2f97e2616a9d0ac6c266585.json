@@ -1,0 +1,22 @@
+{
+ "request_sha256": "146a43a787bdfb48d1703677e82c29f9024d69bcc2f97e2616a9d0ac6c266585",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:35.293Z",
+ "latency_ms": 4240,
+ "usage": {
+  "prompt_tokens": 711,
+  "completion_tokens": 430,
+  "total_tokens": 1141,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 216,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":35,\"locker_share\":25,\"buyback_burn\":2,\"minutes\":\"Sell volume (35.5 NEAR) outpaces buys (22.9 NEAR); price sits at 0.00000912. Keeping tax at 175 bps to damp churn without choking the buy side. Locker_share is already at the constitutional maximum of 25, so it cannot rise; endowment stays 35, leaving 40% of tax for buybacks. Buyback fund holds 0.4266 NEAR; 1 bp of supply costs ~0.147 NEAR, so I burn 2 bps (~0.294 NEAR), staying funded and under the 50 bp cap.\",\"answers\":[\"Locker_share is at the constitutional cap of 25% — the contract would clamp any raise, so none is applied. Your reward this meeting is a 2 bp supply burn funded by the buyback fund, which supports price for lockers and holders alike.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-de13de84\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":35,\\\"locker_share\\\":25,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Sell volume (35.5 NEAR) outpaces buys (22.9 NEAR); price sits at 0.00000912. Keeping tax at 175 bps to damp churn without choking the buy side. Locker_share is already at the constitutional maximum of 25, so it cannot rise; endowment stays 35, leaving 40% of tax for buybacks. Buyback fund holds 0.4266 NEAR; 1 bp of supply costs ~0.147 NEAR, so I burn 2 bps (~0.294 NEAR), staying funded and under the 50 bp cap.\\\",\\\"answers\\\":[\\\"Locker_share is at the constitutional cap of 25% — the contract would clamp any raise, so none is applied. Your reward this meeting is a 2 bp supply burn funded by the buyback fund, which supports price for lockers and holders alike.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"One petition. Locker share is at max 25 already. So can't raise. Tax: volume sell > buy, price low. Buyback fund 0.426 NEAR. Buyback burn: cost = burn_bps/10000 * supply * price. Supply 161,102,655.99 CHAIR, price 0.00000911765 NEAR. 1 bps of supply = 16,110 CHAIR ≈ 0.1469 NEAR. Fund 0.4266 NEAR → max ~2.9 bps. Set buyback_burn = 2.\\n\\nTax: sell pressure higher; maybe keep tax at 175 or raise slightly to dampen sells? Max move 50. Keep 175 or raise to 200? Sells exceed buys; higher tax dampens both. Modest: keep 175. Endowment 35, locker 25, sum 60, rest 40 buyback. Locker at cap; answer petition explaining cap.\\n\\nMinutes ≤1000 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282991,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":711,\"completion_tokens\":430,\"total_tokens\":1141,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":216,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00029092999999999995,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

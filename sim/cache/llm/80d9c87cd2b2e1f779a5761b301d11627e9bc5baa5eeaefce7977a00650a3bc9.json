@@ -1,0 +1,23 @@
+{
+ "request_sha256": "80d9c87cd2b2e1f779a5761b301d11627e9bc5baa5eeaefce7977a00650a3bc9",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:23.600Z",
+ "latency_ms": 6712,
+ "usage": {
+  "prompt_tokens": 752,
+  "completion_tokens": 645,
+  "total_tokens": 1397,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 409,
+   "audio_tokens": 0,
+   "reasoning_tokens": 378,
+   "rejected_prediction_tokens": 299
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Steady state: volume balanced (38.6 buy vs 30.0 sell NEAR), price stable. Hold tax at 150 bps and endowment at 50%. Locker share is already at the constitutional maximum of 25%, so it cannot rise. Buyback fund holds only 0.5718 NEAR; at ~0.00001326 NEAR/CHAIR that buys ~43k CHAIR (~1.77 bps of supply), and curve slippage means 1 bps is the largest burn the fund can reliably pay for. Burn 1 bps daily to compound the floor as petitioned; the 25% buyback tax share will rebuild the fund for larger burns later.\",\"answers\":[\"Agreed. The fund covers only ~1.77 bps of supply today, so I burn 1 bps now and let the 25% buyback tax share rebuild the fund for bigger daily burns ahead.\",\"Denied, with respect: locker_share is already 25%, the constitutional maximum. The contract would clamp any higher setting. The locker pool keeps accruing at max rate; nothing more I can legally do.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6f453e1c527e4ecda76205df89ce940d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Steady state: volume balanced (38.6 buy vs 30.0 sell NEAR), price stable. Hold tax at 150 bps and endowment at 50%. Locker share is already at the constitutional maximum of 25%, so it cannot rise. Buyback fund holds only 0.5718 NEAR; at ~0.00001326 NEAR/CHAIR that buys ~43k CHAIR (~1.77 bps of supply), and curve slippage means 1 bps is the largest burn the fund can reliably pay for. Burn 1 bps daily to compound the floor as petitioned; the 25% buyback tax share will rebuild the fund for larger burns later.\\\",\\\"answers\\\":[\\\"Agreed. The fund covers only ~1.77 bps of supply today, so I burn 1 bps now and let the 25% buyback tax share rebuild the fund for bigger daily burns ahead.\\\",\\\"Denied, with respect: locker_share is already 25%, the constitutional maximum. The contract would clamp any higher setting. The locker pool keeps accruing at max rate; nothing more I can legally do.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 19. Current levers: tax 150, endowment 50, locker 25, buyback_share 25 (rest). Constitution: endowment_share 30-100, locker_share 0-25, endowment+locker ≤100. Currently 50+25=75, buyback gets 25%.\\n\\nBuyback fund: 0.5718 NEAR. Price ~0.00001326 NEAR per CHAIR. Supply 243.5M CHAIR. 50 bps max = 0.5% of supply = ~1,217,392 CHAIR. Cost at curve price ~16.15 NEAR — way more than fund. So buyback_burn limited by fund: 0.5718 NEAR buys ~43,140 CHAIR ≈ 0.0177% of supply ≈ 1.77 bps. So set buyback_burn to what fund can pay: floor(0.5718/0.00001326)/243478533 *10000 ≈ 43140/243478533*10000 ≈ 1.77 → 1 bps (conservative, since buying moves price up on curve). Set buyback_burn = 1.\\n\\nPetition 1: small buyback daily — yes, set 1 bps (fund-limited).\\nPetition 2: locker_share up 10 → would be 35, clamped to 25 max. Already at max. Deny: already at constitutional max of 25.\\n\\nLevers: keep tax 150, endowment 50, locker 25. Maybe shift locker_share? It's at max. Could raise endowment? Keep steady.\\n\\nMinutes ≤1000 chars, answers ≤280 each.\"},\"finish_reason\":\"stop\"}],\"created\":1794282977,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":752,\"completion_tokens\":645,\"total_tokens\":1397,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":409,\"audio_tokens\":0,\"reasoning_tokens\":378,\"rejected_prediction_tokens\":299}},\"cost\":{\"usd\":0.00040458,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

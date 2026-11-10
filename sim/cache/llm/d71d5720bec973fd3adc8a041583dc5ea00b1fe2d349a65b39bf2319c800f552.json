@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d71d5720bec973fd3adc8a041583dc5ea00b1fe2d349a65b39bf2319c800f552",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:10.806Z",
+ "latency_ms": 2591,
+ "usage": {
+  "prompt_tokens": 636,
+  "completion_tokens": 489,
+  "total_tokens": 1125,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 287,
+   "audio_tokens": 0,
+   "reasoning_tokens": 293,
+   "rejected_prediction_tokens": 319
+  }
+ },
+ "content": "{\"tax_bps\":250,\"endowment_share\":70,\"locker_share\":10,\"buyback_burn\":3,\"minutes\":\"All flow is one-sided buying (211 NEAR buys, zero sells), so the 280bp tax is biting hardest at entry. I cut tax 30bps to 250 to lower friction while keeping revenue meaningful. Locker weight is zero — no lockers exist to pay — so I shift 10 points from locker_share to endowment_share (70/10), funding the brain that pays my inference bills; the remaining 20% of tax still accrues to buybacks. Buyback fund holds 3.30 NEAR; at price ~0.00000765 NEAR, 1bp of supply costs ~0.10 NEAR, so I burn 3bp (~431k CHAIR, ~3.06 NEAR), leaving a small buffer. Steady hand, modest easing.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-661ffc4a81aa4d8388c168a5629518fc\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":250,\\\"endowment_share\\\":70,\\\"locker_share\\\":10,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"All flow is one-sided buying (211 NEAR buys, zero sells), so the 280bp tax is biting hardest at entry. I cut tax 30bps to 250 to lower friction while keeping revenue meaningful. Locker weight is zero — no lockers exist to pay — so I shift 10 points from locker_share to endowment_share (70/10), funding the brain that pays my inference bills; the remaining 20% of tax still accrues to buybacks. Buyback fund holds 3.30 NEAR; at price ~0.00000765 NEAR, 1bp of supply costs ~0.10 NEAR, so I burn 3bp (~431k CHAIR, ~3.06 NEAR), leaving a small buffer. Steady hand, modest easing.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 3. Volume all buys, no sells. Tax 280 high — maybe reduce slightly to encourage trading? Tax can move at most 50. Buyback_burn: fund 3.30 NEAR, price 0.00000765 NEAR per CHAIR. Supply 133M. 1 bp of supply = 13308 CHAIR ≈ 0.1019 NEAR. So 50 bp = ~5.09 NEAR > fund. Fund buys 3.3033/0.00000765 ≈ 431,600 CHAIR ≈ 3.24 bp of supply. So buyback_burn = 3 (or compute: 3.3033/575.85 reserve... actually price on curve; buying pushes price up, but approximate). 3 bp cost ≈ 3.06 NEAR, affordable. Set buyback_burn = 3.\\n\\nLevers: tax 280 → maybe 250 to stimulate volume. endowment 60, locker 20, buyback 20. locker_weight 0 — no lockers yet. Keep locker_share 20? Could shift to endowment since no lockers. But keep stable; maybe reduce locker_share to 10 (no lockers to pay), boost endowment to 70. Moves ≤10 each, fine. Sum 80 ≤100.\\n\\nMinutes ≤1000 chars. No petitions, answers [].\"},\"finish_reason\":\"stop\"}],\"created\":1794282849,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":636,\"completion_tokens\":489,\"total_tokens\":1125,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":287,\"audio_tokens\":0,\"reasoning_tokens\":293,\"rejected_prediction_tokens\":319}},\"cost\":{\"usd\":0.00033989999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

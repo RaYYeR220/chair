@@ -1,0 +1,22 @@
+{
+ "request_sha256": "a6b7e306873bcb5c229270c811cd5d78d0b221db0ada93a2fe5bf5d620e5429d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:09.263Z",
+ "latency_ms": 4988,
+ "usage": {
+  "prompt_tokens": 787,
+  "completion_tokens": 429,
+  "total_tokens": 1216,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 269,
+   "audio_tokens": 0,
+   "reasoning_tokens": 148,
+   "rejected_prediction_tokens": 211
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Volume is balanced (44.9 buy vs 35.9 sell NEAR) and price is stable, so tax stays at 100 bps and the split holds at 30/25/45. The buyback fund holds 0.818 NEAR; at price 0.000011287 NEAR/CHAIR, one basis point of the 203.4M supply costs ~0.230 NEAR, so the fund affords 3 bps (0.69 NEAR), leaving a small buffer. Three petitions request a small daily buyback to compound the floor — this meeting delivers exactly that at the maximum the fund can pay for. As taxes accrue, the fund should refill and allow sustained daily burns.\",\"answers\":[\"Agreed. Burning 3 bps of supply today — the most the 0.818 NEAR fund can buy at current price. Small, steady, compounding.\",\"Agreed. 3 bps bought and burned this meeting, funded entirely by the buyback fund. The floor gets a daily bid.\",\"Agreed. Daily buybacks are policy: 3 bps now, and as tax inflows refill the fund we aim to sustain or raise the pace.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-cbcdeac8c80f458d97f239c0c47b475e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Volume is balanced (44.9 buy vs 35.9 sell NEAR) and price is stable, so tax stays at 100 bps and the split holds at 30/25/45. The buyback fund holds 0.818 NEAR; at price 0.000011287 NEAR/CHAIR, one basis point of the 203.4M supply costs ~0.230 NEAR, so the fund affords 3 bps (0.69 NEAR), leaving a small buffer. Three petitions request a small daily buyback to compound the floor — this meeting delivers exactly that at the maximum the fund can pay for. As taxes accrue, the fund should refill and allow sustained daily burns.\\\",\\\"answers\\\":[\\\"Agreed. Burning 3 bps of supply today — the most the 0.818 NEAR fund can buy at current price. Small, steady, compounding.\\\",\\\"Agreed. 3 bps bought and burned this meeting, funded entirely by the buyback fund. The floor gets a daily bid.\\\",\\\"Agreed. Daily buybacks are policy: 3 bps now, and as tax inflows refill the fund we aim to sustain or raise the pace.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Buyback fund is 0.818 NEAR. Price ~0.000011287 NEAR per CHAIR. Supply 203.4M CHAIR. 1 bp of supply = 20344.7 CHAIR ≈ 0.2297 NEAR. So max affordable: 0.818/0.2297 ≈ 3.56 bp. So buyback_burn = 3.\\n\\nPetitions ask for small daily buyback — agree, set 3 bp (fund-limited).\\n\\nTax: volume healthy, keep 100. Shares: endowment 30, locker 25, buyback 45 — keep. Maybe raise endowment slightly? Keep stable.\"},\"finish_reason\":\"stop\"}],\"created\":1794283144,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":787,\"completion_tokens\":429,\"total_tokens\":1216,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":269,\"audio_tokens\":0,\"reasoning_tokens\":148,\"rejected_prediction_tokens\":211}},\"cost\":{\"usd\":0.00033255000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

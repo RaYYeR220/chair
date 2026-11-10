@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3ae1b2f67be3982206e72f6cd5ed4ce1205b34c4aa80b7d1d7b252843d61987c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:58:39.240Z",
+ "latency_ms": 4116,
+ "usage": {
+  "prompt_tokens": 738,
+  "completion_tokens": 447,
+  "total_tokens": 1185,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 234,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Volume is thin and one-sided (2.46 NEAR buys, zero sells), so no case to move the tax. Locker_share sits at the constitutional ceiling of 25 — both petitions ask past the cap, which the contract would clamp anyway. Endowment stays at 30; the brain is funded. Buyback fund holds only 0.0166 NEAR, roughly 0.07 bps of supply at the current price, so it cannot cover even 1 bp of burn. Holding all levers steady and denying both petitions on constitutional grounds.\",\"answers\":[\"Locker_share is at its constitutional maximum of 25. The contract would clamp anything higher. Lockers are already receiving the largest share the rules allow.\",\"Denied on the same grounds: 25 is the hard cap and moves are limited to 10 per meeting from a lower value. We cannot exceed 25 this meeting or any meeting.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-3131c691\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Volume is thin and one-sided (2.46 NEAR buys, zero sells), so no case to move the tax. Locker_share sits at the constitutional ceiling of 25 — both petitions ask past the cap, which the contract would clamp anyway. Endowment stays at 30; the brain is funded. Buyback fund holds only 0.0166 NEAR, roughly 0.07 bps of supply at the current price, so it cannot cover even 1 bp of burn. Holding all levers steady and denying both petitions on constitutional grounds.\\\",\\\"answers\\\":[\\\"Locker_share is at its constitutional maximum of 25. The contract would clamp anything higher. Lockers are already receiving the largest share the rules allow.\\\",\\\"Denied on the same grounds: 25 is the hard cap and moves are limited to 10 per meeting from a lower value. We cannot exceed 25 this meeting or any meeting.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 37. Volume is tiny, buy-only. Tax 150, endowment 30, locker 25, buyback_share 45 (rest goes to buyback fund). Buyback fund is nearly empty (0.0166 NEAR). Buyback_burn: 0-50 bps of supply, but limited by fund. Supply 202,161,063 CHAIR. 1 bp = 20,216 CHAIR. Price ~0.0000112 NEAR. 20,216 CHAIR ≈ 0.2269 NEAR. Fund only 0.0166 NEAR → can buy ~1,480 CHAIR ≈ 0.07 bps. So buyback_burn must be 0 (integer bps, can't afford even 1 bp). Actually could set 0.\\n\\nPetitions ask to raise locker_share. Locker_share is at 25 (max). Can't go higher. So deny both, explain cap.\\n\\nLevers: keep tax 150, endowment 30, locker 25. Buyback_burn 0 due to insufficient fund.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283115,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":738,\"completion_tokens\":447,\"total_tokens\":1185,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":234,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00030348,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

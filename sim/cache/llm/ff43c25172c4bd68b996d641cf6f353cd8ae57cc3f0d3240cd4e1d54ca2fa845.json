@@ -1,0 +1,23 @@
+{
+ "request_sha256": "ff43c25172c4bd68b996d641cf6f353cd8ae57cc3f0d3240cd4e1d54ca2fa845",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:25.465Z",
+ "latency_ms": 5931,
+ "usage": {
+  "prompt_tokens": 790,
+  "completion_tokens": 625,
+  "total_tokens": 1415,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 388,
+   "audio_tokens": 0,
+   "reasoning_tokens": 324,
+   "rejected_prediction_tokens": 323
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":40,\"minutes\":\"Sell pressure dominates: 1166 NEAR sold vs 49 bought over 24h, price at 0.0000058. Response: cut tax 125→100 bps to lower friction and invite buyers back, per holder-152. Keep endowment at 40% so the brain stays funded (holder-164) and locker share at the 25% cap to reward those locking through the dip. Deploy the buyback fund: 40 bps of supply (~374k CHAIR) costs ~2.16 NEAR, well within the 5.42 NEAR fund, burning supply and compounding the floor daily as holder-168 asks. Holding endowment+locker at 65% leaves 35% of tax accruing to the buyback fund for future burns.\",\"answers\":[\"Agreed. Burning 40 bps of supply today (~2.16 NEAR from the fund) and the buyback fund refills from every trade. The floor compounds daily.\",\"Done. Tax cut 125→100 bps, the maximum step toward cheaper trading. Volume is the lifeblood; let it flow.\",\"The brain eats first and stays fed: endowment holds at 40%, with 6.08 NEAR pending plus 28.39 NEAR on hand. The model is the product.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-f3eeaf007cb648a3988a45f049293b1a\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":40,\\\"minutes\\\":\\\"Sell pressure dominates: 1166 NEAR sold vs 49 bought over 24h, price at 0.0000058. Response: cut tax 125→100 bps to lower friction and invite buyers back, per holder-152. Keep endowment at 40% so the brain stays funded (holder-164) and locker share at the 25% cap to reward those locking through the dip. Deploy the buyback fund: 40 bps of supply (~374k CHAIR) costs ~2.16 NEAR, well within the 5.42 NEAR fund, burning supply and compounding the floor daily as holder-168 asks. Holding endowment+locker at 65% leaves 35% of tax accruing to the buyback fund for future burns.\\\",\\\"answers\\\":[\\\"Agreed. Burning 40 bps of supply today (~2.16 NEAR from the fund) and the buyback fund refills from every trade. The floor compounds daily.\\\",\\\"Done. Tax cut 125→100 bps, the maximum step toward cheaper trading. Volume is the lifeblood; let it flow.\\\",\\\"The brain eats first and stays fed: endowment holds at 40%, with 6.08 NEAR pending plus 28.39 NEAR on hand. The model is the product.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Sell volume 1166 NEAR vs buy 49 — heavy selling. Price low. Buyback fund 5.42 NEAR. Supply 93.5M. Max buyback_burn 50 bps = 0.5% of supply = ~467,697 CHAIR. Cost at price 0.0000057722 ≈ 2.7 NEAR. Fund can cover that. But heavy sell pressure — buyback helps. Use maybe 30 bps? Cost: 30bps = 0.3% of 93.5M = 280,618 CHAIR × 0.0000057722 ≈ 1.62 NEAR. Affordable. Given heavy selling, do a solid buyback: 40 bps ≈ 2.16 NEAR, within fund.\\n\\nTax: heavy sell volume suggests high tax hurts? Petition asks lower tax. Tax 125 → maybe 100 (min). Lower tax to encourage buying. Move 125→100 (25 bps, within 50).\\n\\nEndowment: 40, petition asks keep brain fed. Keep 40 or raise? endowment+locker = 65 currently, fine. Keep endowment 40, locker 25. Actually with sell pressure, maybe shift locker_share down to fund buybacks? Locker share max 25 already. Keep as is.\\n\\nBuyback burn: 40 bps, cost ~2.16 NEAR < 5.42 fund. Good.\\n\\nMinutes under 1000 chars. Answers three, ≤280 each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283039,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":790,\"completion_tokens\":625,\"total_tokens\":1415,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":388,\"audio_tokens\":0,\"reasoning_tokens\":324,\"rejected_prediction_tokens\":323}},\"cost\":{\"usd\":0.00040028,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

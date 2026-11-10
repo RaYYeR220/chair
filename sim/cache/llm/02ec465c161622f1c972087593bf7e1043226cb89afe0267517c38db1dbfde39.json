@@ -1,0 +1,21 @@
+{
+ "request_sha256": "02ec465c161622f1c972087593bf7e1043226cb89afe0267517c38db1dbfde39",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:42.530Z",
+ "latency_ms": 4790,
+ "usage": {
+  "prompt_tokens": 653,
+  "completion_tokens": 571,
+  "total_tokens": 1224,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 333,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 16. Flow is one-sided: 11.9 NEAR of buys, zero sells, so tax revenue accrues steadily and there is no sell pressure to punish. Current split (50 endowment / 25 lockers / 25 buyback) remains balanced; no reason to move any lever more than the calm justifies. The binding constraint is the buyback fund: at 0.147 NEAR and a price of ~0.0000087 NEAR per CHAIR, it can retire roughly 16.9k CHAIR, about 0.0011% of the 153.67M supply — well under 1 basis point. Since buyback_burn must be an integer and anything above the fund's capacity is clamped anyway, I set it to 0 and let the buyback fund accumulate this cycle so the next burn is meaningful. Hold tax at 150, endowment at 50, locker share at 25. Reassess if sell volume appears.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-40213f60\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 16. Flow is one-sided: 11.9 NEAR of buys, zero sells, so tax revenue accrues steadily and there is no sell pressure to punish. Current split (50 endowment / 25 lockers / 25 buyback) remains balanced; no reason to move any lever more than the calm justifies. The binding constraint is the buyback fund: at 0.147 NEAR and a price of ~0.0000087 NEAR per CHAIR, it can retire roughly 16.9k CHAIR, about 0.0011% of the 153.67M supply — well under 1 basis point. Since buyback_burn must be an integer and anything above the fund's capacity is clamped anyway, I set it to 0 and let the buyback fund accumulate this cycle so the next burn is meaningful. Hold tax at 150, endowment at 50, locker share at 25. Reassess if sell volume appears.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 16. No petitions. Current levers: tax 150, endowment 50, locker 25, buyback 25. Buy-only volume, price low. Buyback fund tiny (0.147 NEAR). Supply ~153.67M CHAIR. buyback_burn max 50 bps = 0.5% of supply = ~768k CHAIR. Price 0.000008719 NEAR/CHAIR. Cost of 768k CHAIR ≈ 6.7 NEAR — fund can't pay. Fund 0.147 NEAR buys ~16,880 CHAIR ≈ 0.011 bps of supply. So set buyback_burn to what fund can pay: 0.147/0.000008719 ≈ 16,880 CHAIR / 153,670,401 ≈ 0.0011% ≈ 0.11 bps. Integer bps → 0? buyback_burn is integer bps, so 0. Hmm, but maybe set 0 since fund insufficient. Actually could set 0 and let fund accumulate. Or set 1 bps but clamped to fund. Constitution says \\\"no more than the fund can pay for\\\" — setting 1 bps would be clamped. Safer: 0.\\n\\nLevers: buy-only volume, no sells. Keep tax at 150? Maybe modest. Locker share at 25 max. Endowment 50. Keep stable. Maybe reduce buyback_burn to 0 and keep others.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282938,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":653,\"completion_tokens\":571,\"total_tokens\":1224,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":333,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00038345,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

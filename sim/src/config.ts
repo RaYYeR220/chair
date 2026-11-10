@@ -41,6 +41,9 @@ export const CFG = {
   petitionFee: BigInt(a.petition_fee) as bigint, // base units
   petitionMaxChars: k.petition_max_chars as number,
   petitionTopN: k.petitions_in_brief as number,
+  petitionQueueMax: k.petition_queue_max as number,
+  seedBytes: k.seed_bytes as number,
+  maxResponseBytes: k.max_response_bytes as number,
   storageDeposit: BigInt(k.storage_deposit) as bigint,
   rewardScale: BigInt(k.reward_scale) as bigint,
   ladder: (a.ladder as { min_endowment: string; model: string }[]).map((r): Tier => ({ min: BigInt(r.min_endowment), model: r.model })),
@@ -52,6 +55,21 @@ export const CFG = {
   },
   rawNewArgs: a,
   rawConstitution: k,
+  tokenVersion: raw.token_version as string,
   source: raw._source as string,
   mechanics: raw.contract_mechanics as Record<string, string>,
 };
+
+/** The economic fields of a token `new` call (curve, petition fee, launch levers, ladder). */
+export interface NewArgs { curve: { p0: string; k: string }; petition_fee: string; levers: LeverSet | null; ladder: { min_endowment: string; model: string }[] }
+
+/** Runs `fn` with another deployment's `new` args in CFG (golden tests of earlier deployments), then restores them. */
+export function withNewArgs<T>(args: NewArgs, fn: () => T): T {
+  const saved = { p0: CFG.p0, k: CFG.k, petitionFee: CFG.petitionFee, launch: CFG.launch, ladder: CFG.ladder };
+  Object.assign(CFG, {
+    p0: BigInt(args.curve.p0), k: BigInt(args.curve.k), petitionFee: BigInt(args.petition_fee),
+    launch: args.levers ?? (k.default_levers as LeverSet),
+    ladder: args.ladder.map((r): Tier => ({ min: BigInt(r.min_endowment), model: r.model })),
+  });
+  try { return fn(); } finally { Object.assign(CFG, saved); }
+}

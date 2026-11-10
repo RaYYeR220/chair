@@ -1,0 +1,22 @@
+{
+ "request_sha256": "8e237782a936a85cec5667d549aa7a340c40351ddc92390b2482fe881e7f7df8",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:02.414Z",
+ "latency_ms": 3184,
+ "usage": {
+  "prompt_tokens": 710,
+  "completion_tokens": 535,
+  "total_tokens": 1245,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 333,
+   "audio_tokens": 0,
+   "reasoning_tokens": 306,
+   "rejected_prediction_tokens": 273
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Sell pressure dominates (35.5 NEAR sold vs 10.6 bought). Raising tax 150→200 to slow the bleed, within the 50bps step limit. Split stays 50/25/25: endowment funded, lockers paid, buyback accumulating. Buyback fund holds only 0.495 NEAR; at ~0.0000134 NEAR/CHAIR that buys roughly 37k CHAIR (~1.5bps of supply, less after curve impact), so burn is set to 1bp — the fund cannot cover more. As taxes accrue on elevated sell volume, the buyback fund will rebuild and future burns can scale. Petition answered in order.\",\"answers\":[\"Agreed, holder-155. A small buyback fires today: 1bp of supply burned with the 0.495 NEAR fund — the maximum it can pay for. Keep selling less and the fund compounds; bigger burns follow.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-5f9b2ac1b01b4944959d38bb2c6f63b1\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Sell pressure dominates (35.5 NEAR sold vs 10.6 bought). Raising tax 150→200 to slow the bleed, within the 50bps step limit. Split stays 50/25/25: endowment funded, lockers paid, buyback accumulating. Buyback fund holds only 0.495 NEAR; at ~0.0000134 NEAR/CHAIR that buys roughly 37k CHAIR (~1.5bps of supply, less after curve impact), so burn is set to 1bp — the fund cannot cover more. As taxes accrue on elevated sell volume, the buyback fund will rebuild and future burns can scale. Petition answered in order.\\\",\\\"answers\\\":[\\\"Agreed, holder-155. A small buyback fires today: 1bp of supply burned with the 0.495 NEAR fund — the maximum it can pay for. Keep selling less and the fund compounds; bigger burns follow.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 15. Sell pressure dominates (35.5 NEAR sells vs 10.6 buys). Tax at 150, could raise modestly to 175-200. Endowment 50, locker 25, buyback 25. Buyback fund only 0.495 NEAR. Supply 245.4M; buyback_burn max 50 bps = 0.5% of supply = ~1.227M CHAIR. Price ~0.00001335 NEAR. Cost of 1.227M CHAIR ≈ 16.4 NEAR — fund can't pay. Fund 0.495 NEAR buys ~37,100 CHAIR ≈ 0.015 bps of supply. So buyback_burn limited by fund. Compute: 0.495/0.00001335 ≈ 37,090 CHAIR. As bps of supply: 37090/245379404 * 10000 ≈ 1.51 bps. But buying moves the curve up; actual amount less. Be conservative: set buyback_burn = 1.\\n\\nPetition: holder wants small buyback daily — we're doing that, agree.\\n\\nTax: sell pressure heavy; raise tax to 200 (max move 50). Keep endowment 50, locker 25, buyback 25. That's fine (sum 100).\\n\\nMinutes under 1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282959,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":710,\"completion_tokens\":535,\"total_tokens\":1245,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":333,\"audio_tokens\":0,\"reasoning_tokens\":306,\"rejected_prediction_tokens\":273}},\"cost\":{\"usd\":0.000374,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

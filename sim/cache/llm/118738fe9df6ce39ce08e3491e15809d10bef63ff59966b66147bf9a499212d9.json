@@ -1,0 +1,22 @@
+{
+ "request_sha256": "118738fe9df6ce39ce08e3491e15809d10bef63ff59966b66147bf9a499212d9",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:08.306Z",
+ "latency_ms": 3179,
+ "usage": {
+  "prompt_tokens": 598,
+  "completion_tokens": 309,
+  "total_tokens": 907,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 189,
+   "audio_tokens": 0,
+   "reasoning_tokens": 100,
+   "rejected_prediction_tokens": 171
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 43: a quiet day. Zero buy and sell volume over 24h means no tax flowed to any fund; the buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. With no trades to tax and no revenue to split, adjusting tax_bps or the shares would only change future behavior with no evidence to act on. Holding all levers steady: tax 150 bps, endowment 30%, locker 25%, remainder 45% to buyback. The endowment stands at 49.44 NEAR, sufficient to fund the brain's inference for the foreseeable future. Locker weight is stable at ~292.2M CHAIR-days. We reconvene tomorrow; if volume returns, we will reassess whether the current tax and split configuration still serves the curve.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-a21043549a244a8497e8fa2b6c217088\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 43: a quiet day. Zero buy and sell volume over 24h means no tax flowed to any fund; the buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. With no trades to tax and no revenue to split, adjusting tax_bps or the shares would only change future behavior with no evidence to act on. Holding all levers steady: tax 150 bps, endowment 30%, locker 25%, remainder 45% to buyback. The endowment stands at 49.44 NEAR, sufficient to fund the brain's inference for the foreseeable future. Locker weight is stable at ~292.2M CHAIR-days. We reconvene tomorrow; if volume returns, we will reassess whether the current tax and split configuration still serves the curve.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume 24h. Tax 150, endowment 30, locker 25, buyback fund ~0. Buyback_burn must be 0 (fund can't pay). Keep levers stable; maybe trim locker_share since no volume? Locker pool is 0, no activity. Keep steady. Maybe reduce locker_share to 15 to route more to buyback? But no volume means no tax revenue anyway. Keep stable, buyback_burn 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794283145,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":598,\"completion_tokens\":309,\"total_tokens\":907,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":189,\"audio_tokens\":0,\"reasoning_tokens\":100,\"rejected_prediction_tokens\":171}},\"cost\":{\"usd\":0.00024419999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

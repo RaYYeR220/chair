@@ -1,0 +1,22 @@
+{
+ "request_sha256": "09383dddbbfd65d17e577502d836d67d1931598f49f4e5c9c13572eb22f98715",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:46.165Z",
+ "latency_ms": 2963,
+ "usage": {
+  "prompt_tokens": 696,
+  "completion_tokens": 621,
+  "total_tokens": 1317,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 378,
+   "audio_tokens": 0,
+   "reasoning_tokens": 375,
+   "rejected_prediction_tokens": 351
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Sell-only volume (27.27 NEAR, no buys) — holders are exiting, so I keep tax at the 100 floor to avoid adding friction. Locker_share is already at the constitutional maximum of 25; the petition asks for something the contract clamps, so it cannot be granted. Endowment sits at 46.77 NEAR, well-funded, so shares stay at 50/25/25. Buyback fund is 0.21 NEAR ≈ 15.8k CHAIR against 244.6M supply — that's ~0.06 bps, below the 1-bps integer step, so buyback_burn is 0 this meeting. Accumulating fund for a meaningful future burn is preferable to a dust burn now.\",\"answers\":[\"Locker_share is already at the constitutional cap of 25% — the contract would clamp any raise to nothing. You're getting the maximum the rules allow. What would actually help lockers is more volume: I'm holding tax at 100 bps to keep trading friction minimal.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-9d0a30f7fdc2418aa118a1ce808b3f17\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Sell-only volume (27.27 NEAR, no buys) — holders are exiting, so I keep tax at the 100 floor to avoid adding friction. Locker_share is already at the constitutional maximum of 25; the petition asks for something the contract clamps, so it cannot be granted. Endowment sits at 46.77 NEAR, well-funded, so shares stay at 50/25/25. Buyback fund is 0.21 NEAR ≈ 15.8k CHAIR against 244.6M supply — that's ~0.06 bps, below the 1-bps integer step, so buyback_burn is 0 this meeting. Accumulating fund for a meaningful future burn is preferable to a dust burn now.\\\",\\\"answers\\\":[\\\"Locker_share is already at the constitutional cap of 25% — the contract would clamp any raise to nothing. You're getting the maximum the rules allow. What would actually help lockers is more volume: I'm holding tax at 100 bps to keep trading friction minimal.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 23. Current: tax 100, endowment 50, locker 25, buyback_share 25 (rest). Volume: only sells 27.27 NEAR. Tax revenue at 100bps = ~0.27 NEAR/day. Locker pool small.\\n\\nPetition: raise locker_share. Max is 25 already — locker_share is at cap (0-25). So can't raise. Explain that.\\n\\nBuyback_burn: fund 0.21 NEAR, price 0.00001333 NEAR per CHAIR → 0.21/0.00001333 ≈ 15,800 CHAIR. Supply 244.6M. 50 bps = 0.5% = 1,223,090 CHAIR, cost ≈ 16.3 NEAR. Fund can't cover. So buyback_burn limited by fund: 15,800 CHAIR ≈ 0.0065 bps... tiny. Compute: bps = 15800/244617954 * 10000 ≈ 0.0646 bps. So buyback_burn 0 (or minimal). Integer, so 0.\\n\\nLevers: volume is sell-only, price low. Maybe keep tax at 100 to not discourage, or raise slightly? Sell pressure only; raising tax on sells discourages selling but also revenue. Keep tax 100. Endowment 50, locker 25 stays. Maybe shift endowment down to fund buybacks? Endowment has 46.77 NEAR, healthy. Could lower endowment_share to 40, giving buyback 35? But buyback fund barely matters given tiny fund. Keep stable.\\n\\nMinutes concise. Answer petition: locker_share already at constitutional max 25.\"},\"finish_reason\":\"stop\"}],\"created\":1794283003,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":696,\"completion_tokens\":621,\"total_tokens\":1317,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":378,\"audio_tokens\":0,\"reasoning_tokens\":375,\"rejected_prediction_tokens\":351}},\"cost\":{\"usd\":0.0004149,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

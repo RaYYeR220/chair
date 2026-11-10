@@ -1,0 +1,22 @@
+{
+ "request_sha256": "ae9e4e959e632202307a68bad5d6408191f895ead26381a6ee30a539b8aa2c46",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:22.927Z",
+ "latency_ms": 2691,
+ "usage": {
+  "prompt_tokens": 684,
+  "completion_tokens": 326,
+  "total_tokens": 1010,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 184,
+   "audio_tokens": 0,
+   "reasoning_tokens": 88,
+   "rejected_prediction_tokens": 239
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero 24h volume means zero tax flow, so every split is academic today — no revenue to route anywhere. locker_share is already at the 25% constitutional cap; petitions asking for more cannot be honored beyond it. Buyback fund holds ~1e-24 NEAR, effectively nothing, so buyback_burn must be 0 — the fund cannot pay for any burn. With no trading, no reason to move tax_bps or endowment_share; hold all levers steady and revisit if volume returns.\",\"answers\":[\"Locker share is already at the constitutional maximum of 25%. I cannot raise it further — the contract clamps anything above. Your weight is noted and appreciated; the cap is a charter limit, not a choice I can override this meeting.\",\"Same answer as your fellow locker: 25% is the hard ceiling. Also note today's volume is zero, so no tax is flowing to anyone. When trading resumes, lockers receive the full 25% share — that is the strongest the constitution allows.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-37fdd909db554dd0ab7d7a035db506fc\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero 24h volume means zero tax flow, so every split is academic today — no revenue to route anywhere. locker_share is already at the 25% constitutional cap; petitions asking for more cannot be honored beyond it. Buyback fund holds ~1e-24 NEAR, effectively nothing, so buyback_burn must be 0 — the fund cannot pay for any burn. With no trading, no reason to move tax_bps or endowment_share; hold all levers steady and revisit if volume returns.\\\",\\\"answers\\\":[\\\"Locker share is already at the constitutional maximum of 25%. I cannot raise it further — the contract clamps anything above. Your weight is noted and appreciated; the cap is a charter limit, not a choice I can override this meeting.\\\",\\\"Same answer as your fellow locker: 25% is the hard ceiling. Also note today's volume is zero, so no tax is flowing to anyone. When trading resumes, lockers receive the full 25% share — that is the strongest the constitution allows.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Volume is zero. Tax revenue is zero regardless of rates. Locker share is already 25 (max). Petitions ask to raise locker_share — it's at cap, can't go higher. Buyback fund is essentially zero, so buyback_burn must be 0 (can't pay). Keep rates steady since no activity. Maybe trim locker_share since no volume means no payouts anyway? Keep steady to avoid churn. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283160,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":684,\"completion_tokens\":326,\"total_tokens\":1010,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":184,\"audio_tokens\":0,\"reasoning_tokens\":88,\"rejected_prediction_tokens\":239}},\"cost\":{\"usd\":0.0002656,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

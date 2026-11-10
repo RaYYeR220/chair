@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6b88fa9a5580b9bf441d4cfb74ceacf26069b23b87881ee05b3f34206249c42a",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:07.616Z",
+ "latency_ms": 31477,
+ "usage": {
+  "prompt_tokens": 660,
+  "completion_tokens": 443,
+  "total_tokens": 1103,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 290,
+   "audio_tokens": 0,
+   "reasoning_tokens": 243,
+   "rejected_prediction_tokens": 169
+  }
+ },
+ "content": "{\"tax_bps\":240,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":4,\"minutes\":\"Sell volume (35.1 NEAR) outpaces buys (22.4 NEAR) roughly 1.6:1, so I nudge the tax up 30 bps to 240 to dampen outflow without choking trade. Shares stay at 60/20/20 — endowment runway is healthy at 9.78 NEAR and locker pool keeps accruing. Buyback fund holds 0.4234 NEAR; at price ~0.00000746 NEAR that buys ~56.3k CHAIR, about 4.4 bps of the 128.69M supply, so I burn 4 bps — the maximum the fund can actually pay for. Small burn, but it keeps the deflationary flywheel turning while the fund rebuilds from the higher tax.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-14ae803a02d04b24828119a1989c18d7\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":240,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":4,\\\"minutes\\\":\\\"Sell volume (35.1 NEAR) outpaces buys (22.4 NEAR) roughly 1.6:1, so I nudge the tax up 30 bps to 240 to dampen outflow without choking trade. Shares stay at 60/20/20 — endowment runway is healthy at 9.78 NEAR and locker pool keeps accruing. Buyback fund holds 0.4234 NEAR; at price ~0.00000746 NEAR that buys ~56.3k CHAIR, about 4.4 bps of the 128.69M supply, so I burn 4 bps — the maximum the fund can actually pay for. Small burn, but it keeps the deflationary flywheel turning while the fund rebuilds from the higher tax.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 10. No petitions. Volume sell > buy slightly. Tax 210, could hold. Buyback fund 0.42 NEAR; buyback_burn max 50 bps of supply = 0.5% of 128.69M ≈ 643,470 CHAIR. Price ~0.00000746 NEAR → cost ≈ 4.8 NEAR. Fund only 0.42 NEAR → can buy ~56,300 CHAIR ≈ 0.44 bps... wait: 0.42/0.00000746 ≈ 56,300 CHAIR, which is 56300/128693981 ≈ 0.0438% ≈ 4.4 bps. So buyback_burn = 4 (fund can pay for ~4.4 bps). Set 4.\\n\\nLevers: hold tax at 210, endowment 60, locker 20. Sell pressure slightly higher; maybe raise tax a bit? Max move 50. Could raise to 250 to dampen sells. Modest: raise to 240. Keep shares. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282876,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":660,\"completion_tokens\":443,\"total_tokens\":1103,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":290,\"audio_tokens\":0,\"reasoning_tokens\":243,\"rejected_prediction_tokens\":169}},\"cost\":{\"usd\":0.0003205,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

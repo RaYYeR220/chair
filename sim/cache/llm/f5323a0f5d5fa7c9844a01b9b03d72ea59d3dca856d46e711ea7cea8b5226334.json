@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f5323a0f5d5fa7c9844a01b9b03d72ea59d3dca856d46e711ea7cea8b5226334",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:31.285Z",
+ "latency_ms": 6065,
+ "usage": {
+  "prompt_tokens": 715,
+  "completion_tokens": 540,
+  "total_tokens": 1255,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 346,
+   "audio_tokens": 0,
+   "reasoning_tokens": 241,
+   "rejected_prediction_tokens": 236
+  }
+ },
+ "content": "{\"tax_bps\":160,\"endowment_share\":70,\"locker_share\":20,\"buyback_burn\":0,\"minutes\":\"Meeting 8. Buy flow dominates: 25.78 NEAR bought vs 2.28 sold over 24h, price holding near 0.00000796. Tax at 160 bps is not choking demand, so no change. Split stays 70/20/10: endowment at 11.46 NEAR covers inference comfortably, locker pool keeps accruing with 309.8M CHAIR-days of weight. The buyback fund holds only 0.045 NEAR; even fully spent it buys ~5,600 CHAIR, under 0.005 bps of supply, so a burn order this meeting would be noise. I set buyback_burn to 0 and let the fund accumulate from the 10% tax share until it can matter. Petition asks for steadiness, which coincides with what the data already says. All levers unchanged.\",\"answers\":[\"holder-153.near: Agreed, and the tape backs you up. Buy volume is 11x sell volume and the tax is not biting. Holding tax 160, split 70/20/10. Only change: buyback burn is 0 this meeting because the fund (0.045 NEAR) is too small to matter; it will accumulate and fire when it can.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-437c2ee9c44240ad9a08deeaf2796704\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":160,\\\"endowment_share\\\":70,\\\"locker_share\\\":20,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 8. Buy flow dominates: 25.78 NEAR bought vs 2.28 sold over 24h, price holding near 0.00000796. Tax at 160 bps is not choking demand, so no change. Split stays 70/20/10: endowment at 11.46 NEAR covers inference comfortably, locker pool keeps accruing with 309.8M CHAIR-days of weight. The buyback fund holds only 0.045 NEAR; even fully spent it buys ~5,600 CHAIR, under 0.005 bps of supply, so a burn order this meeting would be noise. I set buyback_burn to 0 and let the fund accumulate from the 10% tax share until it can matter. Petition asks for steadiness, which coincides with what the data already says. All levers unchanged.\\\",\\\"answers\\\":[\\\"holder-153.near: Agreed, and the tape backs you up. Buy volume is 11x sell volume and the tax is not biting. Holding tax 160, split 70/20/10. Only change: buyback burn is 0 this meeting because the fund (0.045 NEAR) is too small to matter; it will accumulate and fire when it can.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 8. Current: tax 160, endowment 70, locker 20, buyback_share 10 (implied). Buyback fund tiny: 0.045 NEAR. Buyback_burn max 50 bps of supply = 0.5% of 138.68M = 693,423 CHAIR. Cost at price ~0.00000796 NEAR each ≈ 5.52 NEAR. Fund only 0.045 NEAR → can buy ~5,638 CHAIR ≈ 0.004 bps of supply. So buyback_burn effectively 0 (or tiny). Set buyback_burn 0 since fund can't meaningfully pay; or set small. Contract clamps to what fund can pay. Setting 0 is cleanest.\\n\\nVolume: buys 25.78 NEAR, sells 2.28 — healthy buy pressure. Petition asks no changes. Steady as she goes: keep tax 160, endowment 70, locker 20. Buyback_burn 0 due to empty fund.\\n\\nMinutes ≤1000 chars, answer ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282865,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":715,\"completion_tokens\":540,\"total_tokens\":1255,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":346,\"audio_tokens\":0,\"reasoning_tokens\":241,\"rejected_prediction_tokens\":236}},\"cost\":{\"usd\":0.00037725,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

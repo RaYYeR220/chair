@@ -1,0 +1,23 @@
+{
+ "request_sha256": "84f037b4d7420be868545691f1e8c53c0e2e89a5180f6ddaa824b29f9101aab5",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:36.572Z",
+ "latency_ms": 10602,
+ "usage": {
+  "prompt_tokens": 787,
+  "completion_tokens": 605,
+  "total_tokens": 1392,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 366,
+   "audio_tokens": 0,
+   "reasoning_tokens": 360,
+   "rejected_prediction_tokens": 351
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":60,\"locker_share\":30,\"buyback_burn\":1,\"minutes\":\"Buys 70.8 NEAR, zero sells — price holding, no panic. Tax stays 100 bps to keep churn cheap. Lockers carry the floor and three petitions (weight ~247M) ask for their share; raising locker_share 10 to 30, funded by trimming buyback share to 10. Buyback fund is only 0.27 NEAR against a ~1785 NEAR cap, so max affordable burn is ~1.5 bps; setting buyback_burn=1 to stay safely payable. Endowment holds at 60 to keep inference funded.\",\"answers\":[\"Fair point — lockers underwrite the floor while flow is one-sided. Moving locker_share 20→30 this meeting, paid from the buyback slice, which is idle with zero sell pressure.\",\"Heard. locker_share +10 to 30, effective now; your pool accrues from today's tax at the new rate.\",\"Same request, same answer: locker_share rises to 30 this meeting. Weight counted, thank you for locking.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-7a6132a0dcfb4967ac9bdfd73e439821\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":60,\\\"locker_share\\\":30,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Buys 70.8 NEAR, zero sells — price holding, no panic. Tax stays 100 bps to keep churn cheap. Lockers carry the floor and three petitions (weight ~247M) ask for their share; raising locker_share 10 to 30, funded by trimming buyback share to 10. Buyback fund is only 0.27 NEAR against a ~1785 NEAR cap, so max affordable burn is ~1.5 bps; setting buyback_burn=1 to stay safely payable. Endowment holds at 60 to keep inference funded.\\\",\\\"answers\\\":[\\\"Fair point — lockers underwrite the floor while flow is one-sided. Moving locker_share 20→30 this meeting, paid from the buyback slice, which is idle with zero sell pressure.\\\",\\\"Heard. locker_share +10 to 30, effective now; your pool accrues from today's tax at the new rate.\\\",\\\"Same request, same answer: locker_share rises to 30 this meeting. Weight counted, thank you for locking.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 30. Volume: buys 70.77 NEAR, sells 0. Tax 100 bps = ~0.707 NEAR tax. Current: endowment 60, locker 20, buyback 20.\\n\\nPetitions: raise locker_share. Locker weight ~585M CHAIR-days. Supply 178.6M, price ~0.00001 NEAR (market cap ~1.785 NEAR? Wait, price 0.00000999 NEAR per CHAIR, supply 178.6M → ~1785 NEAR... reserve 988 NEAR, ok).\\n\\nBuyback fund is tiny (0.27 NEAR). Buyback_burn: 50 bps of supply = 89,288 CHAIR. Cost at price ~0.00001 → ~0.89 NEAR. Fund only 0.27 NEAR, so max affordable ≈ 0.27/0.00001 ≈ 27,000 CHAIR ≈ 1.5 bps. Actually buying on curve pushes price up; roughly affordable burn bps ≈ fund / (supply*price) *10000 = 0.2735/1785 *10000 ≈ 1.53 bps. So set buyback_burn = 1.\\n\\nLevers: raise locker_share by 10 → 30, keep endowment 60, buyback share drops to 10. Lockers provide stability; sells are zero, so buyback less urgent. Tax stays 100 (volume healthy, low tax encourages churn... but no sells). Keep tax 100.\\n\\nMinutes ≤1000 chars. Answers ≤280 each, three petitions (two identical texts, answer each).\"},\"finish_reason\":\"stop\"}],\"created\":1794283046,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":787,\"completion_tokens\":605,\"total_tokens\":1392,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":366,\"audio_tokens\":0,\"reasoning_tokens\":360,\"rejected_prediction_tokens\":351}},\"cost\":{\"usd\":0.00038982999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

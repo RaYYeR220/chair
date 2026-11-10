@@ -1,0 +1,21 @@
+{
+ "request_sha256": "ae394889101e4392e636362a86bb58878ffd10b0732b2291d0d1b8eb594eee8c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:52.645Z",
+ "latency_ms": 4390,
+ "usage": {
+  "prompt_tokens": 758,
+  "completion_tokens": 552,
+  "total_tokens": 1310,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 308,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":50,\"locker_share\":10,\"buyback_burn\":50,\"minutes\":\"Buy volume (313 NEAR) dwarfs sells (33.5), so we have room to trim the tax 25bps to 175 and let volume grow, per petition 1. Endowment stays at 50% — pending 3.47 NEAR plus 23.27 treasury keeps the brain well fed, honoring petition 2 without over-allocating. Locker share holds at 10%. Buyback fund of 4.23 NEAR comfortably covers a max 50bps burn (~97k CHAIR, ~1.04 NEAR), tightening supply while buy pressure is strong.\",\"answers\":[\"Agreed — cutting tax 200→175 bps. Buy flow is 9x sell flow; a lighter toll should pull in more volume without starving the funds. We'll watch next meeting's flow before moving further.\",\"The brain eats first and it's eating well: 3.47 NEAR pending plus a 23.27 NEAR endowment at 50% of tax. Model stays fed; no change needed this meeting.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-7189aa36\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":50,\\\"locker_share\\\":10,\\\"buyback_burn\\\":50,\\\"minutes\\\":\\\"Buy volume (313 NEAR) dwarfs sells (33.5), so we have room to trim the tax 25bps to 175 and let volume grow, per petition 1. Endowment stays at 50% — pending 3.47 NEAR plus 23.27 treasury keeps the brain well fed, honoring petition 2 without over-allocating. Locker share holds at 10%. Buyback fund of 4.23 NEAR comfortably covers a max 50bps burn (~97k CHAIR, ~1.04 NEAR), tightening supply while buy pressure is strong.\\\",\\\"answers\\\":[\\\"Agreed — cutting tax 200→175 bps. Buy flow is 9x sell flow; a lighter toll should pull in more volume without starving the funds. We'll watch next meeting's flow before moving further.\\\",\\\"The brain eats first and it's eating well: 3.47 NEAR pending plus a 23.27 NEAR endowment at 50% of tax. Model stays fed; no change needed this meeting.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 8. Current: tax 200, endowment 50, locker 10, buyback_share 40 (note: buyback_share isn't a lever in constitution; levers are tax_bps, endowment_share, locker_share, buyback_burn). Buyback fund 4.23 NEAR. Price ~0.0000107. Supply 193.56M CHAIR. 50 bps burn = 96,781 CHAIR ≈ 1.037 NEAR cost. Fund can afford that.\\n\\nVolume: buys 313 NEAR, sells 33.5 — healthy buy pressure. Petition 1: lower tax a bit. Petition 2: keep endowment fed.\\n\\nMove tax 200→175 (within 50). Endowment 50→55? Keep at 50 or raise slightly. Endowment pending 3.47, endowment 23.27 — brain is fed. Keep endowment 50, locker 10. Buyback burn: fund 4.23 NEAR; 50 bps of supply costs ~1.04 NEAR. Set buyback_burn 50? That's aggressive but fund supports it. Maybe 40 to be measured. Let's do 40 bps ≈ 0.83 NEAR, leaving buffer. Actually with strong buy volume, burning more is fine. I'll do 50.\\n\\nMinutes under 1000 chars. Answers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282888,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":758,\"completion_tokens\":552,\"total_tokens\":1310,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":308,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.0003897,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

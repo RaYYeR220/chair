@@ -1,0 +1,23 @@
+{
+ "request_sha256": "f00c5619837401b1ef823ad77687684da7f93597eb3b29c26ad29acbd87d671b",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:50.524Z",
+ "latency_ms": 4522,
+ "usage": {
+  "prompt_tokens": 672,
+  "completion_tokens": 608,
+  "total_tokens": 1280,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 387,
+   "audio_tokens": 0,
+   "reasoning_tokens": 428,
+   "rejected_prediction_tokens": 276
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 13. Flow is net-positive: 26.03 NEAR bought vs 13.73 sold, so no need to touch the 125 bps tax. Locker share stays at its 25 cap to keep lockers paid. Endowment sits at 41.57 NEAR, comfortably funded, so I cut it 10 to 50 and route the freed 10 points to the buyback fund, which is nearly empty at 0.63 NEAR. On burn: even 1 bps of supply costs ~19,190 NEAR at the current curve price, far beyond the fund, so buyback_burn is 0 this meeting; the tax split rebuilds the fund for future burns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-705826d054be462bb774e2d83603529d\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 13. Flow is net-positive: 26.03 NEAR bought vs 13.73 sold, so no need to touch the 125 bps tax. Locker share stays at its 25 cap to keep lockers paid. Endowment sits at 41.57 NEAR, comfortably funded, so I cut it 10 to 50 and route the freed 10 points to the buyback fund, which is nearly empty at 0.63 NEAR. On burn: even 1 bps of supply costs ~19,190 NEAR at the current curve price, far beyond the fund, so buyback_burn is 0 this meeting; the tax split rebuilds the fund for future burns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 13. No petitions. Current: tax 125, endowment 60, locker 25, buyback 15 (implied). Volume buy 26 NEAR, sell 13.7 — net buying pressure. Buyback fund tiny (0.63 NEAR). Buyback burn: fund can pay for how much? Price 0.0000144 NEAR per CHAIR. 0.629 NEAR buys ~43,680 CHAIR, supply 266.5M, that's ~0.016 bps of supply — negligible. So buyback_burn 0? Or small. Max 50 bps would need 0.005*266.5M*0.0000144 ≈ 19,190 NEAR. Way beyond fund. So burn limited by fund: 0.629/0.0000144 ≈ 43,679 CHAIR = 0.0016% of supply ≈ 0.16 bps. Set buyback_burn to floor... integer bps, so 0? Could set 0 since <1 bps. Actually contract clamps to what fund can pay; setting 1 bps would be clamped. Better set 0 and note fund too small, or set small value. I'll set 0 and explain, or maybe 1 clamped... Constitution says \\\"no more than the fund can pay for\\\" — so I should set 0 since even 1 bps unaffordable. Hmm, but burning dust is fine. Set 0.\\n\\nLevers: net buy pressure, price low. Keep tax 125. Locker share at max 25, endowment 60, buyback 15. Buyback fund low; maybe shift to boost buyback? Endowment 41.5 NEAR is healthy. Could move endowment down 10 to 50, locker stays 25, buyback becomes 25 to build fund. That seems reasonable. Tax keep 125.\\n\\nMinutes ≤1000 chars, answers [].\"},\"finish_reason\":\"stop\"}],\"created\":1794282946,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":672,\"completion_tokens\":608,\"total_tokens\":1280,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":387,\"audio_tokens\":0,\"reasoning_tokens\":428,\"rejected_prediction_tokens\":276}},\"cost\":{\"usd\":0.00037408,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

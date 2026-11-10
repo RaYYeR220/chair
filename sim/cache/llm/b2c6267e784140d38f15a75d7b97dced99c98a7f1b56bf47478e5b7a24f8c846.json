@@ -1,0 +1,23 @@
+{
+ "request_sha256": "b2c6267e784140d38f15a75d7b97dced99c98a7f1b56bf47478e5b7a24f8c846",
+ "venice_model": "deepseek-v4-1-flash-1017",
+ "at": "2026-11-10T04:02:05.535Z",
+ "latency_ms": 4309,
+ "usage": {
+  "prompt_tokens": 605,
+  "completion_tokens": 576,
+  "total_tokens": 1181,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 352,
+   "audio_tokens": 0,
+   "reasoning_tokens": 420,
+   "rejected_prediction_tokens": 317
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"No petitions and zero 24h volume. Keep the tax at the constitutional minimum to avoid discouraging trading, keep endowment at its minimum, and keep locker share at its maximum while preserving the remaining 45% buyback share. The buyback fund holds only ~0.0123 NEAR; at the current price that buys roughly 1,458 CHAIR, or ~0.10 bps of supply, below the 1 bps integer minimum. Therefore buyback_burn must be 0 this meeting. No lever changes are warranted until volume or the buyback fund grows.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-74f6cf306a51479386a84e7fd2e8ae07\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"No petitions and zero 24h volume. Keep the tax at the constitutional minimum to avoid discouraging trading, keep endowment at its minimum, and keep locker share at its maximum while preserving the remaining 45% buyback share. The buyback fund holds only ~0.0123 NEAR; at the current price that buys roughly 1,458 CHAIR, or ~0.10 bps of supply, below the 1 bps integer minimum. Therefore buyback_burn must be 0 this meeting. No lever changes are warranted until volume or the buyback fund grows.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"We need answer JSON only. Need decide levers. Meeting 50, no petitions. Need reason within 1000 chars. Need set tax_bps, endowment_share, locker_share, buyback_burn. Current tax 100 min, endowment 30 min, locker 25 max, buyback_share 45. Funds buyback tiny 0.012 NEAR. Volume zero. Supply 141M, sold 148M? Interesting sold > supply maybe. Price low. Need central bank policy. No petitions. Need choose levers within constraints. Since volume zero, tax changes maybe not urgent. Buyback fund tiny, buyback_burn no more than fund can pay. Need calculate max burn basis points fund can pay. Buyback fund 0.012267 NEAR. Price 0.000008412 NEAR per CHAIR. Can buy ~0.012267 / 0.000008412 = 1458 CHAIR. Supply 141,216,345 CHAIR. Burn bps = (1458 / 141,216,345)*10000 = 0.1032 bps. Integer basis points, max 0? Since buyback_burn integer bps, 0.1 bps not possible. Could set 0. If set 1 bps would require 14,121 CHAIR ~0.1188 NEAR > fund. So 0. Need maybe keep tax at 100, endowment 30, locker 25. But maybe adjust? No volume, no petitions. Constitution allows. Need maybe increase tax? But no volume, tax irrelevant. Endowment share min to preserve buyback? Current buyback share 45. Locker share max. Endowment min. Tax min. That's growth-friendly. Buyback_burn 0 due insufficient fund. Minutes concise.\\n\\nNeed ensure JSON valid. Answers [].\\n\\nNeed mention sold > supply? Not relevant. Could maybe raise tax to build buyback? But zero volume means no revenue. No. Keep.\\n\\nFinal only JSON.\"},\"finish_reason\":\"stop\"}],\"created\":1794283321,\"model\":\"deepseek-v4-1-flash-1017\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":605,\"completion_tokens\":576,\"total_tokens\":1181,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":352,\"audio_tokens\":0,\"reasoning_tokens\":420,\"rejected_prediction_tokens\":317}},\"cost\":{\"usd\":0.00079782,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

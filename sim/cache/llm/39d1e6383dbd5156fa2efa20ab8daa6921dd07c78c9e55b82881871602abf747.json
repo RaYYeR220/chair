@@ -1,0 +1,22 @@
+{
+ "request_sha256": "39d1e6383dbd5156fa2efa20ab8daa6921dd07c78c9e55b82881871602abf747",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:09.561Z",
+ "latency_ms": 11652,
+ "usage": {
+  "prompt_tokens": 695,
+  "completion_tokens": 560,
+  "total_tokens": 1255,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 352,
+   "audio_tokens": 0,
+   "reasoning_tokens": 332,
+   "rejected_prediction_tokens": 275
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Flow is one-sided: 12.99 NEAR of buys, zero sells. No sell pressure to defend against, so tax stays at 150 bps. Locker_share is already at the constitutional cap of 25 — the petition asks for what cannot be given. Buyback fund holds only 0.097 NEAR; one basis point of supply costs ~0.11 NEAR at the current curve price, so no burn is affordable this meeting. The fund accumulates from the 15% residual slice of tax; with steady buy volume it should afford a burn within a few meetings. Hold all levers, let the buyback fund rebuild.\",\"answers\":[\"Lockers are valued — locker_share already sits at the constitutional maximum of 25%, and has since the cap bound us. Nothing further can be moved without breaking the charter. The 0.049 NEAR locker pool keeps accruing to you every meeting. Hold tight; the cap is the cap.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4c392329df9f4011b915d9b3f73d3262\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Flow is one-sided: 12.99 NEAR of buys, zero sells. No sell pressure to defend against, so tax stays at 150 bps. Locker_share is already at the constitutional cap of 25 — the petition asks for what cannot be given. Buyback fund holds only 0.097 NEAR; one basis point of supply costs ~0.11 NEAR at the current curve price, so no burn is affordable this meeting. The fund accumulates from the 15% residual slice of tax; with steady buy volume it should afford a burn within a few meetings. Hold all levers, let the buyback fund rebuild.\\\",\\\"answers\\\":[\\\"Lockers are valued — locker_share already sits at the constitutional maximum of 25%, and has since the cap bound us. Nothing further can be moved without breaking the charter. The 0.049 NEAR locker pool keeps accruing to you every meeting. Hold tight; the cap is the cap.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 14. Current: tax 150, endowment 60, locker_share 25 (max), buyback_share 15. Petition asks raise locker_share — already at cap 25. Volume: buys 12.99 NEAR, no sells. Buyback fund tiny (0.097 NEAR). Buyback burn: fund can pay for how much? Price ~0.00000798 NEAR per CHAIR. Supply 138.87M CHAIR. 50 bps = 0.5% = 694,350 CHAIR ≈ 5.54 NEAR. Fund only 0.097 NEAR → ~12,215 CHAIR ≈ 0.0088 bps... wait: 0.097/0.00000798 ≈ 12,215 CHAIR. As bps of supply: 12,215/1,388,700 = 0.0088 bps. So buyback_burn must be 0 (integer bps, min meaningful). Actually 0 to 50; can set 0 since fund can't cover even 1 bp (1 bp = 13,887 CHAIR ≈ 0.11 NEAR > 0.097). So buyback_burn = 0.\\n\\nLevers: keep tax 150? Volume all buys, no sells — one-sided. Maybe keep steady. Locker share at cap; petition denied but acknowledge. Endowment 60 fine. Keep everything, buyback_burn 0.\\n\\nMinutes ≤1000 chars, answers ≤280 each.\"},\"finish_reason\":\"stop\"}],\"created\":1794282898,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":695,\"completion_tokens\":560,\"total_tokens\":1255,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":352,\"audio_tokens\":0,\"reasoning_tokens\":332,\"rejected_prediction_tokens\":275}},\"cost\":{\"usd\":0.00038425,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

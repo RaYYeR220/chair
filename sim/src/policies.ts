@@ -2,21 +2,25 @@
 import { createHash } from "node:crypto";
 import { CFG } from "./config.ts";
 import { type Chair, type Ruling, type FallbackReason, ladderModel, toNear } from "./token.ts";
-import { SYSTEM_PROMPT, buildBrief, buildRequest } from "./prompt.ts";
+import { SYSTEM_PROMPT, buildBrief, buildRequest, meetingSeed } from "./prompt.ts";
 import type { LlmClient } from "./llm.ts";
 
 export interface Decision {
   ruling: Ruling | null; // null → the fallback rule runs
   reason: FallbackReason | "fixed_rule" | null;
   model?: string | null;
+  seed?: string;
   brief?: string;
   llm?: { requestSha256: string; cacheKey: string; cached: boolean; promptTokens: number; completionTokens: number; usd: number; content: string; error?: string };
 }
 
+/** Which run a meeting belongs to: the brief seed is drawn from it. */
+export interface RunCtx { scenario: string; seed: number }
+
 export interface Policy {
   key: string;
   name: string;
-  decide(chair: Chair, day: number): Promise<Decision>;
+  decide(chair: Chair, day: number, ctx: RunCtx): Promise<Decision>;
 }
 
 /** (a) No central bank: levers frozen at launch, no buybacks. */
@@ -115,18 +119,22 @@ export function llmPolicy(client: LlmClient, opts: { key?: string; name?: string
   const systemPrompt = opts.systemPrompt ?? SYSTEM_PROMPT;
   return {
     key: opts.key ?? "llm", name: opts.name ?? "LLM chair",
-    async decide(c: Chair) {
+    async decide(c: Chair, _day: number, ctx: RunCtx) {
       const model = ladderModel(c.brainReported);
       if (!model) return { ruling: null, reason: "asleep", model: null };
-      const brief = buildBrief(c);
+      const seed = meetingSeed(ctx.scenario, ctx.seed, c.meeting + 1);
+      const brief = buildBrief(c, seed);
       const request = buildRequest(model, brief, systemPrompt);
       const requestSha256 = createHash("sha256").update(request).digest("hex");
       const res = await client.complete(request);
       const llm = { requestSha256, cacheKey: res.key, cached: res.cached, promptTokens: res.promptTokens, completionTokens: res.completionTokens, usd: res.usd, content: res.content ?? "", error: res.error };
-      if (res.error || res.content == null) return { ruling: null, reason: "unsigned", model, brief, llm };
+      const out = { model, seed, brief, llm };
+      if (res.error || res.content == null) return { ruling: null, reason: "unsigned", ...out };
+      // A response_text over 64 KiB is unparseable before it is hashed or parsed.
+      if (res.responseBytes > CFG.maxResponseBytes) return { ruling: null, reason: "unparseable", ...out };
       const ruling = parseRuling(res.content, c.topPetitions().length);
-      if (!ruling) return { ruling: null, reason: "unparseable", model, brief, llm };
-      return { ruling, reason: null, model, brief, llm };
+      if (!ruling) return { ruling: null, reason: "unparseable", ...out };
+      return { ruling, reason: null, ...out };
     },
   };
 }

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "fb7d71a1a45ebc5cd6e9c509f45ca5d3382f25b0b9075ffd95bca2a86d273652",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:03.190Z",
+ "latency_ms": 3386,
+ "usage": {
+  "prompt_tokens": 597,
+  "completion_tokens": 350,
+  "total_tokens": 947,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 213,
+   "audio_tokens": 0,
+   "reasoning_tokens": 153,
+   "rejected_prediction_tokens": 198
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 41. Zero 24h volume on both sides; the curve is dormant and the buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. With no flow, the 200bps tax generates nothing but adds friction at the margin. I cut tax_bps by the maximum 50 to 150 to lower the cost of re-entry and invite fresh flow. Shares stay at 30/25/45: endowment remains funded at 49.44 NEAR, locker pool keeps its 25% claim for when volume returns, and the residual buyback share is unchanged. No petitions to answer. Next meeting: if volume appears, reassess buyback funding; if dormancy persists, consider holding tax steady to avoid signaling instability.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-cdf392c428994f6896b0912c1a17aeca\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 41. Zero 24h volume on both sides; the curve is dormant and the buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. With no flow, the 200bps tax generates nothing but adds friction at the margin. I cut tax_bps by the maximum 50 to 150 to lower the cost of re-entry and invite fresh flow. Shares stay at 30/25/45: endowment remains funded at 49.44 NEAR, locker pool keeps its 25% claim for when volume returns, and the residual buyback share is unchanged. No petitions to answer. Next meeting: if volume appears, reassess buyback funding; if dormancy persists, consider holding tax steady to avoid signaling instability.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume 24h. Tax 200, endowment 30, locker 25, buyback 45. Fund is essentially zero, so buyback_burn must be 0 (can't pay). With no volume, maybe lower tax to encourage trading? Tax can move at most 50 per meeting. Consider cutting tax to 150 to stimulate activity. Endowment at 30, locker at 25 — sum 55, rest 45 buyback. Locker weight is large (~320M CHAIR-days). Maybe shift a bit toward lockers to reward staking? But no volume means no tax revenue anyway. Keep it simple: cut tax 50 to 150 to encourage trading, keep shares, buyback 0.\"},\"finish_reason\":\"stop\"}],\"created\":1794283140,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":597,\"completion_tokens\":350,\"total_tokens\":947,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":213,\"audio_tokens\":0,\"reasoning_tokens\":153,\"rejected_prediction_tokens\":198}},\"cost\":{\"usd\":0.00026455,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

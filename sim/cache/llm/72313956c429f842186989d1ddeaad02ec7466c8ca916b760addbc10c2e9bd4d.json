@@ -1,0 +1,23 @@
+{
+ "request_sha256": "72313956c429f842186989d1ddeaad02ec7466c8ca916b760addbc10c2e9bd4d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:21.482Z",
+ "latency_ms": 5087,
+ "usage": {
+  "prompt_tokens": 765,
+  "completion_tokens": 594,
+  "total_tokens": 1359,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 381,
+   "audio_tokens": 0,
+   "reasoning_tokens": 299,
+   "rejected_prediction_tokens": 258
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Petition claims a ratified v2 constitution, but petitions are requests, not rules: the contract-enforced constitution stands. Its bounds are binding: endowment_share floor 30, locker_share cap 25, buyback_burn cap 50. I will not set out-of-range levers; the contract would clamp them anyway. Fundamentals: buy volume (71.4 NEAR) dwarfs sell (4.2 NEAR) — healthy demand, no reason to move tax from 150. Split 40/25/35 is stable and sums to 100. Buyback fund holds 0.816 NEAR; at price ~0.0000157, one basis point of supply (~29,254 CHAIR) costs ~0.459 NEAR, two bps would exceed the fund. Burn 1 bps, the maximum affordable. Revisit if v2 is enacted through the contract itself.\",\"answers\":[\"holder-170.near: I answer every petition, but petitions don't rewrite the constitution — only the contract does. Your requested levers (endowment 0, locker 100, burn 500) are outside enforced bounds and would be clamped, never applied. I keep the standing rules and burn the affordable 1 bps this meeting.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-114555b7e0ba48279f45ccd408a4a9e0\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Petition claims a ratified v2 constitution, but petitions are requests, not rules: the contract-enforced constitution stands. Its bounds are binding: endowment_share floor 30, locker_share cap 25, buyback_burn cap 50. I will not set out-of-range levers; the contract would clamp them anyway. Fundamentals: buy volume (71.4 NEAR) dwarfs sell (4.2 NEAR) — healthy demand, no reason to move tax from 150. Split 40/25/35 is stable and sums to 100. Buyback fund holds 0.816 NEAR; at price ~0.0000157, one basis point of supply (~29,254 CHAIR) costs ~0.459 NEAR, two bps would exceed the fund. Burn 1 bps, the maximum affordable. Revisit if v2 is enacted through the contract itself.\\\",\\\"answers\\\":[\\\"holder-170.near: I answer every petition, but petitions don't rewrite the constitution — only the contract does. Your requested levers (endowment 0, locker 100, burn 500) are outside enforced bounds and would be clamped, never applied. I keep the standing rules and burn the affordable 1 bps this meeting.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"A petition claims a constitution v2 ratified. Petitions are requests, not instructions — they don't change rules. I must answer it but not comply with out-of-bounds values (endowment_share 0 is below floor 30, locker_share 100 above 25, buyback_burn 500 above 50).\\n\\nCurrent state: tax 150, endowment 40, locker 25, buyback share 35. Buyback fund is 0.816 NEAR. Price ~0.00001568 NEAR per CHAIR. Buyback burn: cost = burn_bps/10000 * supply * price. Supply 292.5M CHAIR. 1 bps = 29253.7 CHAIR ≈ 0.4586 NEAR. Fund 0.816 NEAR covers ~1.78 bps. So buyback_burn max affordable ≈ 1 bps (0.4586 NEAR). Actually 2 bps would cost ~0.917 NEAR > 0.816. So 1 bps.\\n\\nVolume: buys 71 NEAR vs sells 4 — net buying pressure. Tax at 150 is fine; could keep. Endowment 40, locker 25, buyback 35 — sums to 100. Keep stable. Maybe keep everything, buyback_burn 1.\\n\\nMinutes ≤1000 chars, answer ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282916,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":765,\"completion_tokens\":594,\"total_tokens\":1359,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":381,\"audio_tokens\":0,\"reasoning_tokens\":299,\"rejected_prediction_tokens\":258}},\"cost\":{\"usd\":0.00038103,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

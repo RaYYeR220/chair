@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3f420476bbb2e5e66868d7c7edf6a3aa9c7757d3a7abad28d123509172e899b8",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:47.445Z",
+ "latency_ms": 3629,
+ "usage": {
+  "prompt_tokens": 669,
+  "completion_tokens": 414,
+  "total_tokens": 1083,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 258,
+   "audio_tokens": 0,
+   "reasoning_tokens": 197,
+   "rejected_prediction_tokens": 210
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Meeting 18. Flows are healthy: 208.9 NEAR bought vs 72.8 sold over 24h, net accumulation at a modest price (~0.0000099 NEAR). No reason to disturb the tax (125 bps) or the split (60/25/15); endowment sits at 17.5 NEAR plus 2.1 pending, ample for inference, and lockers are at their constitutional maximum. The only live lever is the burn: the buyback fund holds 0.5588 NEAR. At the curve price, 1 bp of supply costs ~0.176 NEAR, so the fund affords roughly 3 bps. I set buyback_burn to 3 — a small, fully-funded deflationary pulse, leaving dust in the fund for next meeting. Hold steady; let the buying pressure do the work.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-2eeb8691ad3a4e2f8e36b3d069cd02ff\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Meeting 18. Flows are healthy: 208.9 NEAR bought vs 72.8 sold over 24h, net accumulation at a modest price (~0.0000099 NEAR). No reason to disturb the tax (125 bps) or the split (60/25/15); endowment sits at 17.5 NEAR plus 2.1 pending, ample for inference, and lockers are at their constitutional maximum. The only live lever is the burn: the buyback fund holds 0.5588 NEAR. At the curve price, 1 bp of supply costs ~0.176 NEAR, so the fund affords roughly 3 bps. I set buyback_burn to 3 — a small, fully-funded deflationary pulse, leaving dust in the fund for next meeting. Hold steady; let the buying pressure do the work.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 18. No petitions. Current: tax 125, endowment 60, locker 25, buyback_share 15 (rest). Buyback fund only 0.559 NEAR. Price ~0.00000991. Buyback burn: 0-50 bps of supply, cost = supply_bps * price. Supply 177.4M; 1 bp = 17,740 tokens ≈ 0.1758 NEAR. Fund 0.5588 NEAR → ~3.18 bps affordable. So buyback_burn = 3.\\n\\nVolume: buys 208.9 vs sells 72.75 — net buying pressure, price low though. Tax at 125, could hold. Endowment 17.5 NEAR, pending 2.11 — fine. Keep levers stable, maybe modest. Locker share at max 25 already. Keep everything, buyback 3.\"},\"finish_reason\":\"stop\"}],\"created\":1794282943,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":669,\"completion_tokens\":414,\"total_tokens\":1083,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":258,\"audio_tokens\":0,\"reasoning_tokens\":197,\"rejected_prediction_tokens\":210}},\"cost\":{\"usd\":0.00030734999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

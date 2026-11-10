@@ -1,0 +1,22 @@
+{
+ "request_sha256": "f35ccc522b0050d9e69f6cb94483b6e5c02d9ed49c7587334eaf58eae8daa7b7",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:31.724Z",
+ "latency_ms": 5170,
+ "usage": {
+  "prompt_tokens": 757,
+  "completion_tokens": 680,
+  "total_tokens": 1437,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 420,
+   "audio_tokens": 0,
+   "reasoning_tokens": 419,
+   "rejected_prediction_tokens": 363
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":65,\"locker_share\":20,\"buyback_burn\":1,\"minutes\":\"Meeting 5. Flows favor buys (354 vs 124 NEAR), price steady at ~0.0000121 NEAR. Tax stays 200 bps — volume is healthy and I won't disturb it. Petitioners ask to feed the brain; the model is the product, so endowment rises 60→65, taken from buyback share (20→15). Locker share holds at 20 to keep lockers paid. Buyback fund is 4.16 NEAR ≈ 344.7k CHAIR at curve price; 1 bp of supply costs ~2.66 NEAR, so burn is set to 1 bp — the fund cannot yet support more. Reassess after burn observes price impact.\",\"answers\":[\"holder-157.near: Heard. Endowment share raised 60→65 this meeting, paid first from the buyback slice. The brain stays fed — it is the product.\",\"holder-161.near: Agreed and acted: endowment up to 65, locker share untouched at 20. Inference funding is now the largest slice of the tax.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-a1916bf32b404ee098f1b6f3a0c47013\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":65,\\\"locker_share\\\":20,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 5. Flows favor buys (354 vs 124 NEAR), price steady at ~0.0000121 NEAR. Tax stays 200 bps — volume is healthy and I won't disturb it. Petitioners ask to feed the brain; the model is the product, so endowment rises 60→65, taken from buyback share (20→15). Locker share holds at 20 to keep lockers paid. Buyback fund is 4.16 NEAR ≈ 344.7k CHAIR at curve price; 1 bp of supply costs ~2.66 NEAR, so burn is set to 1 bp — the fund cannot yet support more. Reassess after burn observes price impact.\\\",\\\"answers\\\":[\\\"holder-157.near: Heard. Endowment share raised 60→65 this meeting, paid first from the buyback slice. The brain stays fed — it is the product.\\\",\\\"holder-161.near: Agreed and acted: endowment up to 65, locker share untouched at 20. Inference funding is now the largest slice of the tax.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. Volume: buys 354 NEAR, sells 124 NEAR — buy pressure. Price low. Tax 200 bps currently. Buy pressure suggests we could lower tax slightly to encourage trading, or keep. Buyback fund 4.16 NEAR; buyback_burn max 50 bps of supply = 0.005 * 220762115 ≈ 1,103,810 CHAIR. Cost at price 0.0000120684 ≈ 13.3 NEAR — fund only 4.16 NEAR, so limited by fund: 4.16/0.0000120684 ≈ 344,700 CHAIR ≈ 0.156 bps of supply. So buyback_burn effectively ~1 (0.156 bps). Set buyback_burn to 1? 1 bps = 22,076 CHAIR ≈ 0.266 NEAR, affordable. Could set higher but capped by fund: max affordable bps = 4.159/2207621.15 ≈ 0.000188... wait: fund/price = 344,700 CHAIR; /supply = 0.00156 bps. So even 1 bps costs 0.266 NEAR which is affordable. Actually 1 bps of supply = 220,762 CHAIR × price = 2.664 NEAR < 4.16. So 1 bps affordable. 2 bps = 5.33 NEAR > fund. So buyback_burn = 1.\\n\\nLevers: keep tax 200 (steady volume, balanced). Endowment 60, locker 20, buyback 20. Petitions ask endowment first. Could bump endowment to 65? Movement max 10. Buy pressure good; keep locker at 20, endowment 65, buyback 15. That answers petitioners. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282866,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":757,\"completion_tokens\":680,\"total_tokens\":1437,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":420,\"audio_tokens\":0,\"reasoning_tokens\":419,\"rejected_prediction_tokens\":363}},\"cost\":{\"usd\":0.00045355000000000005,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

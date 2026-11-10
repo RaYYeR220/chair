@@ -1,0 +1,22 @@
+{
+ "request_sha256": "0d6b386d4ff3d321bf6cd167fa1bfeaad36373f48983f9cf82e1c35b70beac42",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:34.953Z",
+ "latency_ms": 8787,
+ "usage": {
+  "prompt_tokens": 669,
+  "completion_tokens": 495,
+  "total_tokens": 1164,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 303,
+   "audio_tokens": 0,
+   "reasoning_tokens": 338,
+   "rejected_prediction_tokens": 273
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":0,\"minutes\":\"Net buying pressure (140 NEAR buys vs 78 sells) and a stable curve argue for holding tax at 200bps. Endowment sits at 16.4 NEAR plus 3.1 pending — well funded for inference — so I shift 10 points from endowment to the buyback share (70→60), building the burn fund while locker share holds at 10. Buyback fund is only 1.07 NEAR; one basis point of supply costs ~1.32 NEAR at current price, so no burn is affordable this meeting. Accumulate and burn next meeting if flows hold.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-eab2c9d6b9154a57b1d1a17417a246d9\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Net buying pressure (140 NEAR buys vs 78 sells) and a stable curve argue for holding tax at 200bps. Endowment sits at 16.4 NEAR plus 3.1 pending — well funded for inference — so I shift 10 points from endowment to the buyback share (70→60), building the burn fund while locker share holds at 10. Buyback fund is only 1.07 NEAR; one basis point of supply costs ~1.32 NEAR at current price, so no burn is affordable this meeting. Accumulate and burn next meeting if flows hold.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 6. Volume buy 140 NEAR, sell 78.5 NEAR — net buying pressure. Tax 200bps, endowment 70, locker 10, buyback 20 (rest). Buyback fund 1.07 NEAR. Price low. Supply 152.5M CHAIR.\\n\\nBuyback burn: 0-50 bps of supply. 50bps = ~762,660 CHAIR. Cost at price 0.000008657 ≈ 6.6 NEAR. Fund only 1.07 NEAR, so max affordable ≈ 1.07/0.000008657 ≈ 123,600 CHAIR ≈ 0.081 bps. So buyback_burn must be 0 (integer bps; even 1 bps = 1525 CHAIR ≈ 0.0132 NEAR — actually 1 bps of supply = 152,532 CHAIR × price = 1.32 NEAR > 1.07 fund). So 0.\\n\\nKeep levers steady; maybe nudge endowment down slightly since endowment balance is healthy (16.36 NEAR) and pending 3.06. Buy volume strong; tax at 200 fine. Maybe reduce endowment_share to 60 to fund buybacks? Endowment is well-funded; shifting 10 to buyback fund helps future burns. Constitution: endowment 30-100, move ≤10. Locker share 10, keep. Set endowment 60, locker 10, buyback gets 30%.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282866,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":669,\"completion_tokens\":495,\"total_tokens\":1164,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":303,\"audio_tokens\":0,\"reasoning_tokens\":338,\"rejected_prediction_tokens\":273}},\"cost\":{\"usd\":0.00034785,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

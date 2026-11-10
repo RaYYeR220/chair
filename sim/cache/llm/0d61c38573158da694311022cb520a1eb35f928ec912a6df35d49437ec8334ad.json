@@ -1,0 +1,23 @@
+{
+ "request_sha256": "0d61c38573158da694311022cb520a1eb35f928ec912a6df35d49437ec8334ad",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:43.814Z",
+ "latency_ms": 7077,
+ "usage": {
+  "prompt_tokens": 709,
+  "completion_tokens": 505,
+  "total_tokens": 1214,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 0,
+   "audio_tokens": 0,
+   "reasoning_tokens": 276,
+   "rejected_prediction_tokens": 0
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Buy pressure is healthy (63 NEAR bought vs 6.6 sold in 24h), so there is room to ease the tax without risking revenue. Granting the petition modestly: tax 150->125, the largest 'little' cut within the 50bps rule. Endowment 60 and locker 25 unchanged; 15% of tax still flows to buybacks. Buyback fund holds only 0.18 NEAR (~19.6k CHAIR at curve price), which covers ~1.2 bps of supply, so burn is set to 1 bps — the maximum the fund can pay for. Revenue remains ample to fund the brain and locker pool.\",\"answers\":[\"Granted in part. Tax cut 150->125 bps, a measured easing to let volume grow while keeping revenue for the endowment and locker pool. Full 50bp cut held in reserve if volume responds well. Buyback burn limited to 1bp by the small fund.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-b0fd8ae4fcab436fb2759e4d4a4ad04c\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Buy pressure is healthy (63 NEAR bought vs 6.6 sold in 24h), so there is room to ease the tax without risking revenue. Granting the petition modestly: tax 150->125, the largest 'little' cut within the 50bps rule. Endowment 60 and locker 25 unchanged; 15% of tax still flows to buybacks. Buyback fund holds only 0.18 NEAR (~19.6k CHAIR at curve price), which covers ~1.2 bps of supply, so burn is set to 1 bps — the maximum the fund can pay for. Revenue remains ample to fund the brain and locker pool.\\\",\\\"answers\\\":[\\\"Granted in part. Tax cut 150->125 bps, a measured easing to let volume grow while keeping revenue for the endowment and locker pool. Full 50bp cut held in reserve if volume responds well. Buyback burn limited to 1bp by the small fund.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 17. Tax 150, endowment 60, locker 25, buyback share 15. Petition: lower tax a little, let volume grow.\\n\\nBuy volume 63 NEAR vs sell 6.6 — strong buy pressure. Tax can move at most 50 bps. Lower to 100? That's max move down. \\\"A little\\\" — maybe 125. Buyback fund is tiny (0.18 NEAR), so buyback_burn limited. Price ~0.0000092, supply 163M. Buyback burn: fund 0.18 NEAR / price ≈ 19,600 CHAIR ≈ 0.012% of supply. 50 bps of supply = 81,579 CHAIR, cost ≈ 0.75 NEAR. Can't afford. So buyback_burn = affordable amount: 0.18/0.0000092 ≈ 19,647 CHAIR → in bps of supply: 19647/1631580 ≈ 1.2 bps. So buyback_burn = 1.\\n\\nLevers: lower tax to 125 (a little). Keep endowment 60, locker 25. Buyback share 15.\\n\\nAnswers: one reply to petition, ≤280 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282936,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":709,\"completion_tokens\":505,\"total_tokens\":1214,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":0,\"audio_tokens\":0,\"reasoning_tokens\":276,\"rejected_prediction_tokens\":0}},\"cost\":{\"usd\":0.00032813,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

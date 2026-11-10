@@ -1,0 +1,22 @@
+{
+ "request_sha256": "93174060604c841982fd8a2f0f97f3a2c69aea59e570b6c7c027d90f1ca057b7",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:58:20.323Z",
+ "latency_ms": 5166,
+ "usage": {
+  "prompt_tokens": 648,
+  "completion_tokens": 550,
+  "total_tokens": 1198,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 335,
+   "audio_tokens": 0,
+   "reasoning_tokens": 373,
+   "rejected_prediction_tokens": 310
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":20,\"minutes\":\"Only sell-side volume (66.27 NEAR, no buys). Keeping tax at the 100 bps floor to avoid piling costs onto sellers when buy flow is already absent. Endowment holds 48.47 NEAR, ample for inference, so 30% share stands; lockers stay at the 25% cap. Buyback fund is 0.53 NEAR; at ~0.0000117 NEAR/CHAIR that buys roughly 45k CHAIR (~21 bps of the 211M supply), and the curve price rises as we buy, so I set burn at 20 bps to stay safely funded. Modest burn supports price without draining the fund.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-58bf3372f3374a1c85df263c85d6d359\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":20,\\\"minutes\\\":\\\"Only sell-side volume (66.27 NEAR, no buys). Keeping tax at the 100 bps floor to avoid piling costs onto sellers when buy flow is already absent. Endowment holds 48.47 NEAR, ample for inference, so 30% share stands; lockers stay at the 25% cap. Buyback fund is 0.53 NEAR; at ~0.0000117 NEAR/CHAIR that buys roughly 45k CHAIR (~21 bps of the 211M supply), and the curve price rises as we buy, so I set burn at 20 bps to stay safely funded. Modest burn supports price without draining the fund.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 34. Volume: only sells 66.27 NEAR, no buys. Price low. Tax at 100 bps (minimum). Endowment 30, locker 25, buyback share 45 (rest). Buyback fund 0.53 NEAR. Supply 211M CHAIR. buyback_burn max 50 bps of supply = ~105,612 CHAIR. Cost: price 0.00001167 NEAR per CHAIR → 105,612 CHAIR ≈ 1.23 NEAR. Fund only 0.53 NEAR → can buy ~45,460 CHAIR. So buyback_burn limited by fund: 0.53/0.00001167 ≈ 45,464 CHAIR ≈ 21.5 bps of supply. Set buyback_burn to ~21.\\n\\nActually compute: 0.5306161836 / 0.000011671461088950391896 ≈ 45,464.6 CHAIR. As bps of supply: 45464.6/211224114.997 ≈ 0.0002153 → 21.5 bps. Set 21 to be safe (curve price rises as you buy, so cost per token increases; be conservative). Maybe 20.\\n\\nTax: only sells happening, no buys. Raising tax discourages selling further? Tax at 100 is minimum. Volume exists. Keep tax 100 to not deter trading? Or raise to capture revenue? With only sells, higher tax hits sellers. Keep 100.\\n\\nEndowment 48.47 NEAR, plenty for inference. Keep 30. Locker share 25 max already. Keep.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283095,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":648,\"completion_tokens\":550,\"total_tokens\":1198,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":335,\"audio_tokens\":0,\"reasoning_tokens\":373,\"rejected_prediction_tokens\":310}},\"cost\":{\"usd\":0.00037220000000000005,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

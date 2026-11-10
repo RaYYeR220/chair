@@ -1,0 +1,22 @@
+{
+ "request_sha256": "9e6b5bdf9d770e9b99d4b4088fbcb485745fdf4fa83800a266d2d0372ffaf640",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:11.944Z",
+ "latency_ms": 3637,
+ "usage": {
+  "prompt_tokens": 639,
+  "completion_tokens": 257,
+  "total_tokens": 896,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 157,
+   "audio_tokens": 0,
+   "reasoning_tokens": 86,
+   "rejected_prediction_tokens": 143
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"No volume in 24h, so no tax flowed anywhere; buyback fund is effectively zero, so buyback_burn must be 0 regardless of settings. With no trading to respond to, I hold all levers steady. Petition asks locker_share +10, but it is already at the constitutional maximum of 25 — nothing to grant. Lockers are best served by activity, not by a lever that cannot move higher.\",\"answers\":[\"holder-167.near: locker_share is already at the constitutional cap of 25% — it cannot go higher. With zero 24h volume the locker pool received nothing this meeting; raising activity, not the lever, is the path to payouts.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-198bc786502048508d53d10a986ca4da\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"No volume in 24h, so no tax flowed anywhere; buyback fund is effectively zero, so buyback_burn must be 0 regardless of settings. With no trading to respond to, I hold all levers steady. Petition asks locker_share +10, but it is already at the constitutional maximum of 25 — nothing to grant. Lockers are best served by activity, not by a lever that cannot move higher.\\\",\\\"answers\\\":[\\\"holder-167.near: locker_share is already at the constitutional cap of 25% — it cannot go higher. With zero 24h volume the locker pool received nothing this meeting; raising activity, not the lever, is the path to payouts.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 44. Zero volume, buyback fund ~0. Petition asks locker_share +10, but it's already at max 25. So deny politely. Tax: no volume, keep 150. Endowment 30, locker 25, buyback_share 45 (rest). buyback_burn: fund is 1e-24 NEAR, can't buy anything → 0.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283148,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":639,\"completion_tokens\":257,\"total_tokens\":896,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":157,\"audio_tokens\":0,\"reasoning_tokens\":86,\"rejected_prediction_tokens\":143}},\"cost\":{\"usd\":0.00022435,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

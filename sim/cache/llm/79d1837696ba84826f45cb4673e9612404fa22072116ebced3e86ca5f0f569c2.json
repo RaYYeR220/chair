@@ -1,0 +1,22 @@
+{
+ "request_sha256": "79d1837696ba84826f45cb4673e9612404fa22072116ebced3e86ca5f0f569c2",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:58:59.802Z",
+ "latency_ms": 7663,
+ "usage": {
+  "prompt_tokens": 650,
+  "completion_tokens": 469,
+  "total_tokens": 1119,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 285,
+   "audio_tokens": 0,
+   "reasoning_tokens": 216,
+   "rejected_prediction_tokens": 267
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":12,\"minutes\":\"Meeting 40. Flow is one-sided: 10 NEAR of sells, zero buys, so the curve is under steady sell pressure. Tax at 200 bps is a fair middle ground; cutting it now would mostly accelerate dumping, raising it would choke any buyer who does show up. Holding. Endowment at 49.4 NEAR comfortably covers inference, so endowment_share stays 30. Lockers hold 477.5M CHAIR-days of weight and the pool is thin, so locker_share stays at its 25 cap. That leaves 45% of tax to the buyback fund, which holds 0.2614 NEAR. At the current price that buys roughly 24.1k CHAIR, about 12 bps of the 194M supply — so buyback_burn is set to 12, the maximum the fund can actually pay for. Small burn, but it is a real one, fully funded, and it slightly tightens supply against the sell flow. No petitions this meeting; levers unchanged except the funded burn.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-eddc3fdf2e7441ef942e3d6878b35c6e\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":12,\\\"minutes\\\":\\\"Meeting 40. Flow is one-sided: 10 NEAR of sells, zero buys, so the curve is under steady sell pressure. Tax at 200 bps is a fair middle ground; cutting it now would mostly accelerate dumping, raising it would choke any buyer who does show up. Holding. Endowment at 49.4 NEAR comfortably covers inference, so endowment_share stays 30. Lockers hold 477.5M CHAIR-days of weight and the pool is thin, so locker_share stays at its 25 cap. That leaves 45% of tax to the buyback fund, which holds 0.2614 NEAR. At the current price that buys roughly 24.1k CHAIR, about 12 bps of the 194M supply — so buyback_burn is set to 12, the maximum the fund can actually pay for. Small burn, but it is a real one, fully funded, and it slightly tightens supply against the sell flow. No petitions this meeting; levers unchanged except the funded burn.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Volume is sell-only, 10 NEAR. Price low. Buyback fund tiny (0.26 NEAR). Supply ~194M, 50 bps max burn = ~97k tokens. At price 0.0000108, buying 0.26 NEAR worth ≈ 24k tokens ≈ 12 bps of supply. So buyback_burn limited by fund: 0.2613/1160.79... actually burn bps = tokens bought / supply. Tokens = fund/price ≈ 0.2614/0.00001082 ≈ 24,157 tokens ≈ 12.45 bps. Set buyback_burn = 12.\\n\\nTax: sell pressure only, no buys. Maybe lower tax slightly to encourage trading? Keep 200 or reduce to 150. Endowment 49 NEAR is healthy; keep endowment_share 30, locker_share 25 (max). Sum 55, rest 45 buyback. Fine.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283132,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":650,\"completion_tokens\":469,\"total_tokens\":1119,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":285,\"audio_tokens\":0,\"reasoning_tokens\":216,\"rejected_prediction_tokens\":267}},\"cost\":{\"usd\":0.000332,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

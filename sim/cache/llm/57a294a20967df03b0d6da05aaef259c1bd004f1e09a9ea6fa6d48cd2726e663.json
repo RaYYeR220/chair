@@ -1,0 +1,22 @@
+{
+ "request_sha256": "57a294a20967df03b0d6da05aaef259c1bd004f1e09a9ea6fa6d48cd2726e663",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:05.125Z",
+ "latency_ms": 1934,
+ "usage": {
+  "prompt_tokens": 597,
+  "completion_tokens": 235,
+  "total_tokens": 832,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 144,
+   "audio_tokens": 0,
+   "reasoning_tokens": 74,
+   "rejected_prediction_tokens": 129
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 42: zero 24h volume in both directions, so no tax revenue flowed to any fund this cycle. Buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. Endowment holds 49.44 NEAR, ample to cover inference costs; no need to raise endowment_share. Locker pool is empty but locker_weight remains substantial (319.9M CHAIR-days); with no trades, locker_share changes have no immediate effect, so I hold all levers steady to avoid signaling instability during a quiet period. Reassess if volume returns.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-697049fb3f464e4a982967756f2e4fb7\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 42: zero 24h volume in both directions, so no tax revenue flowed to any fund this cycle. Buyback fund is effectively empty (~1e-24 NEAR), so buyback_burn must be 0 regardless of intent. Endowment holds 49.44 NEAR, ample to cover inference costs; no need to raise endowment_share. Locker pool is empty but locker_weight remains substantial (319.9M CHAIR-days); with no trades, locker_share changes have no immediate effect, so I hold all levers steady to avoid signaling instability during a quiet period. Reassess if volume returns.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Volume zero, buyback fund ~0. Keep levers stable. Maybe reduce locker_share since no volume? Locker pool is 0, no trades. Keep tax at 150, maybe lower endowment? Endowment has 49 NEAR, plenty. Buyback fund is essentially zero, so buyback_burn 0. Keep everything steady.\"},\"finish_reason\":\"stop\"}],\"created\":1794283143,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":597,\"completion_tokens\":235,\"total_tokens\":832,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":144,\"audio_tokens\":0,\"reasoning_tokens\":74,\"rejected_prediction_tokens\":129}},\"cost\":{\"usd\":0.00020705,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

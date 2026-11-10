@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { CFG, ONE, YOCTO, withLockerMax } from "../src/config.ts";
 import { Chair, N, R, buyCost, sellProceeds, maxBuy, isqrt, clampRuling, fallbackRuling, ladderModel, priceAt } from "../src/token.ts";
-import { parseRuling } from "../src/policies.ts";
+import { parseRuling, llmPolicy } from "../src/policies.ts";
+import type { LlmClient } from "../src/llm.ts";
 import { u } from "../src/rng.ts";
 
 test("isqrt is exact", () => {
@@ -123,6 +124,68 @@ test("petitions: lockers only, one a day, fee burned, three heaviest in order (e
   assert.equal(c.petition(0, "again", 0), false);
   assert.deepEqual(c.topPetitions().map((p) => p.text), ["p0", "p1", "p2"]);
   assert.equal(c.petition(0, "next day", 1), true);
+});
+
+test("v3 petitions: a lock must outlive the meeting; reweighed at the meeting, zeros dropped, the slot freed", () => {
+  const c = new Chair();
+  for (let id = 0; id < 5; id++) { c.holder(id).near = 100n * YOCTO; c.buy(id, 10n * YOCTO); }
+  // id 0 locks for a day on day 0: its lock ends before day 1's meeting, so it can't petition on day 1.
+  c.lock(0, 10000n * ONE, 1, 0);
+  assert.equal(c.weightAt(0, 0), 10000n * ONE);
+  assert.equal(c.weightAt(0, 1), 0n);
+  assert.equal(c.petition(0, "too late", 1), false);
+  // Filed on day 0 (the heaviest), then the meeting slips to day 1: id 0 is dropped, id 4 moves up.
+  for (let id = 1; id < 5; id++) c.lock(id, BigInt(10 - id) * 100n * ONE, 7, 0);
+  for (let id = 0; id < 5; id++) assert.equal(c.petition(id, `p${id}`, 0), true);
+  assert.deepEqual(c.petitions.map((p) => p.text), ["p0", "p1", "p2", "p3", "p4"], "queued by weight at filing");
+  assert.deepEqual(c.briefPetitions(0).map((p) => p.text), ["p0", "p1", "p2"]);
+  assert.deepEqual(c.briefPetitions(1).map((p) => p.text), ["p1", "p2", "p3"]);
+  assert.deepEqual(c.reweighed(1)[0], { owner: 0, filedWeight: 10000n * ONE, weight: 0n, inBrief: false });
+  // A lock added after filing counts at the meeting (bob on token3): id 3 overtakes ids 1 and 2.
+  c.lock(3, 1000n * ONE, 30, 0);
+  assert.deepEqual(c.briefPetitions(0).map((p) => [p.text, p.weight]), [["p3", 7n * 700n * ONE + 30n * 1000n * ONE], ["p0", 10000n * ONE], ["p1", 7n * 900n * ONE]]);
+  c.hold(0, null, "asleep");
+  assert.equal(c.petitions.length, 0, "convene takes the queue");
+});
+
+test("v3 petitions: the queue holds 8, heaviest at filing first, one per account", () => {
+  const c = new Chair();
+  for (let id = 0; id < 11; id++) { c.holder(id).near = 100n * YOCTO; c.buy(id, 5n * YOCTO); c.lock(id, BigInt(10 + id) * ONE, 30, 0); }
+  for (let id = 0; id < 10; id++) assert.equal(c.petition(id, `q${id}`, 0), true);
+  assert.equal(c.petitions.length, CFG.petitionQueueMax);
+  assert.equal(c.petitions[0].text, "q9");
+  assert.ok(c.petitions.every((p) => p.text !== "q0" && p.text !== "q1"), "the lightest drop");
+  // Too light for a full queue: filed and burned, not queued.
+  c.holder(20).near = 100n * YOCTO; c.buy(20, 5n * YOCTO); c.lock(20, ONE, 7, 0);
+  const burned = c.burned;
+  assert.equal(c.petition(20, "too light", 0), true);
+  assert.equal(c.burned, burned + CFG.petitionFee);
+  assert.ok(!c.petitions.some((p) => p.owner === 20));
+  // With no meeting in between, a newer petition from the same account replaces the older.
+  assert.equal(c.petition(9, "q9 again", 1), true);
+  assert.deepEqual(c.petitions.filter((p) => p.owner === 9).map((p) => p.text), ["q9 again"]);
+  // Equal weights: earlier filing wins.
+  const d = new Chair();
+  for (let id = 0; id < 4; id++) { d.holder(id).near = 100n * YOCTO; d.buy(id, 5n * YOCTO); d.lock(id, 100n * ONE, 7, 0); }
+  for (const id of [2, 0, 3, 1]) d.petition(id, `e${id}`, 0);
+  assert.deepEqual(d.briefPetitions(0).map((p) => p.text), ["e2", "e0", "e3"]);
+});
+
+test("v3: a response_text over 64 KiB is unparseable before it is parsed", async () => {
+  const c = new Chair();
+  c.holder(1).near = 100n * YOCTO; c.buy(1, 50n * YOCTO);
+  c.reportEndowment(10n * YOCTO);
+  const content = JSON.stringify({ tax_bps: 250, endowment_share: 60, locker_share: 20, buyback_burn: 0, minutes: "m", answers: [] });
+  const stub = (responseBytes: number) => ({ complete: async () => ({ key: "k", cached: true, content, responseBytes, promptTokens: 0, completionTokens: 0, usd: 0 }) }) as unknown as LlmClient;
+  const ctx = { scenario: "steady", seed: 1 };
+  const ok = await llmPolicy(stub(CFG.maxResponseBytes)).decide(c, 0, ctx);
+  assert.equal(ok.reason, null);
+  assert.equal(ok.ruling?.tax_bps, 250);
+  assert.match(ok.seed!, /^[0-9a-f]{32}$/);
+  assert.equal(JSON.parse(ok.brief!).seed, ok.seed);
+  const big = await llmPolicy(stub(CFG.maxResponseBytes + 1)).decide(c, 0, ctx);
+  assert.equal(big.reason, "unparseable");
+  assert.equal(big.ruling, null);
 });
 
 test("constitution: the contract's clamp cases (v1 bound), and the v2 locker ceiling", () => {

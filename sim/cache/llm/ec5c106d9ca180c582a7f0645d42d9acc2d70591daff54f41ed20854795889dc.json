@@ -1,0 +1,23 @@
+{
+ "request_sha256": "ec5c106d9ca180c582a7f0645d42d9acc2d70591daff54f41ed20854795889dc",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:00:38.765Z",
+ "latency_ms": 4929,
+ "usage": {
+  "prompt_tokens": 784,
+  "completion_tokens": 521,
+  "total_tokens": 1305,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 327,
+   "audio_tokens": 0,
+   "reasoning_tokens": 236,
+   "rejected_prediction_tokens": 255
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":4,\"minutes\":\"Sells outpace buys (76 vs 33 NEAR), so a modest tax cut to 125 bps is warranted to support volume; within the 50 bps step. Split stays 30/25/45: endowment funded, lockers paid, buyback accumulates. Buyback fund is only 0.947 NEAR; at ~0.236 NEAR per bps of supply, I burn 4 bps (~82.5k CHAIR), the maximum the fund can pay. Small daily burns compound the floor as petitioned. Steady otherwise.\",\"answers\":[\"Agreed in part: tax cut from 150 to 125 bps this meeting. Volume is thin and sells dominate; cheaper trading should help. Further cuts depend on flows recovering.\",\"Yes — small daily buybacks it is. Fund holds 0.947 NEAR, so I burn 4 bps of supply (~82.5k CHAIR) today, the maximum affordable. The 45% buyback share rebuilds the fund for tomorrow.\",\"Respectfully, not entirely: I moved the tax 150→125 to support volume, but kept the 30/25/45 split unchanged. Everything else is steady as she goes.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-eea376ce601a48eba710d74a4e8d8828\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":4,\\\"minutes\\\":\\\"Sells outpace buys (76 vs 33 NEAR), so a modest tax cut to 125 bps is warranted to support volume; within the 50 bps step. Split stays 30/25/45: endowment funded, lockers paid, buyback accumulates. Buyback fund is only 0.947 NEAR; at ~0.236 NEAR per bps of supply, I burn 4 bps (~82.5k CHAIR), the maximum the fund can pay. Small daily burns compound the floor as petitioned. Steady otherwise.\\\",\\\"answers\\\":[\\\"Agreed in part: tax cut from 150 to 125 bps this meeting. Volume is thin and sells dominate; cheaper trading should help. Further cuts depend on flows recovering.\\\",\\\"Yes — small daily buybacks it is. Fund holds 0.947 NEAR, so I burn 4 bps of supply (~82.5k CHAIR) today, the maximum affordable. The 45% buyback share rebuilds the fund for tomorrow.\\\",\\\"Respectfully, not entirely: I moved the tax 150→125 to support volume, but kept the 30/25/45 split unchanged. Everything else is steady as she goes.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 51. Current: tax 150, endowment 30, locker 25, buyback share 45 (implied). Sell volume exceeds buy volume (76 vs 33 NEAR). Price low. Buyback fund only 0.947 NEAR.\\n\\nPetitions: lower tax a bit; small buyback daily; no changes.\\n\\nDecisions: tax_bps: lower slightly, e.g., 150→125 (within 50 step). Endowment 30, locker 25 — sum 55, rest 45 buyback. Keep those. Buyback burn: fund 0.9468 NEAR; supply 206M; 1 bps of supply = 20614 CHAIR ≈ 0.236 NEAR at price 0.00001146. Max 50 bps = ~1.03M CHAIR ≈ 11.8 NEAR — can't afford. Affordable: 0.9468/0.236 ≈ 4 bps. Do buyback_burn = 4.\\n\\nMinutes ≤1000 chars. Answers ≤280 each, three petitions.\"},\"finish_reason\":\"stop\"}],\"created\":1794283233,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":784,\"completion_tokens\":521,\"total_tokens\":1305,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":327,\"audio_tokens\":0,\"reasoning_tokens\":236,\"rejected_prediction_tokens\":255}},\"cost\":{\"usd\":0.00034737999999999994,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "b656c88e600d5d0f084325a4529a1a90c556c8403bda88f0e9f1fefcb9a1f866",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:12.096Z",
+ "latency_ms": 3899,
+ "usage": {
+  "prompt_tokens": 692,
+  "completion_tokens": 442,
+  "total_tokens": 1134,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 267,
+   "audio_tokens": 0,
+   "reasoning_tokens": 208,
+   "rejected_prediction_tokens": 258
+  }
+ },
+ "content": "{\"tax_bps\":240,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":3,\"minutes\":\"Meeting 2. All flow is one-sided: 97 NEAR of buys, zero sells. That means the 290 bps tax isn't defending against dump pressure, it's just a toll on newcomers. Holder-169 is right. I cut tax by the maximum allowed step, 50 bps, to 240, and will keep stepping down if buy flow holds. Split stays 60/20/20 endowment/locker/buyback; locker pool is funded and weight is healthy. Buyback fund is 1.75 NEAR at ~0.00000552 NEAR/CHAIR, which covers roughly 3 bps of supply, so I burn 3 bps this meeting. Next meeting: reassess whether the cut lifted volume.\",\"answers\":[\"Agreed. 290 bps punishes the buyers we need. Cutting to 240 this meeting, the max step allowed, and I'll keep walking it down while inflow stays positive. Watch volume after this one.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-795cc498a54347ac8cde7bfb2e20b1a2\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":240,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Meeting 2. All flow is one-sided: 97 NEAR of buys, zero sells. That means the 290 bps tax isn't defending against dump pressure, it's just a toll on newcomers. Holder-169 is right. I cut tax by the maximum allowed step, 50 bps, to 240, and will keep stepping down if buy flow holds. Split stays 60/20/20 endowment/locker/buyback; locker pool is funded and weight is healthy. Buyback fund is 1.75 NEAR at ~0.00000552 NEAR/CHAIR, which covers roughly 3 bps of supply, so I burn 3 bps this meeting. Next meeting: reassess whether the cut lifted volume.\\\",\\\"answers\\\":[\\\"Agreed. 290 bps punishes the buyers we need. Cutting to 240 this meeting, the max step allowed, and I'll keep walking it down while inflow stays positive. Watch volume after this one.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 2. Volume: buys only, no sells. Tax 290, high. Petition asks cut tax. Move at most 50 per meeting: cut to 240. Endowment 60, locker 20, buyback 20. Buyback fund 1.75 NEAR, price ~0.00000552 NEAR per CHAIR. Buyback burn: 0-50 bps of supply. Supply 90.4M; 1 bps = 9041.97 CHAIR ≈ 0.0499 NEAR. Fund 1.75 NEAR buys ~316,900 CHAIR ≈ 3.5 bps. So buyback_burn max ~3. Set 3? Maybe 3 bps affordable: 3 bps = 27,126 CHAIR ≈ 0.1498 NEAR. Yes affordable. Could do 3.\\n\\nKeep endowment 60, locker 20. Minutes concise. Answer petition.\"},\"finish_reason\":\"stop\"}],\"created\":1794282848,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":692,\"completion_tokens\":442,\"total_tokens\":1134,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":267,\"audio_tokens\":0,\"reasoning_tokens\":208,\"rejected_prediction_tokens\":258}},\"cost\":{\"usd\":0.0003248,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

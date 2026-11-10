@@ -1,0 +1,23 @@
+{
+ "request_sha256": "1e3385c3e3cc69049b3324085fa79c2d6c7e489b12e338bba9c873c749e867ff",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:33.216Z",
+ "latency_ms": 6040,
+ "usage": {
+  "prompt_tokens": 656,
+  "completion_tokens": 672,
+  "total_tokens": 1328,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 425,
+   "audio_tokens": 0,
+   "reasoning_tokens": 477,
+   "rejected_prediction_tokens": 316
+  }
+ },
+ "content": "{\"tax_bps\":200,\"endowment_share\":50,\"locker_share\":20,\"buyback_burn\":0,\"minutes\":\"One-sided market: 65.35 NEAR of buys, zero sells, price ~0.0000086 NEAR. Tax flow is healthy (~1.3 NEAR/day at 200bps) but the buyback fund holds only 0.32 NEAR — a 1bp burn costs ~1.5 NEAR, so buyback_bust must be 0 this meeting; we accumulate instead. Endowment sits at 12.66 NEAR, far more than inference needs, so I shift 10 points from endowment to the buyback remainder (50/20/30) to build the burn fund faster. Locker pool keeps its 20% to service 432M CHAIR-days of lock weight. Tax and locker share unchanged; stability while flow is buy-only.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-8ee9f03dc48147828fa19ee6d0601524\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":200,\\\"endowment_share\\\":50,\\\"locker_share\\\":20,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"One-sided market: 65.35 NEAR of buys, zero sells, price ~0.0000086 NEAR. Tax flow is healthy (~1.3 NEAR/day at 200bps) but the buyback fund holds only 0.32 NEAR — a 1bp burn costs ~1.5 NEAR, so buyback_bust must be 0 this meeting; we accumulate instead. Endowment sits at 12.66 NEAR, far more than inference needs, so I shift 10 points from endowment to the buyback remainder (50/20/30) to build the burn fund faster. Locker pool keeps its 20% to service 432M CHAIR-days of lock weight. Tax and locker share unchanged; stability while flow is buy-only.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 14. No petitions. Volume: buys 65.35 NEAR, sells 0. Price low. Tax 200 bps, endowment 60, locker 20, buyback 20.\\n\\nBuyback fund is tiny (0.32 NEAR). Buyback_burn max 50 bps of supply = 151827108 * 0.005 = 759,135 CHAIR. Cost at price 0.00000862 ≈ 6.55 NEAR — fund can't pay. Fund 0.32 NEAR buys ~37,000 CHAIR ≈ 0.024 bps of supply. So set buyback_burn to what fund can pay: 0.32/0.00000862 ≈ 37,200 CHAIR ≈ 0.0245 bps. Integer bps, so 0? buyback_burn is integer basis points; 0.024 bps rounds to 0. Hmm, but maybe we can set 0 and let fund accumulate. Actually with only buys flowing, tax accrues: 65 NEAR * 2% = 1.3 NEAR tax per day. Buyback share 20% = 0.26 NEAR. Still can't afford 1 bp (1.5 NEAR). So buyback_burn 0 this meeting, accumulate.\\n\\nActually maybe allow fractional? Spec says integer. Set 0.\\n\\nConsider raising tax? Only buys, no sells — market one-sided buying, price low. Keep tax 200. Maybe shift shares: endowment 60, locker 20, buyback 20. Locker pool small relative to locker_weight (432M CHAIR-days). Keep stable. Maybe bump buyback to build fund? Move endowment down 10 to 50, buyback... but buyback_share isn't a lever I output; remainder goes to buyback. Levers: endowment_share + locker_share ≤ 100, rest to buyback. Currently 60+20=80, 20 to buyback. Could reduce endowment to 50, keep locker 20 → buyback 30. Endowment has 12.65 NEAR already, plenty. Do that to build buyback fund.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282927,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":656,\"completion_tokens\":672,\"total_tokens\":1328,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":425,\"audio_tokens\":0,\"reasoning_tokens\":477,\"rejected_prediction_tokens\":316}},\"cost\":{\"usd\":0.00040367999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

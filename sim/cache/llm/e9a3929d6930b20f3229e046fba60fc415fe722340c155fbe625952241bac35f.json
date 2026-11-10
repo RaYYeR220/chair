@@ -1,0 +1,23 @@
+{
+ "request_sha256": "e9a3929d6930b20f3229e046fba60fc415fe722340c155fbe625952241bac35f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:22.904Z",
+ "latency_ms": 13342,
+ "usage": {
+  "prompt_tokens": 648,
+  "completion_tokens": 538,
+  "total_tokens": 1186,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 338,
+   "audio_tokens": 0,
+   "reasoning_tokens": 268,
+   "rejected_prediction_tokens": 262
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":60,\"locker_share\":25,\"buyback_burn\":1,\"minutes\":\"Meeting 15. Flow is one-sided: 55.13 NEAR of buys, zero sells, so the tax base is healthy and there is no sell pressure to defend against. Current levers (tax 150, endowment 60, locker 25, buyback share 15) sit comfortably inside constitutional bounds and the split sums to 85, leaving 15% for the buyback fund. No reason to move them; stability helps lockers plan. The buyback fund holds only 0.2215 NEAR. At price 0.0000083179 NEAR/CHAIR, 1 bp of supply (145,636 CHAIR) costs about 1.21 NEAR — more than the fund holds. The largest affordable burn is roughly 26,600 CHAIR, about 0.18 bp, so I set buyback_burn to 1, the minimum constitutional step the fund can cover, and let the 15% flow rebuild the fund for a meaningful burn later. Endowment pending 0.496 NEAR plus balance 15.01 NEAR keeps inference funded. No petitions this meeting.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-fbbd5337a836496da05c5a37dd097f05\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":60,\\\"locker_share\\\":25,\\\"buyback_burn\\\":1,\\\"minutes\\\":\\\"Meeting 15. Flow is one-sided: 55.13 NEAR of buys, zero sells, so the tax base is healthy and there is no sell pressure to defend against. Current levers (tax 150, endowment 60, locker 25, buyback share 15) sit comfortably inside constitutional bounds and the split sums to 85, leaving 15% for the buyback fund. No reason to move them; stability helps lockers plan. The buyback fund holds only 0.2215 NEAR. At price 0.0000083179 NEAR/CHAIR, 1 bp of supply (145,636 CHAIR) costs about 1.21 NEAR — more than the fund holds. The largest affordable burn is roughly 26,600 CHAIR, about 0.18 bp, so I set buyback_burn to 1, the minimum constitutional step the fund can cover, and let the 15% flow rebuild the fund for a meaningful burn later. Endowment pending 0.496 NEAR plus balance 15.01 NEAR keeps inference funded. No petitions this meeting.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 15. No petitions. Volume: buys 55 NEAR, sells 0. Price low. Tax 150, endowment 60, locker 25, buyback share 15 (rest). Buyback fund tiny (0.22 NEAR). Buyback burn: fund can pay for how much? Price 0.0000083179 NEAR per CHAIR. 0.2215 NEAR buys ~26,630 CHAIR. Supply 145.6M. 50 bps = 728,178 CHAIR, cost ~6.06 NEAR. So fund limits. Max affordable: 0.2215/0.0000083179 ≈ 26,630 CHAIR ≈ 1.83 bps of supply. So buyback_burn = 1 (integer bps). Actually 1 bps = 1456 CHAIR costs ~0.0121 NEAR. Could do 1. Maybe 1.\\n\\nLevers: keep tax 150? Volume all buys, no sells. Maybe keep steady. Endowment 60, locker 25 — sum 85, buyback 15. Fine. Keep all same, buyback_burn = 1.\\n\\nMinutes ≤1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282909,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":648,\"completion_tokens\":538,\"total_tokens\":1186,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":338,\"audio_tokens\":0,\"reasoning_tokens\":268,\"rejected_prediction_tokens\":262}},\"cost\":{\"usd\":0.00033548,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

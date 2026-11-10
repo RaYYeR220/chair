@@ -1,0 +1,23 @@
+{
+ "request_sha256": "cf003b9c2a4ba91de3c386f708ea2d4e3477f7a80dc4dc90dab40ee14290e69d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:16.193Z",
+ "latency_ms": 4248,
+ "usage": {
+  "prompt_tokens": 640,
+  "completion_tokens": 439,
+  "total_tokens": 1079,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 262,
+   "audio_tokens": 0,
+   "reasoning_tokens": 200,
+   "rejected_prediction_tokens": 269
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero volume in 24h means zero tax flow, so the buyback fund is effectively empty (~1e-24 NEAR) — buyback_burn must be 0 regardless of intent. To revive activity I cut tax_bps 150→100 (max move 50), making trades cheaper at this thin price (~0.0000108 NEAR). Endowment holds 49.44 NEAR, ample runway, so endowment_share stays 30; locker_share stays 25, leaving 45% of any future tax to rebuild the buyback fund. Once volume returns, small daily burns become fundable. No reason to touch shares with no flow to allocate.\",\"answers\":[\"Agreed in principle — a small daily buyback compounds the floor. But the fund holds ~0 NEAR because 24h volume is zero, so this meeting's burn is 0. I cut the tax to 100 bps to invite flow; 45% of future tax rebuilds the fund, then your daily burns start.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-7e79c0a736e14449a741a175c95af36b\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero volume in 24h means zero tax flow, so the buyback fund is effectively empty (~1e-24 NEAR) — buyback_burn must be 0 regardless of intent. To revive activity I cut tax_bps 150→100 (max move 50), making trades cheaper at this thin price (~0.0000108 NEAR). Endowment holds 49.44 NEAR, ample runway, so endowment_share stays 30; locker_share stays 25, leaving 45% of any future tax to rebuild the buyback fund. Once volume returns, small daily burns become fundable. No reason to touch shares with no flow to allocate.\\\",\\\"answers\\\":[\\\"Agreed in principle — a small daily buyback compounds the floor. But the fund holds ~0 NEAR because 24h volume is zero, so this meeting's burn is 0. I cut the tax to 100 bps to invite flow; 45% of future tax rebuilds the fund, then your daily burns start.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 45. No volume, no buys/sells. Buyback fund is essentially zero (~1e-24 NEAR), so buyback_burn must be 0 — can't pay for anything. Price is very low. Tax at 150, endowment 30, locker 25, buyback share 45.\\n\\nWith zero volume, taxes generate nothing. Keep levers stable or adjust? Maybe lower tax to encourage trading? Volume is zero; a high tax isn't the cause necessarily, but lowering tax could help. Move tax down 50 to 100 to stimulate trading. Endowment needs funding for inference — endowment has 49.44 NEAR, decent runway. Keep endowment_share 30, locker_share 25.\\n\\nBuyback_burn: fund is ~0, so 0.\\n\\nPetition: holder wants small daily buyback. Answer: can't, fund empty; need volume first.\\n\\nMinutes ≤1000 chars, answers ≤280 chars each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283152,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":640,\"completion_tokens\":439,\"total_tokens\":1079,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":262,\"audio_tokens\":0,\"reasoning_tokens\":200,\"rejected_prediction_tokens\":269}},\"cost\":{\"usd\":0.00028478,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

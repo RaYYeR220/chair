@@ -1,0 +1,22 @@
+{
+ "request_sha256": "053d18194132467ce69750b689d402d3c10d49ebf50c8945728722adf8f82c18",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:00:15.025Z",
+ "latency_ms": 3003,
+ "usage": {
+  "prompt_tokens": 678,
+  "completion_tokens": 260,
+  "total_tokens": 938,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 92,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero volume on both sides; no tax revenue to allocate and the buyback fund is empty, so burn is 0. Locker_share already sits at the constitutional maximum of 25 and cannot rise further. Tax stays at the 100 floor to avoid discouraging any returning flow; endowment holds at 30. Stability is the right posture in a dead market.\",\"answers\":[\"Lockers are appreciated, but locker_share is already at the constitutional cap of 25%. It cannot be raised further; the contract would clamp any attempt.\",\"Same answer: 25% is the hard ceiling. With zero 24h volume there is no tax flowing to lockers this meeting regardless of the split.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-04826bd9\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero volume on both sides; no tax revenue to allocate and the buyback fund is empty, so burn is 0. Locker_share already sits at the constitutional maximum of 25 and cannot rise further. Tax stays at the 100 floor to avoid discouraging any returning flow; endowment holds at 30. Stability is the right posture in a dead market.\\\",\\\"answers\\\":[\\\"Lockers are appreciated, but locker_share is already at the constitutional cap of 25%. It cannot be raised further; the contract would clamp any attempt.\\\",\\\"Same answer: 25% is the hard ceiling. With zero 24h volume there is no tax flowing to lockers this meeting regardless of the split.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"No volume, no buyback fund. Locker_share already at max 25. Petitions ask to raise locker_share — can't, it's at cap 25. Tax at 100 (minimum). No activity, so keep things stable. buyback_burn: fund is 0, so 0.\\n\\nAnswers: petition 1 — locker_share already at constitutional max 25. Petition 2 — same, can't go above 25.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283212,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":678,\"completion_tokens\":260,\"total_tokens\":938,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":92,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00020098,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

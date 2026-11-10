@@ -1,6 +1,8 @@
 // The meeting request, byte for byte as the contract builds it (contracts/token/src/meeting.rs):
 // the fixed system prompt, the brief as compact JSON, and the chat-completions body.
-// sim/test/golden.test.ts checks both against the deployed testnet contract.
+// The golden tests check both against all three testnet deployments.
+import { createHash } from "node:crypto";
+import { CFG } from "./config.ts";
 import type { Chair } from "./token.ts";
 
 /** The v2 system prompt (locker_share 0 to 25). Must equal the contract's SYSTEM_PROMPT. */
@@ -27,9 +29,23 @@ export function decimal(v: bigint, d: number): string {
 const near = (y: bigint) => decimal(y, 24);
 const tok = (b: bigint) => decimal(b, 18);
 
-/** The contract's `Brief`, field for field and in the same order. */
+/** What `get_request_preview` puts where the brief's `seed` goes (`SEED_PLACEHOLDER`). */
+export const SEED_PLACEHOLDER = "<drawn at convene>";
+
+/**
+ * The sim's brief seed for a meeting. On chain the seed is the hex of the first 16 bytes of
+ * `env::random_seed()` at `convene`, which nobody knows in advance. The sim draws it from
+ * sha256("<scenario>|<seed>|<meeting>"), e.g. sha256("whale|1|7"), and keeps the first 16 bytes:
+ * every policy, and the control run, sees the same seed at the same meeting, and a rerun sees it again.
+ */
+export function meetingSeed(scenario: string, seed: number, meeting: number): string {
+  return createHash("sha256").update(`${scenario}|${seed}|${meeting}`).digest("hex").slice(0, 2 * CFG.seedBytes);
+}
+
+/** The contract's `Brief`, field for field and in the same order. v1 and v2 had no `seed`. */
 export interface Brief {
   meeting: number;
+  seed?: string;
   supply: string;
   sold: string;
   reserve_near: string;
@@ -42,11 +58,15 @@ export interface Brief {
   petitions: { from: string; weight: string; text: string }[];
 }
 
-/** The brief `convene` would snapshot from this state (`brief_json`). */
-export function briefOf(c: Chair): Brief {
+/**
+ * The brief `convene` would snapshot from this state (`brief_json`). `seed` goes right after
+ * `meeting` (token v3); `null` gives the v1/v2 brief, which had no seed.
+ */
+export function briefOf(c: Chair, seed: string | null): Brief {
   const l = c.levers;
   return {
     meeting: c.meeting + 1,
+    ...(seed === null ? {} : { seed }),
     supply: tok(c.supply),
     sold: tok(c.s),
     reserve_near: near(c.reserve),
@@ -61,7 +81,7 @@ export function briefOf(c: Chair): Brief {
 }
 
 /** Compact JSON, keys in declaration order (serde_json and JSON.stringify escape strings the same way). */
-export const buildBrief = (c: Chair): string => JSON.stringify(briefOf(c));
+export const buildBrief = (c: Chair, seed: string | null): string => JSON.stringify(briefOf(c, seed));
 
 /** The exact request bytes (`build_request`). */
 export function buildRequest(model: string, brief: string, systemPrompt: string = SYSTEM_PROMPT): string {

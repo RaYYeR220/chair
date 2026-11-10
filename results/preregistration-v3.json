@@ -1,0 +1,23 @@
+{
+ "file": "docs/SIMULATION.md",
+ "section": "PREREG-V3:BEGIN..PREREG-V3:END",
+ "sha256": "8ca0f1dcdd7a74a04391a92aaf6a5fb110b1a5b7b8c3b1efa74d40b0ebbb130c",
+ "modelSha256": "9834b1a4313e3b1c175dc2eb6b53ec8c564bfe6aaaa325cbe6314cefd9af38d1",
+ "writtenAt": "2026-11-10T03:53:50.110Z",
+ "llmMeetingsRunBefore": 0,
+ "budgetCalls": 360,
+ "newArgs": "docs/LAUNCH.md mainnet (p0 1e18, k 5e10, levers 300/60/20, petition fee 1e22)",
+ "briefSeed": "first 16 bytes of sha256(\"<scenario>|<seed>|<meeting>\")",
+ "plannedRuns": [
+  "llm seed 1 x 5 scenarios (v3): 286 calls",
+  "llm_b50 whale seed 1 (control, locker max 50): 57 calls",
+  "seed probe: whale seed 1, days 4,8,...,32, identical resend + another seed: 16 calls"
+ ],
+ "hypotheses": [
+  "H1 cap binds (whale lock window: v3 at 25 >= 10/30, control > 25 >= 10/30)",
+  "H2 whale rewards and take below the cap-50 control",
+  "H3 endowment_share reaches the 30 floor in >= 4/5 runs and ends there in >= 4/5",
+  "H4 zero unparseable across 5 runs + control",
+  "H5 whale rewards LLM > PID"
+ ]
+}

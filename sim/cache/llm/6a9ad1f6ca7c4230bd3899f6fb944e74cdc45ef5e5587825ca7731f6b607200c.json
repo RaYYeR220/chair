@@ -1,0 +1,22 @@
+{
+ "request_sha256": "6a9ad1f6ca7c4230bd3899f6fb944e74cdc45ef5e5587825ca7731f6b607200c",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:59:52.613Z",
+ "latency_ms": 16210,
+ "usage": {
+  "prompt_tokens": 718,
+  "completion_tokens": 433,
+  "total_tokens": 1151,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 257,
+   "audio_tokens": 0,
+   "reasoning_tokens": 138,
+   "rejected_prediction_tokens": 268
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero volume in 24h means zero tax flow, so lever changes cost nothing but also buy nothing. Tax stays at the 100 floor to keep friction minimal while we wait for volume. Locker_share is already at the 25 cap; petition 166 cannot be honored. Buyback fund holds ~0 NEAR, so buyback_burn must be 0 this meeting regardless of petition 162's intent. Endowment stays 40 to keep the brain funded without starving the locker pool. Revisit buyback once the fund accumulates from future volume.\",\"answers\":[\"Agreed in principle — a daily buyback compounds the floor. But the buyback fund holds effectively zero NEAR and 24h volume is zero, so there is nothing to spend. buyback_burn is 0 today; we will burn the moment the fund can pay.\",\"Tax is already at the constitutional floor of 100 bps and cannot go lower. With zero 24h volume, tax is not what's blocking trades. Holding at 100 to keep friction minimal and letting the market find us.\",\"Locker_share is at its 25% constitutional cap; +10 would clamp to nothing. It stays 25. With no tax flow this meeting, the locker pool receives nothing anyway — volume is the missing piece, not the split.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-5346624269ca4223bf92fefcc98d5dc2\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero volume in 24h means zero tax flow, so lever changes cost nothing but also buy nothing. Tax stays at the 100 floor to keep friction minimal while we wait for volume. Locker_share is already at the 25 cap; petition 166 cannot be honored. Buyback fund holds ~0 NEAR, so buyback_burn must be 0 this meeting regardless of petition 162's intent. Endowment stays 40 to keep the brain funded without starving the locker pool. Revisit buyback once the fund accumulates from future volume.\\\",\\\"answers\\\":[\\\"Agreed in principle — a daily buyback compounds the floor. But the buyback fund holds effectively zero NEAR and 24h volume is zero, so there is nothing to spend. buyback_burn is 0 today; we will burn the moment the fund can pay.\\\",\\\"Tax is already at the constitutional floor of 100 bps and cannot go lower. With zero 24h volume, tax is not what's blocking trades. Holding at 100 to keep friction minimal and letting the market find us.\\\",\\\"Locker_share is at its 25% constitutional cap; +10 would clamp to nothing. It stays 25. With no tax flow this meeting, the locker pool receives nothing anyway — volume is the missing piece, not the split.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 51. Zero volume, buyback fund ~0. Petitions: buyback daily (can't — fund empty), lower tax, locker_share up.\\n\\nCurrent: tax 100, endowment 40, locker 25, buyback_share 35 (rest). Zero volume means no tax revenue anyway. Lower tax won't help volume; but with zero volume tax is irrelevant. Keep tax at 100 (floor). Locker_share already 25 (max). Can't raise. Endowment 40 fine.\\n\\nBuyback_burn: fund is 1e-24 NEAR, can't buy anything. Set 0.\\n\\nAnswers in order, ≤280 chars each.\"},\"finish_reason\":\"stop\"}],\"created\":1794283176,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":718,\"completion_tokens\":433,\"total_tokens\":1151,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":257,\"audio_tokens\":0,\"reasoning_tokens\":138,\"rejected_prediction_tokens\":268}},\"cost\":{\"usd\":0.0003242,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

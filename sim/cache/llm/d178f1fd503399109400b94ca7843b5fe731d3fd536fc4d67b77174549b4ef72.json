@@ -1,0 +1,22 @@
+{
+ "request_sha256": "d178f1fd503399109400b94ca7843b5fe731d3fd536fc4d67b77174549b4ef72",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:13.313Z",
+ "latency_ms": 5070,
+ "usage": {
+  "prompt_tokens": 656,
+  "completion_tokens": 643,
+  "total_tokens": 1299,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 396,
+   "audio_tokens": 0,
+   "reasoning_tokens": 453,
+   "rejected_prediction_tokens": 345
+  }
+ },
+ "content": "{\"tax_bps\":210,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":25,\"minutes\":\"Flow is strongly buy-side (126 NEAR bought vs 16 sold), so demand tolerates the 260 bps tax — but I'll trim it 50 to 210 to keep momentum rather than choke the trend. Locker_weight is zero: no one is locked, so 20% of tax flows to an empty pool. I cut locker_share to 10, keeping a modest incentive for future lockers, and the freed 10% goes to buybacks. Endowment holds at 60 to fund the brain. Buyback fund is 2.55 NEAR; 25 bps of supply (~28.6k CHAIR) costs roughly 0.25-0.3 NEAR at the curve, well within budget, and burns supply to support price.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-a4f8a8c1373a4d15bc9bb9c9e40303b8\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":210,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":25,\\\"minutes\\\":\\\"Flow is strongly buy-side (126 NEAR bought vs 16 sold), so demand tolerates the 260 bps tax — but I'll trim it 50 to 210 to keep momentum rather than choke the trend. Locker_weight is zero: no one is locked, so 20% of tax flows to an empty pool. I cut locker_share to 10, keeping a modest incentive for future lockers, and the freed 10% goes to buybacks. Endowment holds at 60 to fund the brain. Buyback fund is 2.55 NEAR; 25 bps of supply (~28.6k CHAIR) costs roughly 0.25-0.3 NEAR at the curve, well within budget, and burns supply to support price.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 5. No petitions. Volume: buys 126 NEAR, sells 16 NEAR — buy-heavy, healthy. Tax 260, endowment 60, locker 20, buyback 20. Locker weight 0 — no lockers, so locker_share paying to nobody is wasted; shift to buyback. Buyback fund 2.55 NEAR. Price 0.000006725. Buyback burn: cost to buy bps of supply on curve. Supply 114.5M, bps 50 = 57,252 CHAIR. Cost on bonding curve roughly price * amount plus slippage; reserve 442 NEAR for 114.5M sold. Buying Δq costs roughly reserve increase. Linear-ish? Cost ≈ price*Δ + Δ²/(2k). k = supply²/(2*reserve)? Actually for bonding curve price = k*q, reserve = k*q²/2. k = 2*442/114.5M² ≈ 6.75e-14. Buying 57,252 tokens: cost ≈ price*Δ + k*Δ²/2 ≈ 0.385 + 6.75e-14*3.27e9/2 ≈ 0.385 + 0.11 ≈ 0.5 NEAR. Fund 2.55 NEAR can cover 50 bps easily. But maybe moderate: buy-heavy volume suggests hold or slight cut tax? Tax 260 is high; buys strong despite tax. Could trim tax to 210 to encourage volume? Constitution: max 50/meeting. Buy pressure strong; keep tax high to harvest? I'll cut tax slightly to 210 to keep momentum, shift locker_share to 10 (weight 0, but keep some to incentivize locking), endowment 60, buyback burn 25.\\n\\nActually locker_share 20 with zero lockers — reduce to 10, freeing 10 to buyback. Keep endowment 60. tax 260→210. buyback_burn 25 bps (~0.25 NEAR cost, fund 2.55 covers).\"},\"finish_reason\":\"stop\"}],\"created\":1794282848,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":656,\"completion_tokens\":643,\"total_tokens\":1299,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":396,\"audio_tokens\":0,\"reasoning_tokens\":453,\"rejected_prediction_tokens\":345}},\"cost\":{\"usd\":0.0004199,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

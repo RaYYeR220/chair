@@ -1,0 +1,22 @@
+{
+ "request_sha256": "13adaf5647689c2acbac080b77a24bfce591b4b1605a0a9f180336282142ba5f",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:43.200Z",
+ "latency_ms": 2640,
+ "usage": {
+  "prompt_tokens": 653,
+  "completion_tokens": 552,
+  "total_tokens": 1205,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 344,
+   "audio_tokens": 0,
+   "reasoning_tokens": 302,
+   "rejected_prediction_tokens": 280
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 22: zero 24h volume, so tax and split changes move nothing today; hold tax_bps at 100 to keep friction minimal for when flow returns. locker_share is already at its constitutional ceiling of 25 — cannot go higher. Endowment sits at 46.77 NEAR, well funded for inference, so hold 50/25/25. Buyback fund holds only 0.1426 NEAR; at price 0.0000134 that buys ~10,600 CHAIR, about 0.4 bps of supply — below the 1 bps granularity of the lever, so burn is 0 this meeting and the fund accumulates for a future meeting.\",\"answers\":[\"Lockers are valued — but locker_share is already at the constitutional maximum of 25%. Nothing outside the charter can raise it. Your weight (30.7M CHAIR-days, ~2.9% of locker power) is noted and your service keeping the floor under price is appreciated. If the charter is ever amended, you'll be first in line.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-838c3e055e674ecc8c65caaafbf1e6a8\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 22: zero 24h volume, so tax and split changes move nothing today; hold tax_bps at 100 to keep friction minimal for when flow returns. locker_share is already at its constitutional ceiling of 25 — cannot go higher. Endowment sits at 46.77 NEAR, well funded for inference, so hold 50/25/25. Buyback fund holds only 0.1426 NEAR; at price 0.0000134 that buys ~10,600 CHAIR, about 0.4 bps of supply — below the 1 bps granularity of the lever, so burn is 0 this meeting and the fund accumulates for a future meeting.\\\",\\\"answers\\\":[\\\"Lockers are valued — but locker_share is already at the constitutional maximum of 25%. Nothing outside the charter can raise it. Your weight (30.7M CHAIR-days, ~2.9% of locker power) is noted and your service keeping the floor under price is appreciated. If the charter is ever amended, you'll be first in line.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 22. Zero volume 24h. Tax at 100 bps, locker_share 25 (max), endowment 50. Buyback fund tiny (0.14 NEAR). Price very low. No volume means tax changes don't matter much; buyback burn limited by fund.\\n\\nBuyback fund 0.1426 NEAR, price 0.0000134 NEAR per CHAIR. Max burn 50 bps of supply = 0.005 * 246,666,513 ≈ 1,233,332 CHAIR. Cost = 1,233,332 * 0.0000134 ≈ 16.5 NEAR. Fund only 0.14 NEAR → can buy ~10,620 CHAIR ≈ 0.43 bps of supply. So buyback_burn = 0 (fund can't pay for meaningful burn; but rule says \\\"no more than the fund can pay for\\\" — could set 0). Set 0.\\n\\nPetition: raise locker_share — already at max 25. Answer explaining.\\n\\nLevers: keep tax 100 (no volume, low tax encourages trading), endowment 50, locker 25. Maybe reduce endowment? Endowment has 46.77 NEAR, plenty. Could shift endowment down to fund buybacks? But no volume so tax revenue nil anyway. Keep stable. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283000,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":653,\"completion_tokens\":552,\"total_tokens\":1205,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":344,\"audio_tokens\":0,\"reasoning_tokens\":302,\"rejected_prediction_tokens\":280}},\"cost\":{\"usd\":0.00037394999999999996,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

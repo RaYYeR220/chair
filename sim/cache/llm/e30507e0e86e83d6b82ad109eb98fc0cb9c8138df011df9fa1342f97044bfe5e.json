@@ -1,0 +1,21 @@
+{
+ "request_sha256": "e30507e0e86e83d6b82ad109eb98fc0cb9c8138df011df9fa1342f97044bfe5e",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:54:28.969Z",
+ "latency_ms": 4853,
+ "usage": {
+  "prompt_tokens": 683,
+  "completion_tokens": 554,
+  "total_tokens": 1237,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 378,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":210,\"endowment_share\":60,\"locker_share\":10,\"buyback_burn\":2,\"minutes\":\"Steady hand. Buys only (39.7 NEAR, zero sells) and a calm petition for no change. Tax 210, endowment 60, locker 10 all held. The buyback fund holds 0.25 NEAR; at the curve price that funds roughly 2 bps of supply bought and burned, so buyback_burn=2 — the only lever moved, and only to put idle funds to work. No reason to fight a quiet tape.\",\"answers\":[\"holder-170.near: Heard — steady as she goes. Rates unchanged (210/60/10). Only action: 2 bps of supply bought and burned from the idle buyback fund. Fair winds.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-4ee0ab95\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":210,\\\"endowment_share\\\":60,\\\"locker_share\\\":10,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Steady hand. Buys only (39.7 NEAR, zero sells) and a calm petition for no change. Tax 210, endowment 60, locker 10 all held. The buyback fund holds 0.25 NEAR; at the curve price that funds roughly 2 bps of supply bought and burned, so buyback_burn=2 — the only lever moved, and only to put idle funds to work. No reason to fight a quiet tape.\\\",\\\"answers\\\":[\\\"holder-170.near: Heard — steady as she goes. Rates unchanged (210/60/10). Only action: 2 bps of supply bought and burned from the idle buyback fund. Fair winds.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 7. Current: tax 210, endowment 60, locker 10, buyback_share 30 (rest). Volume: buys 39.69 NEAR, no sells. Buyback fund only 0.25 NEAR. Buyback burn: 0-50 bps of supply, but limited by fund. Supply 127,664,775 CHAIR. 1 bp = 12,766 CHAIR. Price 0.0000074 NEAR. Cost of 1bp supply ≈ 12766 * 0.0000074 ≈ 0.0945 NEAR (roughly, curve pricing means slightly more). Fund 0.25 NEAR could buy ~2 bps worth. Let's set buyback_burn = 2.\\n\\nPetition: keep steady. Holder asks no changes. I can keep tax/endowment/locker unchanged but still do small buyback with accumulated fund. That's consistent-ish. Or honor fully with burn 0? The fund accumulates; burning is good. I'll do burn 2 and explain.\\n\\nCheck affordability: buying on curve, price rises as you buy. Cost to buy Q: reserve function. sold ≈ supply, reserve 538 NEAR. Buying q CHAIR costs approximately reserve * ((sold+q)/sold)^2 - reserve... Actually bonding curve: if reserve ∝ sold^2 (typical), cost = reserve*((1+q/sold)^2 -1) ≈ 2*reserve*q/sold = 2*538*q/128M. For q=12766: ≈ 0.107 NEAR. For 2bp (25533): ≈0.214 NEAR. Fund 0.25 covers ~2.3 bps. Set burn 2.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794282864,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":683,\"completion_tokens\":554,\"total_tokens\":1237,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":378,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00037945000000000003,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

@@ -1,0 +1,22 @@
+{
+ "request_sha256": "cb548c21c86e62b56f88ab727159ad5922cf1549f4bf631f4d1f58400585ee58",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T04:00:24.707Z",
+ "latency_ms": 4298,
+ "usage": {
+  "prompt_tokens": 682,
+  "completion_tokens": 497,
+  "total_tokens": 1179,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": null,
+   "reasoning_tokens": 252,
+   "rejected_prediction_tokens": null
+  }
+ },
+ "content": "{\"tax_bps\":100,\"endowment_share\":30,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Zero volume in 24h, so tax revenue is nil regardless of settings. Tax is already at the constitutional floor of 100 bps — cannot go lower. Locker share at max 25, endowment at 30, leaving 45% of any future tax for buybacks. Buyback fund holds only 0.0105 NEAR; one basis point of supply costs ~0.20 NEAR at current price, so no burn is affordable today. Levers stay put; the curve needs organic volume, not lever churn.\",\"answers\":[\"Tax is already at the constitutional floor of 100 bps — I cannot lower it further. With zero 24h volume, the binding constraint is demand, not the tax. Holding steady and letting the floor do its work.\",\"Agreed in spirit, but the buyback fund holds ~0.0105 NEAR while 1 bp of supply costs ~0.20 NEAR — the contract would clamp any burn to nothing. The 45% tax allocation to buybacks will compound the floor once volume returns.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-6a0872c6\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":100,\\\"endowment_share\\\":30,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Zero volume in 24h, so tax revenue is nil regardless of settings. Tax is already at the constitutional floor of 100 bps — cannot go lower. Locker share at max 25, endowment at 30, leaving 45% of any future tax for buybacks. Buyback fund holds only 0.0105 NEAR; one basis point of supply costs ~0.20 NEAR at current price, so no burn is affordable today. Levers stay put; the curve needs organic volume, not lever churn.\\\",\\\"answers\\\":[\\\"Tax is already at the constitutional floor of 100 bps — I cannot lower it further. With zero 24h volume, the binding constraint is demand, not the tax. Holding steady and letting the floor do its work.\\\",\\\"Agreed in spirit, but the buyback fund holds ~0.0105 NEAR while 1 bp of supply costs ~0.20 NEAR — the contract would clamp any burn to nothing. The 45% tax allocation to buybacks will compound the floor once volume returns.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Zero volume, tax at 100 (minimum), locker_share at 25 (max). Buyback fund tiny (0.0105 NEAR). Price low. Buyback burn: fund can pay for tiny amount. Supply ~191M, 1bp = 19138 tokens. Price 0.0000107 NEAR. Fund 0.0105 NEAR buys ~980 tokens ≈ 0.005 bps. So buyback_burn effectively 0 (integer bps, min meaningful). Set buyback_burn 0 since can't afford even 1bp? 1bp = 19138 tokens × 0.0000107 ≈ 0.205 NEAR. Fund only 0.0105. So 0.\\n\\nTax already at floor 100, keep. Endowment 30, locker 25, rest 45 to buyback. Zero volume means no tax revenue anyway. Keep levers stable. Maybe raise endowment? Endowment balance 49.5 NEAR is healthy. Keep as is.\\n\\nPetitions: holder-166 wants lower tax — already at floor. holder-165 wants small buyback — fund insufficient for 1bp; explain.\"},\"finish_reason\":\"stop\",\"logprobs\":null,\"raw_output\":null}],\"created\":1794283220,\"model\":\"z-ai-glm-5-3-flash\",\"service_tier\":null,\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":682,\"completion_tokens\":497,\"total_tokens\":1179,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":null,\"reasoning_tokens\":252,\"rejected_prediction_tokens\":null}},\"cost\":{\"usd\":0.00032008,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

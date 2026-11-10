@@ -1,0 +1,22 @@
+{
+ "request_sha256": "20edada9b1f55b36b6233cc37b17b7f715c47947ccdebccb751d2760f05c6965",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:11.295Z",
+ "latency_ms": 3678,
+ "usage": {
+  "prompt_tokens": 634,
+  "completion_tokens": 695,
+  "total_tokens": 1329,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 437,
+   "audio_tokens": 0,
+   "reasoning_tokens": 469,
+   "rejected_prediction_tokens": 337
+  }
+ },
+ "content": "{\"tax_bps\":240,\"endowment_share\":60,\"locker_share\":20,\"buyback_burn\":2,\"minutes\":\"Meeting 11. Flow is one-sided: 50 NEAR of buys, zero sells, so the tax base is healthy and there is no sell pressure to fight. Keep tax_bps at 240 — no reason to cut into revenue when demand is strong, no reason to raise and risk damping buys. Split stays 60/20/20: endowment covers inference with a growing buffer (10.5 NEAR), lockers earn a steady 20% on 320.5M weight-days, and the buyback fund accumulates. Fund stands at 0.2793 NEAR; at price 0.00000779 that buys ~35.8k CHAIR. Two basis points of supply is ~27,050 CHAIR (~0.211 NEAR), which the fund covers; three would not. Burn 2 bps this meeting, leaving a small residue to seed the next cycle. No petitions to answer.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-300194ec300f44cab1878d6d8eb1b0bc\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":240,\\\"endowment_share\\\":60,\\\"locker_share\\\":20,\\\"buyback_burn\\\":2,\\\"minutes\\\":\\\"Meeting 11. Flow is one-sided: 50 NEAR of buys, zero sells, so the tax base is healthy and there is no sell pressure to fight. Keep tax_bps at 240 — no reason to cut into revenue when demand is strong, no reason to raise and risk damping buys. Split stays 60/20/20: endowment covers inference with a growing buffer (10.5 NEAR), lockers earn a steady 20% on 320.5M weight-days, and the buyback fund accumulates. Fund stands at 0.2793 NEAR; at price 0.00000779 that buys ~35.8k CHAIR. Two basis points of supply is ~27,050 CHAIR (~0.211 NEAR), which the fund covers; three would not. Burn 2 bps this meeting, leaving a small residue to seed the next cycle. No petitions to answer.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 11. No petitions. Volume 24h: buys 50 NEAR, sells 0. Tax 240, endowment 60, locker 20, buyback share 20 (rest). Buyback fund tiny 0.28 NEAR. Price low. Supply 135M, buyback_burn max 50 bps = 0.5% of supply ≈ 676k CHAIR. Fund can pay: 0.279 NEAR / 0.00000779 ≈ 35,855 CHAIR. So buyback_burn limited by fund.\\n\\nShould I adjust levers? Sells are zero — one-sided buying. Tax 240 is high-ish; could reduce slightly to encourage trading? But buys are healthy. Keep tax at 240 or trim to 220? Movement max 50. Maybe keep stable. Endowment 60, locker 20, buyback 20 — fine. Buyback burn: use the fund, ~35,855 CHAIR ≈ 0.0265 bps of supply. Set buyback_burn to what fund can pay. 0.2793338 / 0.000007790321 = 35,855.6 CHAIR. In bps of supply: 35855/1352496016 ≈ 0.00265 bps. Integer bps — 0 would mean no burn? buyback_burn is integer bps 0-50. Setting 1 bps would require 13,525 CHAIR ≈ 0.105 NEAR — fund can pay that. Actually 1 bps = 0.01% = 13,524.96 CHAIR, cost ≈ 0.1053 NEAR. Fund has 0.279, so 1 bps affordable. 2 bps = 27,050 CHAIR ≈ 0.2107 NEAR — also affordable. 3 bps = 40,575 CHAIR ≈ 0.316 NEAR — not affordable. So set 2 bps, uses most of fund. Or be conservative with 1. I'll do 2.\\n\\nMinutes ≤1000 chars.\"},\"finish_reason\":\"stop\"}],\"created\":1794282907,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":634,\"completion_tokens\":695,\"total_tokens\":1329,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":437,\"audio_tokens\":0,\"reasoning_tokens\":469,\"rejected_prediction_tokens\":337}},\"cost\":{\"usd\":0.00044259999999999997,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

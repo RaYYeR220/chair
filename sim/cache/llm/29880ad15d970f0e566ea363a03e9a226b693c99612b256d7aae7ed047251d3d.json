@@ -1,0 +1,23 @@
+{
+ "request_sha256": "29880ad15d970f0e566ea363a03e9a226b693c99612b256d7aae7ed047251d3d",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:17.703Z",
+ "latency_ms": 10351,
+ "usage": {
+  "prompt_tokens": 758,
+  "completion_tokens": 565,
+  "total_tokens": 1323,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 345,
+   "audio_tokens": 0,
+   "reasoning_tokens": 301,
+   "rejected_prediction_tokens": 315
+  }
+ },
+ "content": "{\"tax_bps\":175,\"endowment_share\":40,\"locker_share\":25,\"buyback_burn\":3,\"minutes\":\"Sell pressure dominates (110 NEAR sold vs 13.5 bought) and price sits at 0.0000098 NEAR. I raise tax 50 bps to the 175 cap to slow churn and refill the funds. Locker_share is already at its 25% constitutional ceiling, so lockers benefit via the higher tax rate instead. Endowment is healthy at ~22 NEAR, so I shift 10 points from endowment to the buyback share (40/25/35) to rebuild the near-empty buyback fund. Buyback fund of 0.514 NEAR buys ~3 bps of supply this meeting; I burn that now rather than wait.\",\"answers\":[\"Lockers are heard — but locker_share is at its 25% ceiling and cannot move higher. Instead I raised the tax 50 bps to 175, which flows 25% of a bigger pie to the locker pool every meeting.\",\"Same answer as your fellow petitioner: the 25% locker cap binds. The lever I moved is the tax rate — up to 175 bps — so locker payouts grow through volume, not share.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-c155bce40d3841399c51602892c297ca\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":175,\\\"endowment_share\\\":40,\\\"locker_share\\\":25,\\\"buyback_burn\\\":3,\\\"minutes\\\":\\\"Sell pressure dominates (110 NEAR sold vs 13.5 bought) and price sits at 0.0000098 NEAR. I raise tax 50 bps to the 175 cap to slow churn and refill the funds. Locker_share is already at its 25% constitutional ceiling, so lockers benefit via the higher tax rate instead. Endowment is healthy at ~22 NEAR, so I shift 10 points from endowment to the buyback share (40/25/35) to rebuild the near-empty buyback fund. Buyback fund of 0.514 NEAR buys ~3 bps of supply this meeting; I burn that now rather than wait.\\\",\\\"answers\\\":[\\\"Lockers are heard — but locker_share is at its 25% ceiling and cannot move higher. Instead I raised the tax 50 bps to 175, which flows 25% of a bigger pie to the locker pool every meeting.\\\",\\\"Same answer as your fellow petitioner: the 25% locker cap binds. The lever I moved is the tax rate — up to 175 bps — so locker payouts grow through volume, not share.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 22. Heavy selling: sell volume 110 NEAR vs buy 13.5. Price low. Tax at 125, can move up to 50 → up to 175. Heavy sell pressure suggests raising tax to dampen churn and fund buybacks. Buyback fund only 0.5139 NEAR. Buyback_burn: 0-50 bps of supply, cost = bps/10000 * supply * price. Supply 174.5M, price 0.0000097762. 1 bps = 17449.65 tokens * 0.000009776 ≈ 0.1704 NEAR. Fund 0.5139 → ~3 bps affordable. Set buyback_burn = 3.\\n\\nLocker_share already 25 (max). Petitioners ask to raise locker_share — can't, at cap. Could raise tax to fund lockers more. Raise tax_bps to 175 (max move). Endowment 50, locker 25, buyback 25. Keep shares same; higher tax raises all flows. Maybe shift endowment down? Endowment 21.97 NEAR is healthy. Could move endowment_share down 10 to 40, give 10 to buyback fund? locker_share at cap 25. endowment 50→40, buyback gets 35. That helps buyback fund accumulate. Do that.\\n\\nMinutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794282967,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":758,\"completion_tokens\":565,\"total_tokens\":1323,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":345,\"audio_tokens\":0,\"reasoning_tokens\":301,\"rejected_prediction_tokens\":315}},\"cost\":{\"usd\":0.00036547999999999995,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

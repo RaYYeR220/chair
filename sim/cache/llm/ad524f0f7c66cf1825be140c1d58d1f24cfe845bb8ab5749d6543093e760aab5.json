@@ -1,0 +1,23 @@
+{
+ "request_sha256": "ad524f0f7c66cf1825be140c1d58d1f24cfe845bb8ab5749d6543093e760aab5",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:57:39.388Z",
+ "latency_ms": 6917,
+ "usage": {
+  "prompt_tokens": 605,
+  "completion_tokens": 424,
+  "total_tokens": 1029,
+  "prompt_tokens_details": {
+   "cached_tokens": 256
+  },
+  "cache_read_input_tokens": 256,
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 267,
+   "audio_tokens": 0,
+   "reasoning_tokens": 226,
+   "rejected_prediction_tokens": 204
+  }
+ },
+ "content": "{\"tax_bps\":125,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":0,\"minutes\":\"Meeting 29. Zero volume in 24h: no tax flowed, buyback fund holds only 0.0299 NEAR. At price 0.000013276 that buys ~2,257 CHAIR, far below the 1 bps minimum burn (~24,350 CHAIR, ~0.32 NEAR), so buyback_burn is 0 this meeting — the fund simply cannot pay. With no flow to split, I hold tax_bps at 125 and the 50/25 split (25% to buyback fund) unchanged; stability beats tinkering in a dead market. Locker weight is healthy at ~1.1B CHAIR-days, so locker incentives remain adequate. Revisit burn once volume returns and the fund can cover at least 1 bps.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-2ccd06f291bb4042ac733fda47fb76d2\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":125,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":0,\\\"minutes\\\":\\\"Meeting 29. Zero volume in 24h: no tax flowed, buyback fund holds only 0.0299 NEAR. At price 0.000013276 that buys ~2,257 CHAIR, far below the 1 bps minimum burn (~24,350 CHAIR, ~0.32 NEAR), so buyback_burn is 0 this meeting — the fund simply cannot pay. With no flow to split, I hold tax_bps at 125 and the 50/25 split (25% to buyback fund) unchanged; stability beats tinkering in a dead market. Locker weight is healthy at ~1.1B CHAIR-days, so locker incentives remain adequate. Revisit burn once volume returns and the fund can cover at least 1 bps.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"No petitions. Zero volume 24h. Buyback fund tiny (0.03 NEAR). Price low. Keep levers stable, maybe small buyback. Buyback fund 0.03 NEAR at price 0.00001327 → ~2257 CHAIR. Supply 243.5M, 50 bps max = ~121,750 CHAIR. Fund can only pay for ~2257 CHAIR worth. So buyback_burn limited by fund. Compute: 0.02996 NEAR / 0.0000132764 ≈ 2257 CHAIR. As bps of supply: 2257/243,501,602 ≈ 0.00000927 → ~0.09 bps. So set buyback_burn to 0 (can't even do 1 bps? 1 bps = 24,350 CHAIR, costs ~0.32 NEAR > fund). So buyback_burn = 0.\\n\\nKeep tax at 125, shares stable. Minutes concise.\"},\"finish_reason\":\"stop\"}],\"created\":1794283052,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":605,\"completion_tokens\":424,\"total_tokens\":1029,\"prompt_tokens_details\":{\"cached_tokens\":256},\"cache_read_input_tokens\":256,\"completion_tokens_details\":{\"accepted_prediction_tokens\":267,\"audio_tokens\":0,\"reasoning_tokens\":226,\"rejected_prediction_tokens\":204}},\"cost\":{\"usd\":0.00027203,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

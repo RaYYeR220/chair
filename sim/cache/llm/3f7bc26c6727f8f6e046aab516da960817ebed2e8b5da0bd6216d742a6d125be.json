@@ -1,0 +1,22 @@
+{
+ "request_sha256": "3f7bc26c6727f8f6e046aab516da960817ebed2e8b5da0bd6216d742a6d125be",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:56:57.729Z",
+ "latency_ms": 6945,
+ "usage": {
+  "prompt_tokens": 641,
+  "completion_tokens": 761,
+  "total_tokens": 1402,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 468,
+   "audio_tokens": 0,
+   "reasoning_tokens": 549,
+   "rejected_prediction_tokens": 411
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":25,\"buyback_burn\":8,\"minutes\":\"Flow is one-sided: 22.36 NEAR of sells, zero buys, so the curve is under steady sell pressure. I lift the tax 50 bps to 150 to slow bleeding and rebuild the buyback fund, still at the gentle end so buyers aren't scared off. Split stays 50/25/25: endowment keeps the brain funded (46.9 NEAR runway is healthy), lockers earned their 25 given they're the only stabilizing holders right now, and the remainder drips into buyback. The buyback fund holds 0.2666 NEAR; at price 0.00001324 each burned bp costs ~0.0322 NEAR, so I burn the full affordable 8 bps (~194k CHAIR), leaving the fund near zero to be refilled by today's tax.\",\"answers\":[]}",
+ "response_text": "{\"id\":\"chatcmpl-45fc8f45919b4359b5a3110bcb0d722c\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":25,\\\"buyback_burn\\\":8,\\\"minutes\\\":\\\"Flow is one-sided: 22.36 NEAR of sells, zero buys, so the curve is under steady sell pressure. I lift the tax 50 bps to 150 to slow bleeding and rebuild the buyback fund, still at the gentle end so buyers aren't scared off. Split stays 50/25/25: endowment keeps the brain funded (46.9 NEAR runway is healthy), lockers earned their 25 given they're the only stabilizing holders right now, and the remainder drips into buyback. The buyback fund holds 0.2666 NEAR; at price 0.00001324 each burned bp costs ~0.0322 NEAR, so I burn the full affordable 8 bps (~194k CHAIR), leaving the fund near zero to be refilled by today's tax.\\\",\\\"answers\\\":[]}\",\"role\":\"assistant\",\"reasoning_content\":\"Meeting 25. Volume: only sells 22.36 NEAR, no buys. Tax at 100 bps. Price low. Buyback fund tiny (0.266 NEAR). Supply 242.9M, so 1 bp of supply ≈ 2429 CHAIR; cost at price 0.00001324 ≈ 0.0322 NEAR per bp. Fund 0.2666 NEAR buys ~8 bp. So buyback_burn max ~8.\\n\\nConsider raising tax slightly since sell pressure only? Tax max move 50. Keep tax at 100 or raise to 150? Sell-only volume suggests some sell pressure; higher tax dampens sells but also discourages buys. Modest: raise to 150? Constitution allows. Endowment 50, locker 25, buyback 25. Locker pool small relative to weight (978M CHAIR-days). Maybe shift: endowment 50, locker 20, buyback 30? Locker share move max 10. Keep locker at 25 to reward lockers? Sell-only day — lockers provide stability; keep locker_share 25. Buyback fund is low; buyback_share 25 of tax on 22 NEAR sells = ~0.056 NEAR/day at 100bps. Raising tax to 150 gives more funds.\\n\\nDecide: tax_bps 150, endowment 50, locker 25, buyback_burn 8 (fund 0.2666; 8bp cost ≈ 0.2577 NEAR, fits; 9bp ≈ 0.29 > fund). Check: 8 bp of 242,914,863 = 194,331 CHAIR × 0.0000132433 ≈ 2.573 NEAR? Wait recompute: 242,914,863 × 0.0008 = 194,331.9 CHAIR. × price 0.00001324 = 2.573 NEAR. That's way more than fund 0.2666. So fund buys only ~0.2666/2.573 × 8bp... per bp cost = 2429.15 CHAIR × 0.0000132433 = 0.03217 NEAR. Fund 0.2666 / 0.03217 ≈ 8.29 bp. So buyback_burn = 8. Yes my earlier calc right.\\n\\nMinutes ≤1000 chars. No petitions, answers [].\"},\"finish_reason\":\"stop\"}],\"created\":1794283010,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":641,\"completion_tokens\":761,\"total_tokens\":1402,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":468,\"audio_tokens\":0,\"reasoning_tokens\":549,\"rejected_prediction_tokens\":411}},\"cost\":{\"usd\":0.00047665,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}

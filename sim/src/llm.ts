@@ -9,6 +9,8 @@ export interface LlmResult {
   key: string;
   cached: boolean;
   content: string | null;
+  /** Bytes of the whole chat-completion body (the contract's `response_text`; over 64 KiB is unparseable). */
+  responseBytes: number;
   promptTokens: number;
   completionTokens: number;
   usd: number;
@@ -47,9 +49,9 @@ export class LlmClient {
   /** API calls this client may still make. */
   remaining(): number { return this.opts.maxCalls - this.stats.calls; }
 
-  /** True if this exact request is already cached. */
-  isCached(request: string): boolean {
-    const file = join(CACHE_DIR, `${createHash("sha256").update(veniceBody(request)).digest("hex")}.json`);
+  /** True if this exact request (and variant) is already cached. */
+  isCached(request: string, variant?: string): boolean {
+    const file = join(CACHE_DIR, `${cacheKey(veniceBody(request), variant)}.json`);
     if (!existsSync(file)) return false;
     return !JSON.parse(readFileSync(file, "utf8")).error || !this.opts.retryErrors;
   }
@@ -63,10 +65,13 @@ export class LlmClient {
     return usd;
   }
 
-  /** `request` is the contract's exact request bytes. */
-  async complete(request: string): Promise<LlmResult> {
+  /**
+   * `request` is the contract's exact request bytes. `variant` names a deliberate resend of the same
+   * bytes (the seed probe): it gets its own cache entry instead of replaying the first answer.
+   */
+  async complete(request: string, variant?: string): Promise<LlmResult> {
     const bytes = veniceBody(request);
-    const key = createHash("sha256").update(bytes).digest("hex");
+    const key = cacheKey(bytes, variant);
     const file = join(CACHE_DIR, `${key}.json`);
     const vm = JSON.parse(bytes).model as string;
     if (existsSync(file)) {
@@ -75,13 +80,14 @@ export class LlmClient {
         this.stats.cacheHits++;
         const usage = hit.usage ?? {};
         const usd = this.account(vm, usage.prompt_tokens ?? 0, usage.completion_tokens ?? 0);
-        return { key, cached: true, content: hit.content ?? null, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, usd, error: hit.error };
+        return { key, cached: true, content: hit.content ?? null, responseBytes: hit.response_text ? Buffer.byteLength(hit.response_text) : 0, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, usd, error: hit.error };
       }
     }
-    if (this.opts.offline) return { key, cached: false, content: null, promptTokens: 0, completionTokens: 0, usd: 0, error: "offline: not in cache" };
-    if (this.stats.calls >= this.opts.maxCalls) return { key, cached: false, content: null, promptTokens: 0, completionTokens: 0, usd: 0, error: "call budget exhausted" };
+    const none = { key, cached: false, content: null, responseBytes: 0, promptTokens: 0, completionTokens: 0, usd: 0 };
+    if (this.opts.offline) return { ...none, error: "offline: not in cache" };
+    if (this.stats.calls >= this.opts.maxCalls) return { ...none, error: "call budget exhausted" };
     this.key ??= readKey();
-    if (!this.key) return { key, cached: false, content: null, promptTokens: 0, completionTokens: 0, usd: 0, error: "no VENICE_API_KEY" };
+    if (!this.key) return { ...none, error: "no VENICE_API_KEY" };
 
     this.stats.calls++;
     let lastErr = "";
@@ -107,7 +113,7 @@ export class LlmClient {
         writeFileSync(file, JSON.stringify(rec, null, 1));
         const usd = this.account(vm, usage.prompt_tokens ?? 0, usage.completion_tokens ?? 0);
         this.opts.log?.(`llm ${vm} ${key.slice(0, 10)} ${Date.now() - t0}ms in=${usage.prompt_tokens} out=${usage.completion_tokens}`);
-        return { key, cached: false, content, promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, usd };
+        return { key, cached: false, content, responseBytes: Buffer.byteLength(text), promptTokens: usage.prompt_tokens ?? 0, completionTokens: usage.completion_tokens ?? 0, usd };
       } catch (e) {
         lastErr = String((e as Error).message ?? e);
         await sleep(5000 * 3 ** attempt);
@@ -116,8 +122,12 @@ export class LlmClient {
     this.stats.errors++;
     writeFileSync(file, JSON.stringify({ request_sha256: key, venice_model: vm, at: new Date().toISOString(), error: lastErr }, null, 1));
     this.opts.log?.(`llm ${vm} ${key.slice(0, 10)} ERROR ${lastErr}`);
-    return { key, cached: false, content: null, promptTokens: 0, completionTokens: 0, usd: 0, error: lastErr };
+    return { ...none, error: lastErr };
   }
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+/** Cache key: sha256 of the Venice body, or of the body plus "
+#<variant>" for a deliberate resend. */
+const cacheKey = (bytes: string, variant?: string) => createHash("sha256").update(variant ? `${bytes}
+#${variant}` : bytes).digest("hex");

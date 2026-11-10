@@ -1,0 +1,22 @@
+{
+ "request_sha256": "8961b436e44796e8eeee22b0c0ed4af929aaa168b04c1c29a4c1352c1df3b7d0",
+ "venice_model": "z-ai-glm-5-3-flash",
+ "at": "2026-11-10T03:55:06.326Z",
+ "latency_ms": 4628,
+ "usage": {
+  "prompt_tokens": 791,
+  "completion_tokens": 575,
+  "total_tokens": 1366,
+  "prompt_tokens_details": {
+   "cached_tokens": 0
+  },
+  "completion_tokens_details": {
+   "accepted_prediction_tokens": 369,
+   "audio_tokens": 0,
+   "reasoning_tokens": 229,
+   "rejected_prediction_tokens": 249
+  }
+ },
+ "content": "{\"tax_bps\":150,\"endowment_share\":50,\"locker_share\":15,\"buyback_burn\":4,\"minutes\":\"Meeting 10. Flow is healthy: 144.4 NEAR bought vs 53.5 sold over 24h, price stable at ~0.0000116 NEAR. No reason to move tax or shares; keep 150 bps split 50/15/35. Petitions unanimously ask for a small daily buyback to compound the floor — agreed. Buyback fund holds 1.0486 NEAR; at current price that buys ~90,200 CHAIR, about 4.28 bps of the 210.94M supply. Setting buyback_burn to 4 bps, fully fundable, leaving a small buffer. Curve buys and burns are permanent supply reduction, so repeating this each meeting compounds the floor as the fund refills from the 35% tax share. Endowment at 30.45 NEAR comfortably covers inference; locker pool keeps accruing to 967.98M weight of lockers.\",\"answers\":[\"Agreed. Burning 4 bps of supply today (~90,200 CHAIR) with the full buyback fund — the max the fund can pay for. Small, daily, compounding.\",\"Agreed. Same petition, same answer: 4 bps bought and burned this meeting, funded entirely by the 1.05 NEAR buyback fund. The floor compounds daily.\",\"Agreed. 4 bps buyback-and-burn executed now. As the 35% buyback share refills the fund, we scale the burn up in future meetings.\"]}",
+ "response_text": "{\"id\":\"chatcmpl-645c6b72de2d4ae0b36327b949b4f5fd\",\"choices\":[{\"index\":0,\"message\":{\"content\":\"{\\\"tax_bps\\\":150,\\\"endowment_share\\\":50,\\\"locker_share\\\":15,\\\"buyback_burn\\\":4,\\\"minutes\\\":\\\"Meeting 10. Flow is healthy: 144.4 NEAR bought vs 53.5 sold over 24h, price stable at ~0.0000116 NEAR. No reason to move tax or shares; keep 150 bps split 50/15/35. Petitions unanimously ask for a small daily buyback to compound the floor — agreed. Buyback fund holds 1.0486 NEAR; at current price that buys ~90,200 CHAIR, about 4.28 bps of the 210.94M supply. Setting buyback_burn to 4 bps, fully fundable, leaving a small buffer. Curve buys and burns are permanent supply reduction, so repeating this each meeting compounds the floor as the fund refills from the 35% tax share. Endowment at 30.45 NEAR comfortably covers inference; locker pool keeps accruing to 967.98M weight of lockers.\\\",\\\"answers\\\":[\\\"Agreed. Burning 4 bps of supply today (~90,200 CHAIR) with the full buyback fund — the max the fund can pay for. Small, daily, compounding.\\\",\\\"Agreed. Same petition, same answer: 4 bps bought and burned this meeting, funded entirely by the 1.05 NEAR buyback fund. The floor compounds daily.\\\",\\\"Agreed. 4 bps buyback-and-burn executed now. As the 35% buyback share refills the fund, we scale the burn up in future meetings.\\\"]}\",\"role\":\"assistant\",\"reasoning_content\":\"Three petitions, all same text. Buyback fund is 1.0486 NEAR. Price ~0.0000116 NEAR per CHAIR. Max buyback_burn is 50 bps of supply = 0.5% of 210.9M ≈ 1,054,716 CHAIR. Cost at price: 1,054,716 × 0.0000116 ≈ 12.26 NEAR — way more than fund. Fund can buy 1.0486 / 0.0000116 ≈ 90,200 CHAIR ≈ 0.0428% of supply ≈ 4.28 bps. So buyback_burn ≈ 4 (or compute: 90,200/210,943,262 = 0.0004276 → 4.28 bps → 4).\\n\\nSet buyback_burn = 4. Keep tax at 150, shares unchanged (50/15/35). Volume healthy, buys exceed sells. Answer petitions affirmatively.\"},\"finish_reason\":\"stop\"}],\"created\":1794282901,\"model\":\"z-ai-glm-5-3-flash\",\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":791,\"completion_tokens\":575,\"total_tokens\":1366,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"accepted_prediction_tokens\":369,\"audio_tokens\":0,\"reasoning_tokens\":229,\"rejected_prediction_tokens\":249}},\"cost\":{\"usd\":0.00040615,\"diem\":0},\"venice_parameters\":{\"strip_thinking_response\":false,\"disable_thinking\":false,\"enable_e2ee\":true,\"enable_web_search\":\"off\",\"enable_web_scraping\":false,\"enable_web_citations\":false,\"include_search_results_in_stream\":false,\"include_venice_system_prompt\":false,\"enable_x_search\":false,\"web_search_citations\":[],\"return_search_results_as_documents\":false}}"
+}
