@@ -1,0 +1,9 @@
+{
+  "name": "chair",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @chair/web dev",
+    "build": "pnpm --filter @chair/web build"
+  }
+}
