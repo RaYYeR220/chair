@@ -2,6 +2,7 @@
 name = "chair-brain"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/RaYYeR220/chair"
 license = "MIT"
 description = "CHAIR brain: stakes the endowment in the NEAR AI farm and signs NEP-413 logins to NEAR AI Cloud through NEAR's MPC network"
 

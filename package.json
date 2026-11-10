@@ -7,6 +7,8 @@
     "dev": "pnpm --filter @chair/web dev",
     "build": "pnpm --filter @chair/web build",
     "readme": "node scripts/render-readme.ts",
-    "check:replay": "node scripts/check-replay.ts"
+    "check:replay": "node scripts/check-replay.ts",
+    "verify:signers": "node scripts/verify-signers.ts",
+    "courier:live": "node scripts/courier-live.ts"
   }
 }

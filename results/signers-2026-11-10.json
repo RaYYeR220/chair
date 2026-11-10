@@ -1,0 +1,490 @@
+{
+ "generated_at": "2026-11-10T09:19:42.882Z",
+ "source": "https://cloud-api.near.ai/v1/attestation/report",
+ "samples_per_model": 3,
+ "ladder": [
+  "z-ai/glm-5.3-flash",
+  "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+  "moonshotai/kimi-k3"
+ ],
+ "model_signers": [
+  "0x3b753b4406613c5e70ae640508632b600424fa0c",
+  "0xfe0071895500a9755c18044948ab4f4e1a7f337e"
+ ],
+ "gateway_signers": [
+  "0xb98a789cdc4817275f5155593ba73ef2a957e779"
+ ],
+ "rejected": [],
+ "models": [
+  {
+   "model": "z-ai/glm-5.3-flash",
+   "min_endowment_near": 1,
+   "served": true,
+   "samples": [
+    {
+     "nonce": "eb684b37c299cbb4731abed4520c8f422642cc16c8e521768d47cabe6325f54f",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000eb684b37c299cbb4731abed4520c8f422642cc16c8e521768d47cabe6325f54f",
+       "quote_sha256": "a4cb55a3c12f042df54c562fcf87aa50e830b960e1524ea2a03c878f78868d46"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = z-ai/glm-5.3-flash",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000eb684b37c299cbb4731abed4520c8f422642cc16c8e521768d47cabe6325f54f",
+        "quote_sha256": "3b5b1a6f13ad9eb20ccaa483ea3f030def47d1485021dde5aafa7e5fff24b47a",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110072930163-1fd6afed-35bd-4a00-89ad-552e2042211e"
+       },
+       "instance_id": "19aea1693533dc2d529db03e3f725f20bde8d66d",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "a0e3c6f4f21a60ea3f5c96bc7ef319b03a184ca2049605399275fbcea74e8c5f",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "nonce": "62a18d8aa3f1e0406bcc2cc9354e7ba9500a5cd871f18be0e99c7a94097bd738",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e77900000000000000000000000062a18d8aa3f1e0406bcc2cc9354e7ba9500a5cd871f18be0e99c7a94097bd738",
+       "quote_sha256": "3984f2f2fa92367e96b2fe2f3b23fcfb9ae4e5fdcc6a5dda903be363964f412b"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = z-ai/glm-5.3-flash",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c00000000000000000000000062a18d8aa3f1e0406bcc2cc9354e7ba9500a5cd871f18be0e99c7a94097bd738",
+        "quote_sha256": "8e358ee68aa1e44daa5e3a2c8cd7c8b53ccbfae66a115822cd59c9d39900ac3f",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110073335637-335269fd-4514-4cec-99de-4e2c2dd80b1b"
+       },
+       "instance_id": "19aea1693533dc2d529db03e3f725f20bde8d66d",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "a0e3c6f4f21a60ea3f5c96bc7ef319b03a184ca2049605399275fbcea74e8c5f",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "nonce": "b6e676397b92de9ec3cb32451c2df2ad1f89489a7af175119a921e96ad0d27e6",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000b6e676397b92de9ec3cb32451c2df2ad1f89489a7af175119a921e96ad0d27e6",
+       "quote_sha256": "04c24ea2c4ff07d89050de77bb3fc912872df54b8cc591a17ac4468ac0ed6ab1"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = z-ai/glm-5.3-flash",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000b6e676397b92de9ec3cb32451c2df2ad1f89489a7af175119a921e96ad0d27e6",
+        "quote_sha256": "768ad593b7c94df0c190248e6aae2eeef7f4dcf493d2a2285383e6324b4c91bf",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110072731298-eba7ac10-41e4-4dc8-bcab-e1688054f339"
+       },
+       "instance_id": "19aea1693533dc2d529db03e3f725f20bde8d66d",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "a0e3c6f4f21a60ea3f5c96bc7ef319b03a184ca2049605399275fbcea74e8c5f",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "model_signers": [
+    "0x3b753b4406613c5e70ae640508632b600424fa0c"
+   ],
+   "served_by": "near-ai (dstack TEE, per-response provider_tee signatures)",
+   "meetings_signed_by": "provider_tee (model_signers); gateway (gateway_signers) if NEAR AI falls back or rewrites the body"
+  },
+  {
+   "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+   "min_endowment_near": 50,
+   "served": true,
+   "samples": [
+    {
+     "nonce": "974aa56caf8245c27db52a9cbc6fe2a70d51f4f9425e5e831b2de881b2fb6d0d",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000974aa56caf8245c27db52a9cbc6fe2a70d51f4f9425e5e831b2de881b2fb6d0d",
+       "quote_sha256": "f285dc0379cc26d523dedded2301e97ea6549f8bc61ed633533cc92d5329fffb"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0xfe0071895500a9755c18044948ab4f4e1a7f337e",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = deepseek-ai/DeepSeek-V4.1-Flash-1017",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e000000000000000000000000974aa56caf8245c27db52a9cbc6fe2a70d51f4f9425e5e831b2de881b2fb6d0d",
+        "quote_sha256": "fff627e17e1ab5d5a1e17f7bc9aaeda6eb8ea0cae66794e58bc9b555f6debf7e",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110072731298-eba7ac10-41e4-4dc8-bcab-e1688054f339"
+       },
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "nonce": "0c1d0228c8d9a8ec9be879c20acc6696dc66da96aee48e8782767b73de2b912c",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000000c1d0228c8d9a8ec9be879c20acc6696dc66da96aee48e8782767b73de2b912c",
+       "quote_sha256": "c1258fddb1c969a8d4cff06cdc8ed6c818fcc03b427f7130fb08c8fb359776fb"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0xfe0071895500a9755c18044948ab4f4e1a7f337e",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = deepseek-ai/DeepSeek-V4.1-Flash-1017",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e0000000000000000000000000c1d0228c8d9a8ec9be879c20acc6696dc66da96aee48e8782767b73de2b912c",
+        "quote_sha256": "90baae51ce1ab10bed1b575d49c816ab96cb260aec8ccb59f70f9e4f8c3f6f55",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110072339140-21b9efd5-2fa7-4b85-9f1a-0a39fb181513"
+       },
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "nonce": "98e70d0200fe8eed1ea83c94279a12c23634257955381470f094d141e16691f5",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e77900000000000000000000000098e70d0200fe8eed1ea83c94279a12c23634257955381470f094d141e16691f5",
+       "quote_sha256": "3d8ecde2feb25243aa9727c34144786efce4499772eeac8c9b22d771e3dee640"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0xfe0071895500a9755c18044948ab4f4e1a7f337e",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = deepseek-ai/DeepSeek-V4.1-Flash-1017",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e00000000000000000000000098e70d0200fe8eed1ea83c94279a12c23634257955381470f094d141e16691f5",
+        "quote_sha256": "a820f08f30ded710e9945b265a3840f7e67403121b2027329057b075794c527d",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261110072930163-1fd6afed-35bd-4a00-89ad-552e2042211e"
+       },
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
+       "ok": true
+      }
+     ]
+    }
+   ],
+   "model_signers": [
+    "0xfe0071895500a9755c18044948ab4f4e1a7f337e"
+   ],
+   "served_by": "near-ai (dstack TEE, per-response provider_tee signatures)",
+   "meetings_signed_by": "provider_tee (model_signers); gateway (gateway_signers) if NEAR AI falls back or rewrites the body"
+  },
+  {
+   "model": "moonshotai/kimi-k3",
+   "min_endowment_near": 500,
+   "served": true,
+   "samples": [
+    {
+     "nonce": "33c586f829208ee907e0ed4591945418aef70bab650d7a507bd3cf4a970692f8",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e77900000000000000000000000033c586f829208ee907e0ed4591945418aef70bab650d7a507bd3cf4a970692f8",
+       "quote_sha256": "9c105ff603e4da6c03b0258aa2b3dd547dd81213dc6dca81f3d7b7138128d8ef"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "provider": "chutes",
+       "signing_address": null,
+       "kind": "none",
+       "kind_evidence": "report.model_attestations[] from provider \"chutes\" has no signing_address: its responses carry NEAR AI gateway signatures (signature_kind \"gateway\")",
+       "provider_binding": {
+        "ok": true,
+        "detail": "TDX report_data = sha256(nonce ‖ e2e_pubkey) PASS, ‖ sha256(SPKI(cert)) PASS"
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "BLACKWELL",
+        "jwt_kid": "nv-eat-kid-prod-20261110072731298-eba7ac10-41e4-4dc8-bcab-e1688054f339"
+       },
+       "provider_says": {
+        "verified": true,
+        "tcb_status": "UpToDate",
+        "gpu_verdict": "PASS",
+        "measurement_config": "8xb300 [10.2.1, flat-252c-2304g] v1.5.0"
+       },
+       "instance_id": "91db18f4-6b33-47b0-be07-d1bd0ce7297f"
+      }
+     ]
+    },
+    {
+     "nonce": "6861a7addf90434b550d8113cf1e1a08d37d79d88968af5f115f5261a5de47f2",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000006861a7addf90434b550d8113cf1e1a08d37d79d88968af5f115f5261a5de47f2",
+       "quote_sha256": "3a8d2c78868feaca06ec00aaf24ab60eaef5866b8ac8b2eb22de17e886f83052"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "provider": "chutes",
+       "signing_address": null,
+       "kind": "none",
+       "kind_evidence": "report.model_attestations[] from provider \"chutes\" has no signing_address: its responses carry NEAR AI gateway signatures (signature_kind \"gateway\")",
+       "provider_binding": {
+        "ok": true,
+        "detail": "TDX report_data = sha256(nonce ‖ e2e_pubkey) PASS, ‖ sha256(SPKI(cert)) PASS"
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "BLACKWELL",
+        "jwt_kid": "nv-eat-kid-prod-20261110072930163-1fd6afed-35bd-4a00-89ad-552e2042211e"
+       },
+       "provider_says": {
+        "verified": true,
+        "tcb_status": "UpToDate",
+        "gpu_verdict": "PASS",
+        "measurement_config": "8xb300 [10.2.1, flat-252c-2304g] v1.5.0"
+       },
+       "instance_id": "6ec6bb2e-420f-4986-b6a0-3172c73d4b31"
+      }
+     ]
+    },
+    {
+     "nonce": "5cd6e70ca917c6319a301855b3c202be16ec5eb3271006262ce0fa2b325bdfbb",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000005cd6e70ca917c6319a301855b3c202be16ec5eb3271006262ce0fa2b325bdfbb",
+       "quote_sha256": "0a76d7a44fcca64b84823e386ab962320d034473a3f4301bf6654b24953acca1"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "provider": "chutes",
+       "signing_address": null,
+       "kind": "none",
+       "kind_evidence": "report.model_attestations[] from provider \"chutes\" has no signing_address: its responses carry NEAR AI gateway signatures (signature_kind \"gateway\")",
+       "provider_binding": {
+        "ok": true,
+        "detail": "TDX report_data = sha256(nonce ‖ e2e_pubkey) PASS, ‖ sha256(SPKI(cert)) PASS"
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "BLACKWELL",
+        "jwt_kid": "nv-eat-kid-prod-20261110072731298-eba7ac10-41e4-4dc8-bcab-e1688054f339"
+       },
+       "provider_says": {
+        "verified": true,
+        "tcb_status": "UpToDate",
+        "gpu_verdict": "PASS",
+        "measurement_config": "8xb300 [10.2.1, flat-252c-1944g] v1.5.0"
+       },
+       "instance_id": "6b19b338-b369-4eae-a8f8-63efbeb4e7da"
+      }
+     ]
+    }
+   ],
+   "model_signers": [],
+   "served_by": "chutes (attested third party)",
+   "meetings_signed_by": "gateway (gateway_signers) only"
+  }
+ ],
+ "checks": {
+  "a": "TDX quote v4, report_data[0:20] = signing_address, [20:32] = 0, [32:64] = fresh nonce; model keys: keccak256(signing_public_key)[12:] = signing_address; request_nonce echoed",
+  "b": "NVIDIA NRAS v3 on the model's GPU evidence: JWT ES384 signature against NRAS JWKS, x-nvidia-overall-att-result = true, eat_nonce = our nonce (gateway: not applicable)",
+  "c": "model signer = model_attestations[] entry whose model_name is the requested model; gateway signer = gateway_attestation"
+ },
+ "not_checked": [
+  "Intel DCAP signature chain and TCB status of the TDX quotes (run dcap-qvl on quote bytes)",
+  "the TDX measurements and compose hash against NEAR AI's published images",
+  "completeness: a model may serve from more keys than these samples met"
+ ]
+}

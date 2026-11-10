@@ -2,6 +2,7 @@
 name = "chair-courier"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/RaYYeR220/chair"
 license = "MIT"
 description = "CHAIR courier: the OutLayer module that carries the meeting request to NEAR AI Cloud and brings back the response with its TEE signature"
 build = "build.rs"

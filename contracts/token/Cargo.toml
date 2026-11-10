@@ -2,6 +2,7 @@
 name = "chair-token"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/RaYYeR220/chair"
 license = "MIT"
 description = "CHAIR: a memecoin that runs its own central bank (NEP-141 token, bonding curve, constitution, rate meetings)"
 

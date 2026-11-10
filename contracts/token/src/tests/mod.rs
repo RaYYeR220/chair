@@ -15,6 +15,7 @@ mod audit_findings;
 mod constitution_tests;
 mod curve_tests;
 mod fuzz;
+mod live_courier;
 mod locks_tests;
 mod meeting_tests;
 mod token_tests;
