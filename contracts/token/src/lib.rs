@@ -47,7 +47,7 @@ mod tests;
 
 pub use constitution::{Asked, Clamp, Levers};
 use curve::{Curve, U256};
-pub use meeting::SYSTEM_PROMPT;
+pub use meeting::{SEED_PLACEHOLDER, SYSTEM_PROMPT};
 pub use types::*;
 
 // ---------------------------------------------------------------- constants
@@ -71,6 +71,10 @@ pub const LOCK_DAYS: [u8; 3] = [1, 7, 30];
 pub const MAX_LOCKS: usize = 8;
 pub const PETITION_MAX_CHARS: usize = 280;
 pub const TOP_PETITIONS: usize = 3;
+/// Petitions waiting for the next meeting, heaviest at filing first. Each
+/// petitioner's weight is recomputed at `convene`, so the queue holds more
+/// than the brief's three; past this many, the lightest filing drops.
+pub const MAX_PENDING_PETITIONS: usize = 8;
 
 /// NEP-145 deposit per account (fixed): the account record with up to
 /// `MAX_LOCKS` locks and each lock's share of the expiry buckets.
@@ -82,6 +86,12 @@ pub const MAX_TIERS: usize = 8;
 pub const MAX_MODEL_LEN: usize = 128;
 /// Largest courier result read; anything longer counts as unsigned.
 pub const MAX_RESULT_BYTES: usize = 256 * 1024;
+/// Largest `response_text` checked; anything longer is `unparseable` before
+/// it is hashed or parsed, so `on_ruling` always has the gas to finish.
+pub const MAX_RESPONSE_BYTES: usize = 64 * 1024;
+/// The brief's `seed`: hex of the first 16 bytes of `env::random_seed()` at
+/// `convene` (SPEC §5.1).
+pub const SEED_BYTES: usize = 16;
 /// Expired lock buckets processed per meeting (the rest wait for the next).
 pub const MAX_EXPIRY_POPS: usize = 64;
 /// Event copies of minutes and answers are clipped to these many bytes.
@@ -97,8 +107,15 @@ pub const ON_RULING_GAS: Gas = Gas::from_tgas(80);
 pub const ON_ENDOWMENT_GAS: Gas = Gas::from_tgas(5);
 /// Prepaid gas `convene` requires when a model is awake (300 TGas recommended).
 pub const CONVENE_GAS: Gas = Gas::from_tgas(220);
-pub const GAS_FOR_RESOLVE_TRANSFER: Gas = Gas::from_tgas(5);
-pub const GAS_FOR_FT_TRANSFER_CALL: Gas = Gas::from_tgas(30);
+/// Extra prepaid gas `convene` requires when it must first run the fallback
+/// for a lapsed meeting (levers, locker payout, endowment transfer).
+pub const LAPSE_GAS: Gas = Gas::from_tgas(20);
+/// `ft_resolve_transfer`: settles the receiver's expired locks, reads and
+/// writes two accounts and logs a refund event.
+pub const GAS_FOR_RESOLVE_TRANSFER: Gas = Gas::from_tgas(15);
+/// Gas `ft_transfer_call` keeps back from `ft_on_transfer`: its own
+/// execution (25 TGas) plus `ft_resolve_transfer`.
+pub const GAS_FOR_FT_TRANSFER_CALL: Gas = Gas::from_tgas(40);
 
 // ---------------------------------------------------------------- state
 
@@ -153,8 +170,9 @@ pub struct Chair {
     /// Hours with a live bucket, ascending.
     expiry: LazyOption<Vec<u64>>,
 
-    // petitions for the next meeting (the three heaviest)
-    petitions: Vec<Petition>,
+    // petitions for the next meeting: at most `MAX_PENDING_PETITIONS`,
+    // heaviest at filing first; reweighed at `convene`
+    petitions: LazyOption<Vec<Petition>>,
     petitions_filed: u32,
 
     volume: Vec<VolumeSlot>,
@@ -303,7 +321,7 @@ impl Chair {
             buckets: LookupMap::new(b"b"),
             popped: LookupMap::new(b"p"),
             expiry: LazyOption::new(b"x", Some(Vec::new())),
-            petitions: Vec::new(),
+            petitions: LazyOption::new(b"q", Some(Vec::new())),
             petitions_filed: 0,
             volume: vec![VolumeSlot::default(); 24],
             meeting_count: 0,
@@ -389,8 +407,11 @@ impl Chair {
         self.stats.clone()
     }
 
+    /// The petitions queued for the next meeting, with their weight at
+    /// filing. `convene` recomputes each weight from the locks still active
+    /// then; `get_request_preview` shows the brief that would result now.
     pub fn get_petitions(&self) -> Vec<Petition> {
-        self.petitions.clone()
+        self.pending_petitions().to_vec()
     }
 
     /// Everything `propose_change` can touch: the signer allowlists and the
@@ -535,6 +556,10 @@ impl Chair {
 
     pub(crate) fn acc(&self) -> U256 {
         U256::from_big_endian(&self.acc_rpw)
+    }
+
+    pub(crate) fn pending_petitions(&self) -> &[Petition] {
+        self.petitions.get().as_deref().unwrap_or(&[])
     }
 
     /// The IQ ladder: the highest tier the endowment reaches; `None` = asleep.

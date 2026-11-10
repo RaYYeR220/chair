@@ -11,6 +11,7 @@ use near_sdk::{testing_env, test_vm_config, NearToken, PromiseOrValue, PromiseRe
 use sha2::{Digest as _, Sha256};
 use sha3::Keccak256;
 
+mod audit_findings;
 mod constitution_tests;
 mod curve_tests;
 mod fuzz;
@@ -247,9 +248,15 @@ pub struct H {
     pub now: u64,
 }
 
+/// The block random seed the harness uses at time `now` (each block its own).
+pub fn seed_at(now: u64) -> [u8; 32] {
+    sha256(&now.to_le_bytes())
+}
+
 pub fn ctx(pred: &AccountId, deposit: u128, now: u64) -> VMContextBuilder {
     let mut b = VMContextBuilder::new();
     b.current_account_id(token())
+        .random_seed(seed_at(now))
         .predecessor_account_id(pred.clone())
         .signer_account_id(pred.clone())
         .attached_deposit(NearToken::from_yoctonear(deposit))

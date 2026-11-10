@@ -60,6 +60,9 @@ pub const KEEP_LIQUID: NearToken = NearToken::from_millinear(250);
 const STALE_MS: u64 = 15 * 60 * 1000;
 /// Bound on promise results read from other contracts.
 const MAX_RESULT_LEN: usize = 16 * 1024;
+/// After `install_login_key`, only the brain account itself may call
+/// `remove_key` for this long; then anyone may.
+pub const KEY_REMOVAL_OWNER_MS: u64 = 7 * 24 * 3600 * 1000;
 
 /// Fixed at `new`. Mainnet values are in docs/BRAIN.md.
 #[near(serializers = [borsh, json])]
@@ -168,6 +171,9 @@ pub struct Brain {
     price_id: Option<String>,
     /// The MPC-derived ed25519 key, installed once as the only full-access key.
     login_key: Option<[u8; 32]>,
+    /// When the login key was installed (ms); `remove_key` opens to anyone
+    /// `KEY_REMOVAL_OWNER_MS` later.
+    login_key_installed_ms: u64,
     farm_registered: bool,
     farm_op: Option<FarmOp>,
     farm_op_since_ms: u64,
@@ -199,6 +205,7 @@ impl Brain {
             binding_sealed: false,
             price_id,
             login_key: None,
+            login_key_installed_ms: 0,
             farm_registered: false,
             farm_op: None,
             farm_op_since_ms: 0,
@@ -243,6 +250,7 @@ impl Brain {
         };
         let key: [u8; 32] = pk.as_bytes()[1..].try_into().unwrap_or_else(|_| env::abort());
         self.login_key = Some(key);
+        self.login_key_installed_ms = env::block_timestamp_ms();
         emit(
             "login_key_installed",
             json!({
@@ -250,17 +258,27 @@ impl Brain {
                 "mpc": self.config.mpc,
                 "domain_id": self.config.mpc_domain_id,
                 "path": self.config.key_path,
+                "key_removal_open_at_ms": U64(self.key_removal_open_at_ms()),
             }),
         );
         Promise::new(env::current_account_id()).add_full_access_key(pk).detach();
         true
     }
 
-    /// Anyone: delete any key of this account except the login key. After
-    /// deployment this strips the deployer key, leaving the MPC key alone.
+    /// Delete any key of this account except the login key: this strips the
+    /// deployer key, leaving the MPC key alone. For 7 days after
+    /// `install_login_key` only the brain account itself (its deployer key)
+    /// may call it, so nobody can strip the deployer key out from under an
+    /// unfinished setup; after that anyone may, so a deployer key left in
+    /// place can always be removed.
     pub fn remove_key(&mut self, public_key: PublicKey) -> Promise {
         let login = self.login_key.unwrap_or_else(|| env::panic_str("install the login key first"));
         require!(public_key != ed25519_public_key(&login), "the login key cannot be removed");
+        require!(
+            env::predecessor_account_id() == env::current_account_id()
+                || env::block_timestamp_ms() >= self.key_removal_open_at_ms(),
+            "only the brain account may remove keys in the 7 days after install_login_key"
+        );
         emit("key_removed", json!({ "public_key": public_key }));
         Promise::new(env::current_account_id()).delete_key(public_key)
     }
@@ -576,6 +594,7 @@ impl Brain {
             "operator": self.operator,
             "binding_sealed": self.binding_sealed,
             "login_public_key": self.login_key.map(|k| ed25519_public_key(&k)),
+            "key_removal_open_at_ms": self.login_key.map(|_| U64(self.key_removal_open_at_ms())),
             "farm_registered": self.farm_registered,
             "price_id": self.price_id,
             "farm_op": self.farm_op,
@@ -608,6 +627,11 @@ impl Brain {
 }
 
 impl Brain {
+    /// From this time (ms) anyone may call `remove_key`.
+    fn key_removal_open_at_ms(&self) -> u64 {
+        self.login_key_installed_ms.saturating_add(KEY_REMOVAL_OWNER_MS)
+    }
+
     fn assert_operator(&self) {
         require!(
             self.operator.as_ref() == Some(&env::predecessor_account_id()),

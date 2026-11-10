@@ -324,29 +324,94 @@ fn on_login_key_rejects_failures_and_non_ed25519_keys() {
     assert!(b.get_login_public_key().is_none());
 }
 
-#[test]
-fn remove_key_deletes_other_keys() {
-    let mut b = keyed_brain();
-    Env::new(stranger()).apply();
-    let deployer = ed25519_public_key(&[3; 32]);
-    let _ = b.remove_key(deployer.clone());
-    let deleted: Vec<String> = get_created_receipts()
+fn deleted_keys() -> Vec<String> {
+    get_created_receipts()
         .into_iter()
         .flat_map(|r| r.actions)
         .filter_map(|a| match a {
             MockAction::DeleteKey { public_key, .. } => Some(public_key.to_string()),
             _ => None,
         })
-        .collect();
-    assert_eq!(deleted, vec![String::from(&deployer)]);
+        .collect()
+}
+
+const WEEK_MS: u64 = 7 * 24 * 3600 * 1000;
+
+#[test]
+fn remove_key_deletes_other_keys() {
+    let mut b = keyed_brain();
+    Env::new(brain_id()).apply();
+    let deployer = ed25519_public_key(&[3; 32]);
+    let _ = b.remove_key(deployer.clone());
+    assert_eq!(deleted_keys(), vec![String::from(&deployer)]);
+}
+
+#[test]
+fn login_key_install_records_when_remove_key_opens() {
+    let b = keyed_brain();
+    assert_eq!(b.get_status()["key_removal_open_at_ms"], (T0_MS + WEEK_MS).to_string());
+    let ev = events().into_iter().find(|e| e["event"] == "login_key_installed").unwrap();
+    assert_eq!(ev["data"][0]["key_removal_open_at_ms"], (T0_MS + WEEK_MS).to_string());
+    assert_eq!(new_brain().get_status()["key_removal_open_at_ms"], Value::Null);
+}
+
+#[test]
+fn only_the_brain_account_removes_keys_in_the_first_7_days() {
+    let deployer = ed25519_public_key(&[3; 32]);
+    for (who, at) in [
+        (stranger(), T0_MS),
+        (operator(), T0_MS + 1),
+        (stranger(), T0_MS + WEEK_MS - 1),
+    ] {
+        let mut b = keyed_brain();
+        Env::new(who.clone()).at(at).apply();
+        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            let _ = b.remove_key(deployer.clone());
+        }));
+        let err = r.expect_err("a stranger must wait 7 days");
+        let msg = err.downcast_ref::<String>().cloned().unwrap_or_default();
+        assert!(msg.contains("only the brain account may remove keys"), "{who} at {at}: {msg}");
+        assert!(deleted_keys().is_empty());
+    }
+    // The brain account itself (its deployer key) may, at once.
+    let mut b = keyed_brain();
+    Env::new(brain_id()).at(T0_MS + 1).apply();
+    let _ = b.remove_key(deployer.clone());
+    assert_eq!(deleted_keys(), vec![String::from(&deployer)]);
+}
+
+#[test]
+fn anyone_removes_keys_after_7_days() {
+    let mut b = keyed_brain();
+    Env::new(stranger()).at(T0_MS + WEEK_MS).apply();
+    let deployer = ed25519_public_key(&[3; 32]);
+    let _ = b.remove_key(deployer.clone());
+    assert_eq!(deleted_keys(), vec![String::from(&deployer)]);
+    assert!(has_event("key_removed"));
 }
 
 #[test]
 #[should_panic(expected = "the login key cannot be removed")]
 fn remove_key_never_removes_the_login_key() {
     let mut b = keyed_brain();
-    Env::new(stranger()).apply();
+    Env::new(brain_id()).apply();
     let _ = b.remove_key(ed25519_public_key(&login_sk().verifying_key().to_bytes()));
+}
+
+#[test]
+#[should_panic(expected = "the login key cannot be removed")]
+fn remove_key_never_removes_the_login_key_even_after_7_days() {
+    let mut b = keyed_brain();
+    Env::new(stranger()).at(T0_MS + WEEK_MS).apply();
+    let _ = b.remove_key(ed25519_public_key(&login_sk().verifying_key().to_bytes()));
+}
+
+#[test]
+#[should_panic(expected = "install the login key first")]
+fn remove_key_needs_the_login_key() {
+    let mut b = new_brain();
+    Env::new(brain_id()).apply();
+    let _ = b.remove_key(ed25519_public_key(&[3; 32]));
 }
 
 // ------------------------------------------------------------------ signing

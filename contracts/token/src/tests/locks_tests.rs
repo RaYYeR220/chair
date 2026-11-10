@@ -267,9 +267,22 @@ fn top_three_by_weight_earlier_wins_ties() {
         h.petition(a, a.as_str());
     }
     h.as_(&alice(), 0);
-    let top: Vec<String> = h.c.get_petitions().iter().map(|p| p.text.clone()).collect();
-    assert_eq!(top, vec!["p2.near", "p5.near", "p1.near"]);
+    // The queue holds all five, heaviest first, earlier first among equals.
+    let queue: Vec<String> = h.c.get_petitions().iter().map(|p| p.text.clone()).collect();
+    assert_eq!(queue, vec!["p2.near", "p5.near", "p1.near", "p3.near", "p4.near"]);
     assert_eq!(h.c.petitions_filed, 5);
+    // The brief takes the three heaviest.
+    h.report(near(10));
+    let req = h.c.get_request_preview().request.unwrap();
+    let body: Value = sj::from_str(&req).unwrap();
+    let brief: Value = sj::from_str(body["messages"][1]["content"].as_str().unwrap()).unwrap();
+    let top: Vec<&str> = brief["petitions"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|p| p["text"].as_str().unwrap())
+        .collect();
+    assert_eq!(top, vec!["p2.near", "p5.near", "p1.near"]);
 }
 
 #[test]
@@ -286,6 +299,6 @@ fn petitions_reach_the_brief_and_clear() {
     assert_eq!(brief["petitions"][0]["from"], "alice.near");
     assert_eq!(brief["petitions"][0]["weight"], "7000");
     assert_eq!(h.meeting(n).petitions, 1);
-    assert!(h.c.petitions.is_empty());
+    assert!(h.c.pending_petitions().is_empty());
     assert_eq!(h.c.petitions_filed, 0);
 }

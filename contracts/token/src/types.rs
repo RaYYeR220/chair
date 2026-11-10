@@ -98,7 +98,10 @@ pub struct Popped {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Petition {
     pub account: AccountId,
-    /// The petitioner's active lock weight (base units × days) when filed.
+    /// Lock weight (base units × days). In the queue: the weight of the
+    /// petitioner's locks that run past the next possible meeting, at
+    /// filing. In a brief: the weight of their locks still active at
+    /// `convene`.
     pub weight: U128,
     pub text: String,
     pub filed_at: U64,
@@ -146,7 +149,8 @@ pub enum MeetingStatus {
     Requested,
     /// Decided: a ruling or the fallback rule was applied.
     Held,
-    /// No result arrived before the next meeting was convened; nothing applied.
+    /// No result arrived before the next meeting was convened. That
+    /// `convene` ran the fallback rule for it first (reason `lapsed`).
     Lapsed,
 }
 
@@ -162,7 +166,8 @@ pub enum OutcomeKind {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Outcome {
     pub kind: OutcomeKind,
-    /// Why the fallback ran: `unsigned`, `bad_hash`, `bad_signature`, `unparseable`, `asleep`.
+    /// Why the fallback ran: `unsigned`, `bad_hash`, `bad_signature`,
+    /// `unparseable`, `asleep` or `lapsed`.
     pub reason: Option<String>,
     pub signer: Option<String>,
     /// `provider_tee` (model TEE, 3-part text) or `gateway` (gateway TEE, 2-part text).
@@ -193,6 +198,9 @@ pub struct Meeting {
     pub model: Option<String>,
     /// Hex sha256 of the exact request bytes sent to the model.
     pub request_sha256: Option<String>,
+    /// The brief's `seed`: hex of the first 16 bytes of the block's random
+    /// seed at `convene`. `None` when no model was asked.
+    pub seed: Option<String>,
     pub deposit: U128,
     pub levers_before: Levers,
     /// Petitions in the brief; the ruling must answer each.
@@ -384,13 +392,18 @@ pub struct ConstitutionView {
     pub system_prompt: String,
 }
 
+/// The request `convene` would build if called now, except the seed.
 #[near(serializers = [json])]
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct RequestPreview {
     pub meeting: u64,
     pub model: Option<String>,
+    /// The request with `seed_placeholder` where the brief's `seed` goes.
+    /// The seed is drawn from the block's randomness at `convene`, so the
+    /// exact request bytes, and their hash, exist only from then on.
     pub request: Option<String>,
-    pub request_sha256: Option<String>,
+    /// The text standing in for the seed (`SEED_PLACEHOLDER`).
+    pub seed_placeholder: String,
 }
 
 /// What `on_ruling` would execute for a given courier result.

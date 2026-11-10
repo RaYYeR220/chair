@@ -17,6 +17,14 @@
 //! meetings after its `unlock_at`, never anything it was not part of. Sum
 //! of all rewards ≤ sum of all distributions, so `locker_owed` always covers
 //! every claim.
+//!
+//! ## Petition weight
+//! A petition needs a lock that runs past the next possible meeting
+//! (`max(now, next_meeting_at)`), and is queued by the weight of such locks.
+//! `convene` then recomputes every queued petitioner's weight from the locks
+//! still active at that moment, drops anyone at zero and briefs the three
+//! heaviest. A lock that expired before the meeting counts for nobody, so
+//! tokens unlocked and relocked by another account fill one slot, not two.
 
 use near_sdk::json_types::{U128, U64};
 use near_sdk::serde_json::json;
@@ -152,12 +160,42 @@ impl Chair {
         pool
     }
 
-    pub(crate) fn active_weight(a: &Account, now: u64) -> u128 {
+    /// Weight of `a`'s locks still active after `t` (`unlock_at > t`).
+    pub(crate) fn active_weight(a: &Account, t: u64) -> u128 {
         a.locks
             .iter()
-            .filter(|l| l.unlock_at > now)
+            .filter(|l| l.unlock_at > t)
             .map(|l| l.weight)
             .sum()
+    }
+
+    /// The brief's petitions at `now` (SPEC §3): each queued petitioner's
+    /// weight recomputed from their locks still active at `now`, petitioners
+    /// at zero dropped, the three heaviest kept (earlier filing wins ties).
+    pub(crate) fn brief_petitions(&self, queue: &[Petition], now: u64) -> Vec<Petition> {
+        let mut out: Vec<Petition> = queue
+            .iter()
+            .filter_map(|p| {
+                let w = self
+                    .accounts
+                    .get(&p.account)
+                    .map_or(0, |a| Self::active_weight(a, now));
+                (w > 0).then(|| Petition {
+                    weight: U128(w),
+                    ..p.clone()
+                })
+            })
+            .collect();
+        // Stable: equal weights keep queue order, which is filing order
+        // among equal filing weights.
+        out.sort_by(|a, b| {
+            b.weight
+                .0
+                .cmp(&a.weight.0)
+                .then(a.filed_at.0.cmp(&b.filed_at.0))
+        });
+        out.truncate(TOP_PETITIONS);
+        out
     }
 
     fn lock_view(&self, l: &Lock, now: u64) -> LockView {
@@ -270,9 +308,13 @@ impl Chair {
     }
 
     /// Files a petition for the next meeting (≤ 280 characters, no control
-    /// characters). Lockers only, one per 24 h; the fixed fee is burned from
-    /// unlocked CHAIR. The three heaviest petitions (earlier wins ties)
-    /// reach the brief. 1 yoctoNEAR.
+    /// characters). Only a locker with a lock that runs past the next
+    /// possible meeting, one per 24 h; the fixed fee is burned from unlocked
+    /// CHAIR. The petition is queued by the weight of those locks (at most
+    /// `MAX_PENDING_PETITIONS`, the lightest drops; a newer petition from
+    /// the same account replaces its queued one). At `convene` every
+    /// weight is recomputed from the locks still active then, and the three
+    /// heaviest (earlier filing wins ties) reach the brief. 1 yoctoNEAR.
     #[payable]
     pub fn petition(&mut self, text: String) -> Petition {
         assert_one_yocto();
@@ -289,8 +331,14 @@ impl Chair {
         let now = env::block_timestamp();
         let mut a = self.account_or_panic(&id);
         self.release_expired(&mut a, now);
-        let weight = Self::active_weight(&a, now);
-        require!(weight > 0, "only lockers may petition");
+        // The earliest the next meeting can convene: only locks still active
+        // then can count in its brief.
+        let next_meeting = self.next_meeting_at.max(now);
+        let weight = Self::active_weight(&a, next_meeting);
+        require!(
+            weight > 0,
+            "only lockers may petition, with a lock that runs past the next meeting"
+        );
         require!(
             a.last_petition_at == 0 || now >= a.last_petition_at + DAY_NS,
             "one petition per day"
@@ -312,14 +360,17 @@ impl Chair {
             filed_at: U64(now),
         };
         self.petitions_filed += 1;
-        let pos = self
-            .petitions
+        let queue = self.petitions.get_mut().get_or_insert_with(Vec::new);
+        // One petition per account in the queue: with meetings more than a
+        // day apart, a newer one replaces the older.
+        queue.retain(|q| q.account != p.account);
+        let pos = queue
             .iter()
             .position(|q| q.weight.0 < weight)
-            .unwrap_or(self.petitions.len());
-        if pos < TOP_PETITIONS {
-            self.petitions.insert(pos, p.clone());
-            self.petitions.truncate(TOP_PETITIONS);
+            .unwrap_or(queue.len());
+        if pos < MAX_PENDING_PETITIONS {
+            queue.insert(pos, p.clone());
+            queue.truncate(MAX_PENDING_PETITIONS);
         }
         events::emit(
             "petition_filed",
@@ -328,7 +379,9 @@ impl Chair {
                 "weight": p.weight,
                 "text": p.text,
                 "meeting": self.meeting_count + 1,
+                // Provisional: weights are recomputed at `convene`.
                 "in_brief": pos < TOP_PETITIONS,
+                "queued": pos < MAX_PENDING_PETITIONS,
             }),
         );
         p

@@ -12,6 +12,11 @@
 //! (one line, no spaces; strings escaped by serde_json). The courier POSTs it
 //! unchanged; `sha256(request)` is stored and must reappear in the model's
 //! signed `signature_text`.
+//!
+//! The brief's second field is `seed`: hex of the first 16 bytes of
+//! `env::random_seed()` at `convene`. Nobody knows it before the block that
+//! convenes, so nobody can shop for a ruling by previewing the request and
+//! nudging the state (a dust buy) until the model answers as they like.
 
 use near_sdk::json_types::{U128, U64};
 use near_sdk::serde::{Deserialize, Serialize};
@@ -41,10 +46,15 @@ With no petitions, answers is [].";
 
 // ---------------------------------------------------------------- brief and request
 
+/// What `get_request_preview` puts where the brief's `seed` goes: the seed
+/// is drawn at `convene` and unknown before.
+pub const SEED_PLACEHOLDER: &str = "<drawn at convene>";
+
 #[derive(Serialize)]
 #[serde(crate = "near_sdk::serde")]
 struct Brief<'a> {
     meeting: u64,
+    seed: &'a str,
     supply: String,
     sold: String,
     reserve_near: String,
@@ -187,12 +197,40 @@ impl Chair {
         w
     }
 
+    /// `meeting_convened`'s `reweighed`: every queued petition with its
+    /// weight at filing and at `convene` (0: no lock active then, dropped),
+    /// and whether it made the brief.
+    fn reweigh_view(&self, queue: &[Petition], brief: &[Petition], now: u64) -> Vec<serde_json::Value> {
+        queue
+            .iter()
+            .map(|q| {
+                let weight = self
+                    .accounts
+                    .get(&q.account)
+                    .map_or(0, |a| Self::active_weight(a, now));
+                json!({
+                    "account_id": q.account,
+                    "filed_weight": q.weight,
+                    "weight": U128(weight),
+                    "in_brief": brief.iter().any(|p| p.account == q.account),
+                })
+            })
+            .collect()
+    }
+
     /// The brief (SPEC §5.1) as compact JSON.
-    pub(crate) fn brief_json(&self, meeting: u64, petitions: &[Petition], locker_weight: u128) -> String {
+    pub(crate) fn brief_json(
+        &self,
+        meeting: u64,
+        seed: &str,
+        petitions: &[Petition],
+        locker_weight: u128,
+    ) -> String {
         let (buy, sell) = self.volume_24h();
         let price = self.curve().price(self.sold);
         let brief = Brief {
             meeting,
+            seed,
             supply: decimal(self.supply, 18),
             sold: decimal(self.sold, 18),
             reserve_near: decimal(self.reserve, 24),
@@ -408,12 +446,18 @@ impl Chair {
 #[near]
 impl Chair {
     /// Holds the next meeting. Anyone may call once `meeting_interval` has
-    /// passed since the last one. Snapshots the brief, builds the request
-    /// and sends it to the OutLayer courier with the attached deposit (at
-    /// least `outlayer.deposit`; OutLayer refunds the unused part to the
-    /// caller) and at least 220 TGas (300 recommended). If the brain is
-    /// asleep (endowment below the first rung), the fallback rule runs at
-    /// once and the deposit is refunded.
+    /// passed since the last one.
+    ///
+    /// If the previous meeting is still waiting for its ruling, it lapses
+    /// first: the fallback rule runs for it (reason `lapsed`).
+    ///
+    /// Then the brief is snapshotted with a fresh `seed` and the petitions
+    /// reweighed, and the request is sent to the OutLayer courier with the
+    /// attached deposit, which must be exactly `outlayer.deposit` (OutLayer
+    /// refunds the unused part to the caller), and at least 220 TGas (240
+    /// after a lapse; 300 recommended). If the brain is asleep (endowment
+    /// below the first rung), the fallback rule runs at once and any
+    /// deposit is refunded.
     #[payable]
     pub fn convene(&mut self) -> PromiseOrValue<Option<Meeting>> {
         let now = env::block_timestamp();
@@ -426,23 +470,31 @@ impl Chair {
         let model = self.model_for(self.endowment_reported);
         if model.is_some() {
             require!(
-                deposit >= self.outlayer.deposit.0,
-                format!("attach at least {} yoctoNEAR for OutLayer", self.outlayer.deposit.0)
+                deposit == self.outlayer.deposit.0,
+                format!("attach exactly {} yoctoNEAR for OutLayer", self.outlayer.deposit.0)
             );
+            let gas = if self.open_meeting.is_some() {
+                CONVENE_GAS.saturating_add(LAPSE_GAS)
+            } else {
+                CONVENE_GAS
+            };
             require!(
-                env::prepaid_gas() >= CONVENE_GAS,
-                "attach at least 220 TGas (300 recommended)"
+                env::prepaid_gas() >= gas,
+                "attach at least 220 TGas, 240 after a lapse (300 recommended)"
             );
         }
 
         if let Some(n) = self.open_meeting.take() {
-            if let Some(r) = self.meetings.get_mut(&n) {
-                if r.status == MeetingStatus::Requested {
-                    r.status = MeetingStatus::Lapsed;
-                }
-            }
             self.stats.lapsed += 1;
             events::emit("meeting_lapsed", &json!({ "meeting": n }));
+            if let Some(mut r) = self.meetings.get(&n).cloned() {
+                if r.status == MeetingStatus::Requested {
+                    // SPEC §4: a missing ruling runs the fallback rule.
+                    self.hold(&mut r, Err(Reason::Lapsed));
+                    r.status = MeetingStatus::Lapsed;
+                    self.meetings.insert(n, r);
+                }
+            }
         }
         self.meeting_count += 1;
         let n = self.meeting_count;
@@ -452,7 +504,8 @@ impl Chair {
         }
 
         self.pop_expired(now);
-        let petitions = std::mem::take(&mut self.petitions);
+        let queue = std::mem::take(self.petitions.get_mut().get_or_insert_with(Vec::new));
+        let petitions = self.brief_petitions(&queue, now);
         self.petitions_filed = 0;
         let mut rec = Meeting {
             number: n,
@@ -460,6 +513,7 @@ impl Chair {
             convened_at: U64(now),
             model: model.clone(),
             request_sha256: None,
+            seed: None,
             deposit: U128(0),
             levers_before: self.levers,
             petitions: petitions.len() as u8,
@@ -487,10 +541,12 @@ impl Chair {
             return PromiseOrValue::Value(Some(rec));
         };
 
-        let brief = self.brief_json(n, &petitions, self.total_weight);
+        let seed = hex(&env::random_seed_array()[..SEED_BYTES]);
+        let brief = self.brief_json(n, &seed, &petitions, self.total_weight);
         let request = build_request(&model, &brief);
         let request_sha256 = hex(&env::sha256_array(request.as_bytes()));
         rec.request_sha256 = Some(request_sha256.clone());
+        rec.seed = Some(seed.clone());
         rec.deposit = U128(deposit);
         self.meetings.insert(n, rec);
         self.open_meeting = Some(n);
@@ -499,8 +555,10 @@ impl Chair {
             &json!({
                 "meeting": n,
                 "model": model,
+                "seed": seed,
                 "request_sha256": request_sha256,
                 "petitions": petitions.len(),
+                "reweighed": self.reweigh_view(&queue, &petitions, now),
                 "request": request,
             }),
         );
@@ -558,10 +616,13 @@ impl Chair {
         let raw = env::promise_result_checked(0, MAX_RESULT_BYTES);
         let rec = self.meetings.get(&meeting).cloned();
         if let (Err(PromiseError::Failed), Some(r)) = (&raw, &rec) {
-            // `request_execution` itself failed, so its deposit came back here.
-            if r.deposit.0 > 0 {
+            // `request_execution` itself failed, so its deposit came back
+            // here. Never refund more than one OutLayer deposit: `convene`
+            // takes exactly that, and the token's own NEAR stays out of reach.
+            let refund = r.deposit.0.min(self.outlayer.deposit.0);
+            if refund > 0 {
                 Promise::new(r.convener.clone())
-                    .transfer(NearToken::from_yoctonear(r.deposit.0))
+                    .transfer(NearToken::from_yoctonear(refund))
                     .detach();
             }
         }
@@ -704,27 +765,28 @@ impl Chair {
     }
 
     /// The request `convene` would send if called now (valid until state or
-    /// the hour changes).
+    /// the hour changes), with `SEED_PLACEHOLDER` in place of the seed. The
+    /// seed comes from the convening block's randomness, so the exact bytes
+    /// and their hash are unknown until `convene`; they are then in the
+    /// `meeting_convened` event and `get_last_request`.
     pub fn get_request_preview(&self) -> RequestPreview {
         let n = self.meeting_count + 1;
-        match self.model_for(self.endowment_reported) {
-            None => RequestPreview {
-                meeting: n,
-                model: None,
-                request: None,
-                request_sha256: None,
-            },
+        let (model, request) = match self.model_for(self.endowment_reported) {
+            None => (None, None),
             Some(model) => {
-                let w = self.weight_after_pops(env::block_timestamp());
-                let brief = self.brief_json(n, &self.petitions, w);
+                let now = env::block_timestamp();
+                let w = self.weight_after_pops(now);
+                let petitions = self.brief_petitions(self.pending_petitions(), now);
+                let brief = self.brief_json(n, SEED_PLACEHOLDER, &petitions, w);
                 let request = build_request(&model, &brief);
-                RequestPreview {
-                    meeting: n,
-                    request_sha256: Some(hex(&env::sha256_array(request.as_bytes()))),
-                    model: Some(model),
-                    request: Some(request),
-                }
+                (Some(model), Some(request))
             }
+        };
+        RequestPreview {
+            meeting: n,
+            model,
+            request,
+            seed_placeholder: SEED_PLACEHOLDER.to_string(),
         }
     }
 }

@@ -288,6 +288,15 @@ It returns `"ed25519:…"`. The tweak is `sha3_256("near-mpc-recovery v0.1.0 eps
 | `on_signed` called by a stranger: `Method on_signed is private` | `2zJgpwzLVkAJv5FqKFJEH5brXQbRZEhnk3J6nb52KTUe` | | | |
 | Final code, login again | `9sgpZyj5skM8nnhj5kQwuhAwcz7w9Js2U1B5jt83GaEB` | | | |
 
+The spike's `remove_key` was open to anyone. The current brain (with the 7-day rule, §5) runs on testnet as `brain.chair-dev.testnet`, the brain of `token3.chair-dev.testnet` (`docs/LAUNCH.md`):
+
+| Step | Tx |
+| --- | --- |
+| Deploy and `new` (code sha256 `f80b409a…f5a8`, 215,884 bytes; `token` = token3, farm = the mock farm above, operator `chair-dev.testnet`) | `GZyTGm7LTgAXqsLRi5S972WyHxvVSpU6AM2tgTa7KVKR` |
+| `stake_endowment`: 1.3454 NEAR into the mock farm, sync, `report_endowment` to token3 (wakes GLM) | `BY2dTk7tw4rtm7aJM3DZMPQCSTbrXfqZB4LqbhAmqaZC` |
+| `install_login_key`: MPC key `ed25519:2ntauYXh…KsZq` added; `key_removal_open_at_ms` 1794885199960 (7 days on) | `6Sv1uRYf84BR6vrKvxjCKfJf1AV7SmioAY3vTgpVtPNJ` |
+| `remove_key` of the deployer key by a stranger the same day: refused (`only the brain account may remove keys in the 7 days after install_login_key`) | `EpWVXr82bLVgmpqzCJgWyKmswSeEboSrotxtwX5pFTD9` |
+
 **MPC latency:** about 4.8 s from the request block to the `on_signed` block (6 blocks).
 
 ### Off-chain verification
@@ -318,7 +327,9 @@ It returns `"ed25519:…"`. The tweak is `sha3_256("near-mpc-recovery v0.1.0 eps
   - calls `mpc.derived_public_key({path, predecessor: self, domain_id})`;
   - stores the key;
   - adds it with `AddKey FullAccess` to the brain's own account.
-- **`remove_key(pk)`** (anyone): deletes any key except the login key. Use it to strip the deployer key.
+- **`remove_key(pk)`**: deletes any key except the login key. Use it to strip the deployer key.
+  - For 7 days after `install_login_key`, only the brain account itself may call it (a transaction signed with its own deployer key). Before, anyone could strip the deployer key the moment the login key landed, before the setup had been checked.
+  - From then on (`get_status.key_removal_open_at_ms`), anyone may, so a deployer key left in place can always be removed.
 
 **Signing**
 
@@ -369,7 +380,7 @@ The brain sends NEAR to nobody. The token sends endowment either by plain transf
 
 ### Tests
 
-**54 unit tests** (`cargo test`). `.cargo/config.toml` sets `AWS_LC_SYS_PREBUILT_NASM=1` so the Windows build doesn't need NASM. They cover:
+**59 unit tests** (`cargo test`). `.cargo/config.toml` sets `AWS_LC_SYS_PREBUILT_NASM=1` so the Windows build doesn't need NASM. They cover:
 
 - the NEP-413 hash against cloud-api's fixtures;
 - the tag and nonce layout;
@@ -536,7 +547,7 @@ API keys authenticate inference routes only, not management routes.
   - sign a binding challenge naming **any** org (binding is permanent, so check the org id before calling `request_binding`).
 
   It can't move NEAR.
-- **Keys.** After `remove_key(deployer)`, the brain has exactly one key (the MPC key), and no code path can deploy, transfer or add a key other than the MPC-derived one.
+- **Keys.** After `remove_key(deployer)`, the brain has exactly one key (the MPC key), and no code path can deploy, transfer or add a key other than the MPC-derived one. The deployer can strip its own key at once; if it doesn't, anyone can 7 days after `install_login_key`.
 - **Concurrency and failures.**
   - Farm operations and signatures each allow one in flight, with a 15-minute stale reset so a lost callback can't brick the brain.
   - A failed stake refunds the deposit, either from the failed receipt or from the farm's `refund_payable_pipeline`.
@@ -626,13 +637,13 @@ The lead signs in at cloud.near.ai with GitHub or Google, then reads `GET /v1/st
 
 ### 8. Strip the deployer key
 
-Once 7A or 7B has succeeded:
+Once 7A or 7B has succeeded, sign as the brain itself (within 7 days of step 4 only the brain account may call `remove_key`):
 
 ```sh
-near contract call-function as-transaction brain.thechair.near remove_key json-args '{"public_key":"<deployer key>"}' …
+near contract call-function as-transaction brain.thechair.near remove_key json-args '{"public_key":"<deployer key>"}' prepaid-gas '30 Tgas' attached-deposit '0 NEAR' sign-as brain.thechair.near network-config mainnet sign-with-keychain send
 ```
 
-Then check that `view_access_key_list` shows only the MPC key. The code is final from then on.
+Then check that `view_access_key_list` shows only the MPC key. The code is final from then on. If this step is skipped, anyone can run it from `get_status.key_removal_open_at_ms` (7 days after step 4).
 
 ### 9. Set up the courier
 

@@ -6,7 +6,9 @@
 //!    is an address in `model_signers` (3-part text) or `gateway_signers` (2-part text)
 //! 3. the chat-completion content of `response_text` parses as a ruling
 //!
-//! in that order. The first failing check names the reason.
+//! in that order. The first failing check names the reason. Before them, a
+//! result without a signature is `unsigned` and a `response_text` over
+//! `MAX_RESPONSE_BYTES` (64 KiB) is `unparseable`, unhashed and unread.
 
 use near_sdk::env;
 use near_sdk::serde_json::{self, Map, Value};
@@ -25,10 +27,14 @@ pub enum Reason {
     /// The signature is malformed, does not recover, or recovers to an
     /// address outside `model_signers`.
     BadSignature,
-    /// Signed, but the content is not a ruling.
+    /// Signed, but the content is not a ruling; or `response_text` is over
+    /// `MAX_RESPONSE_BYTES`.
     Unparseable,
     /// The endowment was below the IQ ladder: no model was asked.
     Asleep,
+    /// No result arrived before the next `convene`, which ran the fallback
+    /// for this meeting first.
+    Lapsed,
 }
 
 impl Reason {
@@ -39,6 +45,7 @@ impl Reason {
             Reason::BadSignature => "bad_signature",
             Reason::Unparseable => "unparseable",
             Reason::Asleep => "asleep",
+            Reason::Lapsed => "lapsed",
         }
     }
 }
@@ -219,7 +226,9 @@ pub struct Signers<'a> {
     pub gateway: &'a [[u8; 20]],
 }
 
-/// Runs checks 1–3 in order.
+/// Runs checks 1–3 in order, after two cheap gates: no signature is
+/// `unsigned`, and a `response_text` over `MAX_RESPONSE_BYTES` is
+/// `unparseable` without being hashed or parsed.
 ///
 /// 1. `signature_text` is exactly `model:req:resp` (provider TEE) or exactly
 ///    `req:resp` (gateway TEE), with `req` this meeting's request hash,
@@ -240,6 +249,9 @@ pub fn verify(
 ) -> Result<Verified, Reason> {
     if signature.is_empty() || signature_text.is_empty() {
         return Err(Reason::Unsigned);
+    }
+    if response_text.len() > crate::MAX_RESPONSE_BYTES {
+        return Err(Reason::Unparseable);
     }
     let response_sha256 = env::sha256_array(response_text.as_bytes());
     let resp = hex(&response_sha256);

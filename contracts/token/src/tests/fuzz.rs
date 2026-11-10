@@ -1,7 +1,8 @@
 //! Fuzz / invariant test. Random sequences of buys, sells, transfers, locks,
 //! petitions, claims, endowment reports, time jumps and meetings whose
 //! rulings are valid, jailbroken, forged, unparseable, missing, failed,
-//! duplicated or never delivered. After every step:
+//! duplicated or never delivered (lapsing into the fallback at the next
+//! convene). After every step:
 //!
 //! - `reserve ≥ ∫₀ˢ p` exactly, and `reserve == ceil(∫₀ˢ p)` (path independence)
 //! - `supply == Σ balances` and `s == supply + burned`
@@ -34,6 +35,7 @@ struct Counts {
     rulings: u64,
     clamped: u64,
     fallbacks: u64,
+    lapsed: u64,
     ignored: u64,
     buybacks: u64,
     gateway: u64,
@@ -175,7 +177,15 @@ impl Fz {
         let a = self.actor();
         let Some(v) = self.view(&a) else { return };
         let now = self.h.now;
-        if v.active_weight.0 == 0
+        // Only locks that outlast the next possible meeting can petition.
+        let next = self.h.c.next_meeting_at.max(now);
+        let weight: u128 = v
+            .locks
+            .iter()
+            .filter(|l| l.unlock_at.0 > next)
+            .map(|l| l.weight.0)
+            .sum();
+        if weight == 0
             || v.transferable.0 < FEE
             || (v.last_petition_at.0 != 0 && now < v.last_petition_at.0 + DAY_NS)
         {
@@ -215,12 +225,23 @@ impl Fz {
     }
 
     fn meeting(&mut self) {
-        let before = self.h.c.levers;
+        let mut before = self.h.c.levers;
         let lapsing = self.h.c.open_meeting;
         let out = self.h.convene();
         self.counts.meetings += 1;
         if let Some(n) = lapsing {
-            assert_eq!(self.h.meeting(n).status, MeetingStatus::Lapsed);
+            // The unanswered meeting ran the fallback first.
+            let m = self.h.meeting(n);
+            assert_eq!(m.status, MeetingStatus::Lapsed);
+            let o = m.outcome.unwrap();
+            assert_eq!(o.kind, OutcomeKind::Fallback);
+            assert_eq!(o.reason.as_deref(), Some("lapsed"));
+            assert_eq!(o.levers, constitution::fallback(before));
+            assert_eq!(o.buyback_tokens.0, 0);
+            self.near_out += o.endowment_sent.0;
+            self.counts.fallbacks += 1;
+            self.counts.lapsed += 1;
+            before = o.levers;
         }
         let n = self.h.c.meeting_count;
         if let PromiseOrValue::Value(_) = out {
@@ -418,6 +439,7 @@ fn fuzz_invariants_hold_over_random_histories() {
         total.rulings += c.rulings;
         total.clamped += c.clamped;
         total.fallbacks += c.fallbacks;
+        total.lapsed += c.lapsed;
         total.ignored += c.ignored;
         total.buybacks += c.buybacks;
         total.gateway += c.gateway;
@@ -438,6 +460,7 @@ fn fuzz_invariants_hold_over_random_histories() {
         ("rulings", total.rulings),
         ("clamped", total.clamped),
         ("fallbacks", total.fallbacks),
+        ("lapsed", total.lapsed),
         ("ignored", total.ignored),
         ("buybacks", total.buybacks),
         ("gateway rulings", total.gateway),

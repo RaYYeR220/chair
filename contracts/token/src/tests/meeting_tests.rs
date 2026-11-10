@@ -112,7 +112,13 @@ fn convene_builds_the_exact_request_and_calls_outlayer() {
     let preview = h.c.get_request_preview();
     let n = h.convene_awake();
     let req = h.c.get_last_request().unwrap();
-    assert_eq!(preview.request.as_deref(), Some(req.as_str()));
+    // The preview is the request but for the seed, drawn at convene.
+    let seed = hexs(&seed_at(h.now)[..16]);
+    assert_eq!(h.meeting(n).seed.as_deref(), Some(seed.as_str()));
+    assert_eq!(
+        preview.request.as_deref().map(|r| r.replace(SEED_PLACEHOLDER, &seed)),
+        Some(req.clone())
+    );
     assert_eq!(preview.meeting, n);
 
     // Shape: compact, exactly three top-level keys in order.
@@ -139,6 +145,7 @@ fn convene_builds_the_exact_request_and_calls_outlayer() {
     // Brief field order is part of the bytes.
     let order = [
         "\"meeting\":",
+        "\"seed\":",
         "\"supply\":",
         "\"sold\":",
         "\"reserve_near\":",
@@ -154,6 +161,7 @@ fn convene_builds_the_exact_request_and_calls_outlayer() {
     assert!(pos.windows(2).all(|w| w[0] < w[1]), "{brief_str}");
     let brief: Value = sj::from_str(brief_str).unwrap();
     assert_eq!(brief["meeting"], n);
+    assert_eq!(brief["seed"], seed);
     assert_eq!(brief["endowment_near"], "10");
     assert_eq!(brief["levers"]["tax_bps"], 200);
     assert_eq!(brief["levers"]["buyback_share"], 20);
@@ -200,7 +208,9 @@ fn convene_needs_the_outlayer_deposit_and_gas() {
     let mut h = traded();
     h.now = h.c.next_meeting_at;
     h.as_(&cranker(), OUTLAYER_DEPOSIT - 1);
-    expect_panic(|| { let _ = h.c.convene(); }, "attach at least");
+    expect_panic(|| { let _ = h.c.convene(); }, "attach exactly");
+    h.as_(&cranker(), OUTLAYER_DEPOSIT + 1);
+    expect_panic(|| { let _ = h.c.convene(); }, "attach exactly");
     let mut h = traded();
     h.now = h.c.next_meeting_at;
     testing_env!(ctx(&cranker(), OUTLAYER_DEPOSIT, h.now)
@@ -769,14 +779,21 @@ fn minutes_are_hashed_whole_and_clipped_in_the_event() {
 #[test]
 fn worst_case_logs_stay_under_the_receipt_limit() {
     let mut h = traded();
+    // A meeting left open, so the next convene also logs a lapse.
+    h.convene_awake();
+    // A full queue of 64-character accounts; every text needs maximal
+    // escaping (8 bytes per quote once nested in the event).
     let quote = "\"".repeat(280);
-    for (i, who) in ["q1.near", "q2.near", "q3.near"].iter().enumerate() {
-        let a = acc(who);
+    for i in 0..MAX_PENDING_PETITIONS {
+        let a = acc(&format!("{}{i:02}.near", "q".repeat(57)));
+        assert_eq!(a.len(), 64);
         h.buy(&a, near(1));
         h.lock(&a, tokens(10 + i as u128), 30);
         h.petition(&a, &quote);
     }
     let n = h.convene_awake();
+    assert!(event("meeting_lapsed").is_some());
+    assert_eq!(event("meeting_convened").unwrap()["reweighed"].as_array().unwrap().len(), MAX_PENDING_PETITIONS);
     let total: usize = get_logs().iter().map(String::len).sum();
     assert!(total < 16_384, "convene logs {total} bytes");
     let answers = ["\"".repeat(400), "\\".repeat(400), "x".repeat(400)];
