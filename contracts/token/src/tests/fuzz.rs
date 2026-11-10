@@ -37,6 +37,8 @@ struct Counts {
     ignored: u64,
     buybacks: u64,
     gateway: u64,
+    /// Meetings that left `locker_share` at the constitution's ceiling.
+    locker_at_max: u64,
 }
 
 struct Fz {
@@ -61,11 +63,14 @@ fn content_for(rng: &mut Rng, before: Levers, petitions: usize) -> String {
         };
         (wild(rng), wild(rng), wild(rng), wild(rng))
     } else {
+        // Plausible: within one step of the levers in force (the bounds
+        // still clamp near the edges, e.g. locker_share at its ceiling).
+        use constitution::*;
         (
-            before.tax_bps as i64 + rng.range(-50, 50),
-            before.endowment_share as i64 + rng.range(-10, 10),
-            before.locker_share as i64 + rng.range(-10, 10),
-            rng.range(0, 50),
+            before.tax_bps as i64 + rng.range(-TAX_STEP_BPS, TAX_STEP_BPS),
+            before.endowment_share as i64 + rng.range(-ENDOWMENT_STEP, ENDOWMENT_STEP),
+            before.locker_share as i64 + rng.range(-LOCKER_STEP, LOCKER_STEP),
+            rng.range(0, BUYBACK_MAX_BPS),
         )
     };
     json!({
@@ -77,9 +82,19 @@ fn content_for(rng: &mut Rng, before: Levers, petitions: usize) -> String {
 
 impl Fz {
     fn new(seed: u64) -> Self {
+        let mut rng = Rng(0x9e37_79b9_7f4a_7c15 ^ (seed + 1).wrapping_mul(0x1000_0000_01b3));
+        // Launch levers anywhere inside the constitution.
+        use constitution::*;
+        let e = rng.range(ENDOWMENT_MIN, ENDOWMENT_MAX);
+        let levers = Levers {
+            tax_bps: rng.range(TAX_MIN_BPS, TAX_MAX_BPS) as u16,
+            endowment_share: e as u8,
+            locker_share: rng.range(LOCKER_MIN, (100 - e).min(LOCKER_MAX)) as u8,
+        };
+        assert!(levers.within_constitution());
         Fz {
-            h: H::new(),
-            rng: Rng(0x9e37_79b9_7f4a_7c15 ^ (seed + 1).wrapping_mul(0x1000_0000_01b3)),
+            h: H::with_levers(Some(levers)),
+            rng,
             actors: (0..5).map(|i| acc(&format!("f{i}.near"))).collect(),
             near_in: 0,
             near_out: 0,
@@ -284,6 +299,9 @@ impl Fz {
             self.counts.buybacks += 1;
         }
         self.check_meeting(before, &o);
+        if o.levers.locker_share as i64 == constitution::LOCKER_MAX {
+            self.counts.locker_at_max += 1;
+        }
         // A re-roll for the same meeting never counts.
         if self.rng.chance(20) {
             let content = content_for(&mut self.rng, self.h.c.levers, petitions);
@@ -313,6 +331,7 @@ impl Fz {
             (l.locker_share as i64 - before.locker_share as i64).abs() <= constitution::LOCKER_STEP
         );
         assert!(o.buyback_bps as i64 <= constitution::BUYBACK_MAX_BPS);
+        assert!(l.locker_share as i64 <= constitution::LOCKER_MAX);
         if o.kind == OutcomeKind::Fallback {
             assert_eq!(l, constitution::fallback(before));
             assert_eq!(o.buyback_tokens.0, 0);
@@ -402,6 +421,7 @@ fn fuzz_invariants_hold_over_random_histories() {
         total.ignored += c.ignored;
         total.buybacks += c.buybacks;
         total.gateway += c.gateway;
+        total.locker_at_max += c.locker_at_max;
     }
     println!(
         "fuzz: {seeds} seeds x {steps} steps = {} steps; {total:?}",
@@ -421,6 +441,7 @@ fn fuzz_invariants_hold_over_random_histories() {
         ("ignored", total.ignored),
         ("buybacks", total.buybacks),
         ("gateway rulings", total.gateway),
+        ("locker_share at its ceiling", total.locker_at_max),
     ] {
         assert!(n * 2_000 >= seeds * steps, "{name} only {n}");
     }

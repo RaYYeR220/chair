@@ -13,7 +13,10 @@ pub const ENDOWMENT_MAX: i64 = 100;
 pub const ENDOWMENT_STEP: i64 = 10;
 
 pub const LOCKER_MIN: i64 = 0;
-pub const LOCKER_MAX: i64 = 50;
+/// v2: 25 (was 50). In the 60-day simulation (docs/SIMULATION.md) the chair
+/// refused a whale's demands in words every time, yet `locker_share` drifted
+/// toward the whale; the bound, not the model, has to hold that line.
+pub const LOCKER_MAX: i64 = 25;
 pub const LOCKER_STEP: i64 = 10;
 
 /// Buyback-and-burn per meeting: at most this many bps of supply (0.5%),

@@ -320,6 +320,19 @@ fn new_rejects_levers_outside_the_constitution() {
         },
         "outside the constitution",
     );
+    // v2: locker_share above 25 is out even when the shares sum to under 100.
+    expect_panic(
+        || {
+            try_new(|_, _, _, _| {
+                Some(Levers {
+                    tax_bps: 200,
+                    endowment_share: 60,
+                    locker_share: 26,
+                })
+            })
+        },
+        "outside the constitution",
+    );
 }
 
 #[test]
@@ -434,7 +447,7 @@ fn constitution_view_exposes_fixed_parameters() {
     assert_eq!(v.ladder, ladder());
     assert_eq!(v.lock_days, vec![1, 7, 30]);
     assert_eq!(v.petition_fee.0, FEE);
-    assert_eq!(v.signer_timelock_s, 48 * 3600);
+    assert_eq!(v.change_timelock_s, 48 * 3600);
     assert_eq!(v.system_prompt, SYSTEM_PROMPT);
     assert_eq!(v.rules.tax_bps.max, 300);
     assert_eq!(v.owner, owner());

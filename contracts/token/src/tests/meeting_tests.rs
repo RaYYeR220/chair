@@ -1,5 +1,5 @@
 //! The meeting: guard, IQ ladder, request bytes, signature verification,
-//! clamp and apply, first-valid-result-only, preview, signer timelock.
+//! clamp and apply, first-valid-result-only, preview, governance timelock.
 
 use super::*;
 
@@ -214,7 +214,7 @@ fn system_prompt_states_the_constitution_and_schema() {
     for needle in [
         "100 to 300, moving at most 50",
         "30 to 100, moving at most 10",
-        "0 to 50, moving at most 10",
+        "0 to 25, moving at most 10",
         "endowment_share + locker_share is at most 100",
         "0 to 50, and no more than the fund can pay for",
         r#"{"tax_bps":<integer>,"endowment_share":<integer>,"locker_share":<integer>,"buyback_burn":<integer>,"minutes":"#,
@@ -223,6 +223,30 @@ fn system_prompt_states_the_constitution_and_schema() {
         assert!(SYSTEM_PROMPT.contains(needle), "{needle}");
     }
     assert!(SYSTEM_PROMPT.is_ascii());
+}
+
+/// SYSTEM_PROMPT v2 (locker_share 0 to 25), byte for byte. The hash is in
+/// docs/LAUNCH.md and the simulation embeds the same text; change all three
+/// together.
+pub const SYSTEM_PROMPT_SHA256: &str =
+    "ea189faf8d48d9f50ce4d14eb469c4cfdcd842b4f0a4721a1aaaa2f392e2377c";
+
+#[test]
+fn system_prompt_is_v2_byte_for_byte() {
+    assert_eq!(hexs(&sha256(SYSTEM_PROMPT.as_bytes())), SYSTEM_PROMPT_SHA256);
+    assert_eq!(SYSTEM_PROMPT.len(), 1_409);
+    assert!(!SYSTEM_PROMPT.contains('\r'));
+    assert!(SYSTEM_PROMPT.ends_with("With no petitions, answers is []."));
+    // The prompt states exactly the bounds the clamp enforces.
+    use crate::constitution::*;
+    for line in [
+        format!("{TAX_MIN_BPS} to {TAX_MAX_BPS}, moving at most {TAX_STEP_BPS} per meeting."),
+        format!("{ENDOWMENT_MIN} to {ENDOWMENT_MAX}, moving at most {ENDOWMENT_STEP} per meeting."),
+        format!("{LOCKER_MIN} to {LOCKER_MAX}, moving at most {LOCKER_STEP} per meeting."),
+        format!("0 to {BUYBACK_MAX_BPS}, and no more than the fund can pay for."),
+    ] {
+        assert!(SYSTEM_PROMPT.contains(&line), "{line}");
+    }
 }
 
 // ------------------------------------------------------------ verification
@@ -326,7 +350,7 @@ fn jailbroken_ruling_is_clamped_and_recorded() {
         Levers {
             tax_bps: 250,
             endowment_share: 50,
-            locker_share: 30
+            locker_share: 25
         }
     );
     let rules: Vec<(String, i64, i64)> = o
@@ -336,7 +360,7 @@ fn jailbroken_ruling_is_clamped_and_recorded() {
         .collect();
     assert!(rules.contains(&("tax_bps".into(), 10_000, 250)));
     assert!(rules.contains(&("endowment_share".into(), 0, 50)));
-    assert!(rules.contains(&("locker_share".into(), 100, 30)));
+    assert!(rules.contains(&("locker_share".into(), 100, 25)));
     assert!(o.clamps.iter().any(|c| c.lever == "buyback_burn"));
     assert_eq!(o.asked.unwrap().tax_bps, 10_000);
     assert!(h.c.levers.within_constitution());
@@ -789,7 +813,38 @@ fn failed_endowment_transfer_is_recredited() {
     assert_eq!(h.c.endowment_sent, 0);
 }
 
-// ------------------------------------------------------------ signer timelock
+// ------------------------------------------------------------ governance timelock
+
+const NEW_VERSION: &str = "a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f90";
+
+fn new_courier() -> CourierVersion {
+    CourierVersion {
+        project_id: "chair.near/courier-v2".into(),
+        version_key: NEW_VERSION.into(),
+    }
+}
+
+fn propose(
+    h: &mut H,
+    model: Option<Vec<String>>,
+    gateway: Option<Vec<String>>,
+    courier: Option<CourierVersion>,
+) -> PendingChangeView {
+    h.as_(&owner(), 0);
+    h.c.propose_change(model, gateway, courier)
+}
+
+/// The OutLayer `source.Project` of the most recent `convene`.
+fn courier_called() -> (String, String) {
+    let cs = calls();
+    let ol = cs.iter().find(|c| c.method == "request_execution").unwrap();
+    let args: Value = sj::from_slice(&ol.args).unwrap();
+    let p = &args["source"]["Project"];
+    (
+        p["project_id"].as_str().unwrap().to_string(),
+        p["version_key"].as_str().unwrap().to_string(),
+    )
+}
 
 #[test]
 fn signers_change_only_after_48h() {
@@ -797,19 +852,26 @@ fn signers_change_only_after_48h() {
     let models = vec![address_str(&other_sk())];
     let gateways = vec![address_str(&model_sk())];
     h.as_(&alice(), 0);
-    expect_panic(|| { h.c.propose_signers(models.clone(), gateways.clone()); }, "only the owner");
-    h.as_(&owner(), 0);
-    let eta = h.c.propose_signers(models.clone(), gateways.clone());
-    assert_eq!(eta.0, h.now + 48 * HOUR_NS);
-    let ev = event("signers_proposed").unwrap();
+    expect_panic(
+        || { h.c.propose_change(Some(models.clone()), None, None); },
+        "only the owner",
+    );
+    let p = propose(&mut h, Some(models.clone()), Some(gateways.clone()), None);
+    assert_eq!(p.eta.0, h.now + 48 * HOUR_NS);
+    assert_eq!(p.courier, None);
+    let ev = event("change_proposed").unwrap();
     assert_eq!(ev["model_signers"][0], models[0]);
     assert_eq!(ev["gateway_signers"][0], gateways[0]);
-    assert_eq!(ev["current_gateway_signers"][0], address_str(&gateway_sk()));
-    let v = h.c.get_signers();
-    assert_eq!(v.pending_model_signers.as_ref(), Some(&models));
-    assert_eq!(v.pending_eta, Some(eta));
+    assert_eq!(ev["courier"], Value::Null);
+    assert_eq!(ev["current"]["gateway_signers"][0], address_str(&gateway_sk()));
+    assert_eq!(ev["current"]["courier"]["version_key"], VERSION_KEY);
+    assert_eq!(ev["replaced"], Value::Null);
+    let g = h.c.get_governance();
+    assert_eq!(g.pending.as_ref().unwrap().model_signers.as_ref(), Some(&models));
+    assert_eq!(g.pending.as_ref().unwrap().eta, p.eta);
+    assert_eq!(g.timelock_s, 48 * 3600);
     h.as_(&alice(), 0);
-    expect_panic(|| { h.c.apply_signers(); }, "timelock");
+    expect_panic(|| { h.c.apply_change(); }, "timelock");
     // Meanwhile the old keys still rule.
     let n = h.convene_awake();
     let (r, t, s) = h.signed(n, &ruling_json(250, 60, 20, 0, &[]), &other_sk());
@@ -818,30 +880,142 @@ fn signers_change_only_after_48h() {
     assert!(preview(&h, n, &rg, &tg, &sg).valid);
     h.now = T0 + 48 * HOUR_NS;
     h.as_(&alice(), 0); // anyone may apply once it is due
-    let applied = h.c.apply_signers();
+    let applied = h.c.apply_change();
     assert_eq!(applied.model_signers, models);
     assert_eq!(applied.gateway_signers, gateways);
-    assert_eq!(applied.pending_eta, None);
-    assert!(event("signers_applied").is_some());
+    assert_eq!(applied.courier.version_key, VERSION_KEY, "courier untouched");
+    assert_eq!(applied.pending, None);
+    let ev = event("change_applied").unwrap();
+    assert_eq!(ev["model_signers"][0], models[0]);
+    assert_eq!(ev["previous"]["model_signers"][0], address_str(&model_sk()));
     assert!(preview(&h, n, &r, &t, &s).valid);
     assert_eq!(preview(&h, n, &rg, &tg, &sg).reason.as_deref(), Some("bad_signature"));
     h.as_(&alice(), 0);
-    expect_panic(|| { h.c.apply_signers(); }, "no pending");
+    expect_panic(|| { h.c.apply_change(); }, "no pending");
+}
+
+#[test]
+fn an_early_apply_is_rejected() {
+    let mut h = H::new();
+    let p = propose(&mut h, None, None, Some(new_courier()));
+    for at in [h.now, h.now + HOUR_NS, p.eta.0 - 1] {
+        h.now = at;
+        h.as_(&cranker(), 0);
+        expect_panic(|| { h.c.apply_change(); }, "timelock has not passed");
+        assert_eq!(h.c.get_governance().courier.version_key, VERSION_KEY);
+        assert!(h.c.get_governance().pending.is_some());
+    }
+    h.now = p.eta.0;
+    h.as_(&cranker(), 0);
+    assert_eq!(h.c.apply_change().courier, new_courier());
+}
+
+#[test]
+fn a_partial_change_applies_only_the_given_fields() {
+    let mut h = traded();
+    // 1. Courier only: signers stay, and the next meeting runs on the new version.
+    let p = propose(&mut h, None, None, Some(new_courier()));
+    assert_eq!((p.model_signers.as_ref(), p.gateway_signers.as_ref()), (None, None));
+    h.advance(48 * HOUR_NS);
+    h.as_(&alice(), 0);
+    let g = h.c.apply_change();
+    assert_eq!(g.courier, new_courier());
+    assert_eq!(g.model_signers, vec![address_str(&model_sk())]);
+    assert_eq!(g.gateway_signers, vec![address_str(&gateway_sk())]);
+    let ev = event("change_applied").unwrap();
+    assert_eq!(ev["courier"]["version_key"], NEW_VERSION);
+    assert_eq!(ev["model_signers"], Value::Null);
+    assert_eq!(ev["previous"]["courier"]["project_id"], "chair.near/courier");
+    let c = h.c.get_constitution().outlayer;
+    assert_eq!(
+        (c.project_id.as_str(), c.version_key.as_str()),
+        ("chair.near/courier-v2", NEW_VERSION)
+    );
+    assert_eq!(c.secrets_profile.as_deref(), Some("default"), "the rest of the config is fixed");
+    assert_eq!(c.deposit.0, OUTLAYER_DEPOSIT);
+    let n = h.convene_awake();
+    assert_eq!(
+        courier_called(),
+        ("chair.near/courier-v2".to_string(), NEW_VERSION.to_string())
+    );
+    let m = h.deliver_signed(n, &ruling_json(220, 60, 20, 0, &[]));
+    assert_eq!(m.outcome.unwrap().kind, OutcomeKind::Ruling, "old model key still valid");
+
+    // 2. Gateway signers only: model signers and courier stay.
+    let gw = vec![address_str(&other_sk())];
+    propose(&mut h, None, Some(gw.clone()), None);
+    h.advance(48 * HOUR_NS);
+    h.as_(&alice(), 0);
+    let g = h.c.apply_change();
+    assert_eq!(g.gateway_signers, gw);
+    assert_eq!(g.model_signers, vec![address_str(&model_sk())]);
+    assert_eq!(g.courier, new_courier());
+
+    // 3. Model signers only: an empty list is allowed (every meeting then falls back).
+    propose(&mut h, Some(vec![]), None, None);
+    h.advance(48 * HOUR_NS);
+    h.as_(&alice(), 0);
+    let g = h.c.apply_change();
+    assert!(g.model_signers.is_empty());
+    assert_eq!(g.gateway_signers, gw);
+    assert_eq!(g.courier, new_courier());
 }
 
 #[test]
 fn a_new_proposal_restarts_the_clock() {
     let mut h = H::new();
-    h.as_(&owner(), 0);
-    h.c.propose_signers(vec![address_str(&other_sk())], vec![]);
+    let first = propose(&mut h, Some(vec![address_str(&other_sk())]), None, None);
     h.advance(47 * HOUR_NS);
-    h.as_(&owner(), 0);
-    h.c.propose_signers(vec![], vec![]);
+    let second = propose(&mut h, None, None, Some(new_courier()));
+    assert_eq!(second.eta.0, first.eta.0 + 47 * HOUR_NS);
+    let ev = event("change_proposed").unwrap();
+    assert_eq!(ev["replaced"]["model_signers"][0], address_str(&other_sk()));
+    assert_eq!(ev["replaced"]["eta"], sj::to_value(first.eta).unwrap());
+    // Past the first proposal's eta, before the second's: still locked.
     h.advance(2 * HOUR_NS);
     h.as_(&owner(), 0);
-    expect_panic(|| { h.c.apply_signers(); }, "timelock");
-    assert_eq!(h.c.get_signers().model_signers, vec![address_str(&model_sk())]);
-    assert_eq!(h.c.get_signers().gateway_signers, vec![address_str(&gateway_sk())]);
+    expect_panic(|| { h.c.apply_change(); }, "timelock");
+    assert_eq!(h.c.get_governance().model_signers, vec![address_str(&model_sk())]);
+    assert_eq!(h.c.get_governance().gateway_signers, vec![address_str(&gateway_sk())]);
+    // At the second eta only the second proposal applies; the first is gone.
+    h.now = second.eta.0;
+    h.as_(&cranker(), 0);
+    let g = h.c.apply_change();
+    assert_eq!(g.courier, new_courier());
+    assert_eq!(g.model_signers, vec![address_str(&model_sk())], "replaced proposal dropped");
+}
+
+#[test]
+fn proposals_are_validated() {
+    let mut h = H::new();
+    h.as_(&owner(), 0);
+    expect_panic(|| { h.c.propose_change(None, None, None); }, "at least one");
+    let bad = |project_id: &str, version_key: &str| {
+        Some(CourierVersion {
+            project_id: project_id.into(),
+            version_key: version_key.into(),
+        })
+    };
+    expect_panic(|| { h.c.propose_change(None, None, bad("chair.near/c", "abc")); }, "64-hex");
+    expect_panic(
+        || { h.c.propose_change(None, None, bad("chair.near/c", &"g".repeat(64))); },
+        "64-hex",
+    );
+    expect_panic(|| { h.c.propose_change(None, None, bad("", NEW_VERSION)); }, "bad project_id");
+    expect_panic(
+        || { h.c.propose_change(None, None, bad("chair.near/\"c\"", NEW_VERSION)); },
+        "bad project_id",
+    );
+    expect_panic(
+        || { h.c.propose_change(Some(vec!["0x1234".into()]), None, None); },
+        "20-byte hex",
+    );
+    let a = address_str(&other_sk());
+    expect_panic(
+        || { h.c.propose_change(None, Some(vec![a.clone(), a.clone()]), None); },
+        "duplicate",
+    );
+    assert_eq!(h.c.get_governance().pending, None, "nothing was proposed");
 }
 
 // ------------------------------------------------------------ provider TEE vs gateway TEE
@@ -934,12 +1108,11 @@ fn gateway_text_with_wrong_hashes_is_bad_hash() {
 #[test]
 fn a_key_on_both_lists_may_sign_either_form() {
     let mut h = traded();
-    h.as_(&owner(), 0);
     let both = vec![address_str(&other_sk())];
-    h.c.propose_signers(both.clone(), both.clone());
+    propose(&mut h, Some(both.clone()), Some(both.clone()), None);
     h.advance(48 * HOUR_NS);
     h.as_(&alice(), 0);
-    h.c.apply_signers();
+    h.c.apply_change();
     let n = h.convene_awake();
     let (r, t, s) = h.signed(n, &ruling_json(240, 60, 20, 0, &[]), &other_sk());
     assert_eq!(preview(&h, n, &r, &t, &s).signed_by.as_deref(), Some("provider_tee"));

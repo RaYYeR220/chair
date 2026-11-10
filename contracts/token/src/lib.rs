@@ -18,7 +18,9 @@
 //!   TEE signature itself, clamps, applies. `preview_ruling` runs the same
 //!   checks as a view.
 //! - **Trust (§9).** The owner's only power is a 48 h timelocked change of
-//!   `model_signers` / `gateway_signers`. No pause, no withdraw, no upgrade.
+//!   `model_signers`, `gateway_signers` and the courier version (OutLayer
+//!   `project_id` + `version_key`), all public and slow (`propose_change` /
+//!   `apply_change`). No pause, no withdraw, no upgrade.
 //!
 //! ## NEAR held by this account
 //! `reserve + buyback_fund + locker_pool + locker_owed + endowment_pending`
@@ -59,8 +61,9 @@ pub const ONE_NEAR: u128 = 1_000_000_000_000_000_000_000_000;
 pub const SEC_NS: u64 = 1_000_000_000;
 pub const HOUR_NS: u64 = 3_600 * SEC_NS;
 pub const DAY_NS: u64 = 24 * HOUR_NS;
-/// SPEC §9: `model_signers` changes wait this long after the proposal.
-pub const SIGNER_TIMELOCK_NS: u64 = 48 * HOUR_NS;
+/// SPEC §9: a governance change (signers, courier version) waits this long
+/// after its proposal.
+pub const CHANGE_TIMELOCK_NS: u64 = 48 * HOUR_NS;
 pub const MIN_MEETING_INTERVAL_S: u64 = 60;
 pub const MAX_MEETING_INTERVAL_S: u64 = 7 * 86_400;
 
@@ -102,7 +105,8 @@ pub const GAS_FOR_FT_TRANSFER_CALL: Gas = Gas::from_tgas(30);
 #[near(contract_state)]
 #[derive(PanicOnDefault)]
 pub struct Chair {
-    // fixed at `new`
+    // fixed at `new` (except `outlayer.project_id` / `outlayer.version_key`,
+    // changeable only through the 48 h timelock)
     owner: AccountId,
     brain: AccountId,
     outlayer: OutlayerConfig,
@@ -112,12 +116,13 @@ pub struct Chair {
     petition_fee: u128,
     ladder: Vec<Tier>,
 
-    // the only owner-mutable values (48 h timelock)
+    // owner-mutable through the 48 h timelock, with the courier version above
     /// Provider (model) TEE signing addresses: 3-part signature texts.
     model_signers: Vec<[u8; 20]>,
     /// NEAR AI gateway TEE signing addresses: 2-part signature texts.
     gateway_signers: Vec<[u8; 20]>,
-    pending_signers: Option<PendingSigners>,
+    /// The one proposal waiting out its timelock, if any.
+    pending_change: Option<PendingChange>,
 
     // curve
     /// `s`: tokens sold on the curve (base units), burned ones included.
@@ -175,6 +180,21 @@ fn hexes(v: &[[u8; 20]]) -> Vec<String> {
     v.iter().map(util::address_hex).collect()
 }
 
+/// Panics unless `project_id` is an OutLayer `owner/name` (1-128 printable
+/// ASCII, no quotes or backslashes) and `version_key` a 64-hex wasm hash.
+fn check_courier(project_id: &str, version_key: &str) {
+    require!(
+        !project_id.is_empty()
+            && project_id.len() <= 128
+            && project_id.bytes().all(|b| b.is_ascii_graphic() && b != b'"' && b != b'\\'),
+        "bad project_id"
+    );
+    require!(
+        version_key.len() == 64 && version_key.bytes().all(|b| b.is_ascii_hexdigit()),
+        "version_key must be the 64-hex wasm hash"
+    );
+}
+
 pub(crate) fn parse_signers(signers: &[String]) -> Vec<[u8; 20]> {
     require!(signers.len() <= MAX_SIGNERS, "too many signers");
     let mut out: Vec<[u8; 20]> = Vec::with_capacity(signers.len());
@@ -230,16 +250,7 @@ impl Chair {
             }
         }
         let o = &outlayer;
-        require!(
-            !o.project_id.is_empty()
-                && o.project_id.len() <= 128
-                && o.project_id.bytes().all(|b| b.is_ascii_graphic() && b != b'"' && b != b'\\'),
-            "bad project_id"
-        );
-        require!(
-            o.version_key.len() == 64 && o.version_key.bytes().all(|b| b.is_ascii_hexdigit()),
-            "version_key must be the 64-hex wasm hash"
-        );
+        check_courier(&o.project_id, &o.version_key);
         require!(
             o.max_instructions.0 > 0 && o.max_instructions.0 <= 500_000_000_000,
             "max_instructions must be 1..=5e11"
@@ -272,7 +283,7 @@ impl Chair {
             ladder,
             model_signers,
             gateway_signers,
-            pending_signers: None,
+            pending_change: None,
             sold: 0,
             supply: 0,
             burned: 0,
@@ -349,7 +360,7 @@ impl Chair {
             petition_fee: U128(self.petition_fee),
             petition_max_chars: PETITION_MAX_CHARS as u32,
             petitions_in_brief: TOP_PETITIONS as u32,
-            signer_timelock_s: SIGNER_TIMELOCK_NS / SEC_NS,
+            change_timelock_s: CHANGE_TIMELOCK_NS / SEC_NS,
             owner: self.owner.clone(),
             brain: self.brain.clone(),
             outlayer: self.outlayer.clone(),
@@ -382,76 +393,116 @@ impl Chair {
         self.petitions.clone()
     }
 
-    pub fn get_signers(&self) -> SignersView {
-        SignersView {
+    /// Everything `propose_change` can touch: the signer allowlists and the
+    /// courier version, the pending proposal and the timelock.
+    pub fn get_governance(&self) -> GovernanceView {
+        GovernanceView {
             owner: self.owner.clone(),
             model_signers: hexes(&self.model_signers),
             gateway_signers: hexes(&self.gateway_signers),
-            pending_model_signers: self.pending_signers.as_ref().map(|p| hexes(&p.model_signers)),
-            pending_gateway_signers: self
-                .pending_signers
-                .as_ref()
-                .map(|p| hexes(&p.gateway_signers)),
-            pending_eta: self.pending_signers.as_ref().map(|p| U64(p.eta)),
-            timelock_s: SIGNER_TIMELOCK_NS / SEC_NS,
+            courier: self.courier(),
+            pending: self.pending_change.as_ref().map(change_view),
+            timelock_s: CHANGE_TIMELOCK_NS / SEC_NS,
         }
     }
 
-    // ------------------------------------------------------------ signers (SPEC §9)
+    // ------------------------------------------------------------ governance (SPEC §9)
 
-    /// Owner only. Starts the 48 h timelock for new `model_signers` (provider
-    /// TEE) and `gateway_signers` (gateway TEE) sets, replaced together
-    /// (pass the current set to keep one). A new proposal replaces any
-    /// pending one and restarts the clock.
-    pub fn propose_signers(&mut self, model_signers: Vec<String>, gateway_signers: Vec<String>) -> U64 {
+    /// Owner only. Proposes new values for any of `model_signers` (provider
+    /// TEE addresses), `gateway_signers` (gateway TEE addresses) and
+    /// `courier` (the OutLayer `project_id` and pinned `version_key` the
+    /// meetings run on). An omitted field keeps its value; a given signer
+    /// list replaces the whole list. Nothing else is changeable.
+    ///
+    /// One proposal is pending at a time: a new one replaces it and restarts
+    /// the 48 h clock. Anyone may `apply_change` once the clock has run out.
+    pub fn propose_change(
+        &mut self,
+        model_signers: Option<Vec<String>>,
+        gateway_signers: Option<Vec<String>>,
+        courier: Option<CourierVersion>,
+    ) -> PendingChangeView {
         require!(
             env::predecessor_account_id() == self.owner,
-            "only the owner proposes signers"
+            "only the owner proposes changes"
         );
-        let model = parse_signers(&model_signers);
-        let gateway = parse_signers(&gateway_signers);
+        require!(
+            model_signers.is_some() || gateway_signers.is_some() || courier.is_some(),
+            "propose at least one of model_signers, gateway_signers, courier"
+        );
+        let model_signers = model_signers.as_deref().map(parse_signers);
+        let gateway_signers = gateway_signers.as_deref().map(parse_signers);
+        if let Some(c) = &courier {
+            check_courier(&c.project_id, &c.version_key);
+        }
         let now = env::block_timestamp();
-        let eta = now + SIGNER_TIMELOCK_NS;
+        let change = PendingChange {
+            model_signers,
+            gateway_signers,
+            courier,
+            proposed_at: now,
+            eta: now + CHANGE_TIMELOCK_NS,
+        };
+        let view = change_view(&change);
         events::emit(
-            "signers_proposed",
+            "change_proposed",
             &near_sdk::serde_json::json!({
-                "model_signers": hexes(&model),
-                "gateway_signers": hexes(&gateway),
-                "current_model_signers": hexes(&self.model_signers),
-                "current_gateway_signers": hexes(&self.gateway_signers),
-                "eta": U64(eta),
+                "model_signers": view.model_signers,
+                "gateway_signers": view.gateway_signers,
+                "courier": view.courier,
+                "proposed_at": view.proposed_at,
+                "eta": view.eta,
+                "current": self.governed(),
+                "replaced": self.pending_change.as_ref().map(change_view),
             }),
         );
-        self.pending_signers = Some(PendingSigners {
-            model_signers: model,
-            gateway_signers: gateway,
-            proposed_at: now,
-            eta,
-        });
-        U64(eta)
+        self.pending_change = Some(change);
+        view
     }
 
-    /// Anyone, once the timelock has passed: installs the pending sets.
-    pub fn apply_signers(&mut self) -> SignersView {
+    /// Anyone, once the timelock has passed: applies the pending proposal,
+    /// only the fields it names.
+    pub fn apply_change(&mut self) -> GovernanceView {
         let eta = self
-            .pending_signers
+            .pending_change
             .as_ref()
             .map(|p| p.eta)
-            .unwrap_or_else(|| env::panic_str("no pending signers"));
+            .unwrap_or_else(|| env::panic_str("no pending change"));
         require!(env::block_timestamp() >= eta, "timelock has not passed");
-        let p = self.pending_signers.take().unwrap_or_else(|| env::abort());
+        let p = self.pending_change.take().unwrap_or_else(|| env::abort());
+        let applied = change_view(&p);
+        let previous = self.governed();
+        if let Some(m) = p.model_signers {
+            self.model_signers = m;
+        }
+        if let Some(g) = p.gateway_signers {
+            self.gateway_signers = g;
+        }
+        if let Some(c) = p.courier {
+            self.outlayer.project_id = c.project_id;
+            self.outlayer.version_key = c.version_key;
+        }
         events::emit(
-            "signers_applied",
+            "change_applied",
             &near_sdk::serde_json::json!({
-                "model_signers": hexes(&p.model_signers),
-                "gateway_signers": hexes(&p.gateway_signers),
-                "previous_model_signers": hexes(&self.model_signers),
-                "previous_gateway_signers": hexes(&self.gateway_signers),
+                "model_signers": applied.model_signers,
+                "gateway_signers": applied.gateway_signers,
+                "courier": applied.courier,
+                "proposed_at": applied.proposed_at,
+                "previous": previous,
             }),
         );
-        self.model_signers = p.model_signers;
-        self.gateway_signers = p.gateway_signers;
-        self.get_signers()
+        self.get_governance()
+    }
+}
+
+fn change_view(p: &PendingChange) -> PendingChangeView {
+    PendingChangeView {
+        model_signers: p.model_signers.as_deref().map(hexes),
+        gateway_signers: p.gateway_signers.as_deref().map(hexes),
+        courier: p.courier.clone(),
+        proposed_at: U64(p.proposed_at),
+        eta: U64(p.eta),
     }
 }
 
@@ -463,6 +514,23 @@ impl Chair {
             p0: self.p0,
             k: self.k,
         }
+    }
+
+    /// The courier version meetings run on now.
+    pub(crate) fn courier(&self) -> CourierVersion {
+        CourierVersion {
+            project_id: self.outlayer.project_id.clone(),
+            version_key: self.outlayer.version_key.clone(),
+        }
+    }
+
+    /// The current values of everything `propose_change` can touch (events).
+    fn governed(&self) -> near_sdk::serde_json::Value {
+        near_sdk::serde_json::json!({
+            "model_signers": hexes(&self.model_signers),
+            "gateway_signers": hexes(&self.gateway_signers),
+            "courier": self.courier(),
+        })
     }
 
     pub(crate) fn acc(&self) -> U256 {

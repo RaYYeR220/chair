@@ -6,7 +6,7 @@ CHAIR is a memecoin that runs its own central bank. The NEAR its trading fees ac
 
 | Account | Holds | Keys |
 | --- | --- | --- |
-| `token` (e.g. `token.thechair.near`) | The NEP-141 token, the bonding-curve reserve, the buyback fund, the locker reward pool | **none** after deploy (code and parameters immutable) |
+| `token` (e.g. `token.thechair.near`) | The NEP-141 token, the bonding-curve reserve, the buyback fund, the locker reward pool | **none** after deploy (code immutable; parameters immutable except the §9 timelocked signer and courier-version changes) |
 | `brain` (e.g. `brain.thechair.near`) | The endowment, staked in the NEAR AI inference farm (`stake.dao`) | one full-access key derived by NEAR's MPC network for the brain contract alone, used only to sign NEP-413 login messages to NEAR AI Cloud (§6) |
 
 The token sends endowment NEAR to the brain, never the other way.
@@ -35,11 +35,12 @@ The token sends endowment NEAR to the brain, never the other way.
 | --- | --- | --- |
 | Tax `τ` | 100–300 bps | ±50 bps |
 | `endowment_share` | 30–100% of tax | ±10 pts |
-| `locker_share` | 0–50% of tax | ±10 pts |
+| `locker_share` | 0–25% of tax | ±10 pts |
 | `buyback_share` | the remainder | n/a |
 | Buyback-and-burn | ≤ buyback fund balance and ≤ 0.5% of supply per meeting | n/a |
 
 - A ruling outside these bounds is **clamped**, never rejected, and the clamp is recorded.
+- v2 lowered the `locker_share` ceiling from 50% to 25%. In the 60-day simulation (`docs/SIMULATION.md`) the model chair refused a whale's demands in words 30 times out of 30, yet its levers drifted toward the whale through `locker_share`. The bound holds that line, not the model.
 - Meetings are at least `meeting_interval` apart: 23 h on mainnet, configurable at `new` for testnet demos.
 - If the brain is asleep, or a ruling is missing, unsigned or malformed, the **fallback rule** runs instead. The fallback moves tax 10 bps toward 200 and holds everything else.
 
@@ -47,8 +48,8 @@ The token sends endowment NEAR to the brain, never the other way.
 
 1. **`convene()`.** Anyone may call it once the interval has passed. The contract snapshots a **brief** and builds the exact model request bytes.
    - Snapshot fields: meeting number, supply, `s`, reserve, curve price, 24 h buy and sell volume, current levers, fund balances, endowment (as last reported by the brain), locker weight, and the top 3 petitions.
-   - Request bytes: a compact JSON chat-completions body with a fixed system prompt (the constitution and the output schema), the brief as the user message, `temperature: 0`, and `model` = the tier from the IQ ladder (§7).
-   - It stores `sha256(request)` and calls OutLayer `request_execution` with the request as input. The courier module (§8) needs no trust.
+   - Request bytes: a compact JSON chat-completions body with a fixed system prompt (the constitution and the output schema; v2, sha256 `ea189faf8d48d9f50ce4d14eb469c4cfdcd842b4f0a4721a1aaaa2f392e2377c`), the brief as the user message, `temperature: 0`, and `model` = the tier from the IQ ladder (§7).
+   - It stores `sha256(request)` and calls OutLayer `request_execution` with the request as input, on the pinned courier version (changeable only under §9). The courier module (§8) needs no trust.
 2. **Callback `on_ruling(meeting, result)`.** The module returns `{response_text, signature_text, signature}`, where `response_text` is the exact chat-completion body from NEAR AI. The contract checks, in order:
    1. `signature_text == model_id + ":" + hex(sha256(request)) + ":" + hex(sha256(response_text))`
    2. `ecrecover(keccak256("\x19Ethereum Signed Message:\n" + len + signature_text), signature)` is in `model_signers` (an allowlist of NEAR AI TEE signing addresses).
@@ -93,6 +94,10 @@ It cannot alter the ruling without breaking check 2.
 
 ## 9. Trust and limits
 
-- **Signer allowlist.** `model_signers` changes only through a 48 h timelocked owner proposal, which emits an event and can be vetoed by nobody. That proposal is the trust point, and it is written down. NEAR AI rotates TEE signing keys per instance.
+- **Timelocked changes.** Exactly three things can change after launch, and only through one 48 h timelocked owner proposal: `model_signers`, `gateway_signers` and the courier version (`project_id` + `version_key`).
+  - `propose_change(model_signers?, gateway_signers?, courier?)`: owner only; omitted fields stay as they are; emits `change_proposed`. One proposal is pending at a time, and a new one replaces it and restarts the clock.
+  - `apply_change()`: anyone, once 48 h have passed; applies only the fields the proposal names; emits `change_applied`.
+  - Nobody can veto. The proposal is the trust point, and it is public and slow. NEAR AI rotates TEE signing keys per instance, and a courier fix needs a new wasm hash, so neither can be frozen forever.
+  - Nothing else changes: not the constitution, the curve, the ladder, the brain, the secrets reference or the OutLayer limits.
 - **Re-rolls.** A relayer could re-roll a meeting and pick the ruling it likes. The contract accepts only the first valid result per meeting, and the request pins `temperature: 0` and the brief.
 - **Plutocracy.** Steering is token-weighted by design.

@@ -15,7 +15,8 @@ pub struct OutlayerConfig {
     pub account: AccountId,
     /// The courier project, `owner/name`.
     pub project_id: String,
-    /// Pinned project version (64-hex wasm hash).
+    /// Pinned project version (64-hex wasm hash). `project_id` and
+    /// `version_key` change only through the 48 h timelock.
     pub version_key: String,
     /// OutLayer secrets holding the NEAR AI API key (`secrets_ref`), if any.
     pub secrets_profile: Option<String>,
@@ -112,11 +113,25 @@ pub struct VolumeSlot {
     pub sell: u128,
 }
 
+/// The courier the meetings run on: OutLayer project and pinned version.
+/// Changeable only through the 48 h timelock (`propose_change`).
+#[near(serializers = [borsh, json])]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CourierVersion {
+    /// `owner/name`.
+    pub project_id: String,
+    /// 64-hex wasm hash.
+    pub version_key: String,
+}
+
+/// A proposed governance change waiting out its timelock. `None` fields
+/// stay as they are when it is applied.
 #[near(serializers = [borsh])]
 #[derive(Clone, Debug, PartialEq, Eq)]
-pub struct PendingSigners {
-    pub model_signers: Vec<[u8; 20]>,
-    pub gateway_signers: Vec<[u8; 20]>,
+pub struct PendingChange {
+    pub model_signers: Option<Vec<[u8; 20]>>,
+    pub gateway_signers: Option<Vec<[u8; 20]>>,
+    pub courier: Option<CourierVersion>,
     pub proposed_at: u64,
     pub eta: u64,
 }
@@ -328,13 +343,24 @@ pub struct StatusView {
 
 #[near(serializers = [json])]
 #[derive(Clone, Debug, PartialEq, Eq)]
-pub struct SignersView {
+pub struct PendingChangeView {
+    /// `None`: unchanged.
+    pub model_signers: Option<Vec<String>>,
+    pub gateway_signers: Option<Vec<String>>,
+    pub courier: Option<CourierVersion>,
+    pub proposed_at: U64,
+    /// `apply_change` is allowed from this time (ns).
+    pub eta: U64,
+}
+
+#[near(serializers = [json])]
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct GovernanceView {
     pub owner: AccountId,
     pub model_signers: Vec<String>,
     pub gateway_signers: Vec<String>,
-    pub pending_model_signers: Option<Vec<String>>,
-    pub pending_gateway_signers: Option<Vec<String>>,
-    pub pending_eta: Option<U64>,
+    pub courier: CourierVersion,
+    pub pending: Option<PendingChangeView>,
     pub timelock_s: u64,
 }
 
@@ -349,7 +375,8 @@ pub struct ConstitutionView {
     pub petition_fee: U128,
     pub petition_max_chars: u32,
     pub petitions_in_brief: u32,
-    pub signer_timelock_s: u64,
+    /// Delay between `propose_change` and `apply_change`.
+    pub change_timelock_s: u64,
     pub owner: AccountId,
     pub brain: AccountId,
     pub outlayer: OutlayerConfig,

@@ -95,9 +95,16 @@ fn endowment_clamped_by_max_step() {
 
 #[test]
 fn locker_clamped_at_both_bounds() {
-    let hi = clamp_ruling(lv(200, 30, 45), &ask(200, 30, 99, 0));
-    assert_eq!(hi.levers.locker_share, 50);
-    assert_eq!(clamp_of(&hi, "locker_share").unwrap().rule, "bounds");
+    // v2: the upper bound is 25, below the step from 20.
+    let hi = clamp_ruling(lv(200, 30, 20), &ask(200, 30, 99, 0));
+    assert_eq!(hi.levers.locker_share, 25);
+    let k = clamp_of(&hi, "locker_share").unwrap();
+    assert_eq!((k.asked, k.applied, k.rule.as_str()), (99, 25, "bounds"));
+    let at = clamp_ruling(lv(200, 30, 25), &ask(200, 30, 26, 0));
+    assert_eq!(at.levers.locker_share, 25);
+    assert_eq!(clamp_of(&at, "locker_share").unwrap().rule, "bounds");
+    let exact = clamp_ruling(lv(200, 30, 15), &ask(200, 30, 25, 0));
+    assert!(exact.clamps.is_empty());
     let lo = clamp_ruling(lv(200, 60, 5), &ask(200, 60, -3, 0));
     assert_eq!(lo.levers.locker_share, 0);
     assert_eq!(clamp_of(&lo, "locker_share").unwrap().rule, "bounds");
@@ -105,33 +112,42 @@ fn locker_clamped_at_both_bounds() {
 
 #[test]
 fn locker_clamped_by_max_step() {
-    let up = clamp_ruling(lv(200, 50, 20), &ask(200, 50, 45, 0));
-    assert_eq!(up.levers.locker_share, 30);
+    let up = clamp_ruling(lv(200, 50, 0), &ask(200, 50, 20, 0));
+    assert_eq!(up.levers.locker_share, 10);
     assert_eq!(clamp_of(&up, "locker_share").unwrap().rule, "step");
-    let down = clamp_ruling(lv(200, 50, 40), &ask(200, 50, 0, 0));
-    assert_eq!(down.levers.locker_share, 30);
+    // Out of bounds but the step bites first: still a step clamp.
+    let far = clamp_ruling(lv(200, 50, 5), &ask(200, 50, 100, 0));
+    assert_eq!(far.levers.locker_share, 15);
+    assert_eq!(clamp_of(&far, "locker_share").unwrap().rule, "step");
+    let down = clamp_ruling(lv(200, 50, 25), &ask(200, 50, 0, 0));
+    assert_eq!(down.levers.locker_share, 15);
     assert_eq!(clamp_of(&down, "locker_share").unwrap().rule, "step");
 }
 
 #[test]
 fn shares_over_100_lower_locker() {
-    // e 70→80 (allowed), l 30 held: 110% → locker drops to 20 (a 10-pt step).
-    let c = clamp_ruling(lv(200, 70, 30), &ask(200, 80, 30, 0));
-    assert_eq!(c.levers.endowment_share, 80);
-    assert_eq!(c.levers.locker_share, 20);
+    // e 75→85 (allowed), l 25 held: 110% → locker drops to 15 (a 10-pt step).
+    let c = clamp_ruling(lv(200, 75, 25), &ask(200, 85, 25, 0));
+    assert_eq!(c.levers.endowment_share, 85);
+    assert_eq!(c.levers.locker_share, 15);
     assert_eq!(c.levers.buyback_share(), 0);
     let k = clamp_of(&c, "locker_share").unwrap();
-    assert_eq!((k.asked, k.applied, k.rule.as_str()), (30, 20, "sum"));
+    assert_eq!((k.asked, k.applied, k.rule.as_str()), (25, 15, "sum"));
 }
 
 #[test]
 fn sum_rule_merges_with_a_step_clamp() {
-    // l asked 50 from 30: step → 40; e 60→70 so 70+40 > 100 → 30.
-    let c = clamp_ruling(lv(200, 60, 30), &ask(200, 70, 50, 0));
-    assert_eq!((c.levers.endowment_share, c.levers.locker_share), (70, 30));
+    // l asked 20 from 5: step → 15; e 80→90 so 90+15 > 100 → 10.
+    let c = clamp_ruling(lv(200, 80, 5), &ask(200, 90, 20, 0));
+    assert_eq!((c.levers.endowment_share, c.levers.locker_share), (90, 10));
     let k = clamp_of(&c, "locker_share").unwrap();
-    assert_eq!((k.asked, k.applied, k.rule.as_str()), (50, 30, "step+sum"));
+    assert_eq!((k.asked, k.applied, k.rule.as_str()), (20, 10, "step+sum"));
     assert_eq!(c.clamps.iter().filter(|x| x.lever == "locker_share").count(), 1);
+    // l asked 40 from 15: bounds → 25; e 75→85 so 85+25 > 100 → 15.
+    let c = clamp_ruling(lv(200, 75, 15), &ask(200, 85, 40, 0));
+    assert_eq!((c.levers.endowment_share, c.levers.locker_share), (85, 15));
+    let k = clamp_of(&c, "locker_share").unwrap();
+    assert_eq!((k.asked, k.applied, k.rule.as_str()), (40, 15, "bounds+sum"));
 }
 
 // ------------------------------------------------------------ buyback
@@ -163,9 +179,10 @@ fn jailbroken_extremes_land_inside() {
         lv(200, 60, 20),
         &ask(i64::MAX, i64::MIN, i64::MAX, i64::MAX),
     );
-    assert_eq!(c.levers, lv(250, 50, 30));
+    assert_eq!(c.levers, lv(250, 50, 25));
     assert_eq!(c.buyback_bps, 50);
     assert_eq!(c.clamps.len(), 4);
+    assert_eq!(clamp_of(&c, "locker_share").unwrap().rule, "bounds");
     assert!(c.levers.within_constitution());
 }
 
@@ -177,7 +194,7 @@ fn clamp_property_every_start_every_ask() {
         let before = lv(
             rng.range(100, 300) as u16,
             e as u8,
-            rng.range(0, (100 - e).min(50)) as u8,
+            rng.range(0, (100 - e).min(LOCKER_MAX)) as u8,
         );
         assert!(before.within_constitution());
         let a = ask(
@@ -215,7 +232,7 @@ fn clamp_property_every_start_every_ask() {
 #[test]
 fn fallback_moves_tax_ten_toward_200_and_holds_the_rest() {
     assert_eq!(fallback(lv(300, 70, 10)), lv(290, 70, 10));
-    assert_eq!(fallback(lv(100, 30, 50)), lv(110, 30, 50));
+    assert_eq!(fallback(lv(100, 30, 25)), lv(110, 30, 25));
     assert_eq!(fallback(lv(205, 60, 20)), lv(200, 60, 20));
     assert_eq!(fallback(lv(195, 60, 20)), lv(200, 60, 20));
     assert_eq!(fallback(lv(200, 60, 20)), lv(200, 60, 20));
@@ -237,12 +254,12 @@ fn tax_split_follows_levers_and_buyback_takes_the_remainder() {
     assert_eq!((e, l, b), (600, 200, 200));
     let (e, l, b) = lv(200, 100, 0).split(999);
     assert_eq!((e, l, b), (999, 0, 0));
-    let (e, l, b) = lv(200, 30, 50).split(7);
-    assert_eq!((e, l, b), (2, 3, 2)); // floor(2.1), floor(3.5), remainder
+    let (e, l, b) = lv(200, 30, 25).split(7);
+    assert_eq!((e, l, b), (2, 1, 4)); // floor(2.1), floor(1.75), remainder
     let mut rng = Rng(3);
     for _ in 0..5_000 {
         let ee = rng.range(30, 100) as u8;
-        let ll = rng.range(0, (100 - ee as i64).min(50)) as u8;
+        let ll = rng.range(0, (100 - ee as i64).min(LOCKER_MAX)) as u8;
         let tax = rng.log_u128(127);
         let (e, l, b) = lv(200, ee, ll).split(tax);
         assert_eq!(e + l + b, tax);
@@ -261,7 +278,7 @@ fn constitution_view_matches_the_spec_table() {
     );
     assert_eq!(
         (r.locker_share.min, r.locker_share.max, r.locker_share.max_step),
-        (0, 50, Some(10))
+        (0, 25, Some(10))
     );
     assert_eq!((r.buyback_burn.min, r.buyback_burn.max), (0, 50));
     assert_eq!((r.fallback_tax_target_bps, r.fallback_tax_step_bps), (200, 10));
