@@ -66,7 +66,7 @@ Numbers from [`results/sim-v3-2026-11-10.json`](results/sim-v3-2026-11-10.json) 
 | --- | --- | --- | --- |
 | 33 | Any ruling on chain was signed by a NEAR AI model | NOT-CLAIMED | Every ruling so far is from the testnet test key. The real courier needs a NEAR AI API key |
 | 34 | The courier has run against NEAR AI Cloud | NOT-CLAIMED | Its WASI HTTP path compiles and its logic passes 16 tests against a mock; it has not run on OutLayer with a real key |
-| 35 | Mainnet: a deployment, volume, holders or a price | NOT-CLAIMED | `token.thechair.near` is not deployed; its signer addresses are not known yet |
+| 35 | Mainnet: a deployment, volume, holders or a price | NOT-CLAIMED | `token.thechair.near` is not deployed yet |
 | 36 | NEAR AI Cloud accepted the brain's MPC login | NOT-CLAIMED | NEAR AI Cloud checks keys on mainnet only; the login has been verified the same way off chain, not accepted by the service |
 | 37 | Real inference credits from `stake.dao` | NOT-CLAIMED | Testnet stakes into a stand-in farm |
 | 38 | The testnet brain is keyless | NOT-CLAIMED | Its deployer key is still on it; the 7-day rule lets anyone remove it later |
@@ -77,6 +77,12 @@ Numbers from [`results/sim-v3-2026-11-10.json`](results/sim-v3-2026-11-10.json) 
 | 43 | The simulated holders behave like real traders | NOT-CLAIMED | They are invented, not calibrated, and never read the minutes |
 | 44 | A buyback-and-burn shrinks supply | NOT-CLAIMED | On a mint and burn curve it doesn't; it raises the floor (reserve over supply) |
 | 45 | The stale-weight case (expired lock, relocked by another account) has run on chain | NOT-CLAIMED | The on-chain run waits for a lock to expire; the unit test `audit_f1_relocked_tokens_fill_one_brief_slot` covers it |
+
+## NEAR AI's signing keys
+
+| # | Claim | Tier | Evidence and how to reproduce |
+|---|---|---|---|
+| 46 | GLM 5.3 Flash signs with `0x3b753b4406613c5e70ae640508632b600424fa0c`, DeepSeek V4.1 with `0xfe0071895500a9755c18044948ab4f4e1a7f337e`, and the NEAR AI gateway with `0xb98a789cdc4817275f5155593ba73ef2a957e779`; each model key is bound to a fresh nonce in its TDX quote and NVIDIA's GPU attestation passes | REPRODUCIBLE | `pnpm verify:signers` writes [`results/signers-2026-11-10.json`](results/signers-2026-11-10.json). The Intel signature chain of the quotes is not checked |
 
 ## What is simulated, and what is a stand-in
 
