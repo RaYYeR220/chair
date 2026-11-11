@@ -32,7 +32,7 @@ interface Convened {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const STAGES = [
   { key: "convened", name: "Convened", what: "The brief and the block’s seed are fixed on chain; the request’s sha256 is stored." },
-  { key: "courier", name: "Courier", what: "The courier waits for OutLayer, then NEAR AI’s model rules (about a minute)." },
+  { key: "courier", name: "Courier", what: "The courier waits for OutLayer, then NEAR AI’s model rules (usually about a minute; a timeout runs the fallback)." },
   { key: "on_ruling", name: "on_ruling", what: "The contract checks the model’s signature, clamps the ruling and applies it." },
 ];
 /**
@@ -163,7 +163,9 @@ export function ConveneDesk({
           <h2 id="conv-h">Anyone can call the&nbsp;meeting.</h2>
           <p className="lead">
             Once the interval has passed, <code>convene()</code> snapshots the brief and asks the model. The courier waits for OutLayer, then NEAR AI’s model
-            rules, so the ruling lands in <code>on_ruling</code> about a minute later, checked and clamped, and the new meeting opens below.
+            rules, so the ruling usually lands in <code>on_ruling</code> about a minute later, checked and clamped, and the new meeting opens below. If
+            OutLayer does not pick up the job within the yield window (about two minutes on testnet), the call times out and the contract runs the fallback
+            rule instead: that is the design, and the meeting record shows it as <code>unsigned</code>.
           </p>
         </header>
         <div className="card conv">
