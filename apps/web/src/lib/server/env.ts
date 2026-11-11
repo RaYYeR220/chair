@@ -1,13 +1,14 @@
 import "server-only";
 import { z } from "zod";
+import { type Network, parseRelayTokens } from "./nearai-gate";
 
 /**
- * Server configuration. Everything has a testnet default except the two
+ * Server configuration. Everything has a testnet default except the
  * secrets, so the read-only routes work with no env at all. Secrets are read
  * here and nowhere else, and never leave the server.
  */
 
-const NETWORKS = {
+export const NETWORKS = {
   testnet: {
     rpc: "https://test.rpc.fastnear.com",
     archivalRpc: "https://archival-rpc.testnet.fastnear.com",
@@ -77,6 +78,32 @@ const schema = z.object({
     .enum(["0", "1", "true", "false", ""])
     .default("0")
     .transform((v) => v === "1" || v === "true"),
+
+  /**
+   * Secret. The NEAR AI Cloud API key the courier relay
+   * (`/api/nearai/v1/...`) adds to the two calls it forwards. Unset: the relay
+   * answers 503 and forwards nothing.
+   */
+  NEARAI_API_KEY: optionalString,
+  /**
+   * Token contracts whose courier may use the relay, comma-separated, each
+   * `.testnet` or `.near` (its network, and so its RPC, follows the suffix).
+   * Default: `token5.chair-dev.testnet` on testnet, `token.thechair.near` on mainnet.
+   */
+  CHAIR_RELAY_TOKENS: optionalString,
+  /** Upstream completions per (token, meeting) per server instance. */
+  CHAIR_NEARAI_MAX_FORWARDS: z.coerce.number().int().min(1).max(5).default(2),
+  /**
+   * Local testing only, off by default: the relay gate compares the body with
+   * this sha256 instead of reading the token's open meeting from chain. It is
+   * ignored on Vercel and whenever NODE_ENV is production.
+   */
+  CHAIR_NEARAI_TEST_REQUEST_SHA256: optionalString.pipe(
+    z
+      .string()
+      .regex(/^[0-9a-f]{64}$/, "must be 64 lowercase hex characters")
+      .optional(),
+  ),
 });
 
 function load() {
@@ -88,6 +115,13 @@ function load() {
   }
   const e = parsed.data;
   const net = NETWORKS[e.CHAIR_NETWORK];
+  let relayTokens: string[];
+  try {
+    relayTokens = parseRelayTokens(e.CHAIR_RELAY_TOKENS, e.CHAIR_NETWORK);
+  } catch (err) {
+    throw new Error(`invalid server env: ${(err as Error).message}`);
+  }
+  const testHashAllowed = !process.env.VERCEL && process.env.NODE_ENV !== "production";
   return {
     networkId: e.CHAIR_NETWORK,
     contractId: e.CHAIR_CONTRACT_ID ?? net.contract,
@@ -113,6 +147,12 @@ function load() {
     },
     conveneIpCooldownS: e.CHAIR_CONVENE_IP_COOLDOWN_S,
     dryRun: e.CHAIR_RELAY_DRY_RUN,
+    nearai: {
+      apiKey: e.NEARAI_API_KEY,
+      tokens: relayTokens,
+      maxForwards: e.CHAIR_NEARAI_MAX_FORWARDS,
+      testRequestSha256: testHashAllowed ? e.CHAIR_NEARAI_TEST_REQUEST_SHA256 : undefined,
+    },
   };
 }
 
@@ -129,6 +169,11 @@ export const env = load();
 export type Env = typeof env;
 
 export const isTestnet = env.networkId === "testnet";
+
+/** The RPC for a network: the configured one for the site's own network, else FastNEAR's. */
+export function rpcFor(network: Network): string {
+  return network === env.networkId ? env.rpc : NETWORKS[network].rpc;
+}
 
 export function txUrl(hash: string) {
   return `${env.explorer}/txns/${hash}`;

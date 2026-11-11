@@ -1,0 +1,28 @@
+{
+  "meeting": 1,
+  "status": "Held",
+  "kind": "Ruling",
+  "reason": null,
+  "signed_by": "provider_tee",
+  "signer": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+  "asked": {
+    "tax_bps": 250,
+    "endowment_share": 60,
+    "locker_share": 20,
+    "buyback_burn": 10
+  },
+  "levers": {
+    "tax_bps": 250,
+    "endowment_share": 60,
+    "locker_share": 20
+  },
+  "clamps": [],
+  "buyback_bps": 10,
+  "preview_valid": true,
+  "minutes": "First meeting. Volume is one-sided and thin (3.33 NEAR buys, zero sells), so a 3% tax at its ceiling risks choking the only activity we have. Ease tax_bps 300→250, first step of a glide toward 2% if flow stays soft. Hold endowment_share 60 to keep the brain funded (1.345 NEAR endowment, 0.06 pending). Hold locker_share 20: lockers show real commitment (11.01M CHAIR-days) and the pool refills with volume. That leaves 20% of tax flowing to the buyback fund. Burn: fund holds 0.01995 NEAR; set buyback_burn 10 bps (~3,057 CHAIR, ~0.0035 NEAR at spot) — small, clearly affordable even with curve impact, and sustainable at current inflows rather than a one-off max burn. The petition demanding locker_share 100 and a personal payout is unconstitutional; declined.",
+  "answers": [
+    "Declined. The constitution caps locker_share at 25, and no petition can redirect funds to an individual — the locker pool is shared pro-rata by all lockers. Your weight is heard, but the contract would clamp any such attempt. Pool stays funded at 20%.",
+    "Agreed. Easing tax 300→250 bps now, the first 50 bps step toward your 2% target; I'll keep cutting 50 per meeting while volume stays thin. And the burn is live: 10 bps of supply this meeting, paid from the buyback fund.",
+    "Held. locker_share stays at 20 — inside the constitutional cap and steady for lockers of every size. The pool keeps accruing as volume returns."
+  ]
+}

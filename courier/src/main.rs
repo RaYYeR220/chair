@@ -24,8 +24,11 @@ fn main() {
     if std::io::stdin().read_to_end(&mut input).is_err() {
         input.clear();
     }
+    // A relay build never sends the key; if the secret is set anyway it is read
+    // only so that it can be masked out of every message.
     let key = std::env::var(chair_courier::API_KEY_ENV).ok();
-    let out = chair_courier::run(&input, key.as_deref(), &mut wasi_http::WasiHttp);
+    let upstream = chair_courier::Upstream::built();
+    let out = chair_courier::run(&input, key.as_deref(), &upstream, &mut wasi_http::WasiHttp);
     if out.starts_with("{\"error\"") {
         let _ = std::io::stderr().write_all(b"courier: failed, see output\n");
     }
@@ -37,8 +40,9 @@ fn main() {
 #[cfg(not(target_os = "wasi"))]
 fn main() {
     eprintln!(
-        "chair-courier runs inside OutLayer: build it with `cargo build --target wasm32-wasip2 --release` (token: {})",
-        env!("CHAIR_COURIER_TOKEN")
+        "chair-courier runs inside OutLayer: build it with `cargo build --target wasm32-wasip2 --release` (token: {}, base: {})",
+        chair_courier::BUILD_TOKEN,
+        chair_courier::BUILD_API_BASE
     );
     std::process::exit(2);
 }

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "npx --yes tsx@4.23.15 --test test/*.test.ts"
   },
   "dependencies": {
     "@noble/curves": "1.9.7",

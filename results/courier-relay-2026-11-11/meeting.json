@@ -1,0 +1,13 @@
+{
+  "meeting": 1,
+  "model": "z-ai/glm-5.3-flash",
+  "seed": "70614e3c294d35f7fe3a9350137255be",
+  "request_sha256": "fbcb1239dbdce6740c2fa4699ac1cc9c344eca156f4d2c53ec071a67d4bb4f9e",
+  "model_signers": [
+    "0x3b753b4406613c5e70ae640508632b600424fa0c",
+    "0xfe0071895500a9755c18044948ab4f4e1a7f337e"
+  ],
+  "gateway_signers": [
+    "0xb98a789cdc4817275f5155593ba73ef2a957e779"
+  ]
+}

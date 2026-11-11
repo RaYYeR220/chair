@@ -2,11 +2,11 @@
 //!
 //! 1. Reads the meeting request bytes from stdin (the `input_data` the token
 //!    passed to `request_execution`).
-//! 2. POSTs them **unchanged** to `https://cloud-api.near.ai/v1/chat/completions`
-//!    with `Authorization: Bearer $NEARAI_API_KEY` (an OutLayer secret).
+//! 2. POSTs them **unchanged** to `{base}/v1/chat/completions`, where `base` is
+//!    NEAR AI Cloud or CHAIR's relay, fixed at build time ([`Upstream`]).
 //! 3. Reads `id` from the response and fetches
-//!    `GET /v1/signature/{id}?model={model}&signing_algo=ecdsa`, retrying while
-//!    the receipt is not stored yet (404).
+//!    `GET {base}/v1/signature/{id}?model={model}&signing_algo=ecdsa`, retrying
+//!    while the receipt is not stored yet (404).
 //! 4. Prints one JSON object:
 //!
 //! ```json
@@ -28,7 +28,7 @@
 //!
 //! On any failure it prints `{"error":{"code":"...","message":"..."}}` instead,
 //! which carries none of the three fields the token needs, so the token runs its
-//! fallback. Messages never contain the API key.
+//! fallback. Messages never contain the API key, in either mode.
 //!
 //! All logic sits behind [`Http`] so it runs and is tested natively; `main.rs`
 //! wires WASI HTTP for `wasm32-wasip2`.
@@ -39,7 +39,7 @@ use sha2::{Digest, Sha256};
 pub const API_BASE: &str = "https://cloud-api.near.ai";
 pub const CHAT_PATH: &str = "/v1/chat/completions";
 pub const SIGNATURE_PATH: &str = "/v1/signature/";
-/// The OutLayer secret holding the NEAR AI Cloud API key.
+/// The OutLayer secret holding the NEAR AI Cloud API key (direct builds only).
 pub const API_KEY_ENV: &str = "NEARAI_API_KEY";
 /// Larger requests are refused (OutLayer input above 32 KB also costs extra).
 pub const MAX_REQUEST_BYTES: usize = 64 * 1024;
@@ -126,33 +126,49 @@ impl Delivery {
 }
 
 /// Run the courier and return the JSON line to print.
-pub fn run(input: &[u8], api_key: Option<&str>, http: &mut impl Http) -> String {
-    match deliver(input, api_key, http) {
+///
+/// `api_key` is sent only to NEAR AI Cloud directly. Through the relay it is
+/// never sent, and is still masked out of every message if it is set.
+pub fn run(input: &[u8], api_key: Option<&str>, upstream: &Upstream, http: &mut impl Http) -> String {
+    match deliver(input, api_key, upstream, http) {
         Ok(d) => d.to_json().to_string(),
         Err(f) => json!({ "error": { "code": f.code, "message": f.message } }).to_string(),
     }
 }
 
-pub fn deliver(input: &[u8], api_key: Option<&str>, http: &mut impl Http) -> Result<Delivery, Failure> {
-    let Some(key) = api_key.map(str::trim).filter(|k| !k.is_empty()) else {
-        return fail(
-            "missing_api_key",
-            format!("the {API_KEY_ENV} secret is not set for this OutLayer project"),
-        );
+pub fn deliver(input: &[u8], api_key: Option<&str>, upstream: &Upstream, http: &mut impl Http) -> Result<Delivery, Failure> {
+    let key = api_key.map(str::trim).filter(|k| !k.is_empty());
+    let auth = match upstream {
+        Upstream::Direct => match key {
+            Some(k) => Some(format!("Bearer {k}")),
+            None => {
+                return fail(
+                    "missing_api_key",
+                    format!("the {API_KEY_ENV} secret is not set for this OutLayer project"),
+                )
+            }
+        },
+        Upstream::Relay { .. } => None,
     };
+    // Only for masking from here on.
+    let key = key.unwrap_or("");
     let model = check_request(input)?;
-    let auth = format!("Bearer {key}");
+    let with_auth = |mut headers: Vec<(String, String)>| {
+        if let Some(a) = &auth {
+            headers.insert(0, ("authorization".into(), a.clone()));
+        }
+        headers
+    };
 
     // 2. The request, byte for byte.
     let chat = http
         .send(&Request {
             method: Method::Post,
-            url: format!("{API_BASE}{CHAT_PATH}"),
-            headers: vec![
-                ("authorization".into(), auth.clone()),
+            url: upstream.chat_url(),
+            headers: with_auth(vec![
                 ("content-type".into(), "application/json".into()),
                 ("accept".into(), "application/json".into()),
-            ],
+            ]),
             body: input.to_vec(),
         })
         .or_else(|e| fail("upstream_transport", redact(&e, key)))?;
@@ -170,12 +186,12 @@ pub fn deliver(input: &[u8], api_key: Option<&str>, http: &mut impl Http) -> Res
         .ok_or(Failure { code: "response_missing_id", message: "the completion has no string `id`".into() })?;
 
     // 3. The TEE receipt.
-    let url = format!(
-        "{API_BASE}{SIGNATURE_PATH}{}?model={}&signing_algo=ecdsa",
-        url_encode(&chat_id),
-        url_encode(&model)
-    );
-    let get = Request { method: Method::Get, url, headers: vec![("authorization".into(), auth), ("accept".into(), "application/json".into())], body: vec![] };
+    let get = Request {
+        method: Method::Get,
+        url: upstream.signature_url(&chat_id, &model),
+        headers: with_auth(vec![("accept".into(), "application/json".into())]),
+        body: vec![],
+    };
     let mut last = String::new();
     for attempt in 0..SIGNATURE_ATTEMPTS {
         if attempt > 0 {
@@ -303,4 +319,81 @@ fn preview(body: &[u8], key: &str) -> String {
         cut.push('…');
     }
     redact(&cut, key)
+}
+
+// ---------------------------------------------------------------- upstream
+// `test-signer` links this crate, and token3 pins its build (741e211c…c456).
+// The URL helpers below are `#[inline]`, so they are compiled only into builds
+// that use them: without it they land in this crate's object code and reorder
+// the test signer's functions. Recheck with the CLAIMS.md #13 command.
+
+/// This build's base and token: `CHAIR_API_BASE` and `CHAIR_TOKEN` at build time (`build.rs`).
+pub const BUILD_API_BASE: &str = env!("CHAIR_COURIER_API_BASE");
+pub const BUILD_TOKEN: &str = env!("CHAIR_COURIER_TOKEN");
+
+/// Where the courier's two calls go.
+///
+/// - **Direct** (`https://cloud-api.near.ai`, the default build): both calls
+///   carry `Authorization: Bearer $NEARAI_API_KEY` (an OutLayer secret).
+/// - **Relay** (any other base, e.g. `https://chair-tau-khaki.vercel.app/api/nearai`):
+///   OutLayer workers can't reach NEAR AI Cloud, so the calls go to CHAIR's
+///   relay, which adds the key. The courier sends no key and appends
+///   `token={CHAIR_TOKEN}` to both calls; the relay forwards only the token's
+///   open-meeting request. The relay is not trusted either: it can't change a
+///   byte of the request or the response without breaking the signature the
+///   token checks.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Upstream {
+    /// NEAR AI Cloud itself, with the API key.
+    Direct,
+    /// CHAIR's NEAR AI relay at `base`, keyless; `token` names the token
+    /// contract whose open meeting the relay checks the request against.
+    Relay { base: String, token: String },
+}
+
+impl Upstream {
+    /// Direct when `base` is NEAR AI Cloud, the relay otherwise.
+    pub fn new(base: &str, token: &str) -> Self {
+        let base = base.trim_end_matches('/');
+        if base == API_BASE {
+            Upstream::Direct
+        } else {
+            Upstream::Relay { base: base.to_string(), token: token.to_string() }
+        }
+    }
+
+    /// The one this build was made for.
+    pub fn built() -> Self {
+        Self::new(BUILD_API_BASE, BUILD_TOKEN)
+    }
+
+    #[inline]
+    pub fn base(&self) -> &str {
+        match self {
+            Upstream::Direct => API_BASE,
+            Upstream::Relay { base, .. } => base,
+        }
+    }
+
+    #[inline]
+    fn chat_url(&self) -> String {
+        match self {
+            Upstream::Direct => format!("{API_BASE}{CHAT_PATH}"),
+            Upstream::Relay { base, token } => format!("{base}{CHAT_PATH}?token={}", url_encode(token)),
+        }
+    }
+
+    #[inline]
+    fn signature_url(&self, chat_id: &str, model: &str) -> String {
+        let url = format!(
+            "{}{SIGNATURE_PATH}{}?model={}&signing_algo=ecdsa",
+            self.base(),
+            url_encode(chat_id),
+            url_encode(model)
+        );
+        match self {
+            Upstream::Direct => url,
+            Upstream::Relay { token, .. } => format!("{url}&token={}", url_encode(token)),
+        }
+    }
 }

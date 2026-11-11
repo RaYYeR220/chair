@@ -77,7 +77,7 @@ The token sends endowment NEAR to the brain, never the other way.
   - **Primary:** the brain contract requests an ed25519 signature from `v1.signer` (domain 1, path `nearai-login`) over a NEP-413 hash it computes itself (tag `2^31+413`, recipient fixed to NEAR AI). The corresponding derived public key is added once as `brain`'s only full-access key. The contract never signs anything that isn't a NEP-413 login hash.
   - **Deployer key.** `remove_key(pk)` deletes any key but the login key. For 7 days after `install_login_key` only the brain account itself may call it, so nobody can strip the deployer key out from under an unfinished setup. After that anyone may, so a deployer key left in place can always be removed and the brain ends up keyless but for the MPC key.
   - **Fallback:** a key generated inside the OutLayer TEE.
-- The API key lives in OutLayer encrypted secrets bound to the courier project. The worst case for a leaked API key is spent credits, never NEAR.
+- The API key lives on a server, never in the request or the result: in the NEAR AI relay's environment for the relay builds the tokens pin (§8), or in OutLayer encrypted secrets bound to the courier project for a direct build. The worst case for a leaked API key is spent credits, never NEAR.
 
 ## 7. IQ ladder
 
@@ -93,11 +93,16 @@ The endowment determines the model tier. The ladder is a fixed table set at `new
 ## 8. Courier module (OutLayer, WASI P2)
 
 1. Reads the request bytes from input.
-2. POSTs them unchanged to `https://cloud-api.near.ai/v1/chat/completions` with the API key from secrets.
-3. Fetches `/v1/signature/{chat_id}?model=…&signing_algo=ecdsa`.
+2. POSTs them unchanged to `{base}/v1/chat/completions`.
+3. Fetches `{base}/v1/signature/{chat_id}?model=…&signing_algo=ecdsa`.
 4. Returns `{response_text, signature_text, signature}`.
 
-It cannot alter the ruling without breaking check 2.
+`base` is fixed per build (`CHAIR_API_BASE`, with `CHAIR_TOKEN`), and the manifest's network allowlist holds exactly its host, so both are covered by the wasm's sha256:
+
+- **Relay** (what the tokens pin): `https://chair-tau-khaki.vercel.app/api/nearai`. OutLayer workers can't open a connection to `cloud-api.near.ai`, so the courier calls CHAIR's NEAR AI relay on the site instead. It sends no API key and adds `token=<CHAIR_TOKEN>` to both calls. The relay forwards a completion only if the body's sha256 equals `request_sha256` of the token's open meeting (`get_status().open_meeting`, whose `get_meeting` record is still `requested`); anything else gets 403 and nothing goes upstream. It adds the key from its own environment, returns NEAR AI's status and body bytes unchanged, and calls NEAR AI at most twice per meeting per server instance (a 200 is replayed, not fetched again). Signature lookups pass through for allowlisted tokens only, rate-limited. Code: `apps/web/src/app/api/nearai/`, `apps/web/src/lib/server/nearai-gate.ts`.
+- **Direct** (the build default): `https://cloud-api.near.ai`, with the API key from OutLayer secrets.
+
+Neither the courier nor the relay can alter the ruling without breaking checks 1 and 2: the token itself verifies NEAR AI's TEE signature over `sha256(request)` and `sha256(response_text)`. What a relay could still do is covered in `docs/SECURITY.md`, "Relay".
 
 ## 9. Trust and limits
 

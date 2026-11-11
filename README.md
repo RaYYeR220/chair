@@ -152,7 +152,7 @@ pnpm --filter @chair/web typecheck
 pnpm build                       # the web app
 ```
 
-The exact build commands for the contracts and the OutLayer modules are in [`docs/LAUNCH.md`](docs/LAUNCH.md). Rebuilt from this source with rustc 1.95.0, the token gives the code hash deployed at token3, and the test signer gives the `version_key` token3 pins ([CLAIMS.md](CLAIMS.md), claims 12 and 13).
+The exact build commands for the contracts and the OutLayer modules are in [`docs/LAUNCH.md`](docs/LAUNCH.md). Rebuilt with rustc 1.95.0 from commit `a74b97a`, the token gives the code hash deployed at token3 and token4. Its code has not changed since; later commits set the Cargo `repository` field, which writes the repo link into the contract's NEP-330 metadata and moves the hash to `c4cdd3d4…`. The test signer gives the `version_key` token3 pins ([CLAIMS.md](CLAIMS.md), claims 12 and 13).
 
 ## Honest limits
 

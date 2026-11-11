@@ -51,8 +51,9 @@ async function post(url: string, method: string, params: unknown, timeoutMs: num
   throw last instanceof Error ? last : new RpcError("rpc unreachable");
 }
 
-export function rpc<T>(method: string, params: unknown, opts: { archival?: boolean; timeoutMs?: number } = {}): Promise<T> {
-  return post(opts.archival ? env.archivalRpc : env.rpc, method, params, opts.timeoutMs ?? 12_000) as Promise<T>;
+/** `url` overrides the site's RPC (the NEAR AI relay reads tokens on either network). */
+export function rpc<T>(method: string, params: unknown, opts: { archival?: boolean; timeoutMs?: number; url?: string } = {}): Promise<T> {
+  return post(opts.url ?? (opts.archival ? env.archivalRpc : env.rpc), method, params, opts.timeoutMs ?? 12_000) as Promise<T>;
 }
 
 export type Finality = "final" | "optimistic";
@@ -61,15 +62,19 @@ export type Finality = "final" | "optimistic";
 export async function view<T>(
   method: string,
   args: object = {},
-  opts: { contract?: string; finality?: Finality } = {},
+  opts: { contract?: string; finality?: Finality; rpcUrl?: string; timeoutMs?: number } = {},
 ): Promise<T> {
-  const res = await rpc<{ result?: number[]; error?: string; logs?: string[] }>("query", {
-    request_type: "call_function",
-    finality: opts.finality ?? "final",
-    account_id: opts.contract ?? env.contractId,
-    method_name: method,
-    args_base64: Buffer.from(JSON.stringify(args)).toString("base64"),
-  });
+  const res = await rpc<{ result?: number[]; error?: string; logs?: string[] }>(
+    "query",
+    {
+      request_type: "call_function",
+      finality: opts.finality ?? "final",
+      account_id: opts.contract ?? env.contractId,
+      method_name: method,
+      args_base64: Buffer.from(JSON.stringify(args)).toString("base64"),
+    },
+    { url: opts.rpcUrl, timeoutMs: opts.timeoutMs },
+  );
   if (res.error) throw new RpcError(cleanPanic(res.error), res.error, "ContractPanic");
   if (!res.result) throw new RpcError(`${method}: empty result`);
   const text = Buffer.from(res.result).toString("utf8");

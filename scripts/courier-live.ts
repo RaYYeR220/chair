@@ -3,6 +3,11 @@
  *
  *   NEARAI_API_KEY=sk-... pnpm courier:live [--signers results/signers-<date>.json] [--dir results/courier-live-<date>] [--allow-gateway]
  *
+ * Through CHAIR's NEAR AI relay instead (the relay holds the key; the courier
+ * gets none):
+ *
+ *   CHAIR_API_BASE=http://localhost:3000/api/nearai CHAIR_TOKEN=token5.chair-dev.testnet pnpm courier:live --dir results/courier-relay-<date>
+ *
  * 1. The token's unit-test harness launches a token with the mainnet launch
  *    parameters and the verified signers, files three petitions (one an
  *    injection) and convenes meeting 1. It writes the exact request bytes.
@@ -35,6 +40,9 @@ const latestSigners = () => {
 const signers = resolve(flag("signers") ?? latestSigners());
 const dir = resolve(flag("dir") ?? `results/courier-live-${today}`);
 const env = { ...process.env, CHAIR_LIVE_DIR: dir, CHAIR_LIVE_SIGNERS: signers, AWS_LC_SYS_PREBUILT_NASM: "1", ...(argv.includes("--allow-gateway") ? { CHAIR_LIVE_ALLOW_GATEWAY: "1" } : {}) };
+/** `CHAIR_API_BASE` other than NEAR AI Cloud: the courier is built for a relay, which holds the key. */
+const relayBase = (process.env.CHAIR_API_BASE ?? "").trim().replace(/\/+$/, "");
+const viaRelay = relayBase !== "" && relayBase !== "https://cloud-api.near.ai";
 
 function contractStep(label: string) {
   console.error(`\n== ${label}`);
@@ -48,17 +56,20 @@ function contractStep(label: string) {
 }
 
 console.error(`signers: ${signers}\ndir:     ${dir}`);
+console.error(`via:     ${viaRelay ? `relay ${relayBase} (token ${process.env.CHAIR_TOKEN || "token.thechair.near"}), no key in the courier` : "NEAR AI Cloud, direct"}`);
 rmSync(resolve(dir, "courier-output.json"), { force: true });
 rmSync(resolve(dir, "contract-verdict.json"), { force: true });
 contractStep("1. launch, petitions, convene: the exact request bytes");
 
-if (!process.env.NEARAI_API_KEY) {
+if (!viaRelay && !process.env.NEARAI_API_KEY) {
   console.error(`\nNEARAI_API_KEY is not set. The request is ready at ${dir}/request.json; set the key and run again.`);
   process.exit(2);
 }
 
-console.error("\n== 2. the courier's logic against NEAR AI Cloud");
-const c = spawnSync("cargo", ["run", "--quiet", "--example", "live", "--", resolve(dir, "request.json")], { cwd: resolve(root, "courier"), env, encoding: "utf8" });
+console.error(`\n== 2. the courier's logic against ${viaRelay ? "the relay" : "NEAR AI Cloud"}`);
+const courierEnv: NodeJS.ProcessEnv = { ...env };
+if (viaRelay) delete courierEnv.NEARAI_API_KEY;
+const c = spawnSync("cargo", ["run", "--quiet", "--example", "live", "--", resolve(dir, "request.json")], { cwd: resolve(root, "courier"), env: courierEnv, encoding: "utf8" });
 console.error(c.stderr.trim());
 writeFileSync(resolve(dir, "courier-output.json"), c.stdout);
 let out: any;

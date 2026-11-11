@@ -1,21 +1,25 @@
-//! The courier's own logic, run natively against NEAR AI Cloud instead of
-//! inside OutLayer. Same `chair_courier::run`, same requests and retries; only
-//! the HTTP layer differs (curl here, WASI HTTP on OutLayer).
+//! The courier's own logic, run natively instead of inside OutLayer. Same
+//! `chair_courier::run`, same requests and retries, same build-time
+//! `CHAIR_API_BASE` and `CHAIR_TOKEN`; only the HTTP layer differs (curl here,
+//! WASI HTTP on OutLayer).
 //!
 //! ```sh
+//! # direct: NEAR AI Cloud with the key
 //! NEARAI_API_KEY=sk-... cargo run --example live -- <request file> > courier-output.json
+//! # through a relay (no key here; the relay holds it)
+//! CHAIR_API_BASE=http://localhost:3000/api/nearai CHAIR_TOKEN=token5.chair-dev.testnet //!   cargo run --example live -- <request file> > courier-output.json
 //! ```
 //!
 //! The request file holds the exact bytes the token sends to OutLayer. stdout is
 //! exactly what the module would print, so the token's `on_ruling` can be fed
-//! with it (`pnpm courier:live` does all of this). The key goes to curl on
-//! stdin, never on its command line.
+//! with it (`pnpm courier:live` does all of this). A key goes to curl on stdin,
+//! never on its command line.
 
 use std::io::Write;
 use std::process::{Command, Stdio};
 use std::time::Instant;
 
-use chair_courier::{run, Http, Method, Request, Response, API_KEY_ENV};
+use chair_courier::{run, Http, Method, Request, Response, Upstream, API_KEY_ENV};
 
 struct Curl {
     dir: std::path::PathBuf,
@@ -73,7 +77,9 @@ fn main() {
     let dir = std::env::temp_dir().join(format!("chair-courier-live-{}", std::process::id()));
     std::fs::create_dir_all(&dir).expect("temp dir");
     let key = std::env::var(API_KEY_ENV).ok();
-    let out = run(&input, key.as_deref(), &mut Curl { dir: dir.clone(), n: 0 });
+    let upstream = Upstream::built();
+    eprintln!("courier-live: base {}", upstream.base());
+    let out = run(&input, key.as_deref(), &upstream, &mut Curl { dir: dir.clone(), n: 0 });
     let _ = std::fs::remove_dir_all(&dir);
     print!("{out}");
     if out.starts_with("{\"error\"") {
