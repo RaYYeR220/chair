@@ -5,6 +5,7 @@ import { readFaces } from "@/components/canvas/kit";
 import { createRails, RAIL_LEVERS, type RailLever } from "@/components/canvas/rails";
 import { useScene } from "@/components/canvas/useScene";
 import type { LeversView, Rules } from "@/lib/chair-types";
+import { CONTRACT } from "@/lib/content/constitution";
 import type { ReplayMeeting } from "@/lib/views";
 
 const COPY: Record<RailLever, { name: string; what: string }> = {
@@ -68,7 +69,7 @@ export function RailsFigure({
       ))}
       {caption ? (
         <figcaption className="rail-cap" ref={capRef}>
-          {loading ? <span className="loading">Reading token3.chair-dev.testnet…</span> : null}
+          {loading ? <span className="loading">Reading {CONTRACT}…</span> : null}
         </figcaption>
       ) : null}
     </figure>

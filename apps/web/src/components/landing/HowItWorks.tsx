@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import { fmtNear, sh } from "@/lib/format";
+import { fmtNear, sh, signerName } from "@/lib/format";
 import type { MeetingView } from "@/lib/views";
+import { CONTRACT } from "@/lib/content/constitution";
 import { FlowScenes } from "./FlowScenes";
 import { Offline } from "./Offline";
 
@@ -20,7 +21,8 @@ const STEPS: { key: string; name: string; body: ReactNode }[] = [
     name: "Ask",
     body: (
       <>
-        The contract stores <code>sha256(request)</code>. An OutLayer courier carries the bytes unchanged to a model in a TEE on NEAR AI Cloud.
+        The contract stores <code>sha256(request)</code>. An OutLayer courier carries the bytes unchanged to a model in a TEE on NEAR AI Cloud, through a
+        relay that forwards only that request.
       </>
     ),
   },
@@ -60,17 +62,30 @@ function details(m: MeetingView): Record<string, ReactNode> {
         sha256(request)
         <br />
         <b>{sh(m.request_sha256, 8, 4)}</b>
+        {m.outlayer_request_id != null ? (
+          <>
+            <br />
+            OutLayer request <b>{m.outlayer_request_id}</b>
+          </>
+        ) : null}
       </>
     ),
     verify: (
       <>
         signer <b>{sh(m.signer, 6, 4)}</b>
         <br />
-        on model_signers · test key
+        {signerName(m.signer_info) ?? "on model_signers"}
       </>
     ),
     clamp: (
       <>
+        {!m.clamps.length && m.asked ? (
+          <>
+            no cut needed
+            <br />
+            every lever asked inside its bounds
+          </>
+        ) : null}
         {lock ? (
           <>
             locker_share{" "}
@@ -115,7 +130,7 @@ function details(m: MeetingView): Record<string, ReactNode> {
   };
 }
 
-/** 1. How a meeting works. `m1`: meeting 1, `null` if testnet could not be read, `undefined` while loading. */
+/** 1. How a meeting works. `m1`: the site token's meeting 1, `null` if testnet could not be read, `undefined` while loading. */
 export function HowItWorks({ m1 }: { m1: MeetingView | null | undefined }) {
   const d = m1 ? details(m1) : null;
   const flow = m1 ? { seed: m1.seed ?? "", requestSha256: m1.request_sha256 ?? "", weights: m1.petitions.map((p) => Number(p.weight)) } : null;
@@ -149,7 +164,7 @@ export function HowItWorks({ m1 }: { m1: MeetingView | null | undefined }) {
           <Offline>Couldn’t reach testnet just now, so meeting 1’s values are not shown under the steps.</Offline>
         ) : (
           <p className="fine rv">
-            Values under each step are read from meeting 1 on <span className="m">token3.chair-dev.testnet</span>
+            Values under each step are read from meeting 1 on <span className="m">{m1?.contract ?? CONTRACT}</span>
             {m1 === undefined ? " (loading)" : ""}. Dot positions are illustrative.
           </p>
         )}

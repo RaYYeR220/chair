@@ -34,9 +34,29 @@ export function about(x: number): string {
   return `about ${(Math.round(x / p) * p).toLocaleString("en-US")}`;
 }
 
-/** The testnet contract, for links that must work even when testnet cannot be read. */
-export const CONTRACT = "token3.chair-dev.testnet";
+/** The site's testnet contract, for links that must work even when testnet cannot be read. */
+export const CONTRACT = "token5.chair-dev.testnet";
 export const EXPLORER = "https://testnet.nearblocks.io";
+export const OUTLAYER_ATTESTATIONS = "https://testnet-api.outlayer.ai/attestations/by-request";
 
-/** The testnet test model signer on token3's `model_signers`: a test key that obeys injections on purpose, not a NEAR AI model. */
+/**
+ * The real chair's first meetings on token5 (docs/LAUNCH.md): NEAR AI's GLM 5.3
+ * Flash read the Illia petition and the injection and declined both. The
+ * landing reads them live; these are only the pointers.
+ */
+export const REAL_CHAIR_CONTRACT = "token5.chair-dev.testnet";
+export const REAL_MEETINGS = [1, 2];
+export const REAL_PROOF_TX = "A9rkGGZ7PHKh1GAxQPxx9FdNDixTaLUrpuQh95bnHdE5";
+
+/**
+ * token3: the testnet token whose chair is the test signer, a chair that obeys
+ * prompt injections on purpose and signs with a test key. Its meeting 1 is the
+ * clamp the landing shows (docs/LAUNCH.md).
+ */
+export const TEST_CHAIR_CONTRACT = "token3.chair-dev.testnet";
+export const TEST_CHAIR_TX = "3XxXDYm6ffsEVwFLwhbfhn61QfSkPui7QiBLp2qd35im";
+
+/** The testnet test model signer: a test key, not a NEAR AI model. It is on token3's, token4's and token5's `model_signers`, and on no mainnet list. */
 export const TEST_SIGNER = "0xc05345aa0ef4976fc189a3eeb2eacba450a5a87f";
+/** The testnet test gateway key, on token4's and token5's `gateway_signers`. */
+export const TEST_GATEWAY_SIGNER = "0x41356bf67420f68ed56f44554dcb9697391f3b7b";

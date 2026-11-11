@@ -15,33 +15,39 @@ import type {
   StatusView,
 } from "@/lib/chair-types";
 import { decimal, near, tokens } from "@/lib/units";
-import { env } from "./env";
+import { env, site, type Target } from "./env";
 import { accessKeys, finalBlock, type Finality, view } from "./rpc";
 
 /**
  * Typed client for the token contract's views (contracts/token/src: lib.rs,
  * meeting.rs, locks.rs, trade.rs, ft.rs). Every method maps one view.
+ * `chairAt` reads any CHAIR token; `chair` is the site's own.
  */
-export const chair = {
-  curve: (f?: Finality) => view<CurveView>("get_curve", {}, { finality: f }),
-  levers: (f?: Finality) => view<LeversView>("get_levers", {}, { finality: f }),
-  funds: (f?: Finality) => view<FundsView>("get_funds", {}, { finality: f }),
-  status: (f?: Finality) => view<StatusView>("get_status", {}, { finality: f }),
-  stats: (f?: Finality) => view<Stats>("get_stats", {}, { finality: f }),
-  constitution: () => view<ConstitutionView>("get_constitution"),
-  governance: () => view<GovernanceView>("get_governance"),
-  petitions: (f?: Finality) => view<Petition[]>("get_petitions", {}, { finality: f }),
-  meeting: (n: number, f?: Finality) => view<Meeting | null>("get_meeting", { meeting: n }, { finality: f }),
-  lastRequest: () => view<string | null>("get_last_request"),
-  requestPreview: (f?: Finality) => view<RequestPreview>("get_request_preview", {}, { finality: f }),
-  previewRuling: (args: { response_text: string; signature_text: string; signature: string; meeting: number }) =>
-    view<RulingPreview>("preview_ruling", args, { finality: "optimistic" }),
-  account: (accountId: string, f?: Finality) => view<AccountView | null>("get_account", { account_id: accountId }, { finality: f }),
-  quoteBuy: (nearIn: bigint, accountId?: string) =>
-    view<BuyQuote>("quote_buy", { near_in: nearIn.toString(), account_id: accountId ?? null }, { finality: "optimistic" }),
-  ftBalance: (accountId: string) => view<string>("ft_balance_of", { account_id: accountId }),
-  totalSupply: () => view<string>("ft_total_supply"),
-};
+export function chairAt(t: Target) {
+  const at = (f?: Finality) => ({ finality: f, contract: t.contract, rpcUrl: t.rpc });
+  return {
+    curve: (f?: Finality) => view<CurveView>("get_curve", {}, at(f)),
+    levers: (f?: Finality) => view<LeversView>("get_levers", {}, at(f)),
+    funds: (f?: Finality) => view<FundsView>("get_funds", {}, at(f)),
+    status: (f?: Finality) => view<StatusView>("get_status", {}, at(f)),
+    stats: (f?: Finality) => view<Stats>("get_stats", {}, at(f)),
+    constitution: () => view<ConstitutionView>("get_constitution", {}, at()),
+    governance: () => view<GovernanceView>("get_governance", {}, at()),
+    petitions: (f?: Finality) => view<Petition[]>("get_petitions", {}, at(f)),
+    meeting: (n: number, f?: Finality) => view<Meeting | null>("get_meeting", { meeting: n }, at(f)),
+    lastRequest: () => view<string | null>("get_last_request", {}, at()),
+    requestPreview: (f?: Finality) => view<RequestPreview>("get_request_preview", {}, at(f)),
+    previewRuling: (args: { response_text: string; signature_text: string; signature: string; meeting: number }) =>
+      view<RulingPreview>("preview_ruling", args, at("optimistic")),
+    account: (accountId: string, f?: Finality) => view<AccountView | null>("get_account", { account_id: accountId }, at(f)),
+    quoteBuy: (nearIn: bigint, accountId?: string) =>
+      view<BuyQuote>("quote_buy", { near_in: nearIn.toString(), account_id: accountId ?? null }, at("optimistic")),
+    ftBalance: (accountId: string) => view<string>("ft_balance_of", { account_id: accountId }, at()),
+    totalSupply: () => view<string>("ft_total_supply", {}, at()),
+  };
+}
+
+export const chair = chairAt(site);
 
 // ---------------------------------------------------------------- short-lived cache
 

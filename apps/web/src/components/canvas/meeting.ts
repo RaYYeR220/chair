@@ -189,7 +189,7 @@ export function createFan(cv: HTMLCanvasElement, lbl: HTMLElement, data: FanData
       t > T.cut
         ? clamped
           ? `asked ${data.asked} → ${data.applied}${data.rule ? ` · ${data.rule}` : ""}`
-          : `asked ${data.asked} · inside the bound`
+          : `asked ${data.asked} → ${data.applied}`
         : t > T.ask
           ? `asked ${data.asked}`
           : "asked …";

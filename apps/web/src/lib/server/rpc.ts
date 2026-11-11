@@ -159,15 +159,21 @@ export interface TxStatus {
 
 /**
  * Full status of a transaction with every receipt in its tree. Falls back to
- * the archival node when the regular one has garbage-collected it.
+ * the archival node when the regular one has garbage-collected it. `net`
+ * picks the network's nodes (the site's by default).
  */
-export async function txStatus(hash: string, sender: string, waitUntil = "NONE"): Promise<TxStatus> {
+export async function txStatus(
+  hash: string,
+  sender: string,
+  waitUntil = "NONE",
+  net: { rpc: string; archivalRpc: string } = { rpc: env.rpc, archivalRpc: env.archivalRpc },
+): Promise<TxStatus> {
   const params = { tx_hash: hash, sender_account_id: sender, wait_until: waitUntil };
   try {
-    return await rpc<TxStatus>("EXPERIMENTAL_tx_status", params, { timeoutMs: 20_000 });
+    return await rpc<TxStatus>("EXPERIMENTAL_tx_status", params, { url: net.rpc, timeoutMs: 20_000 });
   } catch (e) {
     if (e instanceof RpcError && /UNKNOWN_TRANSACTION|GARBAGE_COLLECTED|UNKNOWN_BLOCK/i.test(`${e.kind} ${e.message}`)) {
-      return rpc<TxStatus>("EXPERIMENTAL_tx_status", params, { archival: true, timeoutMs: 20_000 });
+      return rpc<TxStatus>("EXPERIMENTAL_tx_status", params, { url: net.archivalRpc, timeoutMs: 20_000 });
     }
     throw e;
   }

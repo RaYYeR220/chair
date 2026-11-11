@@ -3,16 +3,18 @@ import { Suspense } from "react";
 import { Close } from "@/components/landing/Close";
 import { Constitution } from "@/components/landing/Constitution";
 import { FoolIt } from "@/components/landing/FoolIt";
+import { FooledChair } from "@/components/landing/FooledChair";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { IqLadder } from "@/components/landing/IqLadder";
 import { Limits } from "@/components/landing/Limits";
-import { MeetingOne } from "@/components/landing/MeetingOne";
+import { RealChair } from "@/components/landing/RealChair";
 import { Simulation } from "@/components/landing/Simulation";
 import { Verify } from "@/components/landing/Verify";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
+import { REAL_CHAIR_CONTRACT, REAL_MEETINGS, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
 import { loadMeeting, loadMeetings, loadState } from "@/lib/server/live";
 import { toReplay } from "@/lib/views";
 import "@/styles/landing.css";
@@ -20,7 +22,7 @@ import "@/styles/landing.css";
 const LINKS = [
   { href: "#how", label: "How it works" },
   { href: "#constitution", label: "Constitution" },
-  { href: "#meeting-1", label: "Meeting 1" },
+  { href: "#real-chair", label: "Real meetings" },
   { href: "#fool", label: "Try to fool it" },
   { href: "#simulation", label: "Simulation" },
 ];
@@ -40,10 +42,19 @@ async function ConstitutionLive() {
   return <Constitution state={state} meetings={list ? toReplay(list) : null} />;
 }
 
-async function MeetingOneLive() {
+/** token5's meetings, ruled by NEAR AI's model. A meeting that can't be read is left out; none at all is `null`. */
+async function RealChairLive() {
   await connection();
-  const [m1, state] = await Promise.all([loadMeeting(1), loadState()]);
-  return <MeetingOne m1={m1} tokenKeys={state ? state.token_keys : null} />;
+  const [ms, state] = await Promise.all([Promise.all(REAL_MEETINGS.map((n) => loadMeeting(n, REAL_CHAIR_CONTRACT))), loadState()]);
+  const got = ms.filter((m) => m !== null);
+  const keys = state && state.contract === REAL_CHAIR_CONTRACT ? state.token_keys : undefined;
+  return <RealChair meetings={got.length ? got : null} contract={REAL_CHAIR_CONTRACT} tokenKeys={keys} />;
+}
+
+/** token3's meeting 1: the test chair that obeys injections, and the clamp. */
+async function FooledChairLive() {
+  await connection();
+  return <FooledChair m1={await loadMeeting(1, TEST_CHAIR_CONTRACT)} />;
 }
 
 async function IqLadderLive() {
@@ -66,8 +77,11 @@ export default function Home() {
         <Suspense fallback={<Constitution state={undefined} meetings={undefined} />}>
           <ConstitutionLive />
         </Suspense>
-        <Suspense fallback={<MeetingOne m1={undefined} tokenKeys={undefined} />}>
-          <MeetingOneLive />
+        <Suspense fallback={<RealChair meetings={undefined} contract={REAL_CHAIR_CONTRACT} />}>
+          <RealChairLive />
+        </Suspense>
+        <Suspense fallback={<FooledChair m1={undefined} />}>
+          <FooledChairLive />
         </Suspense>
         <FoolIt />
         <Simulation />

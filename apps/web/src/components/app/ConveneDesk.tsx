@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { getJson, postJson } from "@/lib/client/api";
 import type { MeetingRecord } from "@/lib/chair-types";
 import { clock } from "@/lib/format";
-import type { StateView } from "@/lib/views";
+import type { MeetingView, StateView } from "@/lib/views";
 import type { AppInitial } from "./types";
 
 type Phase = "sent" | "convened" | "held" | "error";
@@ -32,21 +32,31 @@ interface Convened {
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const STAGES = [
   { key: "convened", name: "Convened", what: "The brief and the block’s seed are fixed on chain; the request’s sha256 is stored." },
-  { key: "courier", name: "Courier", what: "OutLayer carries the request bytes to the model in a TEE and brings back the signed reply." },
-  { key: "on_ruling", name: "on_ruling", what: "The contract checks the signature, clamps the ruling and applies it." },
+  { key: "courier", name: "Courier", what: "The courier waits for OutLayer, then NEAR AI’s model rules (about a minute)." },
+  { key: "on_ruling", name: "on_ruling", what: "The contract checks the model’s signature, clamps the ruling and applies it." },
 ];
+/**
+ * The route waits up to 150 s for the ruling (maxDuration 180). If it gives up
+ * first, the page keeps watching the meeting until it is held: the yield
+ * window is about 200 blocks, so it is held either way within about two minutes.
+ */
+const POST_TIMEOUT_MS = 190_000;
+const WATCH_MORE_MS = 120_000;
 
-/** Convene: enabled once the interval has passed; shows the meeting land, about ten seconds later. */
+/** Convene: enabled once the interval has passed; shows the meeting land, about a minute later. */
 export function ConveneDesk({
   state,
   remaining,
   writes,
   onLanded,
+  last,
 }: {
   state: StateView | null;
   remaining: number | null;
   writes: AppInitial["writes"];
   onLanded: (n: number, record: MeetingRecord | null, dry: boolean) => void;
+  /** The newest meeting, read live: how long its ruling took. */
+  last: MeetingView | null;
 }) {
   const [run, setRun] = useState<Run | null>(null);
   const [now, setNow] = useState(0);
@@ -65,6 +75,7 @@ export function ConveneDesk({
   }, [running]);
 
   const open = state?.meetings.open ?? null;
+  const lastTook = last?.held_at_ms && last.convened_at_ms && last.status === "held" ? (last.held_at_ms - last.convened_at_ms) / 1000 : null;
   const next = state ? state.meetings.count + 1 : null;
   const ready = !!state && remaining === 0 && open == null;
   const dry = writes.dry_run;
@@ -79,18 +90,27 @@ export function ConveneDesk({
     setNow(t0);
     setRun({ phase: "sent", t0, target: next, dry });
     let watching = !dry;
+    let opened = false;
     // On chain, watch the meeting open while the request waits for its ruling.
     (async () => {
       while (watching) {
         await sleep(1500);
         if (!watching) break;
         const r = await getJson<{ open_meeting: number | null }>("/api/convene", 8_000);
-        if (r.ok && r.data.open_meeting === next) update((x) => (x.phase === "sent" ? { ...x, phase: "convened" } : x));
+        if (r.ok && r.data.open_meeting === next) {
+          opened = true;
+          update((x) => (x.phase === "sent" ? { ...x, phase: "convened" } : x));
+        }
       }
     })();
-    const r = await postJson<Convened>("/api/convene", {}, 130_000);
+    const r = await postJson<Convened>("/api/convene", {}, POST_TIMEOUT_MS);
     watching = false;
     if (!r.ok) {
+      // The meeting opened but the request ran out of time: keep watching it on chain.
+      if (opened && (r.status === undefined || r.status >= 500)) {
+        await watchUntilHeld(next, t0);
+        return;
+      }
       update((x) => ({ ...x, phase: "error", error: r.error }));
       return;
     }
@@ -103,12 +123,30 @@ export function ConveneDesk({
       await at(d.timeline.on_ruling_s);
     }
     if (!d.landed) {
-      update((x) => ({ ...x, phase: "convened", note: d.note, n: d.meeting }));
+      update((x) => ({ ...x, phase: "convened", n: d.meeting }));
+      await watchUntilHeld(d.meeting, t0);
       return;
     }
     update((x) => ({ ...x, phase: "held", n: d.meeting, note: d.note, waited: d.dry_run ? d.timeline?.on_ruling_s : d.waited_s }));
     if (alive.current) onLanded(d.meeting, d.record, !!d.dry_run);
   };
+
+  /** Polls the meeting clock until meeting `n` is no longer open, then reads its record. */
+  async function watchUntilHeld(n: number, t0: number) {
+    const until = Date.now() + WATCH_MORE_MS;
+    while (alive.current && Date.now() < until) {
+      const c = await getJson<{ open_meeting: number | null; next_meeting: number }>("/api/convene", 8_000);
+      if (c.ok && c.data.open_meeting !== n && c.data.next_meeting > n) {
+        const rec = await getJson<MeetingRecord>(`/api/meetings/${n}`, 45_000);
+        const record = rec.ok ? rec.data : null;
+        update((x) => ({ ...x, phase: "held", n, waited: (Date.now() - t0) / 1000 }));
+        if (alive.current) onLanded(n, record, false);
+        return;
+      }
+      await sleep(2_500);
+    }
+    update((x) => ({ ...x, phase: "convened", n, note: `Meeting ${n} is still waiting for its ruling. It will appear in the archive below once it lands.` }));
+  }
 
   const stage = (i: number) => {
     if (!run) return "";
@@ -124,8 +162,8 @@ export function ConveneDesk({
           <p className="eyebrow">Convene</p>
           <h2 id="conv-h">Anyone can call the&nbsp;meeting.</h2>
           <p className="lead">
-            Once the interval has passed, <code>convene()</code> snapshots the brief and asks the model. The ruling lands in <code>on_ruling</code> about ten
-            seconds later, checked and clamped, and the new meeting opens below.
+            Once the interval has passed, <code>convene()</code> snapshots the brief and asks the model. The courier waits for OutLayer, then NEAR AI’s model
+            rules, so the ruling lands in <code>on_ruling</code> about a minute later, checked and clamped, and the new meeting opens below.
           </p>
         </header>
         <div className="card conv">
@@ -144,6 +182,7 @@ export function ConveneDesk({
                   : remaining && remaining > 0
                     ? `The interval is ${state.meetings.interval_s} s; the button opens when the clock reaches zero.`
                     : "The interval has passed. Convening costs you nothing: the demo account pays the OutLayer deposit."}
+              {state && lastTook ? ` Meeting ${last!.number} took ${lastTook.toFixed(1)} s from convene to ruling.` : null}
             </p>
             <div className="form-row" style={{ justifyContent: "flex-start" }}>
               <button className="btn sm" type="button" onClick={start} disabled={!ready || running || !writes.convene}>

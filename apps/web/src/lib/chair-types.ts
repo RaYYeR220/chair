@@ -320,7 +320,21 @@ export interface CourierResult {
   outlayer_charged_yocto: string | null;
 }
 
+/** Who signed a ruling, as results/signers-*.json and docs/LAUNCH.md know the address. */
+export interface SignerInfo {
+  address: string;
+  /** `model`: a NEAR AI model's TEE key; `gateway`: NEAR AI's gateway key; `test_key`: the testnet test signer. */
+  kind: "model" | "gateway" | "test_key" | "unknown";
+  model: string | null;
+  /** The file that names it. */
+  source: string | null;
+  /** When `pnpm verify:signers` checked it against NEAR AI's attestation. */
+  verified_at: string | null;
+}
+
 export interface MeetingRecord {
+  /** The token contract this meeting belongs to. */
+  contract: string;
   number: number;
   status: MeetingStatus;
   final: boolean;
@@ -350,6 +364,10 @@ export interface MeetingRecord {
   locker_paid: U128 | null;
   endowment_sent: U128 | null;
   on_ruling_gas_tgas: number | null;
+  /** The ruling's recovered signer, named. */
+  signer_info: SignerInfo | null;
+  /** OutLayer's attestation for the courier run (it names the executed build and the input hash). */
+  attestation_url: string | null;
   txs: TxRef[];
   events: { event: string; receipt_id: string; data: Record<string, unknown> }[];
   /** Where the data came from and what could not be found. */

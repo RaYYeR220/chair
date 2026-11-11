@@ -1,6 +1,6 @@
 import "server-only";
 import { z } from "zod";
-import { type Network, parseRelayTokens } from "./nearai-gate";
+import { type Network, networkOf, parseRelayTokens } from "./nearai-gate";
 
 /**
  * Server configuration. Everything has a testnet default except the
@@ -14,13 +14,15 @@ export const NETWORKS = {
     archivalRpc: "https://archival-rpc.testnet.fastnear.com",
     nearblocksApi: "https://api-testnet.nearblocks.io",
     explorer: "https://testnet.nearblocks.io",
-    contract: "token3.chair-dev.testnet",
+    outlayerApi: "https://testnet-api.outlayer.ai",
+    contract: "token5.chair-dev.testnet",
   },
   mainnet: {
     rpc: "https://rpc.mainnet.fastnear.com",
     archivalRpc: "https://archival-rpc.mainnet.fastnear.com",
     nearblocksApi: "https://api.nearblocks.io",
     explorer: "https://nearblocks.io",
+    outlayerApi: "https://api.outlayer.ai",
     contract: "token.thechair.near",
   },
 } as const;
@@ -175,10 +177,43 @@ export function rpcFor(network: Network): string {
   return network === env.networkId ? env.rpc : NETWORKS[network].rpc;
 }
 
-export function txUrl(hash: string) {
-  return `${env.explorer}/txns/${hash}`;
+export function txUrl(hash: string, explorer: string = env.explorer) {
+  return `${explorer}/txns/${hash}`;
 }
 
 export function accountUrl(id: string) {
   return `${env.explorer}/address/${id}`;
+}
+
+/**
+ * A token contract and where to read it. The site's own token is `site`; the
+ * landing also reads token3, the testnet token whose chair is the test signer,
+ * and each token's RPC, NearBlocks API and explorer follow its network.
+ */
+export interface Target {
+  contract: string;
+  network: Network;
+  rpc: string;
+  archivalRpc: string;
+  nearblocksApi: string;
+  explorer: string;
+  outlayerApi: string;
+}
+
+export const site: Target = {
+  contract: env.contractId,
+  network: env.networkId,
+  rpc: env.rpc,
+  archivalRpc: env.archivalRpc,
+  nearblocksApi: env.nearblocksApi,
+  explorer: env.explorer,
+  outlayerApi: NETWORKS[env.networkId].outlayerApi,
+};
+
+export function targetFor(contract: string): Target {
+  if (contract === site.contract) return site;
+  const network = networkOf(contract) ?? env.networkId;
+  if (network === env.networkId) return { ...site, contract };
+  const n = NETWORKS[network];
+  return { contract, network, rpc: n.rpc, archivalRpc: n.archivalRpc, nearblocksApi: n.nearblocksApi, explorer: n.explorer, outlayerApi: n.outlayerApi };
 }

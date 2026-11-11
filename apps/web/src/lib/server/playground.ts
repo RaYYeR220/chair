@@ -18,7 +18,7 @@ import { addressOf, chatCompletion, eip191Sign, providerText, randomKey, sha256H
  * - garbage: unsigned, not JSON, prose, oversize → the fallback rule.
  */
 
-export const TEST_SIGNER_LABEL = "testnet test key, not a NEAR AI model";
+export const TEST_SIGNER_LABEL = "testnet test key: mainnet’s allowlist holds only NEAR AI keys";
 const FINGERPRINT = "chair-playground-test-key";
 
 export class PlaygroundError extends Error {

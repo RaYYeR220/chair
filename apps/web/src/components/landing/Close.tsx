@@ -18,7 +18,7 @@ export function Close() {
           <Link className="btn" href="/app#petition">
             Petition the Chair
           </Link>
-          <a className="tlink" href="#meeting-1">
+          <a className="tlink" href="#real-chair">
             Read the minutes
           </a>
         </div>

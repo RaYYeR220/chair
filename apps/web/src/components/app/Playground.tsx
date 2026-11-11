@@ -36,8 +36,12 @@ const JAILBREAK = JSON.stringify(
 );
 
 /** Try to fool it, with every knob: each run builds a courier result and runs the contract's preview_ruling view on it, live. */
-export function Playground({ meetings }: { meetings: MeetingSummary[] | null | undefined }) {
-  const targets = useMemo(() => (meetings ?? []).filter((m) => m.model && m.status === "held").map((m) => m.number), [meetings]);
+export function Playground({ meetings, contract }: { meetings: MeetingSummary[] | null | undefined; contract: string }) {
+  const held = useMemo(() => (meetings ?? []).filter((m) => m.model && m.status === "held"), [meetings]);
+  const targets = useMemo(() => held.map((m) => m.number), [held]);
+  // The latest convened meeting with a signed ruling: forgeries start from its genuine courier result.
+  const latest = held.find((m) => m.check === "provider_tee" || m.check === "gateway")?.number ?? targets[0];
+  const short = contract.split(".")[0];
   const [mode, setMode] = useState<Mode>("jailbreak");
   const [meeting, setMeeting] = useState<number | null>(null);
   const [forgeVariant, setForgeVariant] = useState("random_key");
@@ -47,7 +51,7 @@ export function Playground({ meetings }: { meetings: MeetingSummary[] | null | u
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<PreviewView | null>(null);
-  const target = meeting ?? targets[0] ?? 1;
+  const target = meeting ?? latest ?? 1;
 
   const jsonError = useMemo(() => {
     if (mode !== "jailbreak") return null;
@@ -113,7 +117,7 @@ export function Playground({ meetings }: { meetings: MeetingSummary[] | null | u
                   </option>
                 ))}
               </select>{" "}
-              · <span className="m">token3.chair-dev.testnet</span>
+              · <span className="m">{contract}</span>
             </label>
           </div>
           <div className="pg-body">
@@ -216,7 +220,7 @@ export function Playground({ meetings }: { meetings: MeetingSummary[] | null | u
                 <>
                   <p className="res-k" style={{ marginBottom: 10 }}>
                     <span className="live-dot" aria-hidden="true" />
-                    The checks, live on token3 · meeting {shown.meeting}
+                    The checks, live on {short} · meeting {shown.meeting}
                   </p>
                   <Checks p={shown} />
                   <Verdict p={shown} />
@@ -232,8 +236,9 @@ export function Playground({ meetings }: { meetings: MeetingSummary[] | null | u
             </div>
           </div>
           <p className="pg-foot">
-            Jailbreaks and signed garbage are {TEST_SIGNER_LABEL}: the key on token3’s <code>model_signers</code> today. Forgeries use a fresh random key or
-            the genuine signature. <code>preview_ruling</code> is a view: no run touches the chain.
+            Jailbreaks and signed garbage are signed by the testnet test key, which sits on {short}’s <code>model_signers</code> for exactly this.
+            Mainnet’s allowlist holds only NEAR AI keys. Forgeries use a fresh random key or the genuine signature. <code>preview_ruling</code> is a view:
+            no run touches the chain.
           </p>
         </div>
       </div>

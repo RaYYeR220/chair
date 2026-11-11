@@ -1,3 +1,5 @@
+import type { SignerInfo } from "@/lib/chair-types";
+
 /** Display helpers shared by the landing and the app. */
 
 /** `0x1234ab…cdef`: the head and tail of a hash or address. */
@@ -30,6 +32,18 @@ const MODEL_NAMES: Record<string, string> = {
   "moonshotai/kimi-k3": "Kimi K3",
 };
 export const modelName = (m: string | null | undefined) => (m ? (MODEL_NAMES[m] ?? m) : "asleep");
+
+/** Who a signer is, in a few words: "GLM-5.3-flash's TEE key on NEAR AI Cloud", "the testnet test key". */
+export function signerName(i: SignerInfo | null | undefined): string | null {
+  if (!i) return null;
+  if (i.kind === "model") return `${modelName(i.model)}’s TEE key on NEAR AI Cloud`;
+  if (i.kind === "gateway") return "NEAR AI’s gateway key";
+  if (i.kind === "test_key") return "the testnet test key";
+  return null;
+}
+
+/** The testnet test key, as every place that shows it labels it. */
+export const TEST_KEY_LABEL = "testnet test key: mainnet’s allowlist holds only NEAR AI keys";
 
 /** `Nov 10, 03:17 UTC`. */
 export function utc(msEpoch: number): string {

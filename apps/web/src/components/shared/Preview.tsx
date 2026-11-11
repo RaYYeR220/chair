@@ -5,12 +5,12 @@ import { readFaces } from "@/components/canvas/kit";
 import { createLanes, failGate, type LanesScene } from "@/components/canvas/lanes";
 import { register } from "@/components/canvas/scheduler";
 import { TEST_SIGNER } from "@/lib/content/constitution";
-import { sh, trim } from "@/lib/format";
+import { sh, TEST_KEY_LABEL, trim } from "@/lib/format";
 import type { PreviewView } from "@/lib/views";
 
 const listOf = (xs: string[]) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`);
 
-export const TEST_SIGNER_LABEL = "signed by a testnet test key, not a NEAR AI model";
+export const TEST_SIGNER_LABEL = TEST_KEY_LABEL;
 
 /** The canvas of checks a courier result runs through. Swapping `p` replays the run. */
 export function Lanes({ p, onCycleDone }: { p: PreviewView; onCycleDone?: () => void }) {

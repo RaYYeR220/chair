@@ -1,4 +1,4 @@
-import type { Asked, Clamp, Levers, LeversView, MeetingRecord, Rules, SignatureCheck, TxRef } from "@/lib/chair-types";
+import type { Asked, Clamp, Levers, LeversView, MeetingRecord, Rules, SignatureCheck, SignerInfo, TxRef } from "@/lib/chair-types";
 import { near, tokens } from "@/lib/units";
 
 /**
@@ -118,6 +118,7 @@ export function toStateView(s: StateBody): StateView {
 // ---------------------------------------------------------------- one meeting
 
 export interface MeetingView {
+  contract: string;
   number: number;
   status: MeetingRecord["status"];
   check: SignatureCheck;
@@ -134,6 +135,7 @@ export interface MeetingView {
   signature: string | null;
   signer: string | null;
   signed_by: string | null;
+  signer_info: SignerInfo | null;
   reason: string | null;
   locker_weight: string | null;
   petitions: { from: string; weight: string; text: string; answer: string | null }[];
@@ -149,6 +151,7 @@ export interface MeetingView {
   on_ruling_tgas: number | null;
   outlayer_request_id: number | null;
   outlayer_charged_near: number | null;
+  attestation_url: string | null;
   convene_tx: TxRef | null;
   txs: TxRef[];
   notes: string[];
@@ -159,6 +162,7 @@ const ms = (ns: string | null | undefined) => (ns ? Number(BigInt(ns) / 1_000_00
 export function toMeetingView(r: MeetingRecord): MeetingView {
   const o = r.outcome;
   return {
+    contract: r.contract,
     number: r.number,
     status: r.status,
     check: r.check,
@@ -175,6 +179,7 @@ export function toMeetingView(r: MeetingRecord): MeetingView {
     signature: r.courier?.signature ?? null,
     signer: o?.signer ?? null,
     signed_by: o?.signed_by ?? null,
+    signer_info: r.signer_info ?? null,
     reason: o?.reason ?? null,
     locker_weight: r.brief?.locker_weight ?? null,
     petitions: r.petitions.map((p) => ({ from: p.from, weight: p.weight, text: p.text, answer: p.answer })),
@@ -190,6 +195,7 @@ export function toMeetingView(r: MeetingRecord): MeetingView {
     on_ruling_tgas: r.on_ruling_gas_tgas,
     outlayer_request_id: r.courier?.outlayer_request_id ?? null,
     outlayer_charged_near: r.courier?.outlayer_charged_yocto ? Number(near(r.courier.outlayer_charged_yocto)) : null,
+    attestation_url: r.attestation_url ?? null,
     convene_tx: r.txs.find((t) => t.label === "convene") ?? null,
     txs: r.txs,
     notes: r.notes,
@@ -216,6 +222,9 @@ export interface MeetingSummary {
   seed: string | null;
   petitions: number;
   levers_before: Levers;
+  signer: string | null;
+  signed_by: string | null;
+  signer_info: SignerInfo | null;
   asked: Asked | null;
   applied: Levers | null;
   clamps: Clamp[];
@@ -233,6 +242,9 @@ export interface MeetingListItem {
   seed: string | null;
   petitions: number;
   levers_before: Levers;
+  signer?: string | null;
+  signed_by?: string | null;
+  signer_info?: SignerInfo | null;
   asked: Asked | null;
   applied: Levers | null;
   clamps: Clamp[];
@@ -250,6 +262,9 @@ export function toSummary(m: MeetingListItem): MeetingSummary {
     seed: m.seed,
     petitions: m.petitions,
     levers_before: m.levers_before,
+    signer: m.signer ?? null,
+    signed_by: m.signed_by ?? null,
+    signer_info: m.signer_info ?? null,
     asked: m.asked,
     applied: m.applied,
     clamps: m.clamps,

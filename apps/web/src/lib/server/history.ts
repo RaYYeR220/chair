@@ -11,9 +11,10 @@ import type {
   SignatureCheck,
   TxRef,
 } from "@/lib/chair-types";
-import { cached, chair, parseBrief } from "./chair";
-import { env, txUrl } from "./env";
+import { cached, chairAt, parseBrief } from "./chair";
+import { env, site, type Target, txUrl } from "./env";
 import { type ChainEvent, decodeValue, receiptMethods, type TxStatus, txEvents, txStatus } from "./rpc";
+import { signerInfo } from "./signers";
 
 /**
  * Meeting history, rebuilt from the chain's own record: the meeting view,
@@ -21,20 +22,39 @@ import { type ChainEvent, decodeValue, receiptMethods, type TxStatus, txEvents, 
  * (`meeting_convened`, the OutLayer courier's output, `on_ruling`'s
  * `meeting_held`). A held or lapsed meeting never changes again, so its
  * record is cached for the life of the server instance (and the API sends it
- * with an immutable cache header).
+ * with an immutable cache header). Every function reads the site's token
+ * unless given another `Target` (the landing also reads token3).
  */
 
 const sha256 = (s: string) => createHash("sha256").update(s, "utf8").digest("hex");
 
 const records = new Map<string, MeetingRecord>();
 const convenes = new Map<string, { hash: string; sender: string }>();
-const key = (n: number) => `${env.contractId}:${n}`;
+const key = (n: number, t: Target = site) => `${t.contract}:${n}`;
 
+/**
+ * Convene transactions listed in docs/LAUNCH.md, so these records never
+ * depend on NearBlocks. Each is still confirmed on chain by its
+ * `meeting_convened` event before it is used.
+ */
+const LAUNCH_CONVENES: Record<string, Record<number, string>> = {
+  "token5.chair-dev.testnet": {
+    1: "A9rkGGZ7PHKh1GAxQPxx9FdNDixTaLUrpuQh95bnHdE5",
+    2: "4G3Xmeqd1V4W75VwYqeW5YT83LnDzNXhtaMzPB57vFVu",
+  },
+  "token3.chair-dev.testnet": {
+    1: "3XxXDYm6ffsEVwFLwhbfhn61QfSkPui7QiBLp2qd35im",
+    2: "ADAwf2NEaz1W7VMuxSb1yxmbXTLgBKpKzCRfjsrKVSdU",
+  },
+};
+for (const [contract, list] of Object.entries(LAUNCH_CONVENES)) {
+  for (const [n, hash] of Object.entries(list)) convenes.set(`${contract}:${n}`, { hash, sender: "" });
+}
 for (const [n, hash] of env.knownConvenes) convenes.set(key(n), { hash, sender: "" });
 
-/** Record the transaction that convened meeting `n` (the convene route calls this). */
-export function rememberConvene(n: number, hash: string, sender: string) {
-  convenes.set(key(n), { hash, sender });
+/** Record the transaction that convened meeting `n` (the convene route calls this for the site's token). */
+export function rememberConvene(n: number, hash: string, sender: string, t: Target = site) {
+  convenes.set(key(n, t), { hash, sender });
 }
 
 // ---------------------------------------------------------------- finding the convene tx
@@ -47,9 +67,10 @@ interface NbTxn {
   outcomes: { status: boolean };
 }
 
-async function nearblocks<T>(path: string): Promise<T> {
-  const res = await fetch(`${env.nearblocksApi}${path}`, {
-    headers: env.nearblocksKey ? { authorization: `Bearer ${env.nearblocksKey}` } : {},
+async function nearblocks<T>(t: Target, path: string): Promise<T> {
+  const apiKey = t.network === env.networkId ? env.nearblocksKey : undefined;
+  const res = await fetch(`${t.nearblocksApi}${path}`, {
+    headers: apiKey ? { authorization: `Bearer ${apiKey}` } : {},
     signal: AbortSignal.timeout(12_000),
     cache: "no-store",
   });
@@ -59,8 +80,8 @@ async function nearblocks<T>(path: string): Promise<T> {
   return body.data;
 }
 
-function convenedNumber(tx: TxStatus): number | null {
-  const e = txEvents(tx).find((x) => x.event === "meeting_convened" && x.executor === env.contractId);
+function convenedNumber(tx: TxStatus, t: Target): number | null {
+  const e = txEvents(tx).find((x) => x.event === "meeting_convened" && x.executor === t.contract);
   return e ? Number(e.data.meeting) : null;
 }
 
@@ -69,25 +90,25 @@ function convenedNumber(tx: TxStatus): number | null {
  * NearBlocks transaction list of the token just before `convened_at`, each
  * candidate confirmed on chain by its `meeting_convened` event.
  */
-async function findConvene(m: Meeting): Promise<{ hash: string; sender: string; tx: TxStatus } | null> {
-  const known = convenes.get(key(m.number));
+async function findConvene(m: Meeting, t: Target): Promise<{ hash: string; sender: string; tx: TxStatus } | null> {
+  const known = convenes.get(key(m.number, t));
   if (known) {
-    const tx = await txStatus(known.hash, known.sender || m.convener);
-    if (convenedNumber(tx) === m.number) return { hash: known.hash, sender: known.sender || m.convener, tx };
+    const tx = await txStatus(known.hash, known.sender || m.convener, "NONE", t);
+    if (convenedNumber(tx, t) === m.number) return { hash: known.hash, sender: known.sender || m.convener, tx };
   }
   const at = BigInt(m.convened_at);
   const before = (at + 30n * 1_000_000_000n).toString();
-  const list = await cached(`nb:${env.contractId}:${before}`, 60_000, () =>
-    nearblocks<NbTxn[]>(`/v3/accounts/${env.contractId}/txns?before_ts=${before}&limit=25`),
+  const list = await cached(`nb:${t.contract}:${before}`, 60_000, () =>
+    nearblocks<NbTxn[]>(t, `/v3/accounts/${t.contract}/txns?before_ts=${before}&limit=25`),
   );
   const candidates = list
     .filter((t) => t.outcomes.status && t.actions.some((a) => a.method === "convene") && BigInt(t.block_timestamp) <= at)
     .sort((a, b) => (BigInt(b.block_timestamp) > BigInt(a.block_timestamp) ? 1 : -1))
     .slice(0, 3);
   for (const c of candidates) {
-    const tx = await txStatus(c.transaction_hash, c.signer_account_id);
-    if (convenedNumber(tx) === m.number) {
-      rememberConvene(m.number, c.transaction_hash, c.signer_account_id);
+    const tx = await txStatus(c.transaction_hash, c.signer_account_id, "NONE", t);
+    if (convenedNumber(tx, t) === m.number) {
+      rememberConvene(m.number, c.transaction_hash, c.signer_account_id, t);
       return { hash: c.transaction_hash, sender: c.signer_account_id, tx };
     }
   }
@@ -182,34 +203,35 @@ function slimEvent(e: ChainEvent) {
   return { event: e.event, receipt_id: e.receipt_id, data };
 }
 
-function receiptRef(tx: TxStatus, hash: string, method: string, label: string): TxRef | null {
+function receiptRef(tx: TxStatus, hash: string, method: string, label: string, explorer: string): TxRef | null {
   const methods = receiptMethods(tx);
   const r = tx.receipts_outcome.find((x) => methods.get(x.id) === method);
-  return r ? { label, hash, url: txUrl(hash), receipt_id: r.id, block_hash: r.block_hash } : null;
+  return r ? { label, hash, url: txUrl(hash, explorer), receipt_id: r.id, block_hash: r.block_hash } : null;
 }
 
-async function build(m: Meeting): Promise<{ record: MeetingRecord; complete: boolean }> {
+async function build(m: Meeting, t: Target): Promise<{ record: MeetingRecord; complete: boolean }> {
   const notes: string[] = [];
-  const constitution = await cached("constitution", 60_000, chair.constitution);
+  const chair = chairAt(t);
+  const constitution = await cached(`constitution:${t.contract}`, 60_000, chair.constitution);
   const outlayer = constitution.outlayer.account;
 
   let conv: Awaited<ReturnType<typeof findConvene>> = null;
   try {
-    conv = await findConvene(m);
+    conv = await findConvene(m, t);
   } catch (e) {
     notes.push(`convene tx lookup failed: ${(e as Error).message}`);
   }
   if (!conv) notes.push("convene transaction not found; the record holds the contract view only");
 
-  const events = conv ? txEvents(conv.tx).filter((e) => e.executor === env.contractId) : [];
+  const events = conv ? txEvents(conv.tx).filter((e) => e.executor === t.contract) : [];
   const convened = events.find((e) => e.event === "meeting_convened" && Number(e.data.meeting) === m.number);
   let held = events.find((e) => e.event === "meeting_held" && Number(e.data.meeting) === m.number);
   const txs: TxRef[] = [];
   if (conv) {
-    txs.push({ label: "convene", hash: conv.hash, url: txUrl(conv.hash), block_hash: conv.tx.transaction_outcome.block_hash });
-    const req = receiptRef(conv.tx, conv.hash, "request_execution", "outlayer request_execution");
-    const resp = receiptRef(conv.tx, conv.hash, "on_execution_response", "courier result");
-    const ruled = receiptRef(conv.tx, conv.hash, "on_ruling", "on_ruling");
+    txs.push({ label: "convene", hash: conv.hash, url: txUrl(conv.hash, t.explorer), block_hash: conv.tx.transaction_outcome.block_hash });
+    const req = receiptRef(conv.tx, conv.hash, "request_execution", "outlayer request_execution", t.explorer);
+    const resp = receiptRef(conv.tx, conv.hash, "on_execution_response", "courier result", t.explorer);
+    const ruled = receiptRef(conv.tx, conv.hash, "on_ruling", "on_ruling", t.explorer);
     for (const r of [req, resp, ruled]) if (r) txs.push(r);
   }
 
@@ -218,11 +240,11 @@ async function build(m: Meeting): Promise<{ record: MeetingRecord; complete: boo
   if (m.status === "lapsed" && !held) {
     try {
       const nextMeeting = await chair.meeting(m.number + 1);
-      const next = nextMeeting ? await findConvene(nextMeeting) : null;
+      const next = nextMeeting ? await findConvene(nextMeeting, t) : null;
       if (next) {
-        lapseEvents = txEvents(next.tx).filter((e) => e.executor === env.contractId && Number(e.data.meeting) === m.number);
+        lapseEvents = txEvents(next.tx).filter((e) => e.executor === t.contract && Number(e.data.meeting) === m.number);
         held = lapseEvents.find((e) => e.event === "meeting_held");
-        txs.push({ label: "lapse settled (next convene)", hash: next.hash, url: txUrl(next.hash) });
+        txs.push({ label: "lapse settled (next convene)", hash: next.hash, url: txUrl(next.hash, t.explorer) });
       } else notes.push("the convene that settled this lapse was not found");
     } catch (e) {
       notes.push(`lapse lookup failed: ${(e as Error).message}`);
@@ -256,7 +278,9 @@ async function build(m: Meeting): Promise<{ record: MeetingRecord; complete: boo
   const methods = conv ? receiptMethods(conv.tx) : new Map<string, string>();
   const onRuling = conv?.tx.receipts_outcome.find((r) => methods.get(r.id) === "on_ruling");
 
+  const requestId = courier?.outlayer_request_id ?? null;
   const record: MeetingRecord = {
+    contract: t.contract,
     number: m.number,
     status: m.status,
     final: m.status !== "requested",
@@ -283,6 +307,8 @@ async function build(m: Meeting): Promise<{ record: MeetingRecord; complete: boo
     locker_paid: o?.locker_paid ?? null,
     endowment_sent: o?.endowment_sent ?? null,
     on_ruling_gas_tgas: onRuling ? Math.round(onRuling.outcome.gas_burnt / 1e10) / 100 : null,
+    signer_info: signerInfo(o?.signer),
+    attestation_url: requestId !== null && Number.isFinite(requestId) ? `${t.outlayerApi}/attestations/by-request/${requestId}` : null,
     txs,
     events: [...events.filter((e) => Number(e.data.meeting) === m.number), ...lapseEvents].map(slimEvent),
     notes,
@@ -301,13 +327,13 @@ async function build(m: Meeting): Promise<{ record: MeetingRecord; complete: boo
 }
 
 /** One meeting's full record, or `null` if the contract has no such meeting. */
-export async function getMeetingRecord(n: number): Promise<MeetingRecord | null> {
-  const hit = records.get(key(n));
+export async function getMeetingRecord(n: number, t: Target = site): Promise<MeetingRecord | null> {
+  const hit = records.get(key(n, t));
   if (hit) return hit;
-  const m = await chair.meeting(n);
+  const m = await chairAt(t).meeting(n);
   if (!m) return null;
-  const { record, complete } = await build(m);
-  if (complete) records.set(key(n), record);
+  const { record, complete } = await build(m, t);
+  if (complete) records.set(key(n, t), record);
   return record;
 }
 
@@ -317,6 +343,7 @@ export function isCachedFinal(n: number) {
 
 /** Every meeting the contract still holds (the last 64), newest first, from views only. */
 export async function listMeetings() {
+  const chair = chairAt(site);
   const status = await chair.status();
   const count = status.meeting_count;
   const from = Math.max(1, count - 63);
@@ -351,12 +378,15 @@ function summary(m: Meeting, convene: string | null) {
     request_sha256: m.request_sha256,
     petitions: m.petitions,
     levers_before: m.levers_before,
+    signer: o?.signer ?? null,
+    signed_by: o?.signed_by ?? null,
+    signer_info: signerInfo(o?.signer),
     asked: o?.asked ?? null,
     applied: o?.levers ?? null,
     clamps: o?.clamps ?? [],
     buyback_bps: o?.buyback_bps ?? 0,
     locker_paid: o?.locker_paid ?? null,
     endowment_sent: o?.endowment_sent ?? null,
-    convene_tx: convene ? { hash: convene, url: txUrl(convene) } : null,
+    convene_tx: convene ? { hash: convene, url: txUrl(convene, site.explorer) } : null,
   };
 }

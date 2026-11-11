@@ -82,6 +82,7 @@ export function ChairApp({ initial }: { initial: AppInitial }) {
     };
   }, [initial.state, initial.petitions, initial.meetings, refreshState, refreshPetitions, refreshMeetings]);
 
+  const contract = state?.contract ?? CONTRACT;
   // seconds until the next meeting can be convened, counted down locally between polls
   const remaining = state && now ? Math.max(0, state.meetings.opens_in_s - (now - stateAt.current) / 1000) : null;
   const ago = state && now && stateAt.current ? Math.max(0, Math.round((now - stateAt.current) / 1000)) : null;
@@ -109,7 +110,7 @@ export function ChairApp({ initial }: { initial: AppInitial }) {
         <p className="app-status" role="status">
           <span>
             <span className="live-dot" aria-hidden="true" />
-            <span className="m">{CONTRACT}</span>
+            <span className="m">{contract}</span>
           </span>
           {state ? <span>block {state.block.height.toLocaleString("en-US")}</span> : null}
           {ago != null ? <span>read {ago < 2 ? "just now" : `${ago} s ago`}</span> : null}
@@ -138,9 +139,9 @@ export function ChairApp({ initial }: { initial: AppInitial }) {
 
       <LiveState state={state} remaining={remaining} />
       <PetitionDesk petitions={petitions} state={state} writes={writes} onFiled={refreshPetitions} />
-      <ConveneDesk state={state} remaining={remaining} writes={writes} onLanded={onLanded} />
-      <Archive meetings={meetings} latest={initial.latest ?? null} landed={landed} />
-      <Playground meetings={meetings} />
+      <ConveneDesk state={state} remaining={remaining} writes={writes} onLanded={onLanded} last={landed?.record && !landed.dry ? landed.record : (initial.latest ?? null)} />
+      <Archive meetings={meetings} latest={initial.latest ?? null} landed={landed} contract={contract} />
+      <Playground meetings={meetings} contract={contract} />
     </>
   );
 }

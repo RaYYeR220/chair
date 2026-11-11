@@ -11,7 +11,14 @@ import { call, demoAccountId, demoAvailable } from "./wallet";
  * Convene the next meeting with the demo account's NEAR: `convene` with the
  * exact OutLayer deposit once the interval has passed, then wait for the
  * courier's result to land in `on_ruling` and return the meeting record.
+ *
+ * With NEAR AI behind the courier that takes about a minute: OutLayer picks
+ * the job up (token5: 116 and 138 blocks), the model rules, the courier
+ * fetches the signature (15 s inside OutLayer). token5's two meetings took
+ * 68.5 s and 84.6 s from convene to ruling (docs/LAUNCH.md). The yield window
+ * is about 200 blocks, so by about two minutes the meeting is held either way.
  */
+export const CONVENE_WAIT_MS = 150_000;
 
 export class ConveneError extends Error {
   constructor(
@@ -81,7 +88,7 @@ export async function convene(opts: { waitMs?: number } = {}) {
     return { hash: r.hash, url: r.url, deposit, lapsing: status.open_meeting };
   });
 
-  const deadline = started + (opts.waitMs ?? 80_000);
+  const deadline = started + (opts.waitMs ?? CONVENE_WAIT_MS);
   const { n } = await conveneReceipt(sent.hash, demo, Math.min(deadline, Date.now() + 30_000));
   rememberConvene(n, sent.hash, demo);
   forget("state");

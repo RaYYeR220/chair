@@ -1,4 +1,4 @@
-import { CONTRACT, EXPLORER } from "@/lib/content/constitution";
+import { CONTRACT, EXPLORER, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
 import { BLINDBOOK, REPO } from "@/lib/format";
 import { Brand } from "./Brand";
 
@@ -21,7 +21,7 @@ export function Footer() {
             CLAIMS.md
           </a>
           <a href={`${EXPLORER}/address/${CONTRACT}`} target="_blank" rel="noopener">
-            token3 on nearblocks
+            {CONTRACT.split(".")[0]} on nearblocks
           </a>
         </nav>
         <div className="foot-fine">
@@ -33,7 +33,10 @@ export function Footer() {
             </a>
             , a dark pool for NEAR Intents (github.com/RaYYeR220/blindbook).
           </p>
-          <p>Testnet values are read live from token3.chair-dev.testnet; simulation values are unsigned; anything else drawn is labelled illustrative.</p>
+          <p>
+            Testnet values are read live from {CONTRACT}, and the fooled test chair from {TEST_CHAIR_CONTRACT}; simulation values are unsigned; anything
+            else drawn is labelled illustrative.
+          </p>
         </div>
       </div>
     </footer>

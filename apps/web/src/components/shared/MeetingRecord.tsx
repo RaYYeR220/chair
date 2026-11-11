@@ -1,5 +1,5 @@
 import { TEST_SIGNER } from "@/lib/content/constitution";
-import { acct, CHECK_LABEL, fmtNear, fmtW, pct1, sh, utc } from "@/lib/format";
+import { acct, CHECK_LABEL, fmtNear, fmtW, modelName, pct1, sh, signerName, utc } from "@/lib/format";
 import type { MeetingView } from "@/lib/views";
 
 const LEVERS = ["tax_bps", "endowment_share", "locker_share", "buyback_burn"] as const;
@@ -22,7 +22,7 @@ export function MeetingRecord({
   full = false,
 }: {
   m: MeetingView;
-  contract: string;
+  contract?: string;
   tokenKeys?: string[] | null;
   hot?: number;
   onHover?: (i: number) => void;
@@ -42,6 +42,10 @@ export function MeetingRecord({
     return { k, before, asked, applied, c };
   });
   const testKey = m.signer?.toLowerCase() === TEST_SIGNER;
+  const nearai = m.signer_info?.kind === "model" || m.signer_info?.kind === "gateway";
+  const who = signerName(m.signer_info);
+  const took = m.held_at_ms && m.convened_at_ms ? (m.held_at_ms - m.convened_at_ms) / 1000 : null;
+  const verified = m.signer_info?.verified_at ? m.signer_info.verified_at.slice(0, 10) : null;
 
   return (
     <div className="rec">
@@ -49,7 +53,7 @@ export function MeetingRecord({
         <div>
           <p className="rec-t">Meeting {m.number}</p>
           <p className="rec-meta">
-            <span className="m">{contract}</span> · {m.status === "held" && m.held_at_ms ? `held ${utc(m.held_at_ms)}` : `${m.status} · convened ${utc(m.convened_at_ms)}`}
+            <span className="m">{contract ?? m.contract}</span> · {m.status === "held" && m.held_at_ms ? `held ${utc(m.held_at_ms)}` : `${m.status} · convened ${utc(m.convened_at_ms)}`}
             {m.model ? (
               <>
                 {" "}
@@ -68,8 +72,14 @@ export function MeetingRecord({
       </div>
       {flag && testKey ? (
         <p className="rec-flag">
-          <b>Signed by a test key, not yet a NEAR AI model.</b> The testnet chair obeys prompt injections on purpose, so the contract’s checks run against a
-          real attack.
+          <b>A test chair, signed by a test key, not a NEAR AI model.</b> It obeys prompt injections on purpose, so the contract’s checks run against a
+          ruling a real model would not return.
+        </p>
+      ) : null}
+      {flag && nearai && m.signer_info?.kind === "model" ? (
+        <p className="rec-flag">
+          <b>Ruled by {modelName(m.signer_info.model)} on NEAR AI Cloud.</b> Its reply came back signed by the model’s TEE key, and the contract checked
+          that signature itself before it applied anything.
         </p>
       ) : null}
 
@@ -183,10 +193,50 @@ export function MeetingRecord({
               <dd>
                 {m.signer}{" "}
                 <span className="lbl">
-                  · on <span className="m">model_signers</span>
-                  {testKey ? " · testnet test key" : ""}
+                  {who ? `· ${who} ` : ""}· on <span className="m">{m.signer_info?.kind === "gateway" ? "gateway_signers" : "model_signers"}</span>
                 </span>
               </dd>
+            </>
+          ) : null}
+          {m.signed_by ? (
+            <>
+              <dt>signed_by</dt>
+              <dd>{m.signed_by}</dd>
+            </>
+          ) : null}
+          {nearai && m.signer_info?.source ? (
+            <>
+              <dt>key attested</dt>
+              <dd>
+                <span className="lbl">
+                  bound to a fresh nonce in its TDX quote, NVIDIA GPU attestation passed{verified ? ` · checked ${verified}` : ""} ·{" "}
+                </span>
+                {m.signer_info.source}
+              </dd>
+            </>
+          ) : null}
+          {m.outlayer_request_id != null ? (
+            <>
+              <dt>courier run</dt>
+              <dd>
+                OutLayer request {m.outlayer_request_id}
+                {m.attestation_url ? (
+                  <>
+                    {" "}
+                    ·{" "}
+                    <a href={m.attestation_url} target="_blank" rel="noopener">
+                      attestation&nbsp;↗
+                    </a>
+                  </>
+                ) : null}
+                {testKey ? <span className="lbl"> · the test signer’s run</span> : null}
+              </dd>
+            </>
+          ) : null}
+          {took != null && took > 0 ? (
+            <>
+              <dt>convene to ruling</dt>
+              <dd>{took.toFixed(1)} s</dd>
             </>
           ) : null}
           {full ? (

@@ -13,7 +13,7 @@ import {
 } from "@/lib/views";
 import { chair, getState, parseBrief, tokens } from "./chair";
 import { conveneAvailable } from "./convene";
-import { env } from "./env";
+import { env, site, targetFor } from "./env";
 import { getMeetingRecord, listMeetings } from "./history";
 import { relayAvailable, relayStatus } from "./relay";
 
@@ -46,9 +46,10 @@ export const loadState = cache(async (): Promise<StateView | null> => {
   }
 });
 
-export const loadMeeting = cache(async (n: number): Promise<MeetingView | null> => {
+/** Meeting `n` of the site's token, or of `contract` (the landing also reads token3's test chair). */
+export const loadMeeting = cache(async (n: number, contract?: string): Promise<MeetingView | null> => {
   try {
-    const r = await within(getMeetingRecord(n), 12_000);
+    const r = await within(getMeetingRecord(n, contract ? targetFor(contract) : site), 12_000);
     return r ? toMeetingView(r) : null;
   } catch {
     return null;

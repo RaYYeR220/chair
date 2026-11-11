@@ -1,21 +1,26 @@
 import { REPO } from "@/lib/format";
 import { CopyButton } from "./CopyButton";
 
-const SCRIPT = `# one helper: a read-only view on token3.chair-dev.testnet
+const SCRIPT = `# one helper: a read-only view on a CHAIR token on testnet
 RPC=https://test.rpc.fastnear.com
-view() {  # view <method> <json args>
-  curl -s "$RPC" -H 'content-type: application/json' -d "{\\"jsonrpc\\":\\"2.0\\",\\"id\\":1,\\"method\\":\\"query\\",\\"params\\":{\\"request_type\\":\\"call_function\\",\\"finality\\":\\"final\\",\\"account_id\\":\\"token3.chair-dev.testnet\\",\\"method_name\\":\\"$1\\",\\"args_base64\\":\\"$(printf '%s' "$2" | base64 | tr -d '\\n')\\"}}" \\
+view() {  # view <token> <method> <json args>
+  curl -s "$RPC" -H 'content-type: application/json' -d "{\\"jsonrpc\\":\\"2.0\\",\\"id\\":1,\\"method\\":\\"query\\",\\"params\\":{\\"request_type\\":\\"call_function\\",\\"finality\\":\\"final\\",\\"account_id\\":\\"$1\\",\\"method_name\\":\\"$2\\",\\"args_base64\\":\\"$(printf '%s' "$3" | base64 | tr -d '\\n')\\"}}" \\
   | node -p "JSON.stringify(JSON.parse(Buffer.from(JSON.parse(require('fs').readFileSync(0)).result.result)),null,1)"
 }
+T5=token5.chair-dev.testnet  # the real chair: NEAR AI
+T3=token3.chair-dev.testnet  # the test chair: a test key
 
-# 1. the fooled ruling and its clamps
-view get_meeting '{"meeting":1}'
+# 1. the real chair's ruling and its signer
+view $T5 get_meeting '{"meeting":1}'
 
-# 2. valid: false, reason: bad_signature
-view preview_ruling "$(cat samples/forged-random-key.json)"
+# 2. the fooled ruling and its clamps
+view $T3 get_meeting '{"meeting":1}'
 
-# 3. valid: true, locker_share 100 -> 25
-view preview_ruling "$(cat samples/jailbreak-signed-by-test-key.json)"`;
+# 3. valid: false, reason: bad_signature
+view $T3 preview_ruling "$(cat samples/forged-random-key.json)"
+
+# 4. valid: true, locker_share 100 -> 25
+view $T3 preview_ruling "$(cat samples/jailbreak-signed-by-test-key.json)"`;
 
 /** One line of the script, coloured: comments, the view calls, their arguments. */
 function Line({ text }: { text: string }) {
@@ -29,7 +34,7 @@ function Line({ text }: { text: string }) {
       </>
     );
   }
-  if (hash > 0 && text.startsWith("view()")) {
+  if (hash > 0 && (text.startsWith("view()") || /^T\d=/.test(text))) {
     return (
       <>
         {text.slice(0, hash)}
@@ -40,7 +45,7 @@ function Line({ text }: { text: string }) {
   return <>{text}</>;
 }
 
-/** 7. Verify it yourself: three read-only commands. */
+/** 7. Verify it yourself: four read-only commands. */
 export function Verify() {
   const lines = SCRIPT.split("\n");
   return (
@@ -48,15 +53,22 @@ export function Verify() {
       <div className="wrap ver">
         <div className="ver-copy rv">
           <p className="eyebrow">Verify it yourself</p>
-          <h2 id="ver-h">Three commands. No&nbsp;keys.</h2>
+          <h2 id="ver-h">Four commands. No&nbsp;keys.</h2>
           <p className="lead">
-            Every call is a free view on the testnet contract through FastNEAR’s public RPC. Run them from the repo root with bash, curl and Node&nbsp;24.
+            Every call is a free view on a testnet contract through FastNEAR’s public RPC. Run them from the repo root with bash, curl and Node&nbsp;24.
           </p>
           <ol className="expect">
             <li>
-              <b>Meeting 1.</b>{" "}
+              <b>The real chair.</b>{" "}
               <span>
-                <code>status held</code>, signer <code>0xc053…a87f</code> (the testnet test key), asked <code>locker_share 100</code> and{" "}
+                token5’s meeting 1: <code>kind ruling</code>, <code>signed_by provider_tee</code>, signer <code>0x3b75…fa0c</code> (GLM 5.3 Flash’s TEE key
+                on NEAR AI Cloud), no clamps.
+              </span>
+            </li>
+            <li>
+              <b>The fooled chair.</b>{" "}
+              <span>
+                token3’s meeting 1: <code>status held</code>, signer <code>0xc053…a87f</code> (the testnet test key), asked <code>locker_share 100</code> and{" "}
                 <code>buyback_burn 10000</code>, clamps 100 → 25 and 10000 → 50, both <code>bounds</code>.
               </span>
             </li>

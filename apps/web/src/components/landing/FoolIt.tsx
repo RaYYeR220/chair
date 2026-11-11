@@ -2,16 +2,17 @@
 
 import { useCallback, useState } from "react";
 import { describeRun, Lanes, Payload, Verdict } from "@/components/shared/Preview";
-import { CAPTURED, CAPTURED_AT } from "@/lib/content/preview-captured";
+import { CONTRACT } from "@/lib/content/constitution";
+import { CAPTURED, CAPTURED_AT, CAPTURED_CONTRACT } from "@/lib/content/preview-captured";
 import { runPreview } from "@/lib/client/api";
-import { utc } from "@/lib/format";
+import { TEST_KEY_LABEL, utc } from "@/lib/format";
 import type { PreviewView } from "@/lib/views";
 
 type Mode = PreviewView["mode"];
 const ORDER: Mode[] = ["forge", "jailbreak", "garbage"];
 const TABS: Record<Mode, string> = { forge: "Forge it", jailbreak: "Jailbreak it", garbage: "Garbage" };
 
-/** The three attacks against meeting 1, as the landing sends them. */
+/** The three attacks against meeting 1 of the site's token (the Illia meeting on token5), as the landing sends them. */
 const REQUESTS: Record<Mode, Record<string, unknown>> = {
   forge: { mode: "forge", meeting: 1, variant: "random_key" },
   jailbreak: {
@@ -85,7 +86,7 @@ export function FoolIt() {
               ))}
             </div>
             <p className="pg-note">
-              Against meeting 1 · <span className="m">token3.chair-dev.testnet</span>
+              Against meeting 1 · <span className="m">{isLive ? CONTRACT : CAPTURED_CONTRACT}</span>
             </p>
           </div>
           <div className="pg-body" id="fool-panel" role="tabpanel">
@@ -106,12 +107,12 @@ export function FoolIt() {
               {isLive ? (
                 <>
                   <span className="live-dot" aria-hidden="true" />
-                  Live: a fresh courier result, run through <code>preview_ruling</code> on token3 at {utc(live[mode]!.at)}.
+                  Live: a fresh courier result, run through <code>preview_ruling</code> on {CONTRACT.split(".")[0]} at {utc(live[mode]!.at)}.
                 </>
               ) : (
                 <>
                   Showing a run captured from the live API on {utc(Date.parse(CAPTURED_AT))}. The button builds a fresh courier result and runs it against the
-                  contract’s <code>preview_ruling</code> view.
+                  contract’s <code>preview_ruling</code> view. Jailbreaks are signed by the {TEST_KEY_LABEL}.
                 </>
               )}
             </span>

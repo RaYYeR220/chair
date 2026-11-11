@@ -70,6 +70,16 @@
   color: var(--ink-2);
   border: 1px solid var(--hair);
 }
+/* the playground's signer label is a sentence: let it wrap on a phone */
+@media (max-width: 640px) {
+  .form-row .badge.ink {
+    white-space: normal;
+    max-width: 100%;
+    padding: 3px 10px;
+    border-radius: var(--r-sm);
+    line-height: 1.4;
+  }
+}
 
 /* sections */
 .asec {
@@ -539,6 +549,16 @@
 }
 .arch .cl .v {
   color: var(--violet);
+}
+.arch .sig {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font);
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+.arch .sig .m {
+  color: var(--ink-2);
 }
 .arch .when {
   font-size: 12.5px;

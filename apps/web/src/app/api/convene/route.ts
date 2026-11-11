@@ -1,13 +1,18 @@
 import { connection } from "next/server";
 import { chair } from "@/lib/server/chair";
-import { convene, conveneAvailable } from "@/lib/server/convene";
+import { CONVENE_WAIT_MS, convene, conveneAvailable } from "@/lib/server/convene";
 import { dryRunConvene } from "@/lib/server/dryrun";
 import { env } from "@/lib/server/env";
 import { CACHE, fail, json } from "@/lib/server/http";
 import { clientIp, Limiter } from "@/lib/server/limit";
 import { finalBlock } from "@/lib/server/rpc";
 
-export const maxDuration = 120;
+/**
+ * A NEAR AI meeting lands about a minute after convene (lib/server/convene.ts),
+ * so the route waits up to CONVENE_WAIT_MS (150 s) plus the send. 180 s needs
+ * Fluid compute on Hobby (its limit is 300 s) or a Pro plan.
+ */
+export const maxDuration = 180;
 
 const limiter = new Limiter("convene", env.conveneIpCooldownS);
 /** The dry run sends nothing, so it only needs a short cooldown. */
@@ -53,7 +58,7 @@ export async function POST(req: Request) {
   const gate = limiter.check(ip);
   if (!gate.ok) return json({ ok: false, error: gate.reason, retry_after_s: gate.retry_after_s }, { status: 429 });
   try {
-    const out = await convene({ waitMs: 90_000 });
+    const out = await convene({ waitMs: CONVENE_WAIT_MS });
     limiter.record(ip);
     return json({ ok: true, ...out }, { cache: CACHE.none });
   } catch (e) {
