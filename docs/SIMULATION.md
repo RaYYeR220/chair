@@ -160,7 +160,7 @@ Everything else is as in v2: the agents, scenarios, constitution and PID. The sy
 
 ```sh
 sim/run              # 4 policies x 5 scenarios; deterministic policies over 20 seeds; LLM chair replayed from sim/cache/llm
-sim/run test         # unit tests of the token model + golden tests against all three testnet deployments
+sim/run test         # unit tests of the token model + golden tests against four testnet deployments
 sim/run --live       # also call Venice for any LLM meeting not in the cache (reads VENICE_API_KEY from the environment or sim/.env)
 sim/run --no-llm     # deterministic policies only
 ```
@@ -590,6 +590,7 @@ v3 ran on the mainnet args with the seed, and it changes none of the points belo
 - **Venice is not NEAR AI Cloud.**
   - The model families match the IQ ladder, but the hosts differ.
   - The Venice request differs from the contract's bytes in two ways: Venice's model id, and `venice_parameters.include_venice_system_prompt: false`. The contract-format request and its sha256 are logged per meeting.
+  - The simulation's requests had no `reasoning_effort`. The deployed meetings, from token5 on, send `"reasoning_effort":"low"`, and the simulation was not rerun with it.
   - `temperature: 0` isn't deterministic at the lever level on Venice: in the seed probe, the identical request gave a different applied ruling in 5 of 8 meetings (tax ±25 bps or the buyback size). NEAR AI's hosts weren't measured. docs/SECURITY.md says that at temperature 0 "completions rarely differ", which limits a courier that fetches several completions and keeps the one it prefers. On Venice that premise doesn't hold for tax and buyback, though the clamp still bounds each choice to one step. The response cache makes the sim's reruns deterministic.
   - Kimi K3 (≥ 500 NEAR) was never reached.
 - **Not modelled:** staking yield on the endowment, gas, OutLayer latency, meetings drifting off a 24 h grid (mainnet is 23 h), the 1-hour granularity of the contract's volume window and lock expiry, and secondary markets (all trades are on the curve). Holders claim rewards only when a lock ends.

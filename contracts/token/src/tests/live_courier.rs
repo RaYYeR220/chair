@@ -23,7 +23,7 @@ use super::*;
 use std::path::PathBuf;
 
 const MAINNET_DEPOSIT: u128 = 15_000_000_000_000_000_000_000; // 0.015 NEAR
-const MAINNET_VERSION_KEY: &str = "08b77db13e6c1052c3c0e0e42afa5030bc8acb7fc76f0e32673c5328a3c38469";
+const MAINNET_VERSION_KEY: &str = "7df2093408b0625df643569669677d742d791ccb6750b8c5e95801787eda7181";
 
 fn signers(path: &str) -> (Vec<String>, Vec<String>) {
     let v: Value = sj::from_str(&std::fs::read_to_string(path).unwrap_or_else(|e| panic!("CHAIR_LIVE_SIGNERS {path}: {e}"))).unwrap();

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T09:28:40.536Z",
+ "generated_at": "2026-11-11T13:10:23.759Z",
  "source": "https://cloud-api.near.ai/v1/attestation/report",
  "samples_per_model": 3,
  "ladder": [
@@ -22,7 +22,7 @@
    "served": true,
    "samples": [
     {
-     "nonce": "708110eb12d2660ab98bd934bc288747b4e4cd62c1b99a4413d256f691284ef7",
+     "nonce": "f47a0f03dbf61239635f601f107c4b50bb032f14deb6165681a4bcab733123ec",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -31,8 +31,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000708110eb12d2660ab98bd934bc288747b4e4cd62c1b99a4413d256f691284ef7",
-       "quote_sha256": "8b7fd868923561189f81ac1f3c016d3a2729cebbbc580f9cecf53af9b994d171"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000f47a0f03dbf61239635f601f107c4b50bb032f14deb6165681a4bcab733123ec",
+       "quote_sha256": "71c4b602d89baf0ea6f1bac469989c1e3771d15b2ddb8bff390b94e5b332c8f9"
       },
       "gpu": {
        "ok": null,
@@ -50,8 +50,8 @@
        "tdx_binding": {
         "ok": true,
         "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000708110eb12d2660ab98bd934bc288747b4e4cd62c1b99a4413d256f691284ef7",
-        "quote_sha256": "5e7ac477a8af29dc9acfecf5ece2d3a6ec1311a55ad038c740caaaf5de570b23",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000f47a0f03dbf61239635f601f107c4b50bb032f14deb6165681a4bcab733123ec",
+        "quote_sha256": "8bb81e1181ec096d848f288ffaebe04ff626b6a80137820c09c465d49a5b0d10",
         "public_key_hashes_to_address": true
        },
        "gpu": {
@@ -69,7 +69,7 @@
      ]
     },
     {
-     "nonce": "19f16b7252796334a986b4930affbf2f5fbb797ece9b6dc3d4228862b776f911",
+     "nonce": "cbf139de936b964d845ae2ac2e75a33e87d92b7a2522d0c6b6010a92448c0e5a",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -78,8 +78,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e77900000000000000000000000019f16b7252796334a986b4930affbf2f5fbb797ece9b6dc3d4228862b776f911",
-       "quote_sha256": "70d2d926f6e996cc4ecc7cda5c1b4686fd4dcf4c383e9c8531727ddc2c809aef"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000cbf139de936b964d845ae2ac2e75a33e87d92b7a2522d0c6b6010a92448c0e5a",
+       "quote_sha256": "37f6ac6c0255784f0fa70707f3a848736aaab4b12d38f8361dbd7d7d4b3d9ab3"
       },
       "gpu": {
        "ok": null,
@@ -97,8 +97,8 @@
        "tdx_binding": {
         "ok": true,
         "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c00000000000000000000000019f16b7252796334a986b4930affbf2f5fbb797ece9b6dc3d4228862b776f911",
-        "quote_sha256": "bc08d38b88103e1d9c72be060d2c6f84359fc130368cf307163c70bedd08064c",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000cbf139de936b964d845ae2ac2e75a33e87d92b7a2522d0c6b6010a92448c0e5a",
+        "quote_sha256": "393d7ca0530fb20ddaafa586e91c8a1ae7883666dfcdb7367cfd268faedad80a",
         "public_key_hashes_to_address": true
        },
        "gpu": {
@@ -106,7 +106,7 @@
         "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
         "gpus": 8,
         "arch": "HOPPER",
-        "jwt_kid": "nv-eat-kid-prod-20261111072340718-fe54994c-71c6-4664-a0af-0fef1ea3886a"
+        "jwt_kid": "nv-eat-kid-prod-20261111072732839-6558afa6-f307-45b4-a621-c56da842e71a"
        },
        "instance_id": "19aea1693533dc2d529db03e3f725f20bde8d66d",
        "app_name": "dstack-nvidia-0.5.11",
@@ -116,7 +116,7 @@
      ]
     },
     {
-     "nonce": "b0ebd93feb9ced2d07aa73a199e19c87f85b73c64905833234dbdb7464720344",
+     "nonce": "045bef8769bd48507c9d5842668ac7af0bd1bd6f268eb4ca60ac8ef8722f329f",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -125,8 +125,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000b0ebd93feb9ced2d07aa73a199e19c87f85b73c64905833234dbdb7464720344",
-       "quote_sha256": "8f45c47ca5d69c1fd80aebf8de799ea509dd2102b290fd01a71355bd162841e4"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000045bef8769bd48507c9d5842668ac7af0bd1bd6f268eb4ca60ac8ef8722f329f",
+       "quote_sha256": "1c2f1c45c2fc3d3bc34008ecc63e76eae07d264498642880d063cc0a053c5c06"
       },
       "gpu": {
        "ok": null,
@@ -144,8 +144,8 @@
        "tdx_binding": {
         "ok": true,
         "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000b0ebd93feb9ced2d07aa73a199e19c87f85b73c64905833234dbdb7464720344",
-        "quote_sha256": "8817bf1c8167259deb71289ebeee2f98da9b7940760b9e6c598666a8be11dd7a",
+        "report_data": "3b753b4406613c5e70ae640508632b600424fa0c000000000000000000000000045bef8769bd48507c9d5842668ac7af0bd1bd6f268eb4ca60ac8ef8722f329f",
+        "quote_sha256": "35e6363e36b085f11c2b491053ac9d858b99dd6516a8ff1b1ea7b91bbe870a48",
         "public_key_hashes_to_address": true
        },
        "gpu": {
@@ -153,7 +153,7 @@
         "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
         "gpus": 8,
         "arch": "HOPPER",
-        "jwt_kid": "nv-eat-kid-prod-20261111072340718-fe54994c-71c6-4664-a0af-0fef1ea3886a"
+        "jwt_kid": "nv-eat-kid-prod-20261111072931691-1ab042a6-6ad6-4f87-ae07-e98e45559c6a"
        },
        "instance_id": "19aea1693533dc2d529db03e3f725f20bde8d66d",
        "app_name": "dstack-nvidia-0.5.11",
@@ -175,7 +175,7 @@
    "served": true,
    "samples": [
     {
-     "nonce": "5273962488dcc63ef684e0c03b17e3091295a79ca8741fc5a7b205a820abaa1e",
+     "nonce": "d42802e59a36155be3043497fd0a5a3b1defe6fb342e5278d0524ad4de53461c",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -184,8 +184,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000005273962488dcc63ef684e0c03b17e3091295a79ca8741fc5a7b205a820abaa1e",
-       "quote_sha256": "fc1ad1cd6b29912968b1ff3638a8bf30bf59db7598a09f1ea7715638636b7c31"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000d42802e59a36155be3043497fd0a5a3b1defe6fb342e5278d0524ad4de53461c",
+       "quote_sha256": "7fb8aec56062ee6b5d25e54ff6f2e45c280b84ec5acaf70f9c9086954fc6bd2a"
       },
       "gpu": {
        "ok": null,
@@ -203,55 +203,8 @@
        "tdx_binding": {
         "ok": true,
         "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e0000000000000000000000005273962488dcc63ef684e0c03b17e3091295a79ca8741fc5a7b205a820abaa1e",
-        "quote_sha256": "667e5f84b366e53a7a4073185b431db893ca294d717380a602d1f8fde2a47bcc",
-        "public_key_hashes_to_address": true
-       },
-       "gpu": {
-        "ok": true,
-        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
-        "gpus": 8,
-        "arch": "HOPPER",
-        "jwt_kid": "nv-eat-kid-prod-20261111072340718-fe54994c-71c6-4664-a0af-0fef1ea3886a"
-       },
-       "instance_id": "7bb9af0ac5b0e22dde3903218f58e56f743164a1",
-       "app_name": "dstack-nvidia-0.5.11",
-       "compose_hash": "c53e254e8b70aa14b45ba3043730a0736ca2afb1df7fa3db9c61578845e470fe",
-       "ok": true
-      }
-     ]
-    },
-    {
-     "nonce": "0151904ce84f99437f74183c5fccc3d64d4cdabeda035294f2c38b8e53bd6f30",
-     "http_status": 200,
-     "gateway": {
-      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
-      "kind": "gateway",
-      "kind_evidence": "report.gateway_attestation",
-      "tdx_binding": {
-       "ok": true,
-       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000000151904ce84f99437f74183c5fccc3d64d4cdabeda035294f2c38b8e53bd6f30",
-       "quote_sha256": "64b2fabd6193baa3addfebadf30ef5aaecb6bf0fc38040323736fb73749de353"
-      },
-      "gpu": {
-       "ok": null,
-       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
-      },
-      "app_name": "dstack-0.5.12",
-      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
-      "ok": true
-     },
-     "model_attestations": [
-      {
-       "signing_address": "0xfe0071895500a9755c18044948ab4f4e1a7f337e",
-       "kind": "model",
-       "kind_evidence": "report.model_attestations[].model_name = deepseek-ai/DeepSeek-V4.1-Flash-1017",
-       "tdx_binding": {
-        "ok": true,
-        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e0000000000000000000000000151904ce84f99437f74183c5fccc3d64d4cdabeda035294f2c38b8e53bd6f30",
-        "quote_sha256": "577e98887b2e96c08f3ee0f08a3a8024d4da0f345c351ce9e1b76d8b5ff5058d",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e000000000000000000000000d42802e59a36155be3043497fd0a5a3b1defe6fb342e5278d0524ad4de53461c",
+        "quote_sha256": "fe32ded9e3e37af9ce0959c968565bc2ca6227780d7173c61fa6f5960881e0d5",
         "public_key_hashes_to_address": true
        },
        "gpu": {
@@ -261,15 +214,15 @@
         "arch": "HOPPER",
         "jwt_kid": "nv-eat-kid-prod-20261111072732839-6558afa6-f307-45b4-a621-c56da842e71a"
        },
-       "instance_id": "7bb9af0ac5b0e22dde3903218f58e56f743164a1",
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
        "app_name": "dstack-nvidia-0.5.11",
-       "compose_hash": "c53e254e8b70aa14b45ba3043730a0736ca2afb1df7fa3db9c61578845e470fe",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
        "ok": true
       }
      ]
     },
     {
-     "nonce": "3aaab4a8157b1d4b8c97bdbf7b0d3b999144cc9dfe00c643667b5389dae5bcd7",
+     "nonce": "54ed5015e54a99c36c82753d8fa0d8ac0c5a113033c2a2ff6c3333686bdc302b",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -278,8 +231,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000003aaab4a8157b1d4b8c97bdbf7b0d3b999144cc9dfe00c643667b5389dae5bcd7",
-       "quote_sha256": "3bdbe5ebfc1efae58cae26b871ca7bde9d58342cec9e66c11f58970e4a29af80"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e77900000000000000000000000054ed5015e54a99c36c82753d8fa0d8ac0c5a113033c2a2ff6c3333686bdc302b",
+       "quote_sha256": "cf501c36b5a74322e0f390be1cba66274a906352b44b09af49204c085591be8e"
       },
       "gpu": {
        "ok": null,
@@ -297,8 +250,8 @@
        "tdx_binding": {
         "ok": true,
         "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e0000000000000000000000003aaab4a8157b1d4b8c97bdbf7b0d3b999144cc9dfe00c643667b5389dae5bcd7",
-        "quote_sha256": "6fdf5743ea8bb7d9520ee3744e605790ff87a7a286cda3ce6f5efd9722febddc",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e00000000000000000000000054ed5015e54a99c36c82753d8fa0d8ac0c5a113033c2a2ff6c3333686bdc302b",
+        "quote_sha256": "aad5fcbb0b6e303fb4eb22315cf8cfd29e3a8c4c51d0215c08c89e420a84f236",
         "public_key_hashes_to_address": true
        },
        "gpu": {
@@ -306,11 +259,58 @@
         "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
         "gpus": 8,
         "arch": "HOPPER",
-        "jwt_kid": "nv-eat-kid-prod-20261111072931691-1ab042a6-6ad6-4f87-ae07-e98e45559c6a"
+        "jwt_kid": "nv-eat-kid-prod-20261111072732839-6558afa6-f307-45b4-a621-c56da842e71a"
        },
-       "instance_id": "7bb9af0ac5b0e22dde3903218f58e56f743164a1",
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
        "app_name": "dstack-nvidia-0.5.11",
-       "compose_hash": "c53e254e8b70aa14b45ba3043730a0736ca2afb1df7fa3db9c61578845e470fe",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
+       "ok": true
+      }
+     ]
+    },
+    {
+     "nonce": "a7dfc9b6537542203416d5226b64061413433d7345875309392daf033f188462",
+     "http_status": 200,
+     "gateway": {
+      "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
+      "kind": "gateway",
+      "kind_evidence": "report.gateway_attestation",
+      "tdx_binding": {
+       "ok": true,
+       "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000a7dfc9b6537542203416d5226b64061413433d7345875309392daf033f188462",
+       "quote_sha256": "c9a6ae881e11da8ac84be89d3d376157f3da4d19542717d0630e9d230e18394f"
+      },
+      "gpu": {
+       "ok": null,
+       "detail": "not applicable: the gateway runs in CPU-only TDX and carries no GPU evidence"
+      },
+      "app_name": "dstack-0.5.12",
+      "compose_hash": "73dbb78cccfdfd6919aa4058de67ae0375d6f6c6f38eedfa78c609761c2d6db6",
+      "ok": true
+     },
+     "model_attestations": [
+      {
+       "signing_address": "0xfe0071895500a9755c18044948ab4f4e1a7f337e",
+       "kind": "model",
+       "kind_evidence": "report.model_attestations[].model_name = deepseek-ai/DeepSeek-V4.1-Flash-1017",
+       "tdx_binding": {
+        "ok": true,
+        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
+        "report_data": "fe0071895500a9755c18044948ab4f4e1a7f337e000000000000000000000000a7dfc9b6537542203416d5226b64061413433d7345875309392daf033f188462",
+        "quote_sha256": "88b9560fd7bcde7ee905565a4e522e380784ea120f326ee22bb453829c14b0c6",
+        "public_key_hashes_to_address": true
+       },
+       "gpu": {
+        "ok": true,
+        "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
+        "gpus": 8,
+        "arch": "HOPPER",
+        "jwt_kid": "nv-eat-kid-prod-20261111072732839-6558afa6-f307-45b4-a621-c56da842e71a"
+       },
+       "instance_id": "fccd496ae28c19105777793efa98fbbd726219cc",
+       "app_name": "dstack-nvidia-0.5.11",
+       "compose_hash": "448683dd83e50727b9c5f6cdc84bd9d93fcf2c888001a85b1ba32f76b3612e3e",
        "ok": true
       }
      ]
@@ -328,7 +328,7 @@
    "served": true,
    "samples": [
     {
-     "nonce": "dfec72c426a515356ea24914a18be1aeeb41774ff335edfd5ba58c33cb2e5958",
+     "nonce": "ea6201b1a69cc7e461e13aa9ade0dd351c8e391c7baeff61cd9baed28f6c64dd",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -337,8 +337,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000dfec72c426a515356ea24914a18be1aeeb41774ff335edfd5ba58c33cb2e5958",
-       "quote_sha256": "bc5d9e563e71a368f5ec65133a01475ae1d08df1e9cb85206c6cdfc83ccc1360"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000ea6201b1a69cc7e461e13aa9ade0dd351c8e391c7baeff61cd9baed28f6c64dd",
+       "quote_sha256": "b6e9b7c221df4341c9b84ae7e54feef202c27c2f244bd726d59e405c71ab7887"
       },
       "gpu": {
        "ok": null,
@@ -369,14 +369,14 @@
         "verified": true,
         "tcb_status": "UpToDate",
         "gpu_verdict": "PASS",
-        "measurement_config": "8xb300 [10.2.1, flat-252c-1944g] v1.5.0"
+        "measurement_config": "8xb300 [10.2.1, flat-252c-2304g] v1.5.0"
        },
-       "instance_id": "6b19b338-b369-4eae-a8f8-63efbeb4e7da"
+       "instance_id": "91db18f4-6b33-47b0-be07-d1bd0ce7297f"
       }
      ]
     },
     {
-     "nonce": "abf93c5c7eb49d679e522c8429ee18bd8a5a590a6a8eb597767d300942d78dcd",
+     "nonce": "5067299e2e8ef1988790b8366c1580b4e61ef2bd659c6d9cf2fc4015ebff5651",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -385,8 +385,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e779000000000000000000000000abf93c5c7eb49d679e522c8429ee18bd8a5a590a6a8eb597767d300942d78dcd",
-       "quote_sha256": "f4f6c23d13cbc19832bab5f5f0cb745f19355b9f7343de787913102da5aa6883"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000005067299e2e8ef1988790b8366c1580b4e61ef2bd659c6d9cf2fc4015ebff5651",
+       "quote_sha256": "e3a060f62a9dca5c5895433bdc10bc3e614a3bdd37be5dcc01eadf3125bf237c"
       },
       "gpu": {
        "ok": null,
@@ -411,20 +411,20 @@
         "detail": "NRAS JWT signature valid (NVIDIA JWKS), x-nvidia-overall-att-result true, eat_nonce = our nonce, 8 GPUs",
         "gpus": 8,
         "arch": "BLACKWELL",
-        "jwt_kid": "nv-eat-kid-prod-20261111072732839-6558afa6-f307-45b4-a621-c56da842e71a"
+        "jwt_kid": "nv-eat-kid-prod-20261111072340718-fe54994c-71c6-4664-a0af-0fef1ea3886a"
        },
        "provider_says": {
         "verified": true,
         "tcb_status": "UpToDate",
         "gpu_verdict": "PASS",
-        "measurement_config": "8xb300 [10.2.1, flat-252c-1944g] v1.5.0"
+        "measurement_config": "8xb300 [10.2.1, flat-252c-2304g] v1.5.0"
        },
-       "instance_id": "6b19b338-b369-4eae-a8f8-63efbeb4e7da"
+       "instance_id": "6ec6bb2e-420f-4986-b6a0-3172c73d4b31"
       }
      ]
     },
     {
-     "nonce": "5568e560ca89cdd090f167ecda5bc9fc0c2bd9fccce24b4913460ba613d72625",
+     "nonce": "2b7afc3ae75e350ddc7f2ec2e8042bfe803ae8bcd6235675d77012f023782df0",
      "http_status": 200,
      "gateway": {
       "signing_address": "0xb98a789cdc4817275f5155593ba73ef2a957e779",
@@ -433,8 +433,8 @@
       "tdx_binding": {
        "ok": true,
        "detail": "TDX report_data = signing address ‖ 12 zero bytes ‖ our fresh nonce",
-       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000005568e560ca89cdd090f167ecda5bc9fc0c2bd9fccce24b4913460ba613d72625",
-       "quote_sha256": "e1db8485d4be744fd000b9553e1d578ffbb140796678bf423f261e1d28ace968"
+       "report_data": "b98a789cdc4817275f5155593ba73ef2a957e7790000000000000000000000002b7afc3ae75e350ddc7f2ec2e8042bfe803ae8bcd6235675d77012f023782df0",
+       "quote_sha256": "d05be9ac05c8539091ce3d08f2264ab6729517442ea275c1fdbabdaa5aead1a0"
       },
       "gpu": {
        "ok": null,
@@ -465,9 +465,9 @@
         "verified": true,
         "tcb_status": "UpToDate",
         "gpu_verdict": "PASS",
-        "measurement_config": "8xb300 [10.2.1, flat-252c-1944g] v1.5.0"
+        "measurement_config": "8xb300 [10.2.1, flat-252c-2304g] v1.5.0"
        },
-       "instance_id": "6b19b338-b369-4eae-a8f8-63efbeb4e7da"
+       "instance_id": "dc3c34eb-cfbf-4887-802d-dde8c0ee9d2e"
       }
      ]
     }

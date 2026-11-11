@@ -113,7 +113,7 @@ node scripts/check-replay.ts results/sim-v3-replay.json
 sim/run test
 ```
 
-**You should see:** `tests 33`, `pass 33`, `fail 0`. The golden tests replay every transaction of the three testnet deployments through the sim's token model. Among them: `token3: both requests are byte-identical to the chain, seed included, and both rulings execute identically`.
+**You should see:** `tests 37`, `pass 37`, `fail 0`. The golden tests replay every transaction of four testnet deployments through the sim's token model, token5's NEAR AI meetings included. Among them: `token3: both requests are byte-identical to the chain, seed included, and both rulings execute identically`.
 
 ```bash
 node scripts/render-readme.ts

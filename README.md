@@ -3,7 +3,7 @@
 <!-- numbers:start -->
 **A memecoin whose rate meetings can't be bought.** In a 60-day simulation, a whale holding 87% to 94% of the locked weight petitioned the model chair at every meeting of its 30-day lock. Its petitions moved the chair's `locker_share` to the constitution's cap of 25 at the first meeting the chair was awake, and the cap held for 30 of 30 meetings. With the cap at 50 instead, the same model on the same seed went to 50 and paid the whale 16.70 NEAR of locker rewards instead of 10.27. *([`results/sim-v3-2026-11-10.json`](results/sim-v3-2026-11-10.json))*
 
-On testnet the contract did the same to a chair that was fooled outright. A test chair that obeys prompt injections on purpose read a petition telling it to ignore the constitution, and returned a signed ruling asking for `locker_share` 100 and `buyback_burn` 10000 bps. The signature checked out against the allowlist (a test key today, not a NEAR AI model), and the contract applied 25 and 50. *(token3 meeting 1, tx [`3XxXDYm6…`](https://testnet.nearblocks.io/txns/3XxXDYm6ffsEVwFLwhbfhn61QfSkPui7QiBLp2qd35im))*
+On testnet the contract did the same to a chair that was fooled outright. A test chair that obeys prompt injections on purpose read a petition telling it to ignore the constitution, and returned a signed ruling asking for `locker_share` 100 and `buyback_burn` 10000 bps. The signature checked out against the allowlist (a test key, not a NEAR AI model), and the contract applied 25 and 50. *(token3 meeting 1, tx [`3XxXDYm6…`](https://testnet.nearblocks.io/txns/3XxXDYm6ffsEVwFLwhbfhn61QfSkPui7QiBLp2qd35im))*
 <!-- numbers:end -->
 
 **The AI can be fooled. The contract can't.**
@@ -24,7 +24,7 @@ The mechanic is the constitution, not the model. The model may be wrong, fooled 
 ## How a meeting works
 
 1. **Convene.** Anyone calls `convene()` once the interval has passed (23 h on mainnet, 5 minutes on testnet) and attaches the courier fee of exactly 0.015 NEAR. The contract snapshots a brief: supply, reserve, price, 24 h volume, levers, funds, endowment, locked weight and the three heaviest petitions. It adds a seed from the convening block's randomness, so nobody can know the exact request before that block.
-2. **Ask.** The contract stores `sha256(request)` and hands the request bytes to an OutLayer courier through yield/resume. The courier posts them unchanged to NEAR AI Cloud and fetches the response's TEE signature. (On testnet a test signer stands in for it today; see [Honest limits](#honest-limits).)
+2. **Ask.** The contract stores `sha256(request)` and hands the request bytes to an OutLayer courier through yield/resume. The courier posts them unchanged to NEAR AI Cloud and fetches the response's TEE signature. On testnet the courier reaches NEAR AI through CHAIR's relay, which holds the API key and forwards only the open meeting's exact request ([Honest limits](#honest-limits)).
 3. **Verify.** In `on_ruling` the contract checks that the signed text is exactly `model:sha256(request):sha256(response)`, recovers the signer with `ecrecover`, and requires it to be on the `model_signers` allowlist. Then it parses the ruling.
 4. **Clamp.** Every lever lands inside the constitution. Nothing is rejected: each cut is recorded with its rule (`bounds`, `step`, `sum` or `fund`).
 5. **Apply.** The contract sets the levers, buys back and burns, pays the lockers, sends the endowment to the brain, and logs the minutes and every answer to a petition in `meeting_held`. If any check failed (`unsigned`, `bad_hash`, `bad_signature`, `unparseable`, `asleep` or `lapsed`), the fallback rule runs instead: tax moves 10 bps toward 200 and everything else holds.
@@ -124,7 +124,7 @@ The [`samples/`](samples) payloads are labelled inside: the jailbreak is meeting
 | [`contracts/brain`](contracts/brain) | The brain: stakes the endowment in `stake.dao`, reports it to the token, signs NEAR AI logins through MPC. `mock-farm/` is its testnet stand-in for `stake.dao`; `scripts/verify-login.mjs` checks a login signature the way NEAR AI Cloud does |
 | [`courier`](courier) | The OutLayer module (WASI P2) that carries the request to NEAR AI Cloud and returns the response with its TEE signature |
 | [`test-signer`](test-signer) | Testnet only: an OutLayer module that stands in for the courier and NEAR AI, plays a chair that injections fool on purpose, and signs with a test key |
-| [`sim`](sim) | The 60-day simulation: token model, holders, scenarios, policies, the response cache (`sim/cache`) and the golden tests against three testnet deployments |
+| [`sim`](sim) | The 60-day simulation: token model, holders, scenarios, policies, the response cache (`sim/cache`) and the golden tests against four testnet deployments |
 | [`results`](results) | Simulation results (JSON and HTML) and the pre-registration hashes |
 | [`samples`](samples) | Ready-made `preview_ruling` payloads: one jailbroken and genuinely signed, two forged |
 | [`apps/web`](apps/web) | Next.js app and API: state, meetings rebuilt from their transactions, petitions, `preview_ruling` playground, relayed petitions and convene |
@@ -137,11 +137,11 @@ The [`samples/`](samples) payloads are labelled inside: the jailbreak is meeting
 | --- | --- | --- |
 | Token contract: curve, locks, petitions, clamp, meetings, signatures, governance, review findings, a fuzz test over 48 seeds of 400 random steps, and a clamp property test over 20,000 random asks | `(cd contracts/token && AWS_LC_SYS_PREBUILT_NASM=1 cargo test)` | 129 |
 | Brain contract: NEP-413 hash against NEAR AI's fixtures, binding tampering, MPC request shape, keys, staking, retirement | `(cd contracts/brain && AWS_LC_SYS_PREBUILT_NASM=1 cargo test)` | 59 |
-| Courier, against a scripted HTTP mock | `(cd courier && AWS_LC_SYS_PREBUILT_NASM=1 cargo test)` | 16 |
+| Courier, against a scripted HTTP mock, in both modes (NEAR AI directly and the relay) | `(cd courier && AWS_LC_SYS_PREBUILT_NASM=1 cargo test)` | 22 |
 | Test signer | `(cd test-signer && AWS_LC_SYS_PREBUILT_NASM=1 cargo test)` | 5 |
-| Simulation: token model units, and golden replays of all three testnet deployments | `sim/run test` | 33 |
+| Simulation: token model units, and golden replays of four testnet deployments | `sim/run test` | 37 |
 
-242 tests, all passing. `AWS_LC_SYS_PREBUILT_NASM=1` matters on Windows only. The token suite takes about 4 minutes, most of it the fuzz test (`CHAIR_FUZZ_SEEDS` and `CHAIR_FUZZ_STEPS` change its size).
+252 tests, all passing. `AWS_LC_SYS_PREBUILT_NASM=1` matters on Windows only. The token suite takes about 4 minutes, most of it the fuzz test (`CHAIR_FUZZ_SEEDS` and `CHAIR_FUZZ_STEPS` change its size).
 
 Other commands:
 
@@ -152,13 +152,13 @@ pnpm --filter @chair/web typecheck
 pnpm build                       # the web app
 ```
 
-The exact build commands for the contracts and the OutLayer modules are in [`docs/LAUNCH.md`](docs/LAUNCH.md). Rebuilt with rustc 1.95.0 from commit `a74b97a`, the token gives the code hash deployed at token3 and token4. Its code has not changed since; later commits set the Cargo `repository` field, which writes the repo link into the contract's NEP-330 metadata and moves the hash to `c4cdd3d4…`. The test signer gives the `version_key` token3 pins ([CLAIMS.md](CLAIMS.md), claims 12 and 13).
+The exact build commands for the contracts and the OutLayer modules are in [`docs/LAUNCH.md`](docs/LAUNCH.md). Rebuilt with rustc 1.95.0 from commit `a74b97a`, the token gives the code hash deployed at token3 and token4. Its code has not changed since; later commits set the Cargo `repository` field, which writes the repo link into the contract's NEP-330 metadata and moves the hash to `c4cdd3d4…`. token5's code is that source plus the `reasoning_effort` change, sha256 `98c7e159…de9d`. The test signer gives the `version_key` token3 pins, and the courier, built in the pinned Docker image, gives token5's `4eb88a7e…dd0d` and mainnet's `7df20934…7181` ([CLAIMS.md](CLAIMS.md), claims 12 and 13). The courier hashes older docs gave (`3681b2ca…`, `08b77db1…`, token4's `e17848ae…`) come from before relay support and no longer reproduce from this source.
 
 ## Honest limits
 
-- **Testnet today.** Everything on chain runs on NEAR testnet, as `token3.chair-dev.testnet`. The mainnet token `token.thechair.near` is not deployed.
-- **The rulings so far are signed by a test key, not by a NEAR AI model.** On testnet the courier is a test-signer OutLayer project (`chair-dev.testnet/test-chair-signer`). It plays a deterministic chair that a prompt injection fools on purpose, and signs with a test key that is on token3's `model_signers`. The real courier needs a NEAR AI API key; it passes its tests against a mock, but has not yet run against NEAR AI.
-- **Mainnet signers are verified but not yet in use.** `pnpm verify:signers` checks that each NEAR AI model's TDX quote binds its signing address to a fresh nonce and that NVIDIA's GPU attestation passes ([`results/signers-2026-11-10.json`](results/signers-2026-11-10.json)): GLM 5.3 Flash signs with `0x3b75…fa0c`, DeepSeek V4.1 with `0xfe00…337e`, and the gateway with `0xb98a…e779`. The Intel signature chain of the quotes is not checked. Kimi K3 is served without a per-response model key, so a Kimi meeting would be gateway-signed.
+- **Testnet today.** Everything on chain runs on NEAR testnet: `token5.chair-dev.testnet` with NEAR AI, and `token3.chair-dev.testnet` with a test chair. The mainnet token `token.thechair.near` is not deployed.
+- **Rulings on token5 are signed by NEAR AI's GLM, through a relay.** token5's two meetings were answered by GLM 5.3 Flash on NEAR AI Cloud, signed by its TEE key `0x3b75…fa0c`, and checked by the contract itself ([`docs/LAUNCH.md`](docs/LAUNCH.md), [CLAIMS.md](CLAIMS.md) claim 33). OutLayer's workers can't reach NEAR AI Cloud directly, so the courier goes through CHAIR's relay on the site, which holds the API key and forwards only the open meeting's exact request. The relay can't change a ruling without breaking the signature, but it could refuse to forward one (the fallback rule then runs) or fetch more than one completion ([`docs/SECURITY.md`](docs/SECURITY.md)). The testnet allowlist also holds a test key (`0xc053…a87f`), so the site's playground can sign rulings a real model never would; mainnet's won't. token3's rulings, including the fooled one above, came from that test key.
+- **NEAR AI's signers are verified, and GLM's key is in use on testnet.** `pnpm verify:signers` checks that each NEAR AI model's TDX quote binds its signing address to a fresh nonce and that NVIDIA's GPU attestation passes ([`results/signers-2026-11-11.json`](results/signers-2026-11-11.json), rerun before token5's `new`): GLM 5.3 Flash signs with `0x3b75…fa0c`, DeepSeek V4.1 with `0xfe00…337e`, and the gateway with `0xb98a…e779`. The Intel signature chain of the quotes is not checked. Kimi K3 is served without a per-response model key, so a Kimi meeting would be gateway-signed.
 - **The owner is a single key** for the 48 h timelocked changes (signer allowlists and courier version). The proposal is public and slow, and nobody can veto it. Nothing else can change.
 - **The simulation used Venice-hosted open models, not NEAR AI.** The model families match the IQ ladder; the hosts differ. Kimi K3 was never reached.
 - **One seed.** The model chair ran on one seed, plus one control run and a seed probe. The deterministic policies ran on 20 seeds, and every comparison is checked against that seed noise.

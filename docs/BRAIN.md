@@ -453,7 +453,7 @@ Embedded in `outlayer.manifest` by `build.rs`:
 
 ### Build and tests
 
-- **Build:** `cargo build --target wasm32-wasip2 --release` produces `chair-courier.wasm`, 164 KB, a component (`0d000100`). sha256 `08b77db1…8469` for `token.thechair.near`.
+- **Build:** `cargo build --target wasm32-wasip2 --release --locked` produces `chair-courier.wasm`, about 165 KB, a component (`0d000100`). In the pinned image (`docs/LAUNCH.md`, Mainnet, Courier), the relay build for `token.thechair.near` is `7df20934…7181` and the direct build `4bda83d4…36eb`. The earlier `08b77db1…8469` predates relay support.
 - **Tests:** 16 native tests against a scripted HTTP mock (`cargo test`). They cover:
   - byte-for-byte forwarding and the returned body;
   - the URLs and headers;
@@ -467,7 +467,7 @@ Embedded in `outlayer.manifest` by `build.rs`:
   - bad requests;
   - `hashes_match`;
   - URL encoding.
-- **Not yet run:** the WASI HTTP path compiles, and it is adapted from Blindbook's `wasi_host.rs`, which runs on OutLayer. It has not been run here; the first run will be on OutLayer.
+- **Run on OutLayer:** the relay build carried token5's two meetings to NEAR AI and back on testnet (`docs/LAUNCH.md`, token5). The direct build ran on token4 but could not connect to `cloud-api.near.ai` (`docs/SECURITY.md`, "Relay").
 
 ---
 

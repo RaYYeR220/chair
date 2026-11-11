@@ -1,6 +1,7 @@
 // The meeting request, byte for byte as the contract builds it (contracts/token/src/meeting.rs):
 // the fixed system prompt, the brief as compact JSON, and the chat-completions body.
-// The golden tests check both against all three testnet deployments.
+// The golden tests check both against the testnet deployments: token1 to token3 on the v1-v3 format,
+// token5 on its own (`reasoning_effort` low).
 import { createHash } from "node:crypto";
 import { CFG } from "./config.ts";
 import type { Chair } from "./token.ts";
@@ -83,8 +84,17 @@ export function briefOf(c: Chair, seed: string | null): Brief {
 /** Compact JSON, keys in declaration order (serde_json and JSON.stringify escape strings the same way). */
 export const buildBrief = (c: Chair, seed: string | null): string => JSON.stringify(briefOf(c, seed));
 
-/** The exact request bytes (`build_request`). */
-export function buildRequest(model: string, brief: string, systemPrompt: string = SYSTEM_PROMPT): string {
+/**
+ * The request body's format, by deployment.
+ * - `"v1-v3"`: every token up to token4, and every request the simulation sent to a model:
+ *   `{"model","messages","temperature":0}`.
+ * - `"token5"`: token5 on adds `"reasoning_effort":"low"` right after `temperature`, so GLM 5.3 Flash
+ *   answers well inside OutLayer's 120 s limit (contracts/token/src/meeting.rs).
+ */
+export type RequestFormat = "v1-v3" | "token5";
+
+/** The exact request bytes (`build_request`). The default format is the one the simulation ran on. */
+export function buildRequest(model: string, brief: string, systemPrompt: string = SYSTEM_PROMPT, format: RequestFormat = "v1-v3"): string {
   return JSON.stringify({
     model,
     messages: [
@@ -92,5 +102,6 @@ export function buildRequest(model: string, brief: string, systemPrompt: string 
       { role: "user", content: brief },
     ],
     temperature: 0,
+    ...(format === "token5" ? { reasoning_effort: "low" } : {}),
   });
 }

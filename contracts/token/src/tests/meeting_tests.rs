@@ -121,24 +121,26 @@ fn convene_builds_the_exact_request_and_calls_outlayer() {
     );
     assert_eq!(preview.meeting, n);
 
-    // Shape: compact, exactly three top-level keys in order.
+    // Shape: compact, exactly four top-level keys in order.
     assert!(req.starts_with(&format!(
         r#"{{"model":"{GLM}","messages":[{{"role":"system","content":"You are the Chair of CHAIR"#
     )));
-    assert!(req.ends_with(r#""}],"temperature":0}"#));
+    assert!(req.ends_with(r#""}],"temperature":0,"reasoning_effort":"low"}"#));
     let body: Value = sj::from_str(&req).unwrap();
     // Byte-exact: compact JSON, strings escaped the serde_json way.
     let brief_raw = body["messages"][1]["content"].as_str().unwrap();
     let expected = format!(
-        r#"{{"model":"{GLM}","messages":[{{"role":"system","content":{}}},{{"role":"user","content":{}}}],"temperature":0}}"#,
+        r#"{{"model":"{GLM}","messages":[{{"role":"system","content":{}}},{{"role":"user","content":{}}}],"temperature":0,"reasoning_effort":"low"}}"#,
         sj::to_string(SYSTEM_PROMPT).unwrap(),
         sj::to_string(brief_raw).unwrap()
     );
     assert_eq!(req, expected);
     assert!(!req.contains('\n') && !brief_raw.contains(": ") && !brief_raw.contains(", "));
     let keys: Vec<&String> = body.as_object().unwrap().keys().collect();
-    assert_eq!(keys.len(), 3);
+    assert_eq!(keys.len(), 4);
     assert_eq!(body["temperature"], 0);
+    assert_eq!(body["reasoning_effort"], "low");
+    assert_eq!(body["reasoning_effort"], crate::meeting::REASONING_EFFORT);
     assert_eq!(body["messages"][0]["content"], SYSTEM_PROMPT);
     assert_eq!(body["messages"][1]["role"], "user");
     let brief_str = body["messages"][1]["content"].as_str().unwrap();

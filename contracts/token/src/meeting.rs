@@ -6,12 +6,17 @@
 //!
 //! ```text
 //! {"model":"<tier model>","messages":[{"role":"system","content":"<SYSTEM_PROMPT>"},
-//!  {"role":"user","content":"<brief JSON>"}],"temperature":0}
+//!  {"role":"user","content":"<brief JSON>"}],"temperature":0,"reasoning_effort":"low"}
 //! ```
 //!
 //! (one line, no spaces; strings escaped by serde_json). The courier POSTs it
 //! unchanged; `sha256(request)` is stored and must reappear in the model's
 //! signed `signature_text`.
+//!
+//! `reasoning_effort` is `low` (token5 on): with full reasoning GLM 5.3 Flash
+//! took 63 to 136 s on a real meeting request, past OutLayer's 120 s limit
+//! about a third of the time; at `low` it answers in 16 to 18 s with the same
+//! schema. Tokens up to token4 sent no `reasoning_effort`.
 //!
 //! The brief's second field is `seed`: hex of the first 16 bytes of
 //! `env::random_seed()` at `convene`. Nobody knows it before the block that
@@ -96,6 +101,7 @@ struct ChatRequest<'a> {
     model: &'a str,
     messages: [Message<'a>; 2],
     temperature: u8,
+    reasoning_effort: &'a str,
 }
 
 #[derive(Serialize)]
@@ -104,6 +110,9 @@ struct Message<'a> {
     role: &'a str,
     content: &'a str,
 }
+
+/// The request's `reasoning_effort`, right after `temperature`.
+pub const REASONING_EFFORT: &str = "low";
 
 /// The exact request bytes for `model` and a serialized brief.
 pub fn build_request(model: &str, brief: &str) -> String {
@@ -120,6 +129,7 @@ pub fn build_request(model: &str, brief: &str) -> String {
             },
         ],
         temperature: 0,
+        reasoning_effort: REASONING_EFFORT,
     })
     .unwrap_or_else(|_| env::abort())
 }
