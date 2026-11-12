@@ -1,10 +1,10 @@
 # CHAIR launch parameters (token v3)
 
-This file lists the exact `new` arguments for the token contract on testnet (token5 with NEAR AI through the relay, token4 with the direct NEAR AI courier, token3 with the test signer, all deployed) and on mainnet. token4 runs token3's code; only its courier and signer lists differ. token5 is v3 with one change to the request: `"reasoning_effort":"low"` after `"temperature":0`. v3 is v2 plus the fixes in `docs/SECURITY.md`; the economics did not change. The simulation copies its numbers from here, so every value below is the literal one. Amounts are decimal strings: NEAR in yoctoNEAR (1 NEAR = 10^24), CHAIR in base units (1 CHAIR = 10^18).
+This file lists the exact `new` arguments for the token contract on mainnet (`token.thechair.near`, live since 2026-11-11, with every launch transaction and meeting 1) and on testnet (token5 with NEAR AI through the relay, token4 with the direct NEAR AI courier, token3 with the test signer, all deployed). token4 runs token3's code; only its courier and signer lists differ. token5 is v3 with one change to the request: `"reasoning_effort":"low"` after `"temperature":0`. v3 is v2 plus the fixes in `docs/SECURITY.md`; the economics did not change. The simulation copies its numbers from here, so every value below is the literal one. Amounts are decimal strings: NEAR in yoctoNEAR (1 NEAR = 10^24), CHAIR in base units (1 CHAIR = 10^18).
 
 ## What every network shares
 
-These are compile-time constants in `contracts/token/src/constitution.rs` and `lib.rs`. No argument changes them, and the token account has no keys.
+These are compile-time constants in `contracts/token/src/constitution.rs` and `lib.rs`. No argument changes them, and once the launch checks pass the token account's last key is deleted (on mainnet, at launch close).
 
 | Item | Value |
 | --- | --- |
@@ -417,7 +417,9 @@ Testnet v2 differs from mainnet only in the account ids, the courier (project, v
 
 Both meetings came back as `kind: ruling`, `signed_by: provider_tee`, signer `0xc053…a87f`, and each held about 10 s after `convene`. Both paid the lockers and sent the endowment to the brain. Meeting 1's event records each petition's answer and the chair's minutes in full.
 
-## Mainnet: `token.thechair.near`
+## Mainnet: `token.thechair.near` (deployed 2026-11-11)
+
+The live token. It runs token5's bytes, its allowlists hold only NEAR AI's attested keys, and its courier reaches NEAR AI Cloud through the relay, as token5's does. Meeting 1, on 2026-11-12, was a ruling by GLM 5.3 Flash, signed in its TEE and checked by the token ([below](#meeting-1-on-2026-11-12)). Every launch transaction is in [The launch, run on 2026-11-11](#the-launch-run-on-2026-11-11).
 
 ```json
 {
@@ -521,3 +523,50 @@ The 2 NEAR margin above is the design target. The launch budget is 8.33 NEAR for
 5. Delete the token's only key, and confirm that `view_access_key_list` is empty.
 6. Have the brain stake about 1 NEAR in `stake.dao`: `deposit_endowment` to top it up, then `stake_endowment`. The brain then syncs and reports the stake, and the token wakes on GLM 5.3 Flash. `get_request_preview` must show the token5 request with `"reasoning_effort":"low"`.
 7. Buy, lock and petition. At least 23 h after `new`, `convene` meeting 1 with 0.015 NEAR. It must come back `kind: ruling`, `signed_by: provider_tee`, signer `0x3b75…fa0c`.
+
+Steps 1 to 4, 6 and 7 ran as listed. Step 5, deleting the token's key, runs at launch close: until then `token.thechair.near` keeps the one full-access key that deployed it.
+
+### The launch, run on 2026-11-11
+
+Every check in step 4 passed before staking: the code hash, `get_constitution`, `get_governance` with no pending change, the OutLayer project's active version and the FastFS bytes, the relay probe, and `pnpm verify:signers --token token.thechair.near`, whose attested keys matched the on-chain allowlists. All transactions are signed by `thechair.near` unless the step says otherwise.
+
+| Step | Tx |
+| --- | --- |
+| Create `brain.thechair.near` (2.45 NEAR) | `HtnU5PN1FGu7VDo6cfhLgYfnNzHaCgGBGhPx9WzKoE6S` |
+| Brain deploy + `new`, signed by the brain (sha256 `830db47d…4c58`; `token` `token.thechair.near`, farm `stake.dao`, MPC `v1.signer`) | `6t5CKm3zC48VpFxHC2md7Z6woDxgcftGTsWkV5mzC8Ws` |
+| `install_login_key`: `ed25519:HZycHbyc1UdPyyEMdLN6ens1dSkNrrV5VMmpByubz6BJ`, which `v1.signer` derives for the brain on path `nearai-login`, becomes a full-access key | `8xAdzdH2wstmgfXKkb4AxwJnsPkTAKdXFif2GcwhyEEj` |
+| Courier `7df20934…7181` to FastFS | `BUZ5i3dHkMT3knPrF1oaJ6xFwLMyvPm2PLb8fjRW1GnY` |
+| `create_project` `thechair.near/courier` at `7df20934…7181` | `CYVcwN8TWX7gYPXUwvD52M7zwjoafuxyM8jXCLsyzt8` |
+| Create `token.thechair.near` (4.2 NEAR) | `D1yuuuitwDhzC7DJJh7iQ2WePrcxhBUuT7ntL6SvS7sJ` |
+| Token deploy + `new` with the JSON above, signed by the token (`code_hash` `BHPkDnyEXYrwqcxnWgSnDtLwGDwNHSBXME4JQJCsy5aL`) | `5wxaxewXbeTi3AXcmyRU5vgBpABMQcouXLrqhTEn8KTc` |
+| `deposit_endowment` 0.984949 NEAR into the brain | `DgPafHoQKyrdCpX5QCJyY1iYQ8uvhL34ZqvnHU8A6sjW` |
+| `stake_endowment`: 1.002001 NEAR staked in `stake.dao` (`prod_33Kp14MGUJa2QA`, validator `nearai.pool.near`) plus 0.015 NEAR of farm storage, then synced and reported to the token, which picks GLM 5.3 Flash | `FoG8eyufzzQxRDKVGJaG7jEKFXwf12fs4vtkx7X4Bb92` |
+| Buy 0.1 NEAR of CHAIR: 72,683.46 CHAIR after the 3% tax and the 0.025 NEAR storage deposit | `3ANieNjkV1jaZNP2WLzbFJZC4uePNEFD3xK6mdkGMytt` |
+| Lock 50,000 CHAIR for 7 days (weight 350,000 CHAIR-days) | `HbhUfqxhfX6v4o9dejuKLYygFVbLoadXr56G5VNkzKJq` |
+| Petition: "Volume is thin. Please ease the tax toward 2% and keep a small burn going." (burns the 10,000 CHAIR fee) | `CHHPatrRNbR3KuXsg17u3F55frC1agh2tLbtvZwB2k73` |
+
+- **FastFS.** The explorer shows the upload call as failed (`Exceeded the prepaid gas`): FastFS reads the upload from the transaction's arguments. The bytes it serves at `main.fastfs.io/thechair.near/outlayer.near/7df20934…7181.wasm` hash to `7df2093408b0625df643569669677d742d791ccb6750b8c5e95801787eda7181`, and the project's `active_version` is that hash.
+- **Signers.** `pnpm verify:signers` ran right before `new` and again against the deployed allowlists, three samples per model each time: GLM 5.3 Flash `0x3b75…fa0c`, DeepSeek V4.1 `0xfe00…337e`, gateway `0xb98a…e779`, the same keys as on 2026-11-10 and 2026-11-11. No test key went in.
+- **Brain.** The brain's own key and its MPC key are both on it. Anyone may remove the deployer key from 2026-11-18 14:26 UTC (`get_status`, `key_removal_open_at_ms`). It has not asked `v1.signer` for a login signature yet (`sign_requests` 0).
+- **Funding.** The token was created with 4.2 NEAR, as planned above; its state right after `new` was 354,023 bytes, which left 0.657 NEAR free. `thechair.near` started the launch with the 8.33 NEAR budget and holds 0.56 NEAR after meeting 1.
+
+### Meeting 1, on 2026-11-12
+
+| Meeting | Tx | Seed | What the chair asked | What the token applied | Clamps | Convene to ruling | `on_ruling` gas |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | `2fLXR3VnybmHR8sK2nMrS2oCRoefgumLMseA3VDLYCBr` (OutLayer request [3008](https://api.outlayer.ai/attestations/by-request/3008)), convened by `thechair.near` at 13:51:17 UTC | `6db11b4659db1e883518bc73e2745f15` | Tax 300 → 250, shares held at 60/20, burn 20 bps | As asked: levers 250/60/20, burn 20 bps (125.37 CHAIR for 0.000126 NEAR) | none | 11.2 s | **4.49 TGas** |
+
+It came back as `kind: ruling`, `signed_by: provider_tee`, signer `0x3b753b4406613c5e70ae640508632b600424fa0c`, GLM 5.3 Flash's key from `pnpm verify:signers`. The courier's `hashes_match` was `true`. The meeting paid the lockers 0.000437 NEAR and sent 0.001311 NEAR of endowment to the brain, and `convene` took exactly 0.015 NEAR.
+
+- **Where the time goes.** The courier ran 5.2 s inside OutLayer (892,729 instructions), and OutLayer charged 0.0015639 NEAR and refunded 0.0134361. From `request_execution` to its answer took 17 blocks, against a yield window of about 200; the whole convene took 11.2 s.
+- **Attestation.** Request 3008's attestation names the convene transaction, project `thechair.near/courier`, `wasm_hash` and `executed_wasm_sha256` `7df20934…7181`, and an `input_hash` equal to the meeting's `request_sha256` `70bdd317c2bd07a3e481dcbaee1f24985f8a8026f8e184b336ae2f547e297d69`. It carries a TDX quote.
+- **The brief**, as the model received it (the request carried `"temperature":0,"reasoning_effort":"low"`):
+
+  ```json
+  {"meeting":1,"seed":"6db11b4659db1e883518bc73e2745f15","supply":"62683.461839956513903206","sold":"72683.461839956513903206","reserve_near":"0.072815533980582524271844","price_near":"0.000001003634173091997825","volume_24h_near":{"buy":"0.072815533980582524271844","sell":"0"},"levers":{"tax_bps":300,"endowment_share":60,"locker_share":20,"buyback_share":20},"funds_near":{"buyback":"0.000436893203883495145632","locker_pool":"0.000436893203883495145631","endowment_pending":"0.001310679611650485436893"},"endowment_near":"1.0020009956963727","locker_weight":"350000","petitions":[{"from":"thechair.near","weight":"350000","text":"Volume is thin. Please ease the tax toward 2% and keep a small burn going."}]}
+  ```
+
+- **The answer** to the one petition: "Agreed in spirit. Easing tax 300→250 bps now, will step toward 200 next meetings if volume stays thin. Burn set at 20 bps of supply, funded from the buyback fund…" The full text is in `meeting_held`.
+- **The minutes**, in full: "First meeting. Volume is thin and one-sided (buys only), so easing the tax is right, but I move gradually: 300 to 250 bps this meeting, with intent to reach ~200 if volume stays soft. Shares stay put; endowment is funded and locker pool is building. Buyback fund (~0.00044 NEAR) covers a modest burn; I set 20 bps of supply (~12.5 CHAIR, ~0.000013 NEAR at curve price) to keep a steady, affordable burn going." As on token5, the estimate in brackets is off by ten: 20 bps of supply was 125.37 CHAIR, for 0.000126 NEAR, which is what the token burned.
+- **Next.** Meeting 2 opens 23 h after meeting 1, at 2026-11-13 12:51:17 UTC (`get_status`, `next_meeting_at`). Anyone may convene it with 0.015 NEAR.
+- **Read from chain** into [`results/mainnet-2026-11-12.json`](../results/mainnet-2026-11-12.json), with the request, response and minutes checked against their on-chain sha256.

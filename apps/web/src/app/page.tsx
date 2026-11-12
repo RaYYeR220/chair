@@ -8,18 +8,20 @@ import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { IqLadder } from "@/components/landing/IqLadder";
 import { Limits } from "@/components/landing/Limits";
+import { Mainnet } from "@/components/landing/Mainnet";
 import { RealChair } from "@/components/landing/RealChair";
 import { Simulation } from "@/components/landing/Simulation";
 import { Verify } from "@/components/landing/Verify";
 import { Footer } from "@/components/site/Footer";
 import { Nav } from "@/components/site/Nav";
 import { Reveal } from "@/components/site/Reveal";
-import { REAL_CHAIR_CONTRACT, REAL_MEETINGS, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
-import { loadMeeting, loadMeetings, loadState } from "@/lib/server/live";
+import { MAINNET_MEETING, REAL_CHAIR_CONTRACT, REAL_MEETINGS, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
+import { loadMainnet, loadMeeting, loadMeetings, loadState } from "@/lib/server/live";
 import { toReplay } from "@/lib/views";
 import "@/styles/landing.css";
 
 const LINKS = [
+  { href: "#mainnet", label: "Mainnet" },
   { href: "#how", label: "How it works" },
   { href: "#constitution", label: "Constitution" },
   { href: "#real-chair", label: "Real meetings" },
@@ -27,9 +29,16 @@ const LINKS = [
   { href: "#simulation", label: "Simulation" },
 ];
 
-// Live sections: each reads testnet at request time and streams in behind a
+// Live sections: each reads the chain at request time and streams in behind a
 // fallback that is the same section, still loading. A failed read renders the
-// section with a quiet note instead of numbers.
+// section with a quiet note instead of numbers. The mainnet strip reads the
+// mainnet token; everything else reads testnet.
+
+/** The mainnet token's first meeting, read-only. */
+async function MainnetLive() {
+  await connection();
+  return <Mainnet data={await loadMainnet(MAINNET_MEETING)} />;
+}
 
 async function HowItWorksLive() {
   await connection();
@@ -71,6 +80,9 @@ export default function Home() {
       <Nav links={LINKS} cta={{ href: "/app", label: "Open app" }} />
       <main id="top">
         <Hero />
+        <Suspense fallback={<Mainnet data={undefined} />}>
+          <MainnetLive />
+        </Suspense>
         <Suspense fallback={<HowItWorks m1={undefined} />}>
           <HowItWorksLive />
         </Suspense>

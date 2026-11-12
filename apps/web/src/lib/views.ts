@@ -202,6 +202,16 @@ export function toMeetingView(r: MeetingRecord): MeetingView {
   };
 }
 
+/** The landing's mainnet strip: one meeting of the mainnet token, and when its next meeting opens. */
+export interface MainnetView {
+  contract: string;
+  explorer: string;
+  /** `null` when the meeting could not be read. */
+  meeting: MeetingView | null;
+  /** From `get_status` and `get_constitution`; `null` when they could not be read. */
+  schedule: { meeting_count: number; open_meeting: number | null; next_meeting_at_ms: number; convene_near: number | null } | null;
+}
+
 /** A meeting as the rails replay it: what stood, what was asked, what landed. */
 export interface ReplayMeeting {
   number: number;

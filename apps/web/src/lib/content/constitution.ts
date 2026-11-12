@@ -40,6 +40,17 @@ export const EXPLORER = "https://testnet.nearblocks.io";
 export const OUTLAYER_ATTESTATIONS = "https://testnet-api.outlayer.ai/attestations/by-request";
 
 /**
+ * Mainnet (docs/LAUNCH.md): the live token and its first meeting, a ruling by
+ * NEAR AI's GLM 5.3 Flash. The landing reads the meeting live; these are the
+ * pointers for links that must work when mainnet cannot be read.
+ */
+export const MAINNET_CONTRACT = "token.thechair.near";
+export const MAINNET_EXPLORER = "https://nearblocks.io";
+export const MAINNET_MEETING = 1;
+export const MAINNET_PROOF_TX = "2fLXR3VnybmHR8sK2nMrS2oCRoefgumLMseA3VDLYCBr";
+export const MAINNET_ATTESTATION = "https://api.outlayer.ai/attestations/by-request/3008";
+
+/**
  * The real chair's first meetings on token5 (docs/LAUNCH.md): NEAR AI's GLM 5.3
  * Flash read the Illia petition and the injection and declined both. The
  * landing reads them live; these are only the pointers.

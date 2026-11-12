@@ -5,6 +5,7 @@
  *   results/sim-v3-<date>.json   the 60-day simulation (latest dated run)
  *   results/sim-2026-11-10.json  the first run (v1), kept as recorded
  *   sim/test/fixtures/testnet-token3-chair-dev.json   token3's meeting 1, as fetched from chain
+ *   results/mainnet-<date>.json  token.thechair.near's meeting 1, as read from mainnet (latest dated file)
  *
  *   pnpm readme        (or: node scripts/render-readme.ts)
  *
@@ -23,6 +24,9 @@ const V1_FILE = "sim-2026-11-10.json";
 const V1 = read(`results/${V1_FILE}`);
 const FIXTURE = "sim/test/fixtures/testnet-token3-chair-dev.json";
 const T3 = read(FIXTURE);
+const mainFile = readdirSync("results").filter((f) => /^mainnet-\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort().at(-1);
+if (!mainFile) throw new Error("no results/mainnet-<date>.json");
+const MAIN = read(`results/${mainFile}`);
 
 /** The whale's account in the simulation (docs/SIMULATION.md). */
 const WHALE = "holder-170.near";
@@ -139,6 +143,31 @@ const m1 = m1tx.events.find((e: any) => e.event === "meeting_held").data[0];
 const clamp = (lever: string) => m1.clamps.find((c: any) => c.lever === lever);
 const lockerClamp = clamp("locker_share"), burnClamp = clamp("buyback_burn");
 
+// ---------------------------------------------------------------- mainnet meeting 1, from the results file
+
+const MODEL_NAMES: Record<string, string> = {
+  "z-ai/glm-5.3-flash": "GLM 5.3 Flash",
+  "deepseek-ai/DeepSeek-V4.1-Flash-1017": "DeepSeek V4.1 Flash",
+  "moonshotai/kimi-k3": "Kimi K3",
+};
+const mm = MAIN.meeting;
+if (mm.kind !== "ruling" || mm.signed_by !== "provider_tee") throw new Error(`mainnet meeting ${mm.number} is not a TEE-signed ruling`);
+if (!MAIN.token.model_signers.includes(mm.signer)) throw new Error("the mainnet ruling's signer is not on the token's model_signers");
+const mainModel = MODEL_NAMES[mm.model] ?? mm.model;
+const mainDate = new Date(Number(BigInt(mm.convened_at) / 1_000_000n)).toISOString().slice(0, 10);
+const mainTx = `[\`${shortTx(mm.convene_tx)}\`](https://nearblocks.io/txns/${mm.convene_tx})`;
+const shortAddr = (a: string) => `${a.slice(0, 6)}…${a.slice(-4)}`;
+const [petition] = mm.petitions;
+// The README quotes the answer's opening only: up to its first comma or dash.
+const opening = (a: string) => `${a.split(/,|\s[—–]\s/)[0].trim()}…`;
+const fromWho = (from: string) => (from === MAIN.token.owner ? "the owner's account" : `\`${from}\``);
+const LEVERS = ["tax_bps", "endowment_share", "locker_share"];
+const moves = LEVERS.filter((k) => mm.levers_before[k] !== mm.levers[k]).map(
+  (k) => `${k === "tax_bps" ? "tax" : k.replace("_", " ")} ${mm.levers_before[k]} → ${mm.levers[k]}${k === "tax_bps" ? " bps" : ""}`,
+);
+const ruled = list([...moves, ...(mm.buyback.bps > 0 ? [`a ${mm.buyback.bps} bps burn`] : [])]) || "no change";
+const applied = mm.clamps.length === 0 ? "applied it as asked, with no clamps" : `applied it with ${mm.clamps.length} clamp${mm.clamps.length > 1 ? "s" : ""}`;
+
 // ---------------------------------------------------------------- blocks
 
 const source = `[\`results/${v3File}\`](results/${v3File})`;
@@ -148,6 +177,8 @@ const numbers = [
   `**A memecoin whose rate meetings can't be bought.** In a 60-day simulation, a whale holding ${pct(Math.min(...whaleShares))} to ${pct(Math.max(...whaleShares))} of the locked weight petitioned the model chair at every meeting of its ${lockMeetings}-day lock. Its petitions moved the chair's \`locker_share\` to the constitution's cap of ${capMax} at the first meeting the chair was awake, and the cap held for ${atCap} of ${lockMeetings} meetings. With the cap at ${controlCap} instead, the same model on the same seed went to ${controlCap} and paid the whale ${n2(rewards.ctl)} NEAR of locker rewards instead of ${n2(rewards.llm)}. *(${source})*`,
   "",
   `On testnet the contract did the same to a chair that was fooled outright. A test chair that obeys prompt injections on purpose read a petition telling it to ignore the constitution, and returned a signed ruling asking for \`locker_share\` ${lockerClamp.asked} and \`buyback_burn\` ${burnClamp.asked} bps. The signature checked out against the allowlist (a test key, not a NEAR AI model), and the contract applied ${lockerClamp.applied} and ${burnClamp.applied}. *(token3 meeting 1, tx ${txLink(m1tx.hash)})*`,
+  "",
+  `**Live on mainnet.** \`${MAIN.token.account_id}\` held its first rate meeting on ${mainDate}. The one petition, from ${fromWho(petition.from)}, asked: "${petition.text}" NEAR AI's ${mainModel} answered "${opening(petition.answer)}", ruled ${ruled}, and signed the ruling in its TEE with \`${shortAddr(mm.signer)}\`. The token checked that signature against its allowlist with \`ecrecover\` and ${applied}. *(meeting ${mm.number}, tx ${mainTx}, OutLayer attestation [${mm.outlayer.request_id}](${mm.outlayer.attestation}), [\`results/${mainFile}\`](results/${mainFile}))*`,
   "<!-- numbers:end -->",
 ].join("\n");
 
@@ -176,4 +207,4 @@ for (const [name, block] of [["numbers", numbers], ["sim", sim]] as const) {
   next = next.replace(re, block);
 }
 writeFileSync("README.md", next);
-console.log(next === readme ? "README numbers already current" : `README numbers rendered from results/${v3File}, results/${V1_FILE} and ${FIXTURE}`);
+console.log(next === readme ? "README numbers already current" : `README numbers rendered from results/${v3File}, results/${V1_FILE}, ${FIXTURE} and results/${mainFile}`);

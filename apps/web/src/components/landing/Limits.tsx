@@ -1,4 +1,4 @@
-import { REAL_CHAIR_CONTRACT, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
+import { MAINNET_CONTRACT, REAL_CHAIR_CONTRACT, TEST_CHAIR_CONTRACT } from "@/lib/content/constitution";
 
 /** 8. Honest limits: what the page's labels leave out. */
 export function Limits() {
@@ -8,21 +8,28 @@ export function Limits() {
         <header className="sec-head rv">
           <p className="eyebrow">Honest limits</p>
           <h2 id="lim-h">What isn’t real&nbsp;yet.</h2>
-          <p className="lead">This page labels everything as testnet, simulation or illustrative. Here is what those labels leave out.</p>
+          <p className="lead">This page labels everything as mainnet, testnet, simulation or illustrative. Here is what those labels leave out.</p>
         </header>
         <ul className="lim rv">
           <li>
-            <h3>Testnet today. Mainnet is next.</h3>
+            <h3>Mainnet is one meeting old.</h3>
             <p>
-              Everything on chain runs on NEAR testnet: <span className="m">{REAL_CHAIR_CONTRACT}</span> with NEAR AI, and{" "}
-              <span className="m">{TEST_CHAIR_CONTRACT}</span> with a test chair. The mainnet token, <span className="m">token.thechair.near</span>, is not
-              deployed yet.
+              <span className="m">{MAINNET_CONTRACT}</span> launched on Nov 11 and held meeting 1 on Nov 12. Its only trade is the launch buy and its one
+              petition came from the owner’s account, so there is no market yet. The adversarial meetings ran on testnet:{" "}
+              <span className="m">{REAL_CHAIR_CONTRACT}</span> with NEAR AI, and <span className="m">{TEST_CHAIR_CONTRACT}</span> with a test chair.
+            </p>
+          </li>
+          <li>
+            <h3>Keyless at launch close.</h3>
+            <p>
+              The testnet tokens have no keys, so nobody can redeploy them. The mainnet token’s deploy key is deleted at launch close, and from then on
+              nobody can redeploy it either.
             </p>
           </li>
           <li>
             <h3>NEAR AI-signed, through a relay.</h3>
             <p>
-              token5’s rulings come from GLM 5.3 Flash on NEAR AI Cloud, signed by its TEE key and checked by the contract. OutLayer’s workers can’t reach NEAR
+              Mainnet’s and token5’s rulings come from GLM 5.3 Flash on NEAR AI Cloud, signed by its TEE key and checked by the contract. OutLayer’s workers can’t reach NEAR
               AI Cloud directly, so the courier goes through CHAIR’s relay, which holds the API key and forwards only the open meeting’s exact request. It
               can’t change a ruling without breaking the signature, but it could refuse to forward one, and then the fallback rule runs.
             </p>
@@ -31,7 +38,7 @@ export function Limits() {
             <h3>The test key stays on testnet.</h3>
             <p>
               token5’s allowlist also holds a test key, so the playground can sign rulings a real model never would. token3’s rulings, the fooled one included,
-              came from that key. Mainnet’s allowlist will hold only NEAR AI’s verified keys.
+              came from that key. Mainnet’s allowlist holds only NEAR AI’s verified keys.
             </p>
           </li>
           <li>
@@ -64,9 +71,10 @@ export function Limits() {
             <p>By design, the heaviest locks are heard first. The cap limits what a whale gets. It doesn’t stop it from being heard.</p>
           </li>
           <li>
-            <h3>The testnet farm is a stand-in.</h3>
+            <h3>The stake is real. The yield is unspent.</h3>
             <p>
-              The testnet brain stakes into a mock with the same interface as <span className="m">stake.dao</span>. No real inference credits have been earned.
+              On mainnet the brain has staked 1.002001 NEAR in <span className="m">stake.dao</span>, and that stake woke the token on GLM. The yield hasn’t
+              paid for any inference yet: the relay’s NEAR AI key pays for each meeting. The testnet brain stakes into a mock with the same interface.
             </p>
           </li>
         </ul>

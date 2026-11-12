@@ -1,0 +1,100 @@
+{
+ "_about": "Mainnet meeting 1 of token.thechair.near, read from chain: views through https://rpc.mainnet.fastnear.com, the convene transaction through its archival node, and OutLayer's attestation for the run. The request, response and minutes were checked against their on-chain sha256. scripts/render-readme.ts renders the README's mainnet paragraph from this file.",
+ "network": "mainnet",
+ "read_at": "2026-11-12T13:58:20Z",
+ "token": {
+  "account_id": "token.thechair.near",
+  "code_hash": "BHPkDnyEXYrwqcxnWgSnDtLwGDwNHSBXME4JQJCsy5aL",
+  "code_sha256": "98c7e1594046785d071e9f9191a1d7d07596367cc1ecc016da19e387f859de9d",
+  "owner": "thechair.near",
+  "brain": "brain.thechair.near",
+  "model_signers": [
+   "0x3b753b4406613c5e70ae640508632b600424fa0c",
+   "0xfe0071895500a9755c18044948ab4f4e1a7f337e"
+  ],
+  "gateway_signers": [
+   "0xb98a789cdc4817275f5155593ba73ef2a957e779"
+  ],
+  "courier": {
+   "outlayer": "outlayer.near",
+   "project_id": "thechair.near/courier",
+   "version_key": "7df2093408b0625df643569669677d742d791ccb6750b8c5e95801787eda7181"
+  },
+  "meeting_interval_s": 82800,
+  "convene_deposit": "15000000000000000000000"
+ },
+ "brain": {
+  "account_id": "brain.thechair.near",
+  "code_sha256": "830db47dd33fc2db4c66e4952e9fd1d42c36a78caa06581830542da1e5524c58",
+  "mpc_login_key": "ed25519:HZycHbyc1UdPyyEMdLN6ens1dSkNrrV5VMmpByubz6BJ",
+  "mpc": "v1.signer",
+  "farm": "stake.dao",
+  "product_id": "prod_33Kp14MGUJa2QA",
+  "validator_id": "nearai.pool.near",
+  "staked": "1002000995696372700000000",
+  "farm_status": "Active",
+  "endowment_reported": "1002000995696372700000000",
+  "stake_tx": "FoG8eyufzzQxRDKVGJaG7jEKFXwf12fs4vtkx7X4Bb92"
+ },
+ "meeting": {
+  "number": 1,
+  "convene_tx": "2fLXR3VnybmHR8sK2nMrS2oCRoefgumLMseA3VDLYCBr",
+  "convener": "thechair.near",
+  "convened_at": "1794491477667249424",
+  "held_at": "1794491488886535305",
+  "model": "z-ai/glm-5.3-flash",
+  "seed": "6db11b4659db1e883518bc73e2745f15",
+  "request_sha256": "70bdd317c2bd07a3e481dcbaee1f24985f8a8026f8e184b336ae2f547e297d69",
+  "response_sha256": "b6146dab324488c836d87df4176dd3d2f6bb06957861836c30f7183843961933",
+  "kind": "ruling",
+  "signed_by": "provider_tee",
+  "signer": "0x3b753b4406613c5e70ae640508632b600424fa0c",
+  "levers_before": {
+   "tax_bps": 300,
+   "endowment_share": 60,
+   "locker_share": 20
+  },
+  "asked": {
+   "tax_bps": 250,
+   "endowment_share": 60,
+   "locker_share": 20,
+   "buyback_burn": 20
+  },
+  "levers": {
+   "tax_bps": 250,
+   "endowment_share": 60,
+   "locker_share": 20
+  },
+  "clamps": [],
+  "buyback": {
+   "bps": 20,
+   "tokens": "125366923679913027806",
+   "near": "125822921702215936895"
+  },
+  "locker_paid": "436893203883495145631",
+  "endowment_sent": "1310679611650485436893",
+  "petitions": [
+   {
+    "from": "thechair.near",
+    "weight_chair_days": "350000",
+    "text": "Volume is thin. Please ease the tax toward 2% and keep a small burn going.",
+    "answer": "Agreed in spirit. Easing tax 300→250 bps now, will step toward 200 next meetings if volume stays thin. Burn set at 20 bps of supply, funded from the buyback fund — a small but steady burn starts today."
+   }
+  ],
+  "minutes": "First meeting. Volume is thin and one-sided (buys only), so easing the tax is right, but I move gradually: 300 to 250 bps this meeting, with intent to reach ~200 if volume stays soft. Shares stay put; endowment is funded and locker pool is building. Buyback fund (~0.00044 NEAR) covers a modest burn; I set 20 bps of supply (~12.5 CHAIR, ~0.000013 NEAR at curve price) to keep a steady, affordable burn going.",
+  "on_ruling_tgas": 4.49,
+  "outlayer": {
+   "request_id": 3008,
+   "attestation": "https://api.outlayer.ai/attestations/by-request/3008",
+   "executed_wasm_sha256": "7df2093408b0625df643569669677d742d791ccb6750b8c5e95801787eda7181",
+   "input_hash": "70bdd317c2bd07a3e481dcbaee1f24985f8a8026f8e184b336ae2f547e297d69",
+   "courier_ms": 5238,
+   "charged": "1563900000000000000000"
+  }
+ },
+ "status": {
+  "meeting_count": 1,
+  "next_meeting_at": "1794574277667249424",
+  "holders": 1
+ }
+}

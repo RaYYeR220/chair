@@ -54,8 +54,8 @@ export function Constitution({ state, meetings }: { state: StateView | null | un
             rises.
           </li>
           <li>
-            <b>Nothing else can change.</b> The token account has no keys. Only the signer allowlists and the courier version move, after a public
-            48&nbsp;h timelock.
+            <b>Nothing else can change.</b> The testnet tokens have no keys, and the mainnet token’s is deleted at launch close. Only the signer
+            allowlists and the courier version move, after a public 48&nbsp;h timelock.
           </li>
         </ul>
       </div>

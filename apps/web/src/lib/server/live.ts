@@ -1,6 +1,8 @@
 import "server-only";
 import { cache } from "react";
+import { near } from "@/lib/units";
 import {
+  type MainnetView,
   type MeetingSummary,
   type MeetingView,
   type PetitionsView,
@@ -11,9 +13,9 @@ import {
   toStateView,
   toSummary,
 } from "@/lib/views";
-import { chair, getState, parseBrief, tokens } from "./chair";
+import { cached, chair, chairAt, getState, parseBrief, tokens } from "./chair";
 import { conveneAvailable } from "./convene";
-import { env, site, targetFor } from "./env";
+import { env, mainnet, site, targetFor } from "./env";
 import { getMeetingRecord, listMeetings } from "./history";
 import { relayAvailable, relayStatus } from "./relay";
 
@@ -54,6 +56,29 @@ export const loadMeeting = cache(async (n: number, contract?: string): Promise<M
   } catch {
     return null;
   }
+});
+
+/**
+ * The mainnet token's meeting `n`, read-only, with its schedule. `null` when
+ * mainnet could not be read at all.
+ */
+export const loadMainnet = cache(async (n: number): Promise<MainnetView | null> => {
+  const m = chairAt(mainnet);
+  const schedule = async () => {
+    const [status, constitution] = await within(
+      Promise.all([m.status(), cached(`constitution:${mainnet.contract}`, 60_000, m.constitution).catch(() => null)]),
+      9_000,
+    );
+    return {
+      meeting_count: status.meeting_count,
+      open_meeting: status.open_meeting,
+      next_meeting_at_ms: Number(BigInt(status.next_meeting_at) / 1_000_000n),
+      convene_near: constitution ? Number(near(constitution.outlayer.deposit)) : null,
+    };
+  };
+  const [meeting, sched] = await Promise.all([loadMeeting(n, mainnet.contract), schedule().catch(() => null)]);
+  if (!meeting && !sched) return null;
+  return { contract: mainnet.contract, explorer: mainnet.explorer, meeting, schedule: sched };
 });
 
 export const loadMeetings = cache(async (): Promise<MeetingSummary[] | null> => {

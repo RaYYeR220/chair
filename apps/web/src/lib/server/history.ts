@@ -38,6 +38,9 @@ const key = (n: number, t: Target = site) => `${t.contract}:${n}`;
  * `meeting_convened` event before it is used.
  */
 const LAUNCH_CONVENES: Record<string, Record<number, string>> = {
+  "token.thechair.near": {
+    1: "2fLXR3VnybmHR8sK2nMrS2oCRoefgumLMseA3VDLYCBr",
+  },
   "token5.chair-dev.testnet": {
     1: "A9rkGGZ7PHKh1GAxQPxx9FdNDixTaLUrpuQh95bnHdE5",
     2: "4G3Xmeqd1V4W75VwYqeW5YT83LnDzNXhtaMzPB57vFVu",

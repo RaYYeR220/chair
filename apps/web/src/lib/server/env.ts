@@ -42,6 +42,10 @@ const schema = z.object({
   NEARBLOCKS_API_KEY: optionalString,
   /** Known convene transactions, `meeting:hash` pairs separated by commas. */
   CHAIR_KNOWN_CONVENES: optionalString,
+  /** The mainnet token the landing reads, read-only, whatever CHAIR_NETWORK is. A `.near` account. */
+  CHAIR_MAINNET_CONTRACT_ID: optionalString,
+  /** The RPC for that read (default: FastNEAR's mainnet RPC). */
+  CHAIR_MAINNET_RPC_URL: optionalString.pipe(z.string().url().optional()),
 
   /** 32-byte secp256k1 hex key of the testnet test model signer. */
   CHAIR_TEST_MODEL_KEY: optionalString.pipe(
@@ -124,6 +128,8 @@ function load() {
     throw new Error(`invalid server env: ${(err as Error).message}`);
   }
   const testHashAllowed = !process.env.VERCEL && process.env.NODE_ENV !== "production";
+  const mainnetContract = e.CHAIR_MAINNET_CONTRACT_ID ?? NETWORKS.mainnet.contract;
+  if (networkOf(mainnetContract) !== "mainnet") throw new Error("invalid server env: CHAIR_MAINNET_CONTRACT_ID must be a .near account");
   return {
     networkId: e.CHAIR_NETWORK,
     contractId: e.CHAIR_CONTRACT_ID ?? net.contract,
@@ -133,6 +139,7 @@ function load() {
     nearblocksKey: e.NEARBLOCKS_API_KEY,
     explorer: net.explorer,
     knownConvenes: parseKnown(e.CHAIR_KNOWN_CONVENES),
+    mainnet: { contractId: mainnetContract, rpc: e.CHAIR_MAINNET_RPC_URL ?? NETWORKS.mainnet.rpc },
     testModelKey: e.CHAIR_TEST_MODEL_KEY,
     demo:
       e.CHAIR_DEMO_ACCOUNT_ID && e.CHAIR_DEMO_SECRET_KEY
@@ -188,7 +195,8 @@ export function accountUrl(id: string) {
 /**
  * A token contract and where to read it. The site's own token is `site`; the
  * landing also reads token3, the testnet token whose chair is the test signer,
- * and each token's RPC, NearBlocks API and explorer follow its network.
+ * and the mainnet token (`mainnet`). Each token's RPC, NearBlocks API and
+ * explorer follow its network.
  */
 export interface Target {
   contract: string;
@@ -210,8 +218,27 @@ export const site: Target = {
   outlayerApi: NETWORKS[env.networkId].outlayerApi,
 };
 
+/**
+ * The mainnet token the landing reads (CHAIR_MAINNET_CONTRACT_ID, default
+ * `token.thechair.near`), through CHAIR_MAINNET_RPC_URL when it is set. Views
+ * only: nothing on the site writes to it.
+ */
+export const mainnet: Target =
+  env.networkId === "mainnet" && env.mainnet.contractId === site.contract
+    ? site
+    : {
+        contract: env.mainnet.contractId,
+        network: "mainnet",
+        rpc: env.mainnet.rpc,
+        archivalRpc: NETWORKS.mainnet.archivalRpc,
+        nearblocksApi: NETWORKS.mainnet.nearblocksApi,
+        explorer: NETWORKS.mainnet.explorer,
+        outlayerApi: NETWORKS.mainnet.outlayerApi,
+      };
+
 export function targetFor(contract: string): Target {
   if (contract === site.contract) return site;
+  if (contract === mainnet.contract) return mainnet;
   const network = networkOf(contract) ?? env.networkId;
   if (network === env.networkId) return { ...site, contract };
   const n = NETWORKS[network];
