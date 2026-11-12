@@ -346,9 +346,11 @@ Meeting 1's brief, as the model received it (request sha256 `92c2b04ef52600121b9
 - **Seed.** `get_request_preview` showed the same brief with `"seed":"<drawn at convene>"` and no hash; the seed exists only from the convening block on.
 - **Reweighing.** Bob filed at 10 k CHAIR-days, then locked 200 k more for 7 days. The brief carries his weight at `convene`, 1.41 M, and `meeting_convened.reweighed` records both: `filed_weight` 10 k, `weight` 1.41 M.
 
-### Stale weight: pending a lock expiry
+### Stale weight: an expired lock can't fill a second brief slot
 
-Locks run at least a day, so the stale-weight attempt can't finish within one session. Carol (`chair-fund-ed152e.testnet`) bought 0.5 NEAR (`7guoNe9Y7mPo1DdUZLNtGuyWMA1WkwR5ktTo76CsoGyy`) and locked 300 k CHAIR for 1 day (`AeaY5M18roK1SShJNoynS1MpV9DA9UZN6i7ShLyugtr5`, unlocks 2026-11-11 03:23:36 UTC). The follow-up script, started between 02:53 and 03:20 UTC that day, makes carol petition on that lock, waits for it to end, moves the same tokens to bob, has bob relock them and petition, then convenes meeting 3. The fix should brief bob alone, with carol in `reweighed` at weight 0. The unit test `audit_f1_relocked_tokens_fill_one_brief_slot` runs the same history.
+Locks run at least a day, so this case needs a lock to expire on chain. Carol (`chair-fund-ed152e.testnet`) locked 300,000 CHAIR for 1 day (`G6RuWz1gEZb9tGQ2wHr8wFhXz617MXZ9fXnUenpCLyWG`) and, three minutes before it ended, petitioned on that lock (`EXVz1jD8h6DLq53shdMgzWTuHMum3nDDRqvafEkMmurX`, filed weight 300,000 CHAIR-days). After the lock ended she moved the same tokens to bob (`GDwE1FZTsyBgdKwAAyFwDZXXLPXLLRtB2DG1Y9zEW6gL`), who relocked them (`BdWG9TuXuKuoyz8JBx7Fvu1RgyXHCHiHRwmF3mxUB8Y1`) and petitioned (`AQrKZC815zHKou74rSY3kRe8NZPZwixdHCYqdyzAokQT`).
+
+Meeting 5 was convened in `5XZ2uxARRjs7K8jkH29gmJoVWhouhQ5mYbZaw8Ch9sB3`. Its `meeting_convened` event reweighs both petitioners at convene: bob at 1,700,000 CHAIR-days, in the brief; carol at weight 0 (filed 300,000), not in the brief. The brief carries bob alone. The first attempt, a day earlier, sent no transactions because of a local tooling fault, so the lock was renewed and the run repeated.
 
 ## Testnet v2: `token2.chair-dev.testnet` (deployed 2026-11-10, superseded)
 
@@ -438,13 +440,26 @@ Both meetings came back as `kind: ruling`, `signed_by: provider_tee`, signer `0x
   {"min_endowment": "50000000000000000000000000", "model": "deepseek-ai/DeepSeek-V4.1-Flash-1017"},
   {"min_endowment": "500000000000000000000000000", "model": "moonshotai/kimi-k3"}
  ],
- "model_signers": ["<NEAR AI provider TEE signing addresses on launch day>"],
- "gateway_signers": ["<NEAR AI gateway TEE signing addresses on launch day>"],
+ "model_signers": [
+  "0x3b753b4406613c5e70ae640508632b600424fa0c",
+  "0xfe0071895500a9755c18044948ab4f4e1a7f337e"
+ ],
+ "gateway_signers": [
+  "0xb98a789cdc4817275f5155593ba73ef2a957e779"
+ ],
  "meeting_interval_s": 82800,
  "petition_fee": "10000000000000000000000",
  "levers": {"tax_bps": 300, "endowment_share": 60, "locker_share": 20}
 }
 ```
+
+These are the final `new` arguments. They differ from token5's only in the account ids, the courier, `meeting_interval_s` and the signer lists, which hold the verified NEAR AI keys and no test key. `secrets_profile` and `secrets_owner` are `null`: there is no OutLayer secret (below).
+
+### Code
+
+The token5 bytes: sha256 `98c7e1594046785d071e9f9191a1d7d07596367cc1ecc016da19e387f859de9d` (bs58 `BHPkDnyEXYrwqcxnWgSnDtLwGDwNHSBXME4JQJCsy5aL`), 351,853 bytes. They come from `contracts/token` at `e78a749`, built with `cargo near build non-reproducible-wasm --locked --no-abi` on rustc 1.95.0 and cargo-near 0.22.0; a clean rebuild into a fresh target directory gives the same bytes. The embedded NEP-330 metadata names `https://github.com/RaYYeR220/chair` without a commit, so the hash depends only on the source and the toolchain.
+
+The brain, `brain.thechair.near`, runs `contracts/brain` built the same way: sha256 `830db47dd33fc2db4c66e4952e9fd1d42c36a78caa06581830542da1e5524c58`, 215,916 bytes. It differs from the testnet brain (`f80b409a…f5a8`, built from `a74b97a`) only in that embedded link, which the Cargo `repository` field added in `7359d17`. Its config names `token.thechair.near`, `stake.dao` and `v1.signer`, and it is deployed before the token, because the config is immutable.
 
 ### Courier
 
@@ -466,12 +481,13 @@ Both meetings came back as `kind: ruling`, `signed_by: provider_tee`, signer `0x
 
 ### Signers
 
-- **What goes in.** Lowercase `0x` addresses of the TEE keys that sign for the ladder's models.
-- **Where to read them.** `GET https://cloud-api.near.ai/v1/attestation/report?model=<model>&signing_algo=ecdsa`, which returns `signing_address`. On 2026-11-10 the endpoint answered with a database error, so nothing could be read.
-- **If they are not known at launch:**
-  1. Pass `[]`. The brain sleeps until 1 NEAR is staked, and meetings run the fallback (`asleep`) anyway.
-  2. Read `signing_address` from the first awake meeting's courier output.
-  3. Add it with `propose_change`. It applies 48 h later.
+- **What goes in.** Lowercase `0x` addresses of the TEE keys that sign for the ladder's models, and the NEAR AI gateway's key.
+- **Where they come from.** `pnpm verify:signers` asks `GET https://cloud-api.near.ai/v1/attestation/report?model=<model>&signing_algo=ecdsa&nonce=<fresh>` for each ladder model. It lists a key only if the TDX quote binds it to the fresh nonce and, for a model key, NVIDIA's attestation of the GPUs passes. On 2026-11-10 and 2026-11-11 ([`results/signers-2026-11-11.json`](../results/signers-2026-11-11.json)) it gave:
+  - GLM 5.3 Flash: `0x3b753b4406613c5e70ae640508632b600424fa0c`;
+  - DeepSeek V4.1: `0xfe0071895500a9755c18044948ab4f4e1a7f337e`;
+  - the gateway: `0xb98a789cdc4817275f5155593ba73ef2a957e779`. Kimi K3 is served by Chutes with no per-response key, so its meetings would be gateway-signed.
+- **On launch day.** Run `pnpm verify:signers` again right before `new`, and launch only if it returns the same keys. After `new`, `pnpm verify:signers --token token.thechair.near` must exit 0 before the token's key is deleted. A key that changes later goes in through `propose_change`, which applies 48 h later.
+- **No test keys.** The testnet lists also hold the playground's test signers. Mainnet's never do.
 
 ### Everything else
 
@@ -488,14 +504,20 @@ The token account pays for its own contract-level storage out of its balance; ac
 | Lock-expiry list, worst case (721 hours × 8 B) | 5,768 | 0.06 |
 | **Margin to fund on top of the code** | | **at least 2.00** |
 
-Create the account with **at least 5.6 NEAR** (6 recommended): the code plus 2 NEAR, which covers the worst-case state 2.4 times. Testnet v3 was funded this way and kept 2.41 NEAR free after two meetings.
+The 2 NEAR margin above is the design target. The launch budget is 8.33 NEAR for everything (brain 2.45, stake 1.0, token, first meeting, gas headroom), so `token.thechair.near` is created with **4.2 NEAR**: 3.54 for the code and the state right after `new` (354,056 bytes on the testnet rehearsal), and about **0.66 NEAR free**. That covers the root state plus roughly 55 retained meeting records, about 50 days at one meeting every 23 hours. It does not cover the 0.83 NEAR worst case. The token never reads its own balance, so anyone can raise the margin later with a plain transfer to `token.thechair.near`.
 
 ### Deploy order
 
-1. Create `token.thechair.near` with at least 5.6 NEAR (above). The code is 352 KB of storage.
-2. Run `near contract deploy … with-init-call new file-args <the JSON above>`.
-3. Check two things:
-   - `get_constitution`: `rules.locker_share.max == 25` and `sha256(system_prompt) == ea189faf…377c`;
-   - `get_governance`: the courier and the signers.
-4. Delete every key on `token.thechair.near` and confirm that `view_access_key_list` is empty.
-5. On the brain side, set `config.token` to `token.thechair.near` (`docs/BRAIN.md` §9).
+1. `brain.thechair.near`: create it with 2.45 NEAR, deploy and `new` in one transaction, then `install_login_key` (MPC key `ed25519:HZycHbyc1UdPyyEMdLN6ens1dSkNrrV5VMmpByubz6BJ`).
+2. The courier: build it, check that its sha256 is `7df20934…7181`, upload it to FastFS, check the served bytes, then `create_project thechair.near/courier`.
+3. Run `pnpm verify:signers`. Create `token.thechair.near` with 4.2 NEAR, then run `near contract deploy … with-init-call new file-args <the JSON above>`.
+4. Check everything before the key goes:
+   - the code hash;
+   - `get_constitution`: rules (`locker_share.max == 25`), `sha256(system_prompt) == ea189faf…377c`, ladder, interval, curve, fee, owner, brain and the OutLayer config;
+   - `get_governance`: the courier and the signers, with no pending change;
+   - the OutLayer project's active version and the FastFS bytes;
+   - the relay probe;
+   - `pnpm verify:signers --token token.thechair.near`.
+5. Delete the token's only key, and confirm that `view_access_key_list` is empty.
+6. Have the brain stake about 1 NEAR in `stake.dao`: `deposit_endowment` to top it up, then `stake_endowment`. The brain then syncs and reports the stake, and the token wakes on GLM 5.3 Flash. `get_request_preview` must show the token5 request with `"reasoning_effort":"low"`.
+7. Buy, lock and petition. At least 23 h after `new`, `convene` meeting 1 with 0.015 NEAR. It must come back `kind: ruling`, `signed_by: provider_tee`, signer `0x3b75…fa0c`.

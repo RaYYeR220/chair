@@ -76,7 +76,7 @@ Numbers from [`results/sim-v3-2026-11-10.json`](results/sim-v3-2026-11-10.json) 
 | 42 | Results on more than one seed for the model chair | NOT-CLAIMED | One seed, one control and a seed probe; deterministic policies ran on 20 seeds |
 | 43 | The simulated holders behave like real traders | NOT-CLAIMED | They are invented, not calibrated, and never read the minutes |
 | 44 | A buyback-and-burn shrinks supply | NOT-CLAIMED | On a mint and burn curve it doesn't; it raises the floor (reserve over supply) |
-| 45 | The stale-weight case (expired lock, relocked by another account) has run on chain | NOT-CLAIMED | The on-chain run waits for a lock to expire; the unit test `audit_f1_relocked_tokens_fill_one_brief_slot` covers it |
+| 45 | An expired lock can't fill a second brief slot: when its tokens are relocked by another account, the first petition is reweighed to 0 at convene | VERIFIED-LIVE | token3 meeting 5, [`5XZ2uxAR…`](https://testnet.nearblocks.io/txns/5XZ2uxARRjs7K8jkH29gmJoVWhouhQ5mYbZaw8Ch9sB3): `meeting_convened.reweighed` lists carol at filed 300,000, weight 0, not in the brief; steps in `docs/LAUNCH.md`. Unit test `audit_f1_relocked_tokens_fill_one_brief_slot` |
 
 ## NEAR AI's signing keys
 
