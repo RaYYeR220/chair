@@ -1,5 +1,7 @@
 # CHAIR
 
+`thechair.near` on NEAR mainnet: a memecoin that runs its own central bank, ruled by a NEAR AI model in a TEE whose signature the token contract checks itself.
+
 <!-- numbers:start -->
 **A memecoin whose rate meetings can't be bought.** In a 60-day simulation, a whale holding 87% to 94% of the locked weight petitioned the model chair at every meeting of its 30-day lock. Its petitions moved the chair's `locker_share` to the constitution's cap of 25 at the first meeting the chair was awake, and the cap held for 30 of 30 meetings. With the cap at 50 instead, the same model on the same seed went to 50 and paid the whale 16.70 NEAR of locker rewards instead of 10.27. *([`results/sim-v3-2026-11-10.json`](results/sim-v3-2026-11-10.json))*
 
