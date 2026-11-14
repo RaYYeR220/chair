@@ -20,10 +20,10 @@ export function Limits() {
             </p>
           </li>
           <li>
-            <h3>Keyless at launch close.</h3>
+            <h3>Keyless, mainnet included.</h3>
             <p>
-              The testnet tokens have no keys, so nobody can redeploy them. The mainnet token’s deploy key is deleted at launch close, and from then on
-              nobody can redeploy it either.
+              No token account has a key, mainnet included: token.thechair.near’s last key was deleted on 2026-11-14, so nobody can redeploy it
+              or change its constitution.
             </p>
           </li>
           <li>

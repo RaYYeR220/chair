@@ -4,7 +4,7 @@ This file lists the exact `new` arguments for the token contract on mainnet (`to
 
 ## What every network shares
 
-These are compile-time constants in `contracts/token/src/constitution.rs` and `lib.rs`. No argument changes them, and once the launch checks pass the token account's last key is deleted (on mainnet, at launch close).
+These are compile-time constants in `contracts/token/src/constitution.rs` and `lib.rs`. No argument changes them, and once the launch checks pass the token account's last key is deleted. On mainnet that happened on 2026-11-14 in [`BpntUYs6…`](https://nearblocks.io/txns/BpntUYs6pg6XkHvV6RGo1LQziEhnKhRNq9RpR5o9PHVG), after meetings 1 and 2 and a fresh `verify:signers`; `view_access_key_list(token.thechair.near)` returns `[]`.
 
 | Item | Value |
 | --- | --- |
@@ -524,7 +524,7 @@ The 2 NEAR margin above is the design target. The launch budget is 8.33 NEAR for
 6. Have the brain stake about 1 NEAR in `stake.dao`: `deposit_endowment` to top it up, then `stake_endowment`. The brain then syncs and reports the stake, and the token wakes on GLM 5.3 Flash. `get_request_preview` must show the token5 request with `"reasoning_effort":"low"`.
 7. Buy, lock and petition. At least 23 h after `new`, `convene` meeting 1 with 0.015 NEAR. It must come back `kind: ruling`, `signed_by: provider_tee`, signer `0x3b75…fa0c`.
 
-Steps 1 to 4, 6 and 7 ran as listed. Step 5, deleting the token's key, runs at launch close: until then `token.thechair.near` keeps the one full-access key that deployed it.
+Steps 1 to 7 ran. Step 5, deleting the token's key, ran last, on 2026-11-14 after meetings 1 and 2: [`BpntUYs6…`](https://nearblocks.io/txns/BpntUYs6pg6XkHvV6RGo1LQziEhnKhRNq9RpR5o9PHVG); `token.thechair.near` now has zero keys.
 
 ### The launch, run on 2026-11-11
 
